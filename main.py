@@ -3,7 +3,7 @@ from agent import Agent
 
 def main():
     
-    model_path = "Qwen/Qwen3-8B"
+    model_path = "Qwen3-8B"
     try:
         llm = Qwen3(model_path)
     except Exception as e:

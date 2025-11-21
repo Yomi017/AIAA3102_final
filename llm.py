@@ -15,7 +15,7 @@ class BaseLLM:
             new_history.insert(0, {"role": "system", "content": meta_instruction})
         return new_history
     
-    def chat_model(self):
+    def chat(self):
         raise NotImplementedError
 
 
@@ -37,7 +37,7 @@ class Qwen3(BaseLLM):
             device_map="auto",
         ).eval()
 
-    def chat_model(
+    def chat(
         self,
         prompt: str,
         *,

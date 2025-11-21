@@ -1,8 +1,8 @@
 from typing import Dict, List, Optional, Tuple, Union
 import json5
 
-from tinyAgent.LLM import InternLM2Chat
-from tinyAgent.tool import Tools
+from llm import BaseLLM
+from tool import Tools
 
 # define tool description template, to be used to introduce available tools to the model
 # name_for_model: tool name, to be called by model
@@ -39,7 +39,7 @@ class Agent:
 
         for tool in self.tool.toolConfig:
             tool_description.append(TOOL_DESC.format(**tool))
-            tool.names.append(tool['name_for_model'])
+            tool_names.append(tool['name_for_model'])
         tool_description = '\n\n'.join(tool_description)
         tool_names = ', '.join(tool_names)
         system_prompt = REACT_PROMPT.format(tool_description=tool_description, tool_names=tool_names)
@@ -76,27 +76,15 @@ class Agent:
         if plugin_name == 'google_search':
             return '\nObservation:' + self.tool.google_search(**plugin_args)
         
-    def text_completion(self, text: str, history: List = []) -> Tuple[str, List]:
-        """
-        与大语言模型进行一次完整的交互。
-        1. 发送用户问题给模型。
-        2. 解析模型返回的工具调用。
-        3. 如果有工具调用，则执行工具。
-        4. 将工具执行结果返回给模型，让模型生成最终答案。
-        Args:
-            text (str): 用户的输入问题。
-            history (List): 对话历史。
-        Returns:
-            Tuple[str, List]: (模型的最终回答, 更新后的对话历史)
-        """
+    def text(self, text: str, history: List = []) -> Tuple[str, List]:
         text = "\nQuestion:" + text
-        
+
         # 'his' is the updated history
-        response, his = self.model.chat(text, history, self.system_prompt)
-        
+        response, his = self.model.chat(text, history=history, meta_instruction=self.system_prompt)
+
         plugin_name, plugin_args, response = self.parse_latest_plugin_call(response)
         if plugin_name:
             tool_observation = self.call_plugin(plugin_name, plugin_args)
             response += tool_observation
-            response, his = self.model.chat(response, history, self.system_prompt)
+            response, his = self.model.chat(response, history=his, meta_instruction=self.system_prompt)
         return response, his
