@@ -52,5 +52,77 @@ class Tools:
             }
         ]
         return tools
+    
+    def google_search(self, search_query: str) -> str:
+        """
+        执行谷歌搜索。
+        Args:
+            search_query (str): 搜索的关键词或短语。
+        Returns:
+            str: 搜索结果的摘要。
+        """
+        url = "http://www.gpts-cristiano.com/cristiano/googleApi"
 
+        # 构造请求体
+        payload = json.dumps({"q": search_query})
+        # 构造请求头，需要填入自己的API KEY
+        headers = {
+            # 'X-API-KEY': '修改为你自己的key',  # 请替换为你的Serper API密钥
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+
+        # 发送POST请求
+        response = requests.post(url, headers=headers, data=payload).json()
+
+        print(response)
+        # 返回第一条搜索结果的摘要
+        return response['organic'][0]['snippet']
+
+    # ================= 新增的天气查询工具实现 =================
+    def query_weather(self, city: str, province: str) -> str:
+        """
+        查询指定省份和城市的天气。
+        Args:
+            city (str): 城市名称。
+            province (str): 省份名称。
+        Returns:
+            str: 格式化后的天气信息字符串或错误提示。
+        """
+        mock_response = {
+            "city": city,
+            "province": province,
+            "temperature": "28°C",
+            "weather": "多云",
+            "humidity": "65%",
+            "wind_direction": "东南风",
+            "wind_power": "3级"
+        }
+        
+        # 将字典格式化成一个对LLM友好的字符串
+        return (
+            f"地点：{mock_response['province']}{mock_response['city']}，"
+            f"天气：{mock_response['weather']}，"
+            f"温度：{mock_response['temperature']}，"
+            f"湿度：{mock_response['humidity']}，"
+            f"风向：{mock_response['wind_direction']}，"
+            f"风力：{mock_response['wind_power']}"
+        )
+    # =======================================================
+    def query_time(self) -> str:
+        """
+        查询当前的时间（通过外部API）。
+        Returns:
+            str: 当前时间的字符串表示。
+        """
+        url = "https://api.uuni.cn//api/time"
+        try:
+            response = requests.get(url, timeout=5)
+            response.raise_for_status()
+            data = response.json()
+            if "date" in data and "weekday" in data:
+                return f"当前时间是：{data['date']}，{data['weekday']}"
+            else:
+                return "无法获取当前时间，API返回格式异常。"
+        except Exception as e:
+            return f"查询时间时发生错误：{e}"
     
