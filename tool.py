@@ -112,19 +112,27 @@ class Tools:
     # =======================================================
     def query_time(self) -> str:
         """
-        查询当前的时间（通过外部API）。
+        查询当前的时间(通过外部API)。
         Returns:
             str: 当前时间的字符串表示。
         """
-        url = "https://api.uuni.cn//api/time"
+        url = "https://api.uuni.cn/api/time"
         try:
             response = requests.get(url, timeout=5)
             response.raise_for_status()
             data = response.json()
+            
+            # 更详细的字段检查
             if "date" in data and "weekday" in data:
-                return f"当前时间是：{data['date']}，{data['weekday']}"
+                return f"当前时间是:{data['date']},{data['weekday']}"
             else:
-                return "无法获取当前时间，API返回格式异常。"
+                return f"无法获取当前时间,API返回格式异常。实际返回:{data}"
+                
+        except requests.Timeout:
+            return "查询时间超时,请稍后重试。"
+        except requests.RequestException as e:
+            return f"网络请求失败:{str(e)}"
+        except json.JSONDecodeError:
+            return "API返回的数据格式不是有效的JSON。"
         except Exception as e:
-            return f"查询时间时发生错误：{e}"
-    
+            return f"查询时间时发生未知错误:{type(e).__name__} - {e}"
