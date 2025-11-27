@@ -7,9 +7,9 @@ def print_banner():
     banner = """
 ╔════════════════════════════════════════════════════════╗
 ║                                                        ║
-║            🤖 AIAA3102 Agent System 🤖            ║
+║            🤖 AIAA3102 Agent System 🤖                ║
 ║                                                        ║
-║              Powered by Qwen3-8B Model                ║
+║              Powered by Qwen3-8B Model                 ║
 ║                                                        ║
 ╚════════════════════════════════════════════════════════╝
     """
