@@ -39,11 +39,13 @@ def print_message(role: str, content: str):
 def main():
     print_banner()
     
-    model_path = "Qwen/Qwen3-8B"
+    model_path = "Qwen3-8B"
+    
     try:
         print_message("system", "正在加载模型...")
         llm = Qwen3(model_path)
-        print_message("system", "✅ 模型加载成功!")
+        
+        # llm = Qwen3(model_path, gpu_ids=[0, 5, 8])
     except Exception as e:
         print_message("error", f"模型初始化失败: {e}")
         return
