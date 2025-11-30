@@ -1,0 +1,19 @@
+标题: GPT
+语言: zh
+来源: https://zh.wikipedia.org/wiki/GPT
+------------------------------------------------------------
+
+GPT可以指：
+
+科技
+基於轉換器的生成式預訓練模型（Generative pre-trained transformer），一個人工智慧語言模型系列
+ChatGPT，一個由OpenAI開發的聊天機器人/生成式預訓練轉化器模型(包含 GPT-1 GPT-2 GPT-3 GPT-4 GPT-4o GPTplus）
+GUID磁碟分割表（GUID Partition Table），一種磁盤分區標準
+Google發布者標籤（Google Publisher Tag），一種嵌入HTML頁面的JavaScript標籤，用於顯示通過DoubleClick for Publishers提供的廣告
+
+生物學
+麩胺酸丙酮酸轉胺酶（Glutamate pyruvate transaminase）
+
+其他
+通用技術（General purpose technology）
+台灣綠黨 (Green Party Taiwan)

@@ -1,0 +1,468 @@
+标题: Q学习
+语言: zh
+来源: https://zh.wikipedia.org/wiki/Q%E5%AD%A6%E4%B9%A0
+------------------------------------------------------------
+
+Q-学习（英語：Q-learning）是强化学习的一种方法。Q-学习就是要記錄下学习過的策略，因而告诉智能体什么情况下采取什么行动會有最大的獎勵值。Q-学习不需要对环境进行建模，即使是对带有随机因素的转移函数或者奖励函数也不需要进行特别的改动就可以进行。
+对于任何有限的馬可夫決策過程（FMDP），Q-学习可以找到一个可以最大化所有步骤的奖励期望的策略，在给定一个部分随机的策略和无限的探索时间，Q-学习可以给出一个最佳的动作选择策略。
+「Q」这个字母在强化学习中表示一个动作的期望奖励。
+
+强化学习
+强化学习涉及一个智慧型代理人（agent），一组「状态」
+  
+    
+      
+        S
+      
+    
+    {\displaystyle S}
+  
+和每个状态下的动作集合
+  
+    
+      
+        A
+      
+    
+    {\displaystyle A}
+  
+。通过执行一个行动
+  
+    
+      
+        
+        a
+        ∈
+        A
+      
+    
+    {\displaystyle \,a\in A}
+  
+，该智慧型代理人从一个状态转移到另一个状态。在一个特定的状态下执行一个动作时，智慧型代理人可以得到一个奖励。 
+智慧型代理人的目标是最大化其奖励的總和。这个潜在的奖励是所有未来可以拿到的奖励值的期望的加权和。
+例如，假设现在你要上地铁，奖励就是你所花的时间的相反数。一种策略就是车门一开就往上挤，但是还有很多人要下车，逆着人流往上挤也会花费不少时间，这个时候你花的总时间可能是：
+
+0秒钟等待时间+15秒挤上去的时间
+在接下来的一天，很巧合，你决定先让别人下车。虽然这个时候看起来等待的时间稍微增加了，但是下车的人也会下的更顺畅，这个时候你可能花的时间是：
+
+5秒等待时间+0秒挤上去的时间。
+
+算法
+Q-學習演算法，主要內容為計算狀態與行為對應的最大期望奖励函式
+  
+    
+      
+        Q
+      
+    
+    {\displaystyle Q}
+  
+：
+
+  
+    
+      
+        Q
+        :
+        S
+        ×
+        A
+        →
+        
+          R
+        
+      
+    
+    {\displaystyle Q:S\times A\to \mathbb {R} }
+  
+ .
+在演算法初始化階段，
+  
+    
+      
+        Q
+      
+    
+    {\displaystyle Q}
+  
+初始值為零(由設計者設計)。在時間
+  
+    
+      
+        t
+      
+    
+    {\displaystyle t}
+  
+時，環境的狀態為
+  
+    
+      
+        
+          s
+          
+            t
+          
+        
+      
+    
+    {\displaystyle s_{t}}
+  
+，智慧型代理人選擇一個行為
+  
+    
+      
+        
+          a
+          
+            t
+          
+        
+      
+    
+    {\displaystyle a_{t}}
+  
+，並且獲得獎勵
+  
+    
+      
+        
+          r
+          
+            t
+          
+        
+      
+    
+    {\displaystyle r_{t}}
+  
+，環境因為代理人的行為導致狀態改變為新的狀態
+  
+    
+      
+        
+          s
+          
+            t
+            +
+            1
+          
+        
+      
+    
+    {\displaystyle s_{t+1}}
+  
+，此時便可根據以下公式更新
+  
+    
+      
+        Q
+      
+    
+    {\displaystyle Q}
+  
+值。演算法的核心為簡單的利用過去與最近的權重平均值來迭代更新數值。
+
+  
+    
+      
+        
+          Q
+          
+            n
+            e
+            w
+          
+        
+        (
+        
+          s
+          
+            t
+          
+        
+        ,
+        
+          a
+          
+            t
+          
+        
+        )
+        ←
+        (
+        1
+        −
+        α
+        )
+        ⋅
+        
+          
+            
+              
+                Q
+                (
+                
+                  s
+                  
+                    t
+                  
+                
+                ,
+                
+                  a
+                  
+                    t
+                  
+                
+                )
+              
+              ⏟
+            
+          
+          
+            old value
+          
+        
+        +
+        
+          
+            
+              α
+              ⏟
+            
+          
+          
+            learning rate
+          
+        
+        ⋅
+        
+          
+            
+              
+                
+                  
+                    (
+                  
+                
+                
+                  
+                    
+                      
+                        r
+                        
+                          t
+                        
+                      
+                      ⏟
+                    
+                  
+                  
+                    reward
+                  
+                
+                +
+                
+                  
+                    
+                      γ
+                      ⏟
+                    
+                  
+                  
+                    discount factor
+                  
+                
+                ⋅
+                
+                  
+                    
+                      
+                        
+                          max
+                          
+                            a
+                          
+                        
+                        Q
+                        (
+                        
+                          s
+                          
+                            t
+                            +
+                            1
+                          
+                        
+                        ,
+                        a
+                        )
+                      
+                      ⏟
+                    
+                  
+                  
+                    estimate of optimal future value
+                  
+                
+                
+                  
+                    )
+                  
+                
+              
+              ⏞
+            
+          
+          
+            learned value
+          
+        
+      
+    
+    {\displaystyle Q^{new}(s_{t},a_{t})\leftarrow (1-\alpha )\cdot \underbrace {Q(s_{t},a_{t})} _{\text{old value}}+\underbrace {\alpha } _{\text{learning rate}}\cdot \overbrace {{\bigg (}\underbrace {r_{t}} _{\text{reward}}+\underbrace {\gamma } _{\text{discount factor}}\cdot \underbrace {\max _{a}Q(s_{t+1},a)} _{\text{estimate of optimal future value}}{\bigg )}} ^{\text{learned value}}}
+  
+
+其中 
+  
+    
+      
+        
+          r
+          
+            t
+          
+        
+      
+    
+    {\displaystyle r_{t}}
+  
+ 代表從狀態 
+  
+    
+      
+        
+          s
+          
+            t
+          
+        
+      
+    
+    {\displaystyle s_{t}}
+  
+ 到狀態 
+  
+    
+      
+        
+          s
+          
+            t
+            +
+            1
+          
+        
+      
+    
+    {\displaystyle s_{t+1}}
+  
+ 所得到的獎勵值, 
+  
+    
+      
+        α
+      
+    
+    {\displaystyle \alpha }
+  
+ 為學習率(
+  
+    
+      
+        0
+        <
+        α
+        ≤
+        1
+      
+    
+    {\displaystyle 0<\alpha \leq 1}
+  
+)。
+  
+    
+      
+        γ
+      
+    
+    {\displaystyle \gamma }
+  
+ 為衰減系數(
+  
+    
+      
+        0
+        ≤
+        γ
+        ≤
+        1
+      
+    
+    {\displaystyle 0\leq \gamma \leq 1}
+  
+)，當 
+  
+    
+      
+        γ
+      
+    
+    {\displaystyle \gamma }
+  
+ 數值越大時，智慧型代理人便更加重視未來獲得的長期獎勵， 
+  
+    
+      
+        γ
+      
+    
+    {\displaystyle \gamma }
+  
+ 數值越小時，智慧代理人便更加短視近利，只在乎目前可獲得的獎勵。
+
+实现
+Q-学习最简单的实现方式就是将獎勵值存储在一个表格（Q-table）中，但是这种方式受限于状态和动作空间的数目。
+
+函数逼近
+Q-学习可以结合函数逼近。这使得在更大的状态空间中使用 Q-学习，即使状态空间是连续的。 
+一个解决方案是以使用人工神经网络来进行函数逼近。函数逼近的方法在一些问题中会有很好的加速效果，某些时候算法可以通过早期经验的总结可以在一些未出现的状态中依然可以有很好的效果。
+
+变种
+深度Q-学习
+深度Q-学习（Deep Q-learning）是一个由Google DeepMind公司开发的利用深度卷积神经网络来进行Q-学习的算法。在使用非线性函数逼近的时候，强化学习经常会有不稳定性或者发散性：这种不稳定性来于当前的观测中有比较强的自相关。DeepMind 通过使用经历回放，也就是每次学习的时候并不直接从最近的经历中学习，而是从之前的经历中随机采样来进行训练。
+
+深度双Q-学习
+尽量深度Q-学习的效果已经很好了，但是人们发现了一个问题，它会过高的估计Q值。Google DeepMind在2015年证明了这个估值错误真的存在，并且采用双Q-学习的方法改进了算法，从而降低了过高估值带来的影响。
+
+参见
+强化学习
+时序差分学习
+SARSA算法
+囚徒困境
+博弈论
+
+参考文献
+外部链接
+Watkins, C.J.C.H. (1989). Learning from Delayed Rewards. PhD thesis, Cambridge University, Cambridge, England.（页面存档备份，存于互联网档案馆）
+Strehl, Li, Wiewiora, Langford, Littman (2006). PAC model-free reinforcement learning
+Reinforcement Learning: An Introduction by Richard Sutton and Andrew S. Barto, an online textbook. See "6.5 Q-Learning: Off-Policy TD Control".
+Piqle: a Generic Java Platform for Reinforcement Learning（页面存档备份，存于互联网档案馆）
+Reinforcement Learning Maze（页面存档备份，存于互联网档案馆）, a demonstration of guiding an ant through a maze using Q-learning.
+Q-learning work by Gerald Tesauro（页面存档备份，存于互联网档案馆）
+Q-learning work by Tesauro Citeseer Link - Doesn't work
+Q-learning algorithm implemented in processing.org language - Doesn't work
+JavaScript Example with Reward Driven RNN learning
+A Brain Library
+A Genetics Library used by the Brain

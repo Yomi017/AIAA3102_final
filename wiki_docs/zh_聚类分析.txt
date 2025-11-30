@@ -1,0 +1,173 @@
+标题: 聚类分析
+语言: zh
+来源: https://zh.wikipedia.org/wiki/%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90
+------------------------------------------------------------
+
+聚类分析（Cluster analysis）亦称集群分析，是对于统计数据分析的一门技术，在许多领域受到广泛应用，包括机器学习，数据挖掘，模式识别，图像分析以及生物信息。聚类是把相似的对象通过静态分类的方法分成不同的组别或者更多的子集（subset），这样让在同一个子集中的成员对象都有相似的一些属性，常见的包括在坐标系中更加短的空间距离等。
+一般把数据聚类归纳为一种非監督式學習。
+
+定义
+聚类（clustering）的概念不能精确定义，这也是为什么聚类算法众多的原因之一。 聚类问题的共同点就是有一组数据对象。 然而，不同的研究人员采用不同的聚类模型，并且对于这些聚类模型中的每一个，可以再给出不同的算法。 而且不同算法发现的“类（簇）”在其属性上往往会有很大差异。 理解这些“聚类模型”是理解各种算法之间差异的关键。 典型的聚类模型包括以下几种：
+
+连通性模型：例如，层次聚类基于距离连通性构建模型。
+质心模型：例如，k-means 算法用单个均值向量表示每个类。
+分布模型：聚类过程使用统计分布建模，例如期望最大化算法使用的多元正态分布。
+密度模型：例如，DBSCAN 和 OPTICS 将聚类定义为数据空间中相连接的密集区域。
+子空间模型：在双聚类（也称为共聚类或双模式聚类）中，聚类是用聚类成员和相关属性建模的。
+组模型：这些算法不为其结果提供改进的模型，只提供分组信息。
+基于图的模型：团(clique)，即图中节点的子集，子集中的每两个节点都由一条边连接，可以被认为是聚类的原型形式。 与 HCS 聚类算法一样，放宽完全连通性的要求（一部分边可能会丢失）被称为”准团”。
+符号图模型：符号图（signed graph）中的每条路径都有一个符号，该符号来自边上符号的乘积。 在平衡理论的假设下，边可能会改变符号并导致分叉图。 较弱的“聚类性公理”（没有循环恰好有一个负边）产生的结果是两个以上的聚类，或只有正边的子图。
+神经模型：最著名的无监督神经网络是自组织映射，这些模型的特征通常与上述一个或多个模型相似，并且在神经网络实现主成分分析或独立分析形式时包括子空间模型 成分分析
+
+“聚类”的本质上是找到一组类, 这些类通常包含数据集中的所有对象。 此外，它可以指定各个类彼此之间的关系，例如，类相互嵌入的层次结构。 聚类可以大致区分为：
+
+硬聚类：每个对象是否属于一个类
+软聚类（又作：模糊聚类）：每个对象在一定程度上属于每个聚类（例如，属于该聚类的可能性）
+也可能有更细微的区别，例如：
+严格分区聚类：每个对象恰好属于一个类
+
+有异常值的严格分区聚类（Strict partitioning clustering with outliers）：对象也可以不属于任何簇，被认为是异常值
+重叠聚类（又作：替代聚类、多视图聚类）：对象可能属于多个聚类； 通常涉及硬簇
+层次聚类：属于子聚类的对象也属于父聚类
+子空间聚类：虽然是重叠聚类，但在唯一定义的子空间内，聚类不应重叠
+
+算法
+没有客观上“正确”的聚类算法，但正如人们所指出的，“聚类在观察者的眼中”。除非你有喜欢一个聚类模型而不是另一个的数学原因，通常需要通过实验选择最适合特定问题的聚类算法。为一种模型设计的算法通常会在包含完全不同类型模型的数据集上失败。 例如，k-means 无法找到非凸簇。
+
+连通性聚类
+基于连通性的聚类，也称为层次聚类，其核心思想是对象与附近对象的相关性高于与较远对象的相关性。 这些算法根据它们的距离将“对象”连接起来形成“簇”。 集群可以主要通过连接集群各部分所需的最大距离来描述。 在不同的距离，会形成不同的聚类，这可以用树状图表示，这解释了通用名称“层次聚类”的来源：这些算法不提供数据集的单一分区，而是提供广泛的层次结构 在一定距离处相互合并的簇。 在树状图中，y 轴标记集群合并的距离，而对象沿 x 轴放置，这样集群就不会混合。
+基于连通性的聚类是一整套方法，它们因计算距离的方式不同而不同。 除了通常选择的距离函数外，用户还需要决定要使用的连接标准（因为一个类/簇由多个对象组成，所以有多个候选来计算距离）。 流行的选择被称为单链接聚类（对象距离的最小值）、完全链接聚类（对象距离的最大值）和 UPGMA 或 WPGMA（“具有算术平均值的未加权或加权对组方法”，也称为平均链接 聚类）。 此外，层次聚类可以是凝聚的（从单个元素开始并将它们聚合成簇）或分裂的（从完整的数据集开始并将其分成多个分区）。
+这些方法不会产生数据集的唯一分区，而是产生一个层次结构，用户仍然需要从中选择合适的集群。 它们对异常值不是很稳健，异常值要么显示为额外的集群，要么甚至导致其他集群合并（称为“链接现象”，特别是单链接集群）。 在一般情况下，复杂度是 O(n)3) 对于凝聚聚类和 O(2n-1)  用于分裂聚类，[7] 这使得它们对于大型数据集来说太慢了。 对于某些特殊情况，已知最优有效方法（复杂度 O(n)2) ：SLINK 用于单链接和 CLINK  用于完全链接聚类。
+
+质心聚类
+在基于质心的聚类算法中，每个聚类由一个中心向量表示，它不一定是数据集的成员。 当簇数固定为 k 时，k-means 聚类给出了优化问题的形式化定义：找到 k 个簇中心并将对象分配到最近的簇中心，使得与簇的平方距离最小。
+已知优化问题本身是 NP问题（NP困 难），因此常用的方法是只搜索近似解。 一个特别著名的近似方法是 Lloyd 算法， 通常简称为“k-means 算法”（尽管另一个算法引入了这个名称）。 然而，它确实只能找到局部最优值，并且通常会使用不同的随机初始化运行多次。 k-means 的变体通常包括这样的优化，例如选择多次运行中的最佳者，但也将质心限制为数据集的成员（k-medoids），选择中位数（k-medians 聚类），不太随机地选择初始中心（ k-means++) 或允许模糊聚类分配 (fuzzy c-means)。
+大多数 k-means 类型的算法都需要预先指定聚类的数量 - k，这被认为是这些算法的最大缺点之一。 此外，算法更喜欢大小大致相似的簇，因为它们总是会将对象分配给最近的质心。 这通常会导致错误地切割集群边界（这并不奇怪，因为该算法优化的是集群中心，而不是集群边界）。
+K-means 有许多有趣的理论特性。 首先，它将数据空间划分为一种称为 Voronoi 图的结构。 其次，它在概念上接近最近邻分类，因此在机器学习中很受欢迎。 第三，它可以看作是基于模型的聚类的变体，Lloyd 算法可以看作是下面讨论的该模型的期望最大化算法的变体。
+基于质心的聚类问题（如 k-means 和 k-medoids）是无容量、度量设施位置问题的特例，是运筹学和计算几何社区中的典型问题。 在一个基本的设施位置问题（其中有许多变体可以模拟更复杂的设置）中，任务是找到最佳仓库位置以最佳地服务一组给定的消费者。 人们可以将“仓库”视为聚类质心，将“消费者位置”视为要聚类的数据。 这使得将设施位置文献中完善的算法解决方案应用于目前考虑的基于质心的聚类问题成为可能。
+
+分布模型聚类
+与统计学关系最密切的聚类模型是基于分布模型的。 然后可以很容易地将聚类定义为最有可能属于同一分布的对象。 这种方法的一个方便的特性是它非常类似于生成人工数据集的方式：通过从分布中抽取随机对象。
+尽管这些方法的理论基础非常出色，但它们都存在一个称为过度拟合的关键问题，除非对模型的复杂性施加约束。 更复杂的模型通常能够更好地解释数据，这使得选择合适的模型复杂性本身就很困难。
+一种著名的方法被称为高斯混合模型（使用期望最大化算法）。 在这里，数据集通常使用固定数量（以避免过度拟合）的高斯分布建模，这些高斯分布随机初始化并且其参数经过迭代优化以更好地拟合数据集。 这将收敛到局部最优，因此多次运行可能会产生不同的结果。 为了获得硬聚类，通常会将对象分配给它们最有可能属于的高斯分布； 对于软聚类，这不是必需的。
+基于分布的聚类为聚类生成复杂模型，可以捕获属性之间的相关性和依赖性。 然而，这些算法给用户带来了额外的负担：对于许多真实数据集，可能没有简明定义的数学模型（例如，假设高斯分布是对数据的相当强的假设）。
+
+密度聚类
+在基于密度的聚类中，
+聚类被定义为密度高于数据集其余部分的区域。 稀疏区域中的对象——需要分离集群——通常被认为是噪声和边界点。
+最流行的基于密度的聚类方法是 DBSCAN,。与许多较新的方法相比，它具有一个定义明确的集群模型，称为“密度可达性”。 类似于基于链接的聚类，它基于一定距离阈值内的连接点。 然而，它只连接满足密度标准的点，在原始变体中定义为该半径内其他对象的最小数量。 簇由所有密度连接的对象（与许多其他方法相反，它可以形成任意形状的簇）加上这些对象范围内的所有对象组成。 DBSCAN 的另一个有趣的特性是它的复杂性相当低——它需要对数据库进行线性数量的范围查询——并且它会发现基本相同的结果（它对核心点和噪声点是确定性的，但对边界点不是） 在每次运行中，因此无需多次运行。 OPTICS是 DBSCAN 的推广，无需为范围参数  ε 选择合适的值，并产生与连锁聚类相关的分层结果。 DeLi-Clu， Density-Link-Clustering 结合了单链接聚类和 OPTICS 的思想，完全消除了 ε  参数，并通过使用 R 树索引提供了优于 OPTICS 的性能改进。
+DBSCAN 和 OPTICS 的主要缺点是它们期望某种密度下降来检测簇边界。 例如，在具有重叠高斯分布（人工数据中的常见用例）的数据集上，这些算法生成的聚类边界通常看起来很随意，因为聚类密度不断降低。 在由高斯混合组成的数据集上，这些算法几乎总是优于能够精确建模此类数据的 EM 聚类等方法。
+均值漂移(mean-shift)是一种聚类方法，其中基于核密度估计将每个对象移动到其附近最密集的区域。 最终，对象会聚到密度的局部最大值。 与 k-means 聚类类似，这些“密度吸引子”可以作为数据集的代表，但 mean-shift 可以检测类似于 DBSCAN 的任意形状的聚类。 由于昂贵的迭代过程和密度估计，均值漂移通常比 DBSCAN 或 k-Means 慢。 除此之外，均值漂移算法对多维数据的适用性受到核密度估计的不平滑行为的阻碍，这会导致聚类尾部过度碎片化。
+
+网格聚类
+基于网格的技术用于多维数据集。 在此技术中，我们创建一个网格结构，并在网格（也称为单元格）上执行比较。 基于网格的技术速度快，计算复杂度低。 有两种类型的基于网格的聚类方法：STING 和 CLIQUE。
+
+聚类类型
+数据聚类算法可以分为结构性或者分散性。结构性算法利用以前成功使用过的聚类器进行分类，而分散型算法则是一次确定所有分类。结构性算法可以从上至下或者从下至上双向进行计算。从下至上算法从每个对象作为单独分类开始，不断融合其中相近的对象。而从上至下算法则是把所有对象作为一个整体分类，然后逐渐分小。
+分散式聚类算法，是一次性确定要产生的类别，这种算法也已应用于从下至上聚类算法。
+基于密度的聚类算法，是为了挖掘有任意形状特性的类别而发明的。此算法把一个类别视为数据集中大于某阈值的一个区域。DBSCAN和OPTICS是两个典型的算法。
+许多聚类算法在执行之前，需要指定从输入数据集中产生的分类个数。除非事先准备好一个合适的值，否则必须决定一个大概值，关于这个问题已经有一些现成的技术。
+
+距离测量
+数据对象间的相似度度量一般是通过数据之间的相互关系来确定。
+在结构性聚类中，关键性的一步就是要选择测量的距离。一个简单的测量就是使用曼哈顿距离，它相当于每个变量的绝对差值之和。该名字的由来起源于在纽约市区测量街道之间的距离就是由人步行的步数来确定的。
+一个更为常见的测量方法是利用欧氏空间距离，可以认为数据分布一个多维空间中，并且计算每个空间中每个点到原点的距离，然后对所有距离进行换算。
+常用的几个距离计算方法：
+
+欧氏距离（2-norm距离）
+曼哈顿距离（Manhattan distance, 1-norm距离）
+infinity norm
+马氏距离
+余弦相似性
+汉明距离
+
+结构性聚类
+在已经得到距离值之后，元素间可以被联系起来。通过分离和融合可以构建一个结构。传统上，表示的方法是树形数据结构，
+然后对该结构进行修剪。树的根节点表示一个包含所有项目的类别，树叶表示与个别的项目相关的类别。
+层次聚类算法，要么是自底向上聚集型的，即从叶子节点开始，最终汇聚到根节点；要么是自顶向下分裂型的，即从根节点开始，递归的向下分裂。
+任意非负值的函数都可以用于衡量一对观测值之间的相似度。决定一个类别是否分裂或者合并的是一个连动的标准，它是两两观测值之间距离的函数。
+在一个指定高度上切割此树，可以得到一个相应精度的分类。
+
+聚集型层次聚类
+它的层次聚类树如下图
+
+概念聚类 （页面存档备份，存于互联网档案馆）
+分散性聚类
+K-均值法及衍生算法
+K-均值法聚类
+K-均值算法表示以空间中k个点为中心进行聚类，对最靠近他们的对象归类。
+
+例如：数据集合为三维，聚类以两点：X =(x1, x2, x3),Y =(y1, y2, y3)。中心点Z变为Z =(z1, z2, z3)，其中z1 = (x1 + y1)/2，z2 = (x2 + y2)/2，z3 = (x3 + y3)/2。
+算法归纳为（J. MacQueen, 1967）：
+
+选择聚类的个数k.
+任意产生k个聚类，然后确定聚类中心，或者直接生成k个中心。
+对每个点确定其聚类中心点。
+再计算其聚类新中心。
+重复以上步骤直到满足收敛要求。（通常就是确定的中心点不再改变。）
+该算法的最大优势在于简洁和快速。劣势在于对于一些结果并不能够满足需要，因为结果往往需要随机点的选择非常巧合。
+
+QT聚类算法
+图论方法
+谱聚类
+在多元变量统计中，谱聚类（英語：spectral clustering）技术利用数据相似矩阵的谱（特征值），在对数据进行降维后，以较少的维度进行聚类。相似矩阵作为输入，提供了对数据集中每一对点相对相似性的定量评估。
+在图像分割中，谱聚类被称为基于分割的物体分类。
+
+评估和验证
+聚类结果的评估（或“验证”）与聚类本身一样困难 。 流行的方法包括“内部”评估，其中聚类被总结为一个单一的质量分数，“外部”评估，其中聚类与现有的“基准真相(ground truth)”分类进行比较，由人类专家进行“手动”评估，以及“间接”通过评估聚类在其预期应用中的效用来进行评估。
+内部评估措施存在一个问题，即它们代表的功能本身可以被视为聚类目标。 例如，可以通过 Silhouette 系数对数据集进行聚类； 除了没有已知的有效算法之外。 通过使用这种内部衡量指标进行评估，人们更愿意比较优化问题的相似性, 而不一定是聚类的有用程度 。
+外部评估也有类似的问题：如果我们有这样的“ground truth”标签，那么我们就不需要聚类了； 而在实际应用中我们通常没有这样的标签。 另一方面，标签仅反映了数据集的一种可能分区，这并不意味着不存在不同的甚至更好的聚类。
+因此，这两种方法都不能最终判断聚类的实际质量，但这需要人工评估， 这是非常主观的。 尽管如此，这样的统计数据在识别不良聚类方面可能非常有用， 但不应忽视主观的人为评估。
+
+应用
+生物
+市场研究
+其他应用
+引用
+参考文献
+Abdi, H. (1994). Additive-tree representations (with an application to face processing) Lecture Notes in Biomathematics, 84, 43-59.. 1990. 
+Clatworthy, J., Buick, D., Hankins, M., Weinman, J., & Horne, R. (2005). The use and reporting of cluster analysis in health psychology: A review. British Journal of Health Psychology 10: 329-358.
+Cole, A. J. & Wishart, D. (1970). An improved algorithm for the Jardine-Sibson method of generating overlapping clusters. The Computer Journal 13(2):156-163.
+Ester, M., Kriegel, H.P., Sander, J., and Xu, X. 1996. A density-based algorithm for discovering clusters in large spatial databases with noise. Proceedings of the 2nd International Conference on Knowledge Discovery and Data Mining, Portland, Oregon, USA: AAAI Press, pp. 226–231.
+Heyer, L.J., Kruglyak, S. and Yooseph, S., Exploring Expression Data: Identification and Analysis of Coexpressed Genes, Genome Research 9:1106-1115.
+Huang, Z. (1998). Extensions to the K-means Algorithm for Clustering Large Datasets with ategorical Values. Data Mining and Knowledge Discovery, 2, p. 283-304.
+Jardine, N. & Sibson, R. (1968). The construction of hierarchic and non-hierarchic classifications. The Computer Journal 11:177.
+The on-line textbook: Information Theory, Inference, and Learning Algorithms （页面存档备份，存于互联网档案馆）, by David J.C. MacKay includes chapters on k-means clustering, soft k-means clustering, and derivations including the E-M algorithm and the variational view of the E-M algorithm.
+Ng, R.T. and Han, J. 1994. Efficient and effective clustering methods for spatial data mining. Proceedings of the 20th VLDB Conference, Santiago, Chile, pp. 144–155.
+Prinzie A., D. Van den Poel (2006), Incorporating sequential information into traditional classification models by using an element/position-sensitive SAM （页面存档备份，存于互联网档案馆）. Decision Support Systems 42 (2): 508-526.
+Romesburg, H. Clarles, Cluster Analysis for Researchers, 2004, 340 pp. ISBN 1-4116-0617-5 or publisher （页面存档备份，存于互联网档案馆）, reprint of 1990 edition published by Krieger Pub. Co... A Japanese language translation is available from Uchida Rokakuho Publishing Co., Ltd., Tokyo, Japan.
+Zhang, T., Ramakrishnan, R., and Livny, M. 1996. BIRCH: An efficient data clustering method for very large databases. Proceedings of ACM SIGMOD Conference, Montreal, Canada, pp. 103–114.
+For spectral clustering :
+
+Jianbo Shi and Jitendra Malik, "Normalized Cuts and Image Segmentation", IEEE Transactions on Pattern Analysis and Machine Intelligence, 22(8), 888-905, August 2000. Available on Jitendra Malik's homepage （页面存档备份，存于互联网档案馆）
+Marina Meila and Jianbo Shi, "Learning Segmentation with Random Walk", Neural Information Processing Systems, NIPS, 2001. Available from Jianbo Shi's homepage （页面存档备份，存于互联网档案馆）
+For estimating number of clusters:
+
+Can, F., Ozkarahan, E. A. (1990) "Concepts and effectiveness of the cover coefficient-based clustering methodology for text databases." ACM Transactions on Database Systems. 15 (4) 483-517.
+For discussion of the elbow criterion:
+
+Aldenderfer, M.S., Blashfield, R.K, Cluster Analysis, (1984), Newbury Park (CA): Sage.
+
+外部链接
+P. Berkhin, Survey of Clustering Data Mining Techniques （页面存档备份，存于互联网档案馆）, Accrue Software, 2002.
+Jain, Murty and Flynn: Data Clustering: A Review （页面存档备份，存于互联网档案馆）, ACM Comp. Surv., 1999.
+for another presentation of hierarchical, k-means and fuzzy c-means see this introduction to clustering （页面存档备份，存于互联网档案馆）. Also has an explanation on mixture of Gaussians.
+David Dowe, Mixture Modelling page （页面存档备份，存于互联网档案馆） - other clustering and mixture model links.
+a tutorial on clustering [1]
+The on-line textbook: Information Theory, Inference, and Learning Algorithms （页面存档备份，存于互联网档案馆）, by David J.C. MacKay includes chapters on k-means clustering, soft k-means clustering, and derivations including the E-M algorithm and the variational view of the E-M algorithm.
+
+相关软件
+免费类
+The flexclust package for R
+COMPACT - Comparative Package for Clustering Assessment （页面存档备份，存于互联网档案馆）（in Matlab）
+YALE (Yet Another Learning Environment): freely available open-source software for data pre-processing, knowledge discovery, data mining, machine learning, visualization, etc. also including a plugin for clustering, fully integrating Weka, easily extendible, and featuring a graphical user interface as well as a XML-based scripting language for data mining;
+mixmod （页面存档备份，存于互联网档案馆） : Model Based Cluster And Discriminant Analysis. Code in C++, interface with Matlab and Scilab
+LingPipe Clustering Tutorial （页面存档备份，存于互联网档案馆） Tutorial for doing complete- and single-link clustering using LingPipe, a Java text data mining package distributed with source.
+Weka : Weka contains tools for data pre-processing, classification, regression, clustering, association rules, and visualization. It is also well-suited for developing new machine learning schemes.
+Tanagra （页面存档备份，存于互联网档案馆） : a free data mining software including several clustering algorithms such as K-MEANS, SOM, Clustering Tree, HAC and more.
+Cluster : Open source clustering software. The routines are available in the form of a C clustering library, an extension module to Python, a module to Perl.
+python-cluster （页面存档备份，存于互联网档案馆） Pure python implementation
+
+商业类
+Clustan （页面存档备份，存于互联网档案馆）
+Peltarion Synapse（using self-organizing maps）[2] （页面存档备份，存于互联网档案馆）

@@ -1,0 +1,544 @@
+标题: 自编码器
+语言: zh
+来源: https://zh.wikipedia.org/wiki/%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8
+------------------------------------------------------------
+
+自编码器（英語：autoencoder）也称自动编码器，是一种人工神经网络，用于学习无标签数据的有效编码；属一种无监督学习。
+自编码（autoencoding）的目的是：学习对高维度数据做低维度“表示”（“表征”或“编码”）；因此，
+通常用于降维。最近，自编码的概念广泛地用于数据的生成模型。 自2010年以来，一些先进的人工智能在深度学习网络中采用了采用堆叠式稀疏自编码。
+
+基本结构
+自编码器有两个主要部分组成：编码器用于将输入编码，而解码器使用编码重构输入。
+实现这个功能最简单的方式就是重复原始信号。然而，自编码器通常被迫近似地重构输入信号，重构结果仅仅包括原信号中最相关的部分。
+自编码器的思想已经流行了几十年，其首次应用可以追溯到20世纪80年代。自编码器最传统的应用是降维或特征学习，现在这个概念已经推广到用于学习数据的生成模型。.21世纪10年代的一些最强大的人工智能在深度神经网络中采用了自编码器。
+最简单的自编码器形式是一个前馈的、非循环的神经网络，类似于多层感知器（MLP）中的单层感知器，用一层或多层隐藏层链接输入和输出。输出层具有与输入层相同数量的节点（神经元）。输出层节点数和输入层一致。其目的是重构输入（最小化输入和输出之间的差异），而不是在给定输入
+  
+    
+      
+        X
+      
+    
+    {\displaystyle X}
+  
+的情况下预测目标值
+  
+    
+      
+        Y
+      
+    
+    {\displaystyle Y}
+  
+， 所以自编码器属于无监督学习。
+自编码器由编码器和解码器组成，二者可以被分别定义为变换 
+  
+    
+      
+        ϕ
+      
+    
+    {\displaystyle \phi }
+  
+ 和
+  
+    
+      
+        ψ
+      
+    
+    {\displaystyle \psi }
+  
+ ，使得：
+
+  
+    
+      
+        ϕ
+        :
+        
+          
+            X
+          
+        
+        →
+        
+          
+            F
+          
+        
+      
+    
+    {\displaystyle \phi :{\mathcal {X}}\rightarrow {\mathcal {F}}}
+  
+
+  
+    
+      
+        ψ
+        :
+        
+          
+            F
+          
+        
+        →
+        
+          
+            X
+          
+        
+      
+    
+    {\displaystyle \psi :{\mathcal {F}}\rightarrow {\mathcal {X}}}
+  
+
+  
+    
+      
+        ϕ
+        ,
+        ψ
+        =
+        
+          
+            
+              a
+              r
+              g
+              
+              m
+              i
+              n
+            
+            
+              ϕ
+              ,
+              ψ
+            
+          
+        
+        
+        ‖
+        
+          
+            X
+          
+        
+        −
+        (
+        ψ
+        ∘
+        ϕ
+        )
+        
+          
+            X
+          
+        
+        
+          ‖
+          
+            2
+          
+        
+      
+    
+    {\displaystyle \phi ,\psi ={\underset {\phi ,\psi }{\operatorname {arg\,min} }}\,\|{\mathcal {X}}-(\psi \circ \phi ){\mathcal {X}}\|^{2}}
+  
+
+在最简单的情况下，给定一个隐藏层，自编码器的编码阶段接受输入
+  
+    
+      
+        
+          x
+        
+        ∈
+        
+          
+            R
+          
+          
+            d
+          
+        
+        =
+        
+          
+            X
+          
+        
+      
+    
+    {\displaystyle \mathbf {x} \in \mathbb {R} ^{d}={\mathcal {X}}}
+  
+并将其映射到
+  
+    
+      
+        
+          h
+        
+        ∈
+        
+          
+            R
+          
+          
+            p
+          
+        
+        =
+        
+          
+            F
+          
+        
+      
+    
+    {\displaystyle \mathbf {h} \in \mathbb {R} ^{p}={\mathcal {F}}}
+  
+：
+
+  
+    
+      
+        
+          h
+        
+        =
+        σ
+        (
+        
+          W
+          x
+        
+        +
+        
+          b
+        
+        )
+      
+    
+    {\displaystyle \mathbf {h} =\sigma (\mathbf {Wx} +\mathbf {b} )}
+  
+
+像
+  
+    
+      
+        
+          h
+        
+      
+    
+    {\displaystyle \mathbf {h} }
+  
+通常表示编码、潜变量或潜在表示。
+  
+    
+      
+        σ
+      
+    
+    {\displaystyle \sigma }
+  
+是一个逐元素的激活函数（例如sigmoid函数或线性整流函数）。
+  
+    
+      
+        
+          W
+        
+      
+    
+    {\displaystyle \mathbf {W} }
+  
+是权重矩阵，
+  
+    
+      
+        
+          b
+        
+      
+    
+    {\displaystyle \mathbf {b} }
+  
+是偏置向量。权重和偏置通常随机初始化，并在训练期间通过反向传播迭代更新。自编码器的解码阶段映射
+  
+    
+      
+        
+          h
+        
+      
+    
+    {\displaystyle \mathbf {h} }
+  
+到重构
+  
+    
+      
+        
+          
+            x
+            ′
+          
+        
+      
+    
+    {\displaystyle \mathbf {x'} }
+  
+（与
+  
+    
+      
+        
+          x
+        
+      
+    
+    {\displaystyle \mathbf {x} }
+  
+形状一致）：
+
+  
+    
+      
+        
+          
+            x
+            ′
+          
+        
+        =
+        
+          σ
+          ′
+        
+        (
+        
+          
+            W
+            ′
+          
+          h
+        
+        +
+        
+          
+            b
+            ′
+          
+        
+        )
+      
+    
+    {\displaystyle \mathbf {x'} =\sigma '(\mathbf {W'h} +\mathbf {b'} )}
+  
+
+其中解码器部分的
+  
+    
+      
+        
+          
+            σ
+            ′
+          
+        
+        ,
+        
+          
+            W
+            ′
+          
+        
+        ,
+        
+          
+            b
+            ′
+          
+        
+      
+    
+    {\displaystyle \mathbf {\sigma '} ,\mathbf {W'} ,\mathbf {b'} }
+  
+ 可能与编码器部分的
+  
+    
+      
+        
+          σ
+        
+        ,
+        
+          W
+        
+        ,
+        
+          b
+        
+      
+    
+    {\displaystyle \mathbf {\sigma } ,\mathbf {W} ,\mathbf {b} }
+  
+无关。
+自编码器被训练来最小化重建误差（如平方误差），通常被称为 "损失"：
+
+  
+    
+      
+        
+          
+            L
+          
+        
+        (
+        
+          x
+        
+        ,
+        
+          
+            x
+            ′
+          
+        
+        )
+        =
+        ‖
+        
+          x
+        
+        −
+        
+          
+            x
+            ′
+          
+        
+        
+          ‖
+          
+            2
+          
+        
+        =
+        ‖
+        
+          x
+        
+        −
+        
+          σ
+          ′
+        
+        (
+        
+          
+            W
+            ′
+          
+        
+        (
+        σ
+        (
+        
+          W
+          x
+        
+        +
+        
+          b
+        
+        )
+        )
+        +
+        
+          
+            b
+            ′
+          
+        
+        )
+        
+          ‖
+          
+            2
+          
+        
+      
+    
+    {\displaystyle {\mathcal {L}}(\mathbf {x} ,\mathbf {x'} )=\|\mathbf {x} -\mathbf {x'} \|^{2}=\|\mathbf {x} -\sigma '(\mathbf {W'} (\sigma (\mathbf {Wx} +\mathbf {b} ))+\mathbf {b'} )\|^{2}}
+  
+
+其中
+  
+    
+      
+        
+          x
+        
+      
+    
+    {\displaystyle \mathbf {x} }
+  
+通常在训练集上平均。
+如前所述，和其它前馈神经网络一样，自编码器的训练是通过误差的反向传播进行的。
+当特征空间
+  
+    
+      
+        
+          
+            F
+          
+        
+      
+    
+    {\displaystyle {\mathcal {F}}}
+  
+的维度比输入空间
+  
+    
+      
+        
+          
+            X
+          
+        
+      
+    
+    {\displaystyle {\mathcal {X}}}
+  
+低时，特征向量
+  
+    
+      
+        ϕ
+        (
+        x
+        )
+      
+    
+    {\displaystyle \phi (x)}
+  
+可以看作时输入
+  
+    
+      
+        x
+      
+    
+    {\displaystyle x}
+  
+的压缩表示，这就是不完备自动编码（undercomplete autoencoders）的情况。如果隐藏层大于（过完备）或等于输入层的数量，或者隐藏单元的容量足够大，自编码器就可能学会恒等函数而变得无用。然而，实验结果表明过完备自编码器（overcomplete autoencoders）仍然可能学习到有用的特征。在理想情况下，编码的维度和模型容量可以根据待建模数据分布的复杂性来设定，采用这种方式的一种途径是正则化自编码器。
+
+另見
+表征学习
+
+
+== 參考 ==
