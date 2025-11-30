@@ -34,13 +34,13 @@ class Tools:
                 'parameters': [
                     {
                         'name': 'city',
-                        'description': '需要查询天气的城市名称，例如“成都”',
+                        'description': '需要查询天气的城市名称，例如"成都"',
                         'required': True,
                         'schema': {'type': 'string'},
                     },
                     {
                         'name': 'province',
-                        'description': '需要查询天气城市所在的省份，例如“四川”',
+                        'description': '需要查询天气城市所在的省份，例如"四川"',
                         'required': True,
                         'schema': {'type': 'string'},
                     }
@@ -63,6 +63,9 @@ class Tools:
         Returns:
             str: 搜索结果的摘要。
         """
+        print(f"\n🔧 [工具调用] google_search")
+        print(f"   参数: search_query='{search_query}'")
+        
         url = "http://www.gpts-cristiano.com/cristiano/googleApi"
 
         # 构造请求体
@@ -76,7 +79,7 @@ class Tools:
         # 发送POST请求
         response = requests.post(url, headers=headers, data=payload).json()
 
-        print(response)
+        print(f"   ✓ 调用成功")
         # 返回第一条搜索结果的摘要
         return response['organic'][0]['snippet']
 
@@ -90,6 +93,9 @@ class Tools:
         Returns:
             str: 格式化后的天气信息字符串或错误提示。
         """
+        print(f"\n🔧 [工具调用] query_weather")
+        print(f"   参数: city='{city}', province='{province}'")
+        
         mock_response = {
             "city": city,
             "province": province,
@@ -100,6 +106,7 @@ class Tools:
             "wind_power": "3级"
         }
         
+        print(f"   ✓ 调用成功")
         # 将字典格式化成一个对LLM友好的字符串
         return (
             f"地点：{mock_response['province']}{mock_response['city']}，"
@@ -116,15 +123,21 @@ class Tools:
         Returns:
             str: 当前时间的字符串表示。
         """
+        print(f"\n🔧 [工具调用] query_time")
+        print(f"   参数: 无")
+        
         url = "https://api.uuni.cn//api/time"
         try:
             response = requests.get(url, timeout=5)
             response.raise_for_status()
             data = response.json()
             if "date" in data and "weekday" in data:
+                print(f"   ✓ 调用成功")
                 return f"当前时间是：{data['date']}，{data['weekday']}"
             else:
+                print(f"   ✗ 调用失败: API返回格式异常")
                 return "无法获取当前时间，API返回格式异常。"
         except Exception as e:
+            print(f"   ✗ 调用失败: {e}")
             return f"查询时间时发生错误：{e}"
     
