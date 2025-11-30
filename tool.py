@@ -5,11 +5,13 @@ import requests
 from typing import Any, Dict, List, Optional
 
 from langchain_google_community import GoogleSearchAPIWrapper
+from calculator import Calculator
 
 class Tools:
     def __init__(self) -> None:
         self.toolConfig = self._tools()
         self._google_search_wrapper: Optional[GoogleSearchAPIWrapper] = None
+        self.calc = Calculator()
     
     def _tools(self) -> list:
         
@@ -30,7 +32,7 @@ class Tools:
             {
                 'name_for_human': '天气查询',
                 'name_for_model': 'query_weather',
-                'description_for_model': '一个专门用于查询特定城市实时天气的工具，需要同时提供城市和省份的名称。',
+                'description_for_model': '一个专门用于查询特定城市实时天气的工具，需要同时提供城市和省份的名称',
                 'parameters': [
                     {
                         'name': 'city',
@@ -49,50 +51,122 @@ class Tools:
             {
                 'name_for_human': '时间查询',
                 'name_for_model': 'query_time',
-                'description_for_model': '一个用于查询当前时间的工具，不需要任何参数。',
+                'description_for_model': '一个用于查询当前时间的工具，不需要任何参数',
                 'parameters': []
+            },
+            {
+                'name_for_human': '基本计算器',
+                'name_for_model': 'basic_calculator',
+                'description_for_model': '用于基本数学运算的计算器,支持加减乘除、幂运算、平方根、绝对值、指数、对数等。可以计算数学表达式',
+                'parameters': [
+                    {
+                        'name': 'expression',
+                        'description': '要计算的数学表达式,例如"2+3*4"、"sqrt(16)"、"abs(-5)"、"2**3"等。支持运算符:+,-,*,/,**。支持函数:sqrt(平方根),abs(绝对值),exp(指数),log(对数)。支持常数:pi,e',
+                        'required': True,
+                        'schema': {'type': 'string'},
+                    }
+                ]
+            },
+            {
+                'name_for_human': '三角函数计算器',
+                'name_for_model': 'trig_calculator',
+                'description_for_model': '用于计算三角函数和反三角函数。支持sin(正弦)、cos(余弦)、tan(正切)、asin(反正弦)、acos(反余弦)、atan(反正切)',
+                'parameters': [
+                    {
+                        'name': 'function',
+                        'description': '要计算的三角函数名称,可选值:"sin","cos","tan","asin","acos","atan"',
+                        'required': True,
+                        'schema': {'type': 'string'},
+                    },
+                    {
+                        'name': 'x',
+                        'description': '函数的输入值。对于sin/cos/tan,默认使用弧度制;对于asin/acos,输入值必须在[-1,1]范围内',
+                        'required': True,
+                        'schema': {'type': 'number'},
+                    },
+                    {
+                        'name': 'degree',
+                        'description': '是否使用角度制(默认False使用弧度制)。仅对sin/cos/tan有效',
+                        'required': False,
+                        'schema': {'type': 'boolean'},
+                    }
+                ]
+            },
+            {
+                'name_for_human': '矩阵计算器',
+                'name_for_model': 'matrix_calculator',
+                'description_for_model': '用于矩阵运算,支持矩阵加法、减法、乘法、数乘、求行列式、求逆矩阵',
+                'parameters': [
+                    {
+                        'name': 'operation',
+                        'description': '要执行的矩阵运算,可选值:"add"(加法),"subtract"(减法),"multiply"(乘法),"scalar_multiply"(数乘),"determinant"(行列式),"inverse"(逆矩阵)',
+                        'required': True,
+                        'schema': {'type': 'string'},
+                    },
+                    {
+                        'name': 'matrix_a',
+                        'description': '第一个矩阵,格式为嵌套列表,例如[[1,2],[3,4]]',
+                        'required': True,
+                        'schema': {'type': 'array'},
+                    },
+                    {
+                        'name': 'matrix_b',
+                        'description': '第二个矩阵(仅用于add/subtract/multiply操作),格式为嵌套列表',
+                        'required': False,
+                        'schema': {'type': 'array'},
+                    },
+                    {
+                        'name': 'scalar',
+                        'description': '标量值(仅用于scalar_multiply操作)',
+                        'required': False,
+                        'schema': {'type': 'number'},
+                    }
+                ]
+            },
+            {
+                'name_for_human': '定积分计算器',
+                'name_for_model': 'integral_calculator',
+                'description_for_model': '用于计算定积分。可以计算各种函数在指定区间上的定积分',
+                'parameters': [
+                    {
+                        'name': 'func_str',
+                        'description': '被积函数的字符串表示,使用x作为变量。例如"x**2"(x的平方),"np.sin(x)"(sin(x)),"x**3 + 2*x"等',
+                        'required': True,
+                        'schema': {'type': 'string'},
+                    },
+                    {
+                        'name': 'a',
+                        'description': '积分下限',
+                        'required': True,
+                        'schema': {'type': 'number'},
+                    },
+                    {
+                        'name': 'b',
+                        'description': '积分上限',
+                        'required': True,
+                        'schema': {'type': 'number'},
+                    }
+                ]
             }
         ]
         return tools
     
     def google_search(self, search_query: str) -> str:
-        """
-        执行谷歌搜索。
-        Args:
-            search_query (str): 搜索的关键词或短语。
-        Returns:
-            str: 搜索结果的摘要。
-        """
+        """执行谷歌搜索"""
         print(f"\n🔧 [工具调用] google_search")
         print(f"   参数: search_query='{search_query}'")
         
         url = "http://www.gpts-cristiano.com/cristiano/googleApi"
-
-        # 构造请求体
         payload = json.dumps({"q": search_query})
-        # 构造请求头，需要填入自己的API KEY
         headers = {
-            # 'X-API-KEY': '修改为你自己的key',  # 请替换为你的Serper API密钥
             'Content-Type': 'application/x-www-form-urlencoded'
         }
-
-        # 发送POST请求
         response = requests.post(url, headers=headers, data=payload).json()
-
         print(f"   ✓ 调用成功")
-        # 返回第一条搜索结果的摘要
         return response['organic'][0]['snippet']
 
-    # ================= 新增的天气查询工具实现 =================
     def query_weather(self, city: str, province: str) -> str:
-        """
-        查询指定省份和城市的天气。
-        Args:
-            city (str): 城市名称。
-            province (str): 省份名称。
-        Returns:
-            str: 格式化后的天气信息字符串或错误提示。
-        """
+        """查询天气"""
         print(f"\n🔧 [工具调用] query_weather")
         print(f"   参数: city='{city}', province='{province}'")
         
@@ -107,7 +181,6 @@ class Tools:
         }
         
         print(f"   ✓ 调用成功")
-        # 将字典格式化成一个对LLM友好的字符串
         return (
             f"地点：{mock_response['province']}{mock_response['city']}，"
             f"天气：{mock_response['weather']}，"
@@ -116,8 +189,9 @@ class Tools:
             f"风向：{mock_response['wind_direction']}，"
             f"风力：{mock_response['wind_power']}"
         )
-    # =======================================================
+
     def query_time(self) -> str:
+        """查询当前时间"""
         print(f"\n🔧 [工具调用] query_time")
         print(f"   参数: 无")
         
@@ -131,8 +205,89 @@ class Tools:
                 return f"当前时间是：{data['date']}，{data['weekday']}"
             else:
                 print(f"   ✗ 调用失败: API返回格式异常")
-                return "无法获取当前时间，API返回格式异常。"
+                return "无法获取当前时间，API返回格式异常"
         except Exception as e:
             print(f"   ✗ 调用失败: {e}")
             return f"查询时间时发生错误：{e}"
     
+    def basic_calculator(self, expression: str) -> str:
+        """基本计算器"""
+        print(f"\n🔧 [工具调用] basic_calculator")
+        print(f"   参数: expression='{expression}'")
+        
+        try:
+            result = self.calc.evaluate(expression)
+            print(f"   ✓ 调用成功: {result}")
+            return f"计算结果: {expression} = {result}"
+        except Exception as e:
+            print(f"   ✗ 调用失败: {e}")
+            return f"计算失败: {str(e)}"
+    
+    def trig_calculator(self, function: str, x: float, degree: bool = False) -> str:
+        """三角函数计算器"""
+        print(f"\n🔧 [工具调用] trig_calculator")
+        print(f"   参数: function='{function}', x={x}, degree={degree}")
+        
+        try:
+            func_map = {
+                'sin': self.calc.sin,
+                'cos': self.calc.cos,
+                'tan': self.calc.tan,
+                'asin': self.calc.asin,
+                'acos': self.calc.acos,
+                'atan': self.calc.atan
+            }
+            
+            if function not in func_map:
+                return f"不支持的三角函数: {function}"
+            
+            result = func_map[function](x, degree=degree)
+            print(f"   ✓ 调用成功: {result}")
+            return f"计算结果: {function}({x}) = {result}"
+        except Exception as e:
+            print(f"   ✗ 调用失败: {e}")
+            return f"计算失败: {str(e)}"
+    
+    def matrix_calculator(self, operation: str, matrix_a: List[List[float]], 
+                         matrix_b: List[List[float]] = None, scalar: float = None) -> str:
+        """矩阵计算器"""
+        print(f"\n🔧 [工具调用] matrix_calculator")
+        print(f"   参数: operation='{operation}', matrix_a={matrix_a}")
+        
+        try:
+            if operation == 'add':
+                result = self.calc.matrix_add(matrix_a, matrix_b)
+                return f"矩阵加法结果: {result}"
+            elif operation == 'subtract':
+                result = self.calc.matrix_subtract(matrix_a, matrix_b)
+                return f"矩阵减法结果: {result}"
+            elif operation == 'multiply':
+                result = self.calc.matrix_multiply(matrix_a, matrix_b)
+                return f"矩阵乘法结果: {result}"
+            elif operation == 'scalar_multiply':
+                result = self.calc.matrix_scalar_multiply(matrix_a, scalar)
+                return f"矩阵数乘结果: {result}"
+            elif operation == 'determinant':
+                result = self.calc.matrix_determinant(matrix_a)
+                return f"矩阵行列式: {result}"
+            elif operation == 'inverse':
+                result = self.calc.matrix_inverse(matrix_a)
+                return f"逆矩阵: {result}"
+            else:
+                return f"不支持的矩阵运算: {operation}"
+        except Exception as e:
+            print(f"   ✗ 调用失败: {e}")
+            return f"计算失败: {str(e)}"
+    
+    def integral_calculator(self, func_str: str, a: float, b: float) -> str:
+        """定积分计算器"""
+        print(f"\n🔧 [工具调用] integral_calculator")
+        print(f"   参数: func_str='{func_str}', a={a}, b={b}")
+        
+        try:
+            result = self.calc.integrate_function(func_str, a, b)
+            print(f"   ✓ 调用成功")
+            return result['description']
+        except Exception as e:
+            print(f"   ✗ 调用失败: {e}")
+            return f"积分计算失败: {str(e)}"

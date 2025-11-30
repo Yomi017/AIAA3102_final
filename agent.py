@@ -49,7 +49,7 @@ class Agent:
         """
         Parse the latest tool calls from the model's output. 
         Args: text (str): The output text of the model. 
-        Returns: Tuple[str, str, str]: (Plugin name, plugin parameter, parsed text) ""
+        Returns: Tuple[str, str, str]: (Plugin name, plugin parameter, parsed text)
         """
         plugin_name, plugin_args = '', ''
         i = text.rfind('\nAction:')
@@ -80,6 +80,14 @@ class Agent:
             return '\nObservation:' + self.tool.query_weather(**plugin_args)
         elif plugin_name == 'query_time':
             return '\nObservation:' + self.tool.query_time(**plugin_args)
+        elif plugin_name == 'basic_calculator':
+            return '\nObservation:' + self.tool.basic_calculator(**plugin_args)
+        elif plugin_name == 'trig_calculator':
+            return '\nObservation:' + self.tool.trig_calculator(**plugin_args)
+        elif plugin_name == 'matrix_calculator':
+            return '\nObservation:' + self.tool.matrix_calculator(**plugin_args)
+        elif plugin_name == 'integral_calculator':
+            return '\nObservation:' + self.tool.integral_calculator(**plugin_args)
         else:
             print(f"✗ unknown tool: {plugin_name}")
             return f'\nObservation: unknown tool: {plugin_name}'
