@@ -29,8 +29,8 @@ Final Answer: the final answer to the original input question
 """
 
 class Agent:
-    def __init__(self, model) -> None:
-        self.tool = Tools()
+    def __init__(self, model, rag_db_path=None) -> None:
+        self.tool = Tools(rag_db_path=rag_db_path)
         self.system_prompt = self.build_system_input()  
         self.model = model
     
@@ -88,6 +88,8 @@ class Agent:
             return '\nObservation:' + self.tool.matrix_calculator(**plugin_args)
         elif plugin_name == 'integral_calculator':
             return '\nObservation:' + self.tool.integral_calculator(**plugin_args)
+        elif plugin_name == 'knowledge_base_query':
+            return '\nObservation:' + self.tool.knowledge_base_query(**plugin_args)
         else:
             print(f"✗ unknown tool: {plugin_name}")
             return f'\nObservation: unknown tool: {plugin_name}'

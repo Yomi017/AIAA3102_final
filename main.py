@@ -1,3 +1,4 @@
+import os
 from llm import Qwen3
 from agent import Agent
 from datetime import datetime
@@ -50,7 +51,19 @@ def main():
         print_message("error", f"模型初始化失败: {e}")
         return
 
-    agent = Agent(llm)
+    # 检查是否有RAG数据库(优先使用wiki_vector_db)
+    rag_db_path = None
+    if os.path.exists("rag/wiki_vector_db"):
+        rag_db_path = "rag/wiki_vector_db"
+        print_message("system", f"发现AI维基知识库: {rag_db_path}")
+    elif os.path.exists("rag/vector_db"):
+        rag_db_path = "rag/vector_db"
+        print_message("system", f"发现知识库: {rag_db_path}")
+    else:
+        print_message("system", "未找到知识库,将不启用RAG功能")
+    
+    agent = Agent(llm, rag_db_path=rag_db_path)
+    
     agent_history = []
     
     print("\n" + "━" * 60)

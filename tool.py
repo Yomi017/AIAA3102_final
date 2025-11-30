@@ -6,12 +6,21 @@ from typing import Any, Dict, List, Optional
 
 from langchain_google_community import GoogleSearchAPIWrapper
 from calculator import Calculator
+from rag.rag_engine import RAGEngine
 
 class Tools:
-    def __init__(self) -> None:
+    def __init__(self, rag_db_path: Optional[str] = None) -> None:
         self.toolConfig = self._tools()
         self._google_search_wrapper: Optional[GoogleSearchAPIWrapper] = None
         self.calc = Calculator()
+        
+        # 初始化RAG引擎(如果提供了数据库路径)
+        self.rag_engine = None
+        if rag_db_path and os.path.exists(rag_db_path):
+            try:
+                self.rag_engine = RAGEngine(rag_db_path)
+            except Exception as e:
+                print(f"⚠️  RAG引擎初始化失败: {e}")
     
     def _tools(self) -> list:
         
@@ -145,6 +154,25 @@ class Tools:
                         'description': '积分上限',
                         'required': True,
                         'schema': {'type': 'number'},
+                    }
+                ]
+            },
+            {
+                'name_for_human': '知识库问答',
+                'name_for_model': 'knowledge_base_query',
+                'description_for_model': '一个基于向量检索的知识库问答工具,可以从预先构建的文档库中检索相关信息来回答问题。当用户询问特定领域知识、文档内容、或需要基于已有资料回答时使用此工具',
+                'parameters': [
+                    {
+                        'name': 'question',
+                        'description': '用户的问题,需要从知识库中检索答案',
+                        'required': True,
+                        'schema': {'type': 'string'},
+                    },
+                    {
+                        'name': 'top_k',
+                        'description': '返回最相关的文档数量,默认为3',
+                        'required': False,
+                        'schema': {'type': 'integer'},
                     }
                 ]
             }
@@ -293,3 +321,23 @@ class Tools:
         except Exception as e:
             print(f"   ✗ 调用失败: {e}")
             return f"积分计算失败: {str(e)}"
+    
+    def knowledge_base_query(self, question: str, top_k: int = 3) -> str:
+        """知识库问答"""
+        print(f"\n🔧 [工具调用] knowledge_base_query")
+        print(f"   参数: question='{question}', top_k={top_k}")
+        
+        if self.rag_engine is None:
+            print(f"   ✗ 调用失败: RAG引擎未初始化")
+            return "知识库未加载,无法回答问题。请先构建并加载向量数据库。"
+        
+        try:
+            result = self.rag_engine.query(question, top_k=top_k)
+            context = result['context']
+            print(f"   ✓ 调用成功,检索到 {len(result['search_results'])} 条相关信息")
+            
+            # 返回检索到的上下文
+            return f"根据知识库检索到以下相关信息:\n\n{context}"
+        except Exception as e:
+            print(f"   ✗ 调用失败: {e}")
+            return f"知识库查询失败: {str(e)}"
