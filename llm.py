@@ -52,6 +52,8 @@ class Qwen3(BaseLLM):
 
         self.tokenizer = AutoTokenizer.from_pretrained(self.path, trust_remote_code=True)
 
+        self.use_vllm = False
+
         if self.use_vllm:
             self.model = self.vllm_class(
                 model=self.path,

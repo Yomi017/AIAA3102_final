@@ -39,7 +39,7 @@ def print_message(role: str, content: str):
 def main():
     print_banner()
     
-    model_path = "Qwen3-8B"
+    model_path = "Qwen/Qwen3-8B"
     
     try:
         print_message("system", "正在加载模型...")
