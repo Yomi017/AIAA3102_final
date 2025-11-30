@@ -118,11 +118,6 @@ class Tools:
         )
     # =======================================================
     def query_time(self) -> str:
-        """
-        查询当前的时间（通过外部API）。
-        Returns:
-            str: 当前时间的字符串表示。
-        """
         print(f"\n🔧 [工具调用] query_time")
         print(f"   参数: 无")
         

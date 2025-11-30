@@ -26,14 +26,6 @@ class Qwen3(BaseLLM):
     THINKING_EOS_TOKEN_ID = 151668  # token id for </think>
 
     def __init__(self, path: str = "", tensor_parallel_size: int = 8, gpu_ids: List[int] = None):
-        """
-        初始化Qwen3模型
-        
-        Args:
-            path: 模型路径
-            tensor_parallel_size: 张量并行大小(当gpu_ids未指定时使用)
-            gpu_ids: 指定使用的GPU序号列表,例如[0, 5, 8]。如果指定,会覆盖tensor_parallel_size
-        """
         # 如果指定了GPU序号,设置CUDA_VISIBLE_DEVICES并调整tensor_parallel_size
         if gpu_ids is not None:
             gpu_str = ",".join(map(str, gpu_ids))
@@ -65,7 +57,7 @@ class Qwen3(BaseLLM):
                 model=self.path,
                 tensor_parallel_size=self.tensor_parallel_size,
                 trust_remote_code=True,
-                gpu_memory_utilization=0.95,
+                gpu_memory_utilization=0.85,
             )
         else:
             self.model = AutoModelForCausalLM.from_pretrained(
