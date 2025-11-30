@@ -4,8 +4,11 @@ from agent import Agent
 def main():
     
     model_path = "Qwen3-8B"
+    
     try:
         llm = Qwen3(model_path)
+        
+        # llm = Qwen3(model_path, gpu_ids=[0, 5, 8])
     except Exception as e:
         print(f"Error initializing model: {e}")
         return
