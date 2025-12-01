@@ -103,6 +103,18 @@ python main.py
 - 如果出现 `faiss` 安装或导入失败：优先尝试 `pip install faiss-cpu`（CPU 环境），或参照 FAISS 官方文档安装适配 CUDA 的包。
 - 如果 RAG 检索返回空或不准确：确认 `rag/wiki_vector_db` 已正确构建并包含 `faiss.index` 与 `documents.pkl`。
 
+## Google 搜索配置
+- 在 Programmable Search Engine 控制台创建搜索引擎，记录 `cx`，并在 Google Cloud Console 申请一个 API Key。
+- 将上述两个值写入 `jsons/goole_search.json`（或其他自定义路径）中，例如：
+	```json
+	{
+		"search_engine_id": "your_cx",
+		"api_key": "your_api_key"
+	}
+	```
+- 若凭据文件不在默认位置，可在 `config.yaml` 的 `google.credentials_path` 指定路径，或在运行前设置环境变量 `GOOGLE_SEARCH_CREDENTIALS=/path/to/your.json`。
+- 工具会在运行时读取 JSON 中的配置并调用官方 Custom Search JSON API，无需再配置额外的 OAuth/Service Account。
+
 ## Project B 进度清单（Tool-Using LLM Agent with ReAct Pattern）
 - [x] 实现 Thought→Action→Observation→Final Answer 的最小 ReAct 循环。
 - [x] 解析结构化工具调用（JSON 参数）并在 `agent.py` 中路由执行。

@@ -1,5 +1,4 @@
 import os
-import yaml
 import json
 import requests
 from typing import Any, Dict, List, Optional
@@ -14,6 +13,8 @@ class Tools:
         self.toolConfig = self._tools()
         self._google_search_wrapper: Optional[GoogleSearchAPIWrapper] = None
         self.calc = Calculator()
+        self.google_credentials_path = os.getenv("GOOGLE_SEARCH_CREDENTIALS", "jsons/goole_search.json")
+        self._google_search_config: Optional[Dict[str, str]] = None
         
         # 初始化RAG引擎(如果提供了数据库路径)
         self.rag_engine = None
@@ -182,19 +183,48 @@ class Tools:
         ]
         return tools
     
+    def _load_google_search_config(self) -> Dict[str, str]:
+        if self._google_search_config is None:
+            if not os.path.exists(self.google_credentials_path):
+                raise FileNotFoundError(f"未找到 Google 配置文件: {self.google_credentials_path}")
+            with open(self.google_credentials_path, "r", encoding="utf-8") as fp:
+                data = json.load(fp) or {}
+            self._google_search_config = data
+        return self._google_search_config
+
+    def _google_search_request(self, query: str, api_key: str, cx: str) -> str:
+        endpoint = "https://customsearch.googleapis.com/customsearch/v1"
+        params = {"q": query, "cx": cx, "key": api_key, "num": 3}
+        response = requests.get(endpoint, params=params, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+        items = data.get("items", [])
+        if not items:
+            logger.warning("Google search returned no results")
+            return "Google 搜索没有找到相关结果。"
+        formatted_results = []
+        for idx, item in enumerate(items[:3], start=1):
+            title = item.get("title", "无标题")
+            snippet = item.get("snippet", "无摘要")
+            link = item.get("link", "")
+            formatted_results.append(f"{idx}. {title}\n{snippet}\n{link}".strip())
+        return "\n\n".join(formatted_results)
+
     def google_search(self, search_query: str) -> str:
         """执行谷歌搜索"""
         logger.info(f"Google search: {search_query}")
-        
         try:
-            url = "http://www.gpts-cristiano.com/cristiano/googleApi"
-            payload = json.dumps({"q": search_query})
-            headers = {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-            response = requests.post(url, headers=headers, data=payload).json()
-            logger.success(f"Google search completed successfully")
-            return response['organic'][0]['snippet']
+            config = self._load_google_search_config()
+            api_key = config.get("api_key")
+            search_engine_id = config.get("search_engine_id")
+            if not api_key or not search_engine_id:
+                message = "Google 搜索未配置: 请在 JSON 文件中提供 api_key 与 search_engine_id。"
+                logger.error(message)
+                return message
+
+            result = self._google_search_request(search_query, api_key, search_engine_id)
+            logger.success("Google search completed successfully")
+            return result
         except Exception as e:
             logger.error(f"Google search failed: {e}")
             raise

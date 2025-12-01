@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 from datetime import datetime
@@ -19,7 +20,10 @@ DEFAULT_CONFIG = {
     "security": {
         "enable_prompt_guard": True,
         "lock_on_violation": True,
-    }
+    },
+    "google": {
+        "credentials_path": "jsons/goole_search.json",
+    },
 }
 
 
@@ -84,12 +88,32 @@ def main():
 
     config = load_config()
     security_config = config.get("security", {})
+    google_config = config.get("google", {})
     logger.info(
         "Security config loaded | prompt_guard={}, lock_on_violation={}",
         security_config.get("enable_prompt_guard"),
         security_config.get("lock_on_violation"),
     )
     
+    credentials_path = google_config.get("credentials_path")
+    if credentials_path:
+        os.environ.setdefault("GOOGLE_SEARCH_CREDENTIALS", credentials_path)
+        if os.path.exists(credentials_path):
+            try:
+                with open(credentials_path, "r", encoding="utf-8") as fp:
+                    google_credentials = json.load(fp) or {}
+                if not google_credentials.get("api_key"):
+                    logger.warning(
+                        "Google 搜索 API key 未配置 (文件: %s)，google_search 工具将不可用。",
+                        credentials_path,
+                    )
+            except Exception as exc:
+                logger.warning(
+                    "无法读取 Google 搜索配置文件 %s: %s",
+                    credentials_path,
+                    exc,
+                )
+
     model_path = "Qwen/Qwen3-8B"
     
     try:

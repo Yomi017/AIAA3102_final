@@ -1,3 +1,6 @@
 security:
   enable_prompt_guard: true
   lock_on_violation: true
+
+google:
+  credentials_path: jsons/goole_search.json
