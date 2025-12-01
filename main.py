@@ -51,7 +51,7 @@ def main():
     
     try:
         print_message("system", "正在加载模型...")
-        llm = Qwen3(model_path)
+        llm = Qwen3(model_path, gpu_ids=[0,1,2,3])
         
         # llm = Qwen3(model_path, gpu_ids=[0, 5, 8])
     except Exception as e:

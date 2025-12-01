@@ -160,7 +160,7 @@ class Tools:
             {
                 'name_for_human': '知识库问答',
                 'name_for_model': 'knowledge_base_query',
-                'description_for_model': '一个基于向量检索的知识库问答工具,可以从预先构建的文档库中检索相关信息来回答问题。当用户询问特定领域知识、文档内容、或需要基于已有资料回答时使用此工具',
+                'description_for_model': '一个基于向量检索的知识库问答工具,可以从预先构建的文档库中检索相关信息来回答问题。当用户询问特定领域知识、文档内容、或需要基于已有资料回答时使用此工具。如果使用网络查询失败,可以尝试使用此工具从知识库中获取答案。',
                 'parameters': [
                     {
                         'name': 'question',
