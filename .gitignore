@@ -3,3 +3,4 @@ ReAct/
 __pycache__/
 log/
 logs/
+.python-version

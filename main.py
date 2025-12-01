@@ -1,16 +1,45 @@
 import os
 import sys
+from datetime import datetime
+
+import yaml
+from loguru import logger
+
 from llm import Qwen3
 from agent import Agent
-from datetime import datetime
 from log_config import setup_logger
-from loguru import logger
 
 # 修复中文输入问题
 try:
     import readline
 except ImportError:
     print("system", "请使用 Python 3.9 或更高版本")
+
+DEFAULT_CONFIG = {
+    "security": {
+        "enable_prompt_guard": True,
+        "lock_on_violation": True,
+    }
+}
+
+
+def _merge_dict(base: dict, override: dict) -> dict:
+    result = dict(base)
+    for key, value in override.items():
+        if isinstance(value, dict) and isinstance(result.get(key), dict):
+            result[key] = _merge_dict(result[key], value)
+        else:
+            result[key] = value
+    return result
+
+
+def load_config(path: str = "config.yaml") -> dict:
+    if not os.path.exists(path):
+        return DEFAULT_CONFIG.copy()
+    with open(path, "r", encoding="utf-8") as fp:
+        data = yaml.safe_load(fp) or {}
+    return _merge_dict(DEFAULT_CONFIG, data)
+
 
 def print_banner():
     """打印欢迎横幅"""
@@ -52,12 +81,20 @@ def main():
     logger.info("=" * 60)
     logger.info("AIAA3102 Agent System started")
     logger.info("=" * 60)
+
+    config = load_config()
+    security_config = config.get("security", {})
+    logger.info(
+        "Security config loaded | prompt_guard={}, lock_on_violation={}",
+        security_config.get("enable_prompt_guard"),
+        security_config.get("lock_on_violation"),
+    )
     
     model_path = "Qwen/Qwen3-8B"
     
     try:
         logger.info("正在加载模型...")
-        llm = Qwen3(model_path, gpu_ids=[0,1,2,3])
+        llm = Qwen3(model_path, gpu_ids=[0])
         logger.success("Model loaded successfully")
         
         # llm = Qwen3(model_path, gpu_ids=[0, 5, 8])
@@ -76,7 +113,7 @@ def main():
     else:
         logger.warning("未找到知识库,将不启用RAG功能")
     
-    agent = Agent(llm, rag_db_path=rag_db_path)
+    agent = Agent(llm, rag_db_path=rag_db_path, security_config=security_config)
     
     agent_history = []
     
@@ -92,6 +129,15 @@ def main():
             if user_input.lower() in ['exit', 'quit']:
                 logger.info("User requested exit")
                 break
+
+            if user_input.lower() in ['reset guard', 'reset_guard', '/reset_guard']:
+                logger.info("Operator requested prompt guard reset")
+                was_blocked = agent.reset_security()
+                if was_blocked:
+                    print("\n🔓 Prompt Guard: 已清除锁定，可以继续输入。")
+                else:
+                    print("\nℹ️ Prompt Guard: 当前未锁定，无需重置。")
+                continue
             
             logger.info(f"User input: {user_input}")
             

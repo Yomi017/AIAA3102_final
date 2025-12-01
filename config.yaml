@@ -1,0 +1,3 @@
+security:
+  enable_prompt_guard: true
+  lock_on_violation: true

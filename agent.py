@@ -1,9 +1,10 @@
-from typing import Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union
 import json5
 from loguru import logger
 
 from llm import BaseLLM
 from tool import Tools
+from security.prompt_guard import has_high_risk, scan_prompt
 
 # define tool description template, to be used to introduce available tools to the model
 # name_for_model: tool name, to be called by model
@@ -86,12 +87,27 @@ Remember: ONE tool per response. NEVER make up information. Every fact must come
 """
 
 class Agent:
-    def __init__(self, model, rag_db_path=None, max_step=10) -> None:
+    def __init__(
+        self,
+        model,
+        rag_db_path=None,
+        max_step=10,
+        security_config: Optional[Dict[str, Any]] = None,
+    ) -> None:
         self.tool = Tools(rag_db_path=rag_db_path)
         self.system_prompt = self.build_system_input()  
         self.model = model
         self.max_step = max_step
-        logger.info(f"Agent initialized with max_step={max_step}, rag_db_path={rag_db_path}")
+        self.security_config = security_config or {}
+        self.prompt_guard_enabled = bool(self.security_config.get("enable_prompt_guard", False))
+        self.lock_on_violation = bool(self.security_config.get("lock_on_violation", True))
+        self.prompt_guard_blocked = False
+        logger.info(
+            "Agent initialized | max_step={}, rag_db_path={}, prompt_guard={}",
+            max_step,
+            rag_db_path,
+            "ON" if self.prompt_guard_enabled else "OFF",
+        )
     
     def build_system_input(self):
         tool_description, tool_names = [], []
@@ -263,6 +279,11 @@ class Agent:
         
     def text(self, text: str, history: List = []) -> Tuple[str, List]:
         logger.info(f"New query received: {text[:100]}...")
+        if self.prompt_guard_enabled:
+            guard_response = self._apply_prompt_guard(text)
+            if guard_response is not None:
+                logger.info("Prompt guard response returned to user")
+                return guard_response, history
         response = "\nQuestion:" + text
 
         # 'his' is the updated history
@@ -303,3 +324,40 @@ class Agent:
 
         logger.info(f"Query completed in {step_count} steps")
         return no_thinking_response, history
+
+    def _apply_prompt_guard(self, user_text: str) -> Optional[str]:
+        """Run heuristic guard; return final answer string if blocked."""
+        if self.prompt_guard_blocked:
+            logger.warning("Prompt guard is locked; rejecting new query")
+            return "Final Answer: ⚠️ 当前会话因检测到提示词攻击而被锁定，请重启程序或联系管理员。"
+
+        guard_result = scan_prompt(user_text)
+        if not guard_result.findings:
+            return None
+
+        categories = ", ".join(sorted({finding.category for finding in guard_result.findings}))
+        logger.warning(
+            "Prompt guard triggered | categories={} | normalized_prompt={}",
+            categories,
+            guard_result.normalized_prompt,
+        )
+
+        if self.lock_on_violation and has_high_risk(guard_result.findings):
+            self.prompt_guard_blocked = True
+            logger.error("Prompt guard locked the session due to high risk input")
+
+        user_message = (
+            "Final Answer: ⚠️ 检测到潜在的危险指令 ({}), 请求已被拒绝。".format(categories)
+        )
+        return user_message
+
+    def reset_security(self) -> bool:
+        """Clear prompt guard lock state; return True if a lock was lifted."""
+        was_blocked = self.prompt_guard_blocked
+        self.prompt_guard_blocked = False
+        logger.info(
+            "Prompt guard reset | previously_blocked={} | guard_enabled={}",
+            was_blocked,
+            self.prompt_guard_enabled,
+        )
+        return was_blocked
