@@ -42,7 +42,7 @@ Response Format Requirements:
   Action Input: [the input for that ONE tool only]
 
 - When you have the final answer:
-  Thought: [your reasoning about why this is the final answer based on tool results]
+  Thought(Optional): [your reasoning about why this is the final answer based on tool results]
   Final Answer: [your complete response based ONLY on verified information from tools]
 
 Remember: ONE tool per response. NEVER make up information. Every fact must come from a tool result.
@@ -77,7 +77,7 @@ Remember: ONE tool per response. NEVER make up information. Every fact must come
   Action Input: [仅针对该一个工具的输入]
 
 - 当有最终答案时:
-  Thought: [基于工具结果,你对为什么这是最终答案的推理]
+  Thought（可选的）: [基于工具结果,你对为什么这是最终答案的推理]
   Final Answer: [仅基于工具验证信息的完整回复]
 
 记住: 每次回复只用一个工具。绝不编造信息。每个事实都必须来自工具结果。
@@ -205,10 +205,10 @@ class Agent:
         final_answer_count = response.count('Final Answer:')
         
         # 检查Thought出现次数(应该正好1次)
-        if thought_count == 0:
-            print("❌ Format Error: Missing 'Thought:'")
-            return False
-        elif thought_count > 1:
+        # if thought_count == 0:
+        #     print("❌ Format Error: Missing 'Thought:'")
+        #     return False
+        if thought_count > 1:
             print(f"❌ Format Error: 'Thought:' appears {thought_count} times, should appear exactly once")
             return False
         
