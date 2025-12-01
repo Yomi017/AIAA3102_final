@@ -52,14 +52,14 @@ class Qwen3(BaseLLM):
 
         self.tokenizer = AutoTokenizer.from_pretrained(self.path, trust_remote_code=True)
 
-        self.use_vllm = False
+        # self.use_vllm = False
 
         if self.use_vllm:
             self.model = self.vllm_class(
                 model=self.path,
                 tensor_parallel_size=self.tensor_parallel_size,
                 trust_remote_code=True,
-                gpu_memory_utilization=0.85,
+                gpu_memory_utilization=0.5,
             )
         else:
             self.model = AutoModelForCausalLM.from_pretrained(
