@@ -1,7 +1,14 @@
 import os
+import sys
 from llm import Qwen3
 from agent import Agent
 from datetime import datetime
+
+# 修复中文输入问题
+try:
+    import readline
+except ImportError:
+    print("system", "请使用 Python 3.9 或更高版本")
 
 def print_banner():
     """打印欢迎横幅"""
