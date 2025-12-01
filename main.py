@@ -3,6 +3,8 @@ import sys
 from llm import Qwen3
 from agent import Agent
 from datetime import datetime
+from log_config import setup_logger
+from loguru import logger
 
 # 修复中文输入问题
 try:
@@ -45,37 +47,40 @@ def print_message(role: str, content: str):
         print(f"\n❌ 错误: {content}")
 
 def main():
-    print_banner()
+    # 初始化日志系统
+    setup_logger()
+    logger.info("=" * 60)
+    logger.info("AIAA3102 Agent System started")
+    logger.info("=" * 60)
     
     model_path = "Qwen/Qwen3-8B"
     
     try:
-        print_message("system", "正在加载模型...")
+        logger.info("正在加载模型...")
         llm = Qwen3(model_path, gpu_ids=[0,1,2,3])
+        logger.success("Model loaded successfully")
         
         # llm = Qwen3(model_path, gpu_ids=[0, 5, 8])
     except Exception as e:
-        print_message("error", f"模型初始化失败: {e}")
+        logger.error(f"模型初始化失败: {e}")
         return
 
     # 检查是否有RAG数据库(优先使用wiki_vector_db)
     rag_db_path = None
     if os.path.exists("rag/wiki_vector_db"):
         rag_db_path = "rag/wiki_vector_db"
-        print_message("system", f"发现AI维基知识库: {rag_db_path}")
+        logger.info(f"发现AI维基知识库: {rag_db_path}")
     elif os.path.exists("rag/vector_db"):
         rag_db_path = "rag/vector_db"
-        print_message("system", f"发现知识库: {rag_db_path}")
+        logger.info(f"发现知识库: {rag_db_path}")
     else:
-        print_message("system", "未找到知识库,将不启用RAG功能")
+        logger.warning("未找到知识库,将不启用RAG功能")
     
     agent = Agent(llm, rag_db_path=rag_db_path)
     
     agent_history = []
     
-    print("\n" + "━" * 60)
-    print("🚀 Agent 已就绪,开始对话吧!")
-    print("━" * 60)
+    logger.info("Agent ready, chat session started")
 
     while True:
         try:
@@ -85,10 +90,11 @@ def main():
                 continue
                 
             if user_input.lower() in ['exit', 'quit']:
-                print_message("system", "👋 再见!")
+                logger.info("User requested exit")
                 break
             
-            print_message("system", "🤔 思考中...")
+            logger.info(f"User input: {user_input}")
+            
             agent_output, agent_history = agent.text(user_input, agent_history)
 
             final_answer_marker = "Final Answer:"
@@ -98,14 +104,17 @@ def main():
             else:
                 final_answer = agent_output.strip()
 
-            print_message("agent", final_answer)
+            print(f"\n🤖 Agent: {final_answer}")
 
         except KeyboardInterrupt:
-            print_message("system", "\n👋 再见!")
+            logger.info("User interrupted (Ctrl+C)")
             break
         except Exception as e:
-            print_message("error", str(e))
+            logger.exception(f"Unexpected error in main loop: {e}")
             continue
+    
+    logger.info("AIAA3102 Agent System stopped")
+    logger.info("=" * 60)
 
 if __name__ == '__main__':
     main()  

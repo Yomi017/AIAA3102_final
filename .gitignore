@@ -1,3 +1,5 @@
 Qwen3-*
 ReAct/
 __pycache__/
+log/
+logs/

@@ -2,6 +2,8 @@ from typing import Dict, List, Tuple
 from copy import deepcopy
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import os
+import time
+from loguru import logger
 
 class BaseLLM:
     def __init__(self, path: str = ""):
@@ -40,21 +42,29 @@ class Qwen3(BaseLLM):
         self.load_model()
 
     def load_model(self):
+        logger.info(f"Loading model from: {self.path}")
+        start_time = time.time()
+        
         try:
             from vllm import LLM, SamplingParams
             self.use_vllm = True
             self.vllm_class = LLM
             self.sampling_params_class = SamplingParams
+            logger.info(f"vLLM detected. Initializing with tensor_parallel_size={self.tensor_parallel_size}")
             print(f"vLLM detected. Initializing with tensor_parallel_size={self.tensor_parallel_size}")
         except ImportError:
+            logger.info("vLLM not found. Falling back to transformers.")
             print("vLLM not found. Falling back to transformers.")
             self.use_vllm = False
 
+        logger.debug("Loading tokenizer...")
         self.tokenizer = AutoTokenizer.from_pretrained(self.path, trust_remote_code=True)
+        logger.success("Tokenizer loaded")
 
         # self.use_vllm = False
 
         if self.use_vllm:
+            logger.info("Initializing vLLM model...")
             self.model = self.vllm_class(
                 model=self.path,
                 tensor_parallel_size=self.tensor_parallel_size,
@@ -62,12 +72,16 @@ class Qwen3(BaseLLM):
                 gpu_memory_utilization=0.5,
             )
         else:
+            logger.info("Initializing transformers model...")
             self.model = AutoModelForCausalLM.from_pretrained(
                 self.path,
                 trust_remote_code=True,
                 torch_dtype="auto",
                 device_map="auto",
             ).eval()
+        
+        elapsed = time.time() - start_time
+        logger.success(f"Model loaded successfully in {elapsed:.2f}s (backend: {'vLLM' if self.use_vllm else 'transformers'})")
 
     def chat(
         self,
@@ -79,6 +93,8 @@ class Qwen3(BaseLLM):
         enable_thinking: bool = True,
         **generate_kwargs,
     ) -> Tuple[Dict[str, str], List[dict]]:
+        logger.debug(f"LLM chat called with prompt length: {len(prompt)}")
+        start_time = time.time()
 
         conversation = self.prepare_history(history, meta_instruction)
         conversation.append({"role": "user", "content": prompt})
@@ -127,4 +143,8 @@ class Qwen3(BaseLLM):
 
         new_history = deepcopy(conversation)
         new_history.append({"role": "assistant", "content": content})
+        
+        elapsed = time.time() - start_time
+        logger.info(f"LLM generated response in {elapsed:.2f}s (length: {len(content)} chars)")
+        
         return content, new_history

@@ -1,5 +1,6 @@
 from typing import Dict, List, Optional, Tuple, Union
 import json5
+from loguru import logger
 
 from llm import BaseLLM
 from tool import Tools
@@ -90,6 +91,7 @@ class Agent:
         self.system_prompt = self.build_system_input()  
         self.model = model
         self.max_step = max_step
+        logger.info(f"Agent initialized with max_step={max_step}, rag_db_path={rag_db_path}")
     
     def build_system_input(self):
         tool_description, tool_names = [], []
@@ -136,7 +138,7 @@ class Agent:
             
             ignored_list = ', '.join(ignored_tools) if ignored_tools else 'unknown tools'
             warning = f"⚠️ Warning: Multiple actions detected. You can only use ONE tool at a time. Using the first action only. Ignored tools: {ignored_list}"
-            print(warning)
+            logger.warning(f"Multiple actions detected. Using first only. Ignored: {ignored_list}")
         
         # 使用第一个Action
         if action_positions:
@@ -187,7 +189,7 @@ class Agent:
         elif plugin_name == 'knowledge_base_query':
             return '\nObservation:' + self.tool.knowledge_base_query(**plugin_args)
         else:
-            print(f"✗ unknown tool: {plugin_name}")
+            logger.error(f"Unknown tool called: {plugin_name}")
             return f'\nObservation: unknown tool: {plugin_name}'
         
     def check_response(self, response: str) -> bool:
@@ -209,25 +211,25 @@ class Agent:
         #     print("❌ Format Error: Missing 'Thought:'")
         #     return False
         if thought_count > 1:
-            print(f"❌ Format Error: 'Thought:' appears {thought_count} times, should appear exactly once")
+            logger.warning(f"Format error: 'Thought:' appears {thought_count} times")
             return False
         
         # 如果有Action,检查出现次数和Action Input
         if action_count > 0:
             if action_count > 1:
-                print(f"❌ Format Error: 'Action:' appears {action_count} times, should appear exactly once")
+                logger.warning(f"Format error: 'Action:' appears {action_count} times")
                 return False
             
             if action_input_count == 0:
-                print("❌ Format Error: 'Action:' found but 'Action Input:' is missing")
+                logger.warning("Format error: 'Action:' found but 'Action Input:' missing")
                 return False
             elif action_input_count > 1:
-                print(f"❌ Format Error: 'Action Input:' appears {action_input_count} times, should appear exactly once")
+                logger.warning(f"Format error: 'Action Input:' appears {action_input_count} times")
                 return False
         
         # 检查Final Answer出现次数
         if final_answer_count > 1:
-            print(f"❌ Format Error: 'Final Answer:' appears {final_answer_count} times, should appear exactly once")
+            logger.warning(f"Format error: 'Final Answer:' appears {final_answer_count} times")
             return False
         
         return True
@@ -260,38 +262,44 @@ class Agent:
         
         
     def text(self, text: str, history: List = []) -> Tuple[str, List]:
+        logger.info(f"New query received: {text[:100]}...")
         response = "\nQuestion:" + text
 
         # 'his' is the updated history
         step_count = 0
         while step_count < self.max_step:
+            logger.debug(f"Step {step_count + 1}/{self.max_step} started")
             new_response, history = self.model.chat(response, history=history, meta_instruction=self.system_prompt)
             response = ""
             no_thinking_response ,thinking_response = self.split_response(new_response)
-
-            print(f"======= history: {history}")
-            print(f"======= Agent Think: {thinking_response}")
-            print(f"======= Agent Response: {no_thinking_response}")
+            
+            logger.debug(f"Thinking: {thinking_response[:100]}..." if thinking_response else "Thinking: None")
+            logger.debug(f"Response: {no_thinking_response[:200]}...")
 
             if not self.check_response(no_thinking_response):
+                logger.warning("Response format check failed, asking model to retry")
                 response = "Your previous response was not in the correct format. Please follow the specified format strictly."
                 continue
 
             plugin_name, plugin_args, warning = self.parse_latest_plugin_call(no_thinking_response)
-            print(f"======= Parsed tool call - Name: {plugin_name}, Args: {plugin_args}")  # Debug: print parsed tool call
+            logger.info(f"Parsed tool call - Name: {plugin_name}, Args: {plugin_args[:100] if plugin_args else 'None'}...")
             if plugin_name:
                 try:
+                    logger.info(f"Calling tool: {plugin_name}")
                     tool_observation = self.call_plugin(plugin_name, plugin_args)
+                    logger.success(f"Tool {plugin_name} executed successfully")
                     # 如果有警告,添加到observation中
                     if warning:
                         tool_observation += f"\n{warning}"
                 except Exception as e:
-                    print("❌ Error", f"Error calling tools {plugin_name}: {e}")
+                    logger.error(f"Tool execution error: {plugin_name}, {str(e)}")
                     tool_observation = f"\nObservation: Error calling tools {plugin_name}: {e}. Please try another tool or correct the arguments."
                 response += tool_observation
-                print(f"======= Agent tool_observation: {tool_observation}")  # Debug: print the observation from the tool
+                logger.debug(f"Tool observation: {tool_observation[:200]}...")
             else:
+                logger.info("No tool call detected, completing response")
                 break
             step_count += 1
 
+        logger.info(f"Query completed in {step_count} steps")
         return no_thinking_response, history

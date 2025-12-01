@@ -3,6 +3,7 @@ import yaml
 import json
 import requests
 from typing import Any, Dict, List, Optional
+from loguru import logger
 
 from langchain_google_community import GoogleSearchAPIWrapper
 from calculator import Calculator
@@ -19,8 +20,10 @@ class Tools:
         if rag_db_path and os.path.exists(rag_db_path):
             try:
                 self.rag_engine = RAGEngine(rag_db_path)
+                logger.info(f"RAG engine initialized with database: {rag_db_path}")
             except Exception as e:
-                print(f"⚠️  RAG引擎初始化失败: {e}")
+                logger.error(f"RAG engine initialization failed: {e}")
+        logger.info(f"Tools initialized with {len(self.toolConfig)} tools")
     
     def _tools(self) -> list:
         
@@ -181,22 +184,24 @@ class Tools:
     
     def google_search(self, search_query: str) -> str:
         """执行谷歌搜索"""
-        print(f"\n🔧 [工具调用] google_search")
-        print(f"   参数: search_query='{search_query}'")
+        logger.info(f"Google search: {search_query}")
         
-        url = "http://www.gpts-cristiano.com/cristiano/googleApi"
-        payload = json.dumps({"q": search_query})
-        headers = {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-        response = requests.post(url, headers=headers, data=payload).json()
-        print(f"   ✓ 调用成功")
-        return response['organic'][0]['snippet']
+        try:
+            url = "http://www.gpts-cristiano.com/cristiano/googleApi"
+            payload = json.dumps({"q": search_query})
+            headers = {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+            response = requests.post(url, headers=headers, data=payload).json()
+            logger.success(f"Google search completed successfully")
+            return response['organic'][0]['snippet']
+        except Exception as e:
+            logger.error(f"Google search failed: {e}")
+            raise
 
     def query_weather(self, city: str, province: str) -> str:
         """查询天气"""
-        print(f"\n🔧 [工具调用] query_weather")
-        print(f"   参数: city='{city}', province='{province}'")
+        logger.info(f"Query weather: {province} {city}")
         
         mock_response = {
             "city": city,
@@ -208,7 +213,6 @@ class Tools:
             "wind_power": "3级"
         }
         
-        print(f"   ✓ 调用成功")
         return (
             f"地点：{mock_response['province']}{mock_response['city']}，"
             f"天气：{mock_response['weather']}，"
@@ -220,8 +224,7 @@ class Tools:
 
     def query_time(self) -> str:
         """查询当前时间"""
-        print(f"\n🔧 [工具调用] query_time")
-        print(f"   参数: 无")
+        logger.info("Query time called")
         
         url = "https://api.uuni.cn//api/time"
         try:
@@ -231,32 +234,26 @@ class Tools:
             
             # 更详细的字段检查
             if "date" in data and "weekday" in data:
-                print(f"   ✓ 调用成功")
                 return f"当前时间是：{data['date']}，{data['weekday']}"
             else:
-                print(f"   ✗ 调用失败: API返回格式异常")
                 return "无法获取当前时间，API返回格式异常"
         except Exception as e:
-            print(f"   ✗ 调用失败: {e}")
             return f"查询时间时发生错误：{e}"
     
     def basic_calculator(self, expression: str) -> str:
         """基本计算器"""
-        print(f"\n🔧 [工具调用] basic_calculator")
-        print(f"   参数: expression='{expression}'")
+        logger.info(f"Basic calculator: {expression}")
         
         try:
             result = self.calc.evaluate(expression)
-            print(f"   ✓ 调用成功: {result}")
+            logger.success(f"Calculation result: {result}")
             return f"计算结果: {expression} = {result}"
         except Exception as e:
-            print(f"   ✗ 调用失败: {e}")
+            logger.error(f"Calculation failed: {e}")
             return f"计算失败: {str(e)}"
     
     def trig_calculator(self, function: str, x: float, degree: bool = False) -> str:
         """三角函数计算器"""
-        print(f"\n🔧 [工具调用] trig_calculator")
-        print(f"   参数: function='{function}', x={x}, degree={degree}")
         
         try:
             func_map = {
@@ -272,17 +269,13 @@ class Tools:
                 return f"不支持的三角函数: {function}"
             
             result = func_map[function](x, degree=degree)
-            print(f"   ✓ 调用成功: {result}")
             return f"计算结果: {function}({x}) = {result}"
         except Exception as e:
-            print(f"   ✗ 调用失败: {e}")
             return f"计算失败: {str(e)}"
     
     def matrix_calculator(self, operation: str, matrix_a: List[List[float]], 
                          matrix_b: List[List[float]] = None, scalar: float = None) -> str:
         """矩阵计算器"""
-        print(f"\n🔧 [工具调用] matrix_calculator")
-        print(f"   参数: operation='{operation}', matrix_a={matrix_a}")
         
         try:
             if operation == 'add':
@@ -306,38 +299,32 @@ class Tools:
             else:
                 return f"不支持的矩阵运算: {operation}"
         except Exception as e:
-            print(f"   ✗ 调用失败: {e}")
             return f"计算失败: {str(e)}"
     
     def integral_calculator(self, func_str: str, a: float, b: float) -> str:
         """定积分计算器"""
-        print(f"\n🔧 [工具调用] integral_calculator")
-        print(f"   参数: func_str='{func_str}', a={a}, b={b}")
         
         try:
             result = self.calc.integrate_function(func_str, a, b)
-            print(f"   ✓ 调用成功")
             return result['description']
         except Exception as e:
-            print(f"   ✗ 调用失败: {e}")
             return f"积分计算失败: {str(e)}"
     
     def knowledge_base_query(self, question: str, top_k: int = 3) -> str:
         """知识库问答"""
-        print(f"\n🔧 [工具调用] knowledge_base_query")
-        print(f"   参数: question='{question}', top_k={top_k}")
+        logger.info(f"Knowledge base query: {question[:100]}...")
         
         if self.rag_engine is None:
-            print(f"   ✗ 调用失败: RAG引擎未初始化")
+            logger.warning("RAG engine not initialized")
             return "知识库未加载,无法回答问题。请先构建并加载向量数据库。"
         
         try:
             result = self.rag_engine.query(question, top_k=top_k)
             context = result['context']
-            print(f"   ✓ 调用成功,检索到 {len(result['search_results'])} 条相关信息")
+            logger.success(f"Retrieved {len(result['search_results'])} results from knowledge base")
             
             # 返回检索到的上下文
             return f"根据知识库检索到以下相关信息:\n\n{context}"
         except Exception as e:
-            print(f"   ✗ 调用失败: {e}")
+            logger.error(f"Knowledge base query failed: {e}")
             return f"知识库查询失败: {str(e)}"
