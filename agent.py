@@ -130,11 +130,16 @@ class Agent:
         self.prompt_guard_enabled = bool(self.security_config.get("enable_prompt_guard", False))
         self.lock_on_violation = bool(self.security_config.get("lock_on_violation", True))
         self.prompt_guard_blocked = False
+        
+        # 检测多模态支持
+        self.supports_multimodal = getattr(model, 'supports_multimodal', False)
+        
         logger.info(
-            "Agent initialized | max_step={}, rag_db_path={}, prompt_guard={}",
+            "Agent initialized | max_step={}, rag_db_path={}, prompt_guard={}, multimodal={}",
             max_step,
             rag_db_path,
             "ON" if self.prompt_guard_enabled else "OFF",
+            "YES" if self.supports_multimodal else "NO",
         )
     
     def build_system_input(self):
@@ -289,8 +294,30 @@ class Agent:
 
         
         
-    def text(self, text: str, history: List = []) -> Tuple[str, List]:
-        logger.info(f"New query received: {text}...")
+    def text(self, text: str, history: List = [], images: List[str] = None) -> Tuple[str, List]:
+        logger.info(f"New query received: {text}... | images: {len(images) if images else 0}")
+        
+        # 验证图片输入
+        if images:
+            if not self.supports_multimodal:
+                error_msg = "Final Answer: ⚠️ 当前模型不支持多模态输入，无法处理图片。请使用支持视觉的模型（如 Qwen3VL）。"
+                logger.warning("Image input rejected: model does not support multimodal")
+                return error_msg, history
+            
+            # 验证图片路径
+            import os
+            invalid_images = []
+            for img_path in images:
+                if not os.path.exists(img_path):
+                    invalid_images.append(img_path)
+            
+            if invalid_images:
+                error_msg = f"Final Answer: ⚠️ 以下图片路径不存在:\n" + "\n".join(f"  - {p}" for p in invalid_images)
+                logger.error(f"Invalid image paths: {invalid_images}")
+                return error_msg, history
+            
+            logger.info(f"Valid images loaded: {images}")
+        
         if self.prompt_guard_enabled:
             guard_response = self._apply_prompt_guard(text)
             if guard_response is not None:
@@ -300,9 +327,19 @@ class Agent:
 
         # 'his' is the updated history
         step_count = 0
+        # 只在第一步传入图片，后续轮次依赖历史
+        current_images = images if step_count == 0 else None
+        
         while step_count < self.max_step:
             logger.debug(f"Step {step_count + 1}/{self.max_step} started")
-            new_response, history = self.model.chat(response, history=history, meta_instruction=self.system_prompt)
+            new_response, history = self.model.chat(
+                response, 
+                history=history, 
+                meta_instruction=self.system_prompt,
+                images=current_images
+            )
+            # 后续轮次不再传图片
+            current_images = None
             response = ""
             no_thinking_response ,thinking_response = self.split_response(new_response)
             

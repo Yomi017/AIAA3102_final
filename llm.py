@@ -8,6 +8,7 @@ from loguru import logger
 class BaseLLM:
     def __init__(self, path: str = ""):
         self.path = path
+        self.supports_multimodal = False  # 默认不支持多模态
 
     def load_model(self):
         raise NotImplementedError
@@ -39,6 +40,7 @@ class Qwen3(BaseLLM):
         
         self.use_vllm = False
         super().__init__(path or self.DEFAULT_MODEL)
+        self.supports_multimodal = False  # 纯文本模型
         self.load_model()
 
     def load_model(self):
@@ -89,10 +91,14 @@ class Qwen3(BaseLLM):
         *,
         history: List[dict] | None = None,
         meta_instruction: str = "",
+        images: List[str] | None = None,
         max_new_tokens: int = 32768,
         enable_thinking: bool = True,
         **generate_kwargs,
     ) -> Tuple[Dict[str, str], List[dict]]:
+        if images:
+            logger.warning(f"Qwen3 does not support multimodal input. Ignoring {len(images)} image(s).")
+        
         logger.debug(f"LLM chat called with prompt length: {len(prompt)}")
         start_time = time.time()
 
@@ -162,6 +168,7 @@ class Qwen3VL(BaseLLM):
             logger.info(f"Using GPUs: {gpu_str}")
         
         super().__init__(path or self.DEFAULT_MODEL)
+        self.supports_multimodal = True  # 支持多模态
         self.load_model()
     
     def load_model(self):

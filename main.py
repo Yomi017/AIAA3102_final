@@ -2,6 +2,7 @@ import json
 import os
 import sys
 from datetime import datetime
+from typing import List, Optional
 
 import yaml
 from loguru import logger
@@ -10,11 +11,50 @@ from llm import Qwen3, Qwen3VL
 from agent import Agent
 from log_config import setup_logger
 
-# 修复中文输入问题
+# 修复中文输入问题并配置 readline
 try:
     import readline
+    import glob
+    
+    # 配置 readline 的路径补全功能
+    def path_completer(text, state):
+        """路径补全函数"""
+        # 如果输入以 @image: 开头，补全路径部分
+        if text.startswith('@image:'):
+            path_part = text[7:]  # 去掉 @image: 前缀
+            matches = glob.glob(path_part + '*')
+            matches = ['@image:' + m for m in matches]
+        else:
+            # 普通路径补全
+            matches = glob.glob(text + '*')
+        
+        # 为目录添加斜杠
+        matches = [m + '/' if os.path.isdir(m.replace('@image:', '')) else m for m in matches]
+        
+        try:
+            return matches[state]
+        except IndexError:
+            return None
+    
+    # 设置 Tab 补全
+    readline.set_completer(path_completer)
+    readline.parse_and_bind("tab: complete")
+    
+    # 设置补全时的分隔符（包含 @ 以支持 @image: 命令）
+    readline.set_completer_delims(' \t\n;')
+    
+    READLINE_AVAILABLE = True
 except ImportError:
+    READLINE_AVAILABLE = False
     print("system", "请使用 Python 3.9 或更高版本")
+
+# 尝试导入PIL用于剪贴板支持
+try:
+    from PIL import ImageGrab, Image
+    CLIPBOARD_SUPPORTED = True
+except ImportError:
+    CLIPBOARD_SUPPORTED = False
+    logger.warning("PIL not available, clipboard image support disabled. Install with: pip install Pillow")
 
 DEFAULT_CONFIG = {
     "security": {
@@ -45,7 +85,35 @@ def load_config(path: str = "config.yaml") -> dict:
     return _merge_dict(DEFAULT_CONFIG, data)
 
 
-def print_banner():
+def save_clipboard_image() -> Optional[str]:
+    """从剪贴板保存图片，返回保存的文件路径"""
+    if not CLIPBOARD_SUPPORTED:
+        return None
+    
+    try:
+        img = ImageGrab.grabclipboard()
+        if img is None or not isinstance(img, Image.Image):
+            return None
+        
+        # 创建临时目录
+        temp_dir = "temp_images"
+        os.makedirs(temp_dir, exist_ok=True)
+        
+        # 生成文件名
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"clipboard_{timestamp}.png"
+        filepath = os.path.join(temp_dir, filename)
+        
+        # 保存图片
+        img.save(filepath)
+        logger.info(f"Clipboard image saved to: {filepath}")
+        return filepath
+    except Exception as e:
+        logger.error(f"Failed to save clipboard image: {e}")
+        return None
+
+
+def print_banner(multimodal_support: bool = False):
     """打印欢迎横幅"""
     banner = """
 ╔════════════════════════════════════════════════════════╗
@@ -59,6 +127,16 @@ def print_banner():
     print(banner)
     print("💡 提示: 输入 'exit' 或 'quit' 退出程序")
     print("💡 提示: 按 Ctrl+C 也可以随时退出")
+    if READLINE_AVAILABLE:
+        print("💡 提示: 按 Tab 键可自动补全文件路径")
+    
+    if multimodal_support:
+        print("\n📷 图片输入功能已启用:")
+        print("   • @image:<路径>  - 添加图片文件 (支持Tab补全)")
+        print("   • @paste         - 从剪贴板添加图片" + (" (不可用)" if not CLIPBOARD_SUPPORTED else ""))
+        print("   • @clear         - 清空图片列表")
+        print("   • @show          - 显示当前图片")
+    
     print("━" * 60)
 
 def print_message(role: str, content: str):
@@ -140,12 +218,25 @@ def main():
     agent = Agent(llm, rag_db_path=rag_db_path, security_config=security_config)
     
     agent_history = []
+    current_images: List[str] = []  # 当前会话的图片列表
+    
+    # 打印欢迎信息
+    print_banner(multimodal_support=agent.supports_multimodal)
     
     logger.info("Agent ready, chat session started")
 
     while True:
         try:
-            user_input = input("\n💬 您: ").strip()
+            # 构建提示符
+            cwd = os.getcwd()
+            if agent.supports_multimodal and current_images:
+                prompt = f"[📷 {len(current_images)}张 | {cwd}]\n💬 您: "
+            elif agent.supports_multimodal:
+                prompt = f"[无图片 | {cwd}]\n💬 您: "
+            else:
+                prompt = f"[{cwd}]\n💬 您: "
+            
+            user_input = input(prompt).strip()
             
             if not user_input:
                 continue
@@ -163,9 +254,63 @@ def main():
                     print("\nℹ️ Prompt Guard: 当前未锁定，无需重置。")
                 continue
             
-            logger.info(f"User input: {user_input}")
+            # 处理图片相关命令
+            if user_input.startswith('@'):
+                if user_input.startswith('@image:'):
+                    img_path = user_input[7:].strip()
+                    if os.path.exists(img_path):
+                        abs_path = os.path.abspath(img_path)
+                        current_images.append(abs_path)
+                        print(f"✅ 已添加图片: {abs_path}")
+                        logger.info(f"Image added: {abs_path}")
+                    else:
+                        print(f"❌ 图片不存在: {img_path}")
+                        logger.warning(f"Image not found: {img_path}")
+                    continue
+                
+                elif user_input == '@paste':
+                    if not CLIPBOARD_SUPPORTED:
+                        print("❌ 剪贴板功能不可用，请安装 Pillow: pip install Pillow")
+                        continue
+                    
+                    saved_path = save_clipboard_image()
+                    if saved_path:
+                        current_images.append(os.path.abspath(saved_path))
+                        print(f"✅ 已从剪贴板添加图片: {saved_path}")
+                        logger.info(f"Image added from clipboard: {saved_path}")
+                    else:
+                        print("❌ 剪贴板中没有图片")
+                    continue
+                
+                elif user_input == '@clear':
+                    count = len(current_images)
+                    current_images.clear()
+                    print(f"✅ 已清空 {count} 张图片")
+                    logger.info(f"Cleared {count} images")
+                    continue
+                
+                elif user_input == '@show':
+                    if current_images:
+                        print(f"\n📷 当前图片列表 ({len(current_images)}张):")
+                        for i, img in enumerate(current_images, 1):
+                            print(f"   {i}. {img}")
+                    else:
+                        print("📷 当前没有图片")
+                    continue
             
-            agent_output, agent_history = agent.text(user_input, agent_history)
+            logger.info(f"User input: {user_input} | images: {len(current_images)}")
+            
+            # 调用 agent，传入图片
+            agent_output, agent_history = agent.text(
+                user_input, 
+                agent_history, 
+                images=current_images if current_images else None
+            )
+            
+            # 处理后清空图片（仅用于首次提问）
+            if current_images:
+                logger.info(f"Images used in this query, clearing for next turn")
+                current_images.clear()
 
             final_answer_marker = "Final Answer:"
             final_answer = agent_output.rfind(final_answer_marker)
