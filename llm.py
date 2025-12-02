@@ -83,7 +83,7 @@ class Qwen3(BaseLLM):
                 model=self.path,
                 tensor_parallel_size=self.tensor_parallel_size,
                 trust_remote_code=True,
-                gpu_memory_utilization=0.5,
+                gpu_memory_utilization=0.9,
             )
         else:
             logger.info("Initializing transformers model...")
@@ -279,20 +279,30 @@ class Qwen3VL(BaseLLM):
             (生成的文本, 更新后的历史)
         """
         logger.debug(f"VL chat called with prompt length: {len(prompt)}, images: {len(images) if images else 0}")
+        logger.debug(f"VL chat prompt repr: {repr(prompt[:100]) if prompt else 'EMPTY'}")
         start_time = time.time()
         
         conversation = self.prepare_history(history, meta_instruction)
+        logger.debug(f"VL conversation before adding user message: {len(conversation)} messages")
         
         # 构建多模态消息
-        content = []
         if images:
+            # 有图片：使用多模态格式
+            content = []
             for img_path in images:
                 content.append({"type": "image", "image": img_path})
-        if prompt != "":
-            content.append({"type": "text", "text": prompt})
-        
-        if len(content) > 0:
-            conversation.append({"role": "user", "content": content})
+            if prompt != "":
+                content.append({"type": "text", "text": prompt})
+            if len(content) > 0:
+                conversation.append({"role": "user", "content": content})
+                logger.debug(f"VL added multimodal message to conversation, total: {len(conversation)} messages")
+        else:
+            # 无图片：使用纯文本格式（兼容标准 chat template）
+            if prompt != "":
+                conversation.append({"role": "user", "content": prompt})
+                logger.debug(f"VL added text-only message to conversation, total: {len(conversation)} messages")
+            else:
+                logger.warning(f"VL prompt is empty and no images! No user message added.")
 
         if self.use_vllm:
             # vLLM 路径
@@ -314,7 +324,7 @@ class Qwen3VL(BaseLLM):
                 temperature=generate_kwargs.get("temperature", 0.7),
                 top_p=generate_kwargs.get("top_p", 0.8),
                 top_k=generate_kwargs.get("top_k", 20),
-                stop_token_ids=[self.processor.tokenizer.eos_token_id] + generate_kwargs.get("stop_token_ids", []),
+                stop_token_ids=[self.processor.eos_token_id] + generate_kwargs.get("stop_token_ids", []),
             )
             
             outputs = self.model.generate(

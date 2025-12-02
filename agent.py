@@ -308,7 +308,11 @@ class Agent:
 
         
         
-    def text(self, text: str, history: List = [], images: List[str] = None) -> Tuple[str, List]:
+    def text(self, text: str, history: List = None, images: List[str] = None) -> Tuple[str, List]:
+        # 处理 None 历史记录
+        if history is None:
+            history = []
+        
         logger.info(f"New query received: {text}... | images: {len(images) if images else 0}")
         
         # 验证图片输入
