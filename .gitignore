@@ -9,3 +9,4 @@ benchmark/ALFworld/PROMPT_GUIDE.md
 manual_test_alfworld.py
 extract_expert_trajectories.py
 testapi.py
+benchmark_results/

@@ -8,11 +8,41 @@ ALFWorld 是一个交互式文本游戏环境，Agent 需要通过观察环境�
 
 import json
 import os
+import time
+import signal
+from contextlib import contextmanager
 from loguru import logger
 from typing import List, Tuple, Dict, Any
 
 from agent import Agent
 from benchmarkTest.result_logger import ResultLogger
+
+
+class TimeoutException(Exception):
+    """超时异常"""
+    pass
+
+
+@contextmanager
+def time_limit(seconds: int):
+    """
+    上下文管理器：设置代码块执行时间限制
+    
+    Args:
+        seconds: 超时时间（秒）
+    """
+    def signal_handler(signum, frame):
+        raise TimeoutException(f"Timed out after {seconds} seconds")
+    
+    # 设置信号处理器
+    signal.signal(signal.SIGALRM, signal_handler)
+    signal.alarm(seconds)
+    
+    try:
+        yield
+    finally:
+        # 取消定时器
+        signal.alarm(0)
 
 # 尝试导入 ALFWorld
 try:
@@ -76,8 +106,7 @@ def testALFworld(agent: Agent, config_path: str = "configs/base_config.yaml", nu
     if num_games is None:
         while True:
             try:
-                num_input = input("\n请输入要测试的游戏数量 (1-30): ").strip()
-                num_games = int(num_input)
+                num_games = 30
                 if 1 <= num_games <= 30:
                     break
                 print("⚠️ 请输入 1-30 之间的数字")
@@ -86,6 +115,22 @@ def testALFworld(agent: Agent, config_path: str = "configs/base_config.yaml", nu
     
     print(f"\n准备测试 {num_games} 个游戏场景...")
     
+    # 询问是否从特定游戏开始
+    start_from = 1
+    try:
+        start_input = input("\n从第几个游戏开始？(直接回车从1开始): ").strip()
+        if start_input:
+            start_from = int(start_input)
+            if start_from < 1:
+                start_from = 1
+                print(f"⚠️ 开始序号无效，从第 1 个游戏开始")
+            elif start_from > num_games:
+                print(f"⚠️ 开始序号 {start_from} 超过总数 {num_games}，从第 1 个游戏开始")
+                start_from = 1
+    except ValueError:
+        print("⚠️ 输入无效，从第 1 个游戏开始")
+        start_from = 1
+    
     results = []
     
     # 创建结果记录器
@@ -93,13 +138,18 @@ def testALFworld(agent: Agent, config_path: str = "configs/base_config.yaml", nu
     
     try:
         for game_count in range(1, num_games + 1):
-            print(f"\n{'='*60}")
-            print(f"🎮 游戏 {game_count}/{num_games}")
-            print(f"{'='*60}")
-            
             # 重置环境获取新任务
             obs, info = env.reset()
             task_desc = obs[0].strip()
+            
+            # 如果还没到开始位置，跳过这个游戏
+            if game_count < start_from:
+                print(f"⏭️  跳过游戏 {game_count}/{num_games}")
+                continue
+            
+            print(f"\n{'='*60}")
+            print(f"🎮 游戏 {game_count}/{num_games}")
+            print(f"{'='*60}")
             
             print(f"\n📝 任务: {task_desc}\n")
             logger.info(f"Game {game_count}/{num_games} - Task: {task_desc}")
@@ -153,7 +203,7 @@ def testALFworld(agent: Agent, config_path: str = "configs/base_config.yaml", nu
     logger.info("=" * 60)
 
 
-def test_interactive_game(agent: Agent, env: Any, task_desc: str, game_num: int, max_steps: int = 50) -> Dict[str, Any]:
+def test_interactive_game(agent: Agent, env: Any, task_desc: str, game_num: int, max_steps: int = 40) -> Dict[str, Any]:
     """测试单个交互式游戏（逐步交互模式）
     
     Args:
@@ -169,6 +219,8 @@ def test_interactive_game(agent: Agent, env: Any, task_desc: str, game_num: int,
     agent_history = []
     step_count = 0
     successful_steps = 0
+    timeout_count = 0  # 超时次数
+    parse_error_count = 0  # 解析错误次数
     done = False
     success = False
     
@@ -285,9 +337,28 @@ def test_interactive_game(agent: Agent, env: Any, task_desc: str, game_num: int,
     Remember: Use "go to [object] [number]" to move before interacting!
     """
             
-            # 让 Agent 生成下一个动作
+            # 让 Agent 生成下一个动作（带超时控制）
             logger.info(f"Game #{game_num} Step {step_count} - Requesting next action")
-            agent_output, agent_history = agent.text(prompt, agent_history)
+            
+            try:
+                start_time = time.time()
+                with time_limit(180):  # 180秒超时
+                    agent_output, agent_history = agent.text(prompt, agent_history)
+                elapsed_time = time.time() - start_time
+                print(f"⏱️  Agent 响应时间: {elapsed_time:.1f}秒")
+                
+            except TimeoutException:
+                elapsed_time = time.time() - start_time
+                print(f"\n⚠️ Agent 响应超时 (>{elapsed_time:.0f}秒)！跳过此步骤...")
+                logger.error(f"Game #{game_num} Step {step_count} - Agent timeout after {elapsed_time:.0f}s")
+                
+                # 记录超时并继续
+                timeout_count += 1
+                action_history.append({
+                    'action': '[TIMEOUT]',
+                    'observation': f'Error: Agent response timed out after 180 seconds. Please respond faster.'
+                })
+                continue
             
             # 【调试】打印 Agent 的完整输出
             print(f"\n{'='*60}")
@@ -312,7 +383,14 @@ def test_interactive_game(agent: Agent, env: Any, task_desc: str, game_num: int,
             if not actions:
                 print(f"步骤 {step_count}: ⚠️ 无法提取有效动作")
                 logger.warning(f"Game #{game_num} Step {step_count} - No valid action extracted")
-                break
+                
+                # 记录失败但继续尝试（给 Agent 一次纠正机会）
+                parse_error_count += 1
+                action_history.append({
+                    'action': '[PARSE_ERROR]',
+                    'observation': 'Error: Could not extract valid action from your response. Please provide a clear command like "go to countertop 1" or "take apple 1 from fridge 1".'
+                })
+                continue  # 继续下一步，而不是直接退出
             
             # 只执行第一个动作
             action = actions[0]
@@ -352,10 +430,16 @@ def test_interactive_game(agent: Agent, env: Any, task_desc: str, game_num: int,
                     print(f"\n🎉 任务完成! (得分: {score}, 执行: {step_count}步, 成功: {successful_steps}步)")
                 else:
                     print(f"\n❌ 任务失败 (得分: {score}, 执行: {step_count}步, 成功: {successful_steps}步)")
+                
+                # 显示错误统计
+                if timeout_count > 0 or parse_error_count > 0:
+                    print(f"   ⚠️ 超时: {timeout_count}次, 解析错误: {parse_error_count}次")
                 break
         
         if not done:
-            print(f"\n⏱未完成任务 (执行: {step_count}步, 成功: {successful_steps}步)")
+            print(f"\n⏱️  未完成任务 (执行: {step_count}步, 成功: {successful_steps}步)")
+            if timeout_count > 0 or parse_error_count > 0:
+                print(f"   ⚠️ 超时: {timeout_count}次, 解析错误: {parse_error_count}次")
             
     except KeyboardInterrupt:
         print("\n 游戏被中断")
@@ -376,7 +460,9 @@ def test_interactive_game(agent: Agent, env: Any, task_desc: str, game_num: int,
         'success': success,
         'steps': step_count,
         'successful_steps': successful_steps,
-        'task': task_desc
+        'task': task_desc,
+        'timeout_count': timeout_count,
+        'parse_error_count': parse_error_count
     }
     
     logger.info(f"Game #{game_num} result: {result}")
