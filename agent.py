@@ -20,8 +20,6 @@ REACT_PROMPT = """Answer the following questions as best you can. You have acces
 
 {tool_description}
 
-Important: When you need current time or date information, use the get_cur_time tool to query it. DO NOT assume or guess the current time.
-
 CRITICAL RULES:
 1. You can ONLY use ONE tool at a time in each response
 2. Each field (Thought, Action, Action Input, Final Answer) must appear EXACTLY ONCE
@@ -35,6 +33,7 @@ CRITICAL RULES:
    - Casual conversation (greetings, chitchat, general discussion): Can answer directly with Final Answer
    - Factual queries (specific data, current events, calculations, etc.): MUST use tools to verify
 10. Even for casual conversation, you MUST follow the response format with Thought and Final Answer
+11. For search tasks, be sure to remember to call the time tool first to check the time
 
 Information Accuracy Requirements:
 - DO NOT fabricate any facts, numbers, dates, or details
@@ -69,7 +68,6 @@ Remember:
 
 {tool_description}
 
-重要提示: 当你需要当前时间或日期信息时,使用get_cur_time工具查询。不要假设或猜测当前时间。
 
 关键规则:
 1. 每次回复中只能使用一个工具
@@ -84,6 +82,7 @@ Remember:
    - 日常对话(问候、闲聊、观点讨论): 可以直接用Final Answer回答
    - 事实性查询(具体数据、时事、计算等): 必须使用工具验证
 10. 即使是日常对话,也必须遵循回复格式,包含Thought和Final Answer
+11. 对于搜索任务,一定要记得先调用时间工具查看时间
 
 信息准确性要求:
 - 不要编造任何事实、数字、日期或细节
@@ -358,7 +357,8 @@ class Agent:
             )
             # 后续轮次不再传图片
             current_images = None
-            response = ""
+            # 在工具调用后，提示模型继续处理
+            response = "Please continue to analyze the observation and provide your final answer."
             no_thinking_response ,thinking_response = self.split_response(new_response)
             
             logger.debug(f"Thinking: {thinking_response}..." if thinking_response else "Thinking: None")

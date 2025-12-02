@@ -128,6 +128,46 @@ class GeneralCapabilityTester:
         logger.info(f"Loaded {len(test_cases)} test cases from {file_path}")
         return test_cases
     
+    def _format_trajectory(self, history: List, final_output: str) -> str:
+        """
+        格式化完整的执行轨迹（包含工具调用）
+        
+        Args:
+            history: 执行历史
+            final_output: 最终输出
+            
+        Returns:
+            格式化的轨迹字符串
+        """
+        trajectory_parts = []
+        
+        for msg in history:
+            role = msg.get('role', '')
+            content = msg.get('content', '')
+            
+            if role == 'system':
+                # 系统指令（通常是提示词）
+                trajectory_parts.append(f"[System Instruction]\n{content}\n")
+            elif role == 'user':
+                # 用户输入
+                if isinstance(content, str):
+                    trajectory_parts.append(f"[User Input]\n{content}\n")
+                else:
+                    # 多模态内容
+                    trajectory_parts.append(f"[User Input - Multimodal]\n{str(content)}\n")
+            elif role == 'assistant':
+                # Agent 的思考和行动
+                trajectory_parts.append(f"[Agent Response]\n{content}\n")
+            elif role == 'tool':
+                # 工具执行结果
+                tool_name = msg.get('name', 'unknown_tool')
+                trajectory_parts.append(f"[Tool Result: {tool_name}]\n{content}\n")
+        
+        # 添加最终输出
+        trajectory_parts.append(f"[Final Output]\n{final_output}\n")
+        
+        return "\n".join(trajectory_parts)
+    
     def run_test_case(self, test_case: Dict[str, Any]) -> Dict[str, Any]:
         """
         运行单个测试案例
@@ -155,8 +195,8 @@ class GeneralCapabilityTester:
         start_time = time.time()
         
         try:
-            # 调用 Agent（无历史记录，独立测试）
-            agent_output, _ = self.agent.text(user_input, history=None)
+            # 调用 Agent（保存历史记录以供评分使用）
+            agent_output, execution_history = self.agent.text(user_input, history=None)
             
             elapsed_time = time.time() - start_time
             
@@ -173,12 +213,16 @@ class GeneralCapabilityTester:
             else:
                 final_answer = agent_output.strip()
             
+            # 构建完整轨迹（包含工具调用历史）
+            full_trajectory = self._format_trajectory(execution_history, agent_output)
+            
             result = {
                 'case_id': case_id,
                 'case_type': case_type,
                 'user_input': user_input,
                 'agent_output': agent_output,
                 'final_answer': final_answer,
+                'full_trajectory': full_trajectory,  # 新增：完整执行轨迹
                 'elapsed_time': elapsed_time,
                 'evaluation_points': test_case.get('evaluation_points', ''),
                 'error': None
@@ -238,12 +282,12 @@ class GeneralCapabilityTester:
 【评估要点】
 {result['evaluation_points']}
 
-【Agent 的完整回答】
-{result['agent_output']}
+【Agent 完整执行轨迹】（包含工具调用过程）
+{result.get('full_trajectory', result['agent_output'])}
 
 【重要说明】
-- ⚠️ 不要评判搜索结果的事实准确性（如日期、新闻内容真实性等）
-- ⚠️ 只评估 Agent 是否正确理解任务、使用了搜索工具、按要求整理了信息
+-  不要评判搜索结果的事实准确性（如日期、新闻内容真实性等）！
+-  只评估 Agent 是否正确理解任务、使用了搜索工具、按要求整理了信息！！！
 
 【评分标准】（仅评估流程和完成度）
 - 1.0: 完美完成任务流程，正确使用搜索工具，信息整理完整规范
@@ -262,7 +306,7 @@ class GeneralCapabilityTester:
 理由: [你的评分理由]
 """
         else:
-            # RAG 任务：正常评估
+            # RAG 任务：评估内容准确性
             scoring_prompt = f"""你是一个严格的 AI Agent 评估专家。请根据以下信息对 Agent 的回答质量进行评分。
 
 【任务类型】
@@ -274,8 +318,8 @@ class GeneralCapabilityTester:
 【评估要点】
 {result['evaluation_points']}
 
-【Agent 的完整回答】
-{result['agent_output']}
+【Agent 完整执行轨迹】（包含工具调用过程）
+{result.get('full_trajectory', result['agent_output'])}
 
 【评分标准】
 - 1.0: 完美回答，完全满足所有评估要点，信息准确、完整、来源可靠
