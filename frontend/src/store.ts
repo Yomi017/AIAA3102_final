@@ -130,6 +130,7 @@ class ChatStore {
     // Optimistic update
     const userMsg: Message = { role: 'user', content };
     this.currentMessages = [...this.currentMessages, userMsg];
+    this.loading = true; // Set loading to true
     this.notify();
 
     try {
@@ -157,6 +158,7 @@ class ChatStore {
       // Add error message to chat
       this.currentMessages = [...this.currentMessages, { role: 'system', content: `Error: ${err.message}` }];
     } finally {
+      this.loading = false; // Set loading to false
       this.notify();
     }
   }
