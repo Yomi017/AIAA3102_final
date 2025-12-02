@@ -1,0 +1,22 @@
+# ALFworld Base Configuration
+# 基础配置文件，用于初始化 ALFworld 环境
+
+env:
+  type: AlfredTWEnv  # 使用文本版本的环境（不需要 AI2-THOR）
+  
+general:
+  random_seed: 42
+  save_path: ./logs/alfworld
+  
+dataset:
+  data_path: /data/home/sim6g/.cache/alfworld/json_2.1.1
+  eval_id_data_path: /data/home/sim6g/.cache/alfworld/json_2.1.1/valid_unseen
+  eval_ood_data_path: /data/home/sim6g/.cache/alfworld/json_2.1.1/valid_unseen
+  num_train_games: -1
+  num_eval_games: -1
+  
+logic:
+  logic_path: /data/home/sim6g/.cache/alfworld/logic
+  
+detector:
+  detector_path: /data/home/sim6g/.cache/alfworld/detectors
