@@ -5,5 +5,4 @@ log/
 logs/
 .python-version
 jsons/
-uploads/
-chat_history.json
+node_modules/

@@ -46,7 +46,7 @@ Information Accuracy Requirements:
 Response Format Requirements:
 - For casual conversation (greetings, chitchat, opinions):
   Thought: [recognize this is casual conversation that doesn't need verification]
-  Final Answer: [your friendly response]
+  Final Answer: [your response]
 
 - When you need to use a tool for factual queries:
   Thought: [your reasoning about what information needs verification and which tool to use]
@@ -95,7 +95,7 @@ Remember:
 回复格式要求:
 - 对于日常对话(问候、闲聊、观点):
   Thought: [识别这是不需要验证的日常对话]
-  Final Answer: [你的友好回复]
+  Final Answer: [你的回复]
 
 - 当需要使用工具查询事实时:
   Thought: [分析需要验证什么信息以及使用哪个工具]
@@ -244,6 +244,11 @@ class Agent:
             logger.warning(f"Format error: 'Thought:' appears {thought_count} times")
             return False, "Format error: 'Thought:' appears more than once"
         
+        # 检查混合使用Action和Final Answer
+        if action_count > 0 and final_answer_count > 0:
+            logger.warning("Format error: Both 'Action:' and 'Final Answer:' found")
+            return False, "Format error: Both 'Action:' and 'Final Answer:' found in the same response. Please use either Action or Final Answer, not both."
+
         # 如果有Action,检查出现次数和Action Input
         if action_count > 0:
             if action_count > 1:
@@ -256,7 +261,7 @@ class Agent:
             elif action_input_count > 1:
                 logger.warning(f"Format error: 'Action Input:' appears {action_input_count} times")
                 return False, f"Format error: 'Action Input:' appears {action_input_count} times. Please check your response."
-        
+
         # 检查Final Answer出现次数
         if final_answer_count > 1:
             logger.warning(f"Format error: 'Final Answer:' appears {final_answer_count} times")
@@ -332,7 +337,7 @@ class Agent:
             if guard_response is not None:
                 logger.info("Prompt guard response returned to user")
                 return guard_response, history
-        response = "\nQuestion:" + text
+        response = text
 
         # 'his' is the updated history
         step_count = 0
@@ -359,17 +364,13 @@ class Agent:
 
             if not response_formate_error:
                 logger.warning("Response format check failed, asking model to retry")
-                # 使用user角色返回格式错误提示
                 error_message = "⚠️ System Error: Your previous response was not in the correct format. Please follow the specified format strictly:\n- Use exactly ONE 'Thought:', ONE 'Action:' (if needed), ONE 'Action Input:' (if Action present), or ONE 'Final Answer:'\n- Do NOT include multiple actions in one response"
-                history.append({"role": "user", "content": error_info + error_message})
+                history.append({"role": "system", "content": error_info + error_message})
                 continue
 
             plugin_name, plugin_args, warning = self.parse_latest_plugin_call(no_thinking_response)
             logger.info(f"Parsed tool call - Name: {plugin_name}, Args: {plugin_args if plugin_args else 'None'}...")
-            if self.have_final_answer(no_thinking_response):
-                logger.info("Final Answer detected in response, ending query")
-                break
-            elif plugin_name:
+            if plugin_name:
                 try:
                     logger.info(f"Calling tool: {plugin_name}")
                     tool_observation = self.call_plugin(plugin_name, plugin_args)
@@ -382,19 +383,23 @@ class Agent:
                         "name": plugin_name
                     })
                     
-                    # 如果有警告,追加user消息
+                    # 如果有警告,追加system消息
                     if warning:
-                        history.append({"role": "user", "content": warning})
+                        history.append({"role": "system", "content": warning})
                     
                     logger.debug(f"Tool observation added to history: {tool_observation}...")
                 except Exception as e:
                     logger.error(f"Tool execution error: {plugin_name}, {str(e)}")
-                    # 使用user角色返回工具错误
+                    # 使用system角色返回工具错误
                     error_message = f"⚠️ Tool Execution Error: Failed to call tool '{plugin_name}'. Error: {e}\nPlease try another tool or correct the arguments."
-                    history.append({"role": "user", "content": error_message})
+                    history.append({"role": "system", "content": error_message})
             else:
-                logger.info("No tool call detected, completing response")
-                break
+                if not self.have_final_answer(no_thinking_response):
+                    logger.info("No final answer detected, continuing query")
+                    history.append({"role": "system", "content": "⚠️ Warning: No tool call detected and no Final Answer provided. Please either use a tool to get information or provide a Final Answer."})
+                else:
+                    logger.info("Final answer detected, stopping query")
+                    break
             step_count += 1
 
         logger.info(f"Query completed in {step_count} steps")

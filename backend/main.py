@@ -18,6 +18,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from agent import Agent
 from llm import Qwen3VL
 from tool import ToolsManager
+from log_config import setup_logger
 
 # ==================== 初始化 ====================
 app = FastAPI(title="AIAA3102 Agent API", version="1.0.0")
@@ -47,7 +48,7 @@ class ChatRequest(BaseModel):
     """聊天请求"""
     message: str
     session_id: Optional[str] = None
-    history: Optional[List[Dict[str, str]]] = None
+    history: Optional[List[Dict[str, Any]]] = None
     images: Optional[List[str]] = None
 
 class ChatResponse(BaseModel):
@@ -115,7 +116,7 @@ async def initialize_resources():
     
     logger.info("Initializing model and agent...")
     try:
-        llm = Qwen3VL()
+        llm = Qwen3VL(gpu_ids=[0,1,2,3])
         agent = Agent(llm, rag_db_path="rag/wiki_vector_db" if os.path.exists("rag/wiki_vector_db") else None)
         load_history()
         logger.success("Model and agent initialized successfully")
@@ -133,6 +134,7 @@ async def shutdown_resources():
 @app.on_event("startup")
 async def startup_event():
     """应用启动事件"""
+    setup_logger()
     await initialize_resources()
 
 @app.on_event("shutdown")

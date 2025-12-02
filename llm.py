@@ -115,7 +115,8 @@ class Qwen3(BaseLLM):
         start_time = time.time()
 
         conversation = self.prepare_history(history, meta_instruction)
-        conversation.append({"role": "user", "content": prompt})
+        if prompt != "":
+            conversation.append({"role": "user", "content": prompt})
 
         text = self.tokenizer.apply_chat_template(
             conversation,
@@ -287,10 +288,12 @@ class Qwen3VL(BaseLLM):
         if images:
             for img_path in images:
                 content.append({"type": "image", "image": img_path})
-        content.append({"type": "text", "text": prompt})
+        if prompt != "":
+            content.append({"type": "text", "text": prompt})
         
-        conversation.append({"role": "user", "content": content})
-        
+        if len(content) > 0:
+            conversation.append({"role": "user", "content": content})
+
         if self.use_vllm:
             # vLLM 路径
             # 处理输入格式
