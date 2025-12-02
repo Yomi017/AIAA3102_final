@@ -82,7 +82,7 @@ class Tools:
             {
                 'name_for_human': '三角函数计算器',
                 'name_for_model': 'trig_calculator',
-                'description_for_model': '用于计算三角函数和反三角函数。支持sin(正弦)、cos(余弦)、tan(正切)、asin(反正弦)、acos(反余弦)、atan(反正切)',
+                'description_for_model': '用于计算三角函数和反三角函数。支持sin(正弦)、cos(余弦)、tan(正切)、asin(反正弦)、acos(反余弦)、atan(反正切), 默认输入为弧度制, 若要角度制, 请设置 degree=True',
                 'parameters': [
                     {
                         'name': 'function',
