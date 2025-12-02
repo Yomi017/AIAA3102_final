@@ -3,7 +3,7 @@ import json5
 from loguru import logger
 
 from llm import BaseLLM
-from tool import Tools
+from tool import ToolsManager
 from security.prompt_guard import has_high_risk, scan_prompt
 
 # define tool description template, to be used to introduce available tools to the model
@@ -122,7 +122,7 @@ class Agent:
         max_step=10,
         security_config: Optional[Dict[str, Any]] = None,
     ) -> None:
-        self.tool = Tools(rag_db_path=rag_db_path)
+        self.tool = ToolsManager(rag_db_path=rag_db_path)
         self.system_prompt = self.build_system_input()  
         self.model = model
         self.max_step = max_step
@@ -140,7 +140,7 @@ class Agent:
     def build_system_input(self):
         tool_description, tool_names = [], []
 
-        for tool in self.tool.toolConfig:
+        for tool in self.tool.get_all_tools_info():
             tool_description.append(TOOL_DESC.format(**tool))
             tool_names.append(tool['name_for_model'])
         tool_description = '\n\n'.join(tool_description)
@@ -208,7 +208,7 @@ class Agent:
 
     def call_plugin(self, plugin_name: str, plugin_args: str) -> str:
         """
-        Call the specified plugin (tool). 
+        Call the specified plugin (tool) using unified interface.
         Args: 
             plugin_name (str): The name of the plugin to be called. 
             plugin_args (str): The parameter of the plugin, which is a string in JSON format. 
@@ -216,25 +216,9 @@ class Agent:
         """
         plugin_args = json5.loads(plugin_args) if plugin_args else {}
         
-        if plugin_name == 'google_search':
-            return '\nObservation:' + self.tool.google_search(**plugin_args)
-        elif plugin_name == 'query_weather':
-            return '\nObservation:' + self.tool.query_weather(**plugin_args)
-        elif plugin_name == 'query_time':
-            return '\nObservation:' + self.tool.query_time(**plugin_args)
-        elif plugin_name == 'basic_calculator':
-            return '\nObservation:' + self.tool.basic_calculator(**plugin_args)
-        elif plugin_name == 'trig_calculator':
-            return '\nObservation:' + self.tool.trig_calculator(**plugin_args)
-        elif plugin_name == 'matrix_calculator':
-            return '\nObservation:' + self.tool.matrix_calculator(**plugin_args)
-        elif plugin_name == 'integral_calculator':
-            return '\nObservation:' + self.tool.integral_calculator(**plugin_args)
-        elif plugin_name == 'knowledge_base_query':
-            return '\nObservation:' + self.tool.knowledge_base_query(**plugin_args)
-        else:
-            logger.error(f"Unknown tool called: {plugin_name}")
-            return f'\nObservation: unknown tool: {plugin_name}'
+        # 使用统一的工具调用接口
+        result = self.tool.call_tool(plugin_name, **plugin_args)
+        return '\nObservation:' + result
         
     def check_response(self, response: str) -> bool:
         """
@@ -306,7 +290,7 @@ class Agent:
         
         
     def text(self, text: str, history: List = []) -> Tuple[str, List]:
-        logger.info(f"New query received: {text[:100]}...")
+        logger.info(f"New query received: {text}...")
         if self.prompt_guard_enabled:
             guard_response = self._apply_prompt_guard(text)
             if guard_response is not None:
@@ -322,8 +306,8 @@ class Agent:
             response = ""
             no_thinking_response ,thinking_response = self.split_response(new_response)
             
-            logger.debug(f"Thinking: {thinking_response[:100]}..." if thinking_response else "Thinking: None")
-            logger.debug(f"Response: {no_thinking_response[:200]}...")
+            logger.debug(f"Thinking: {thinking_response}..." if thinking_response else "Thinking: None")
+            logger.debug(f"Response: {no_thinking_response}...")
 
             if not self.check_response(no_thinking_response):
                 logger.warning("Response format check failed, asking model to retry")
@@ -333,7 +317,7 @@ class Agent:
                 continue
 
             plugin_name, plugin_args, warning = self.parse_latest_plugin_call(no_thinking_response)
-            logger.info(f"Parsed tool call - Name: {plugin_name}, Args: {plugin_args[:100] if plugin_args else 'None'}...")
+            logger.info(f"Parsed tool call - Name: {plugin_name}, Args: {plugin_args if plugin_args else 'None'}...")
             if plugin_name:
                 try:
                     logger.info(f"Calling tool: {plugin_name}")
@@ -351,7 +335,7 @@ class Agent:
                     if warning:
                         history.append({"role": "user", "content": warning})
                     
-                    logger.debug(f"Tool observation added to history: {tool_observation[:200]}...")
+                    logger.debug(f"Tool observation added to history: {tool_observation}...")
                 except Exception as e:
                     logger.error(f"Tool execution error: {plugin_name}, {str(e)}")
                     # 使用user角色返回工具错误
