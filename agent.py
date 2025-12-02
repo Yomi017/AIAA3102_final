@@ -269,11 +269,14 @@ class Agent:
     
     def split_response(self, response: str) -> Tuple[str, str]:
         """
-        Split the model's response into thinking part and final answer part.
+        Split the model's response by removing <think> tags and extracting their content.
+        Only removes <think></think> tags, keeps Thought: and other ReAct format parts.
+        
         Args:
-            response (str): The model's response text.
+            response (str): The model's response text (may contain <think> tags from Qwen3 thinking mode)
+        
         Returns:
-            Tuple[str, str]: (response without thinking tags, thinking content)
+            Tuple[str, str]: (response with think tags removed, thinking content inside tags)
         """
         thinking_content = ''
         clean_response = response
@@ -281,12 +284,15 @@ class Agent:
         # 查找 <think> 和 </think> 标签
         think_start = response.find('<think>')
         think_end = response.find('</think>')
+
+        if think_start == -1 and think_end != -1:
+            think_start = 0  # 只有结束标签，视为从开头开始
         
         if think_start != -1 and think_end != -1 and think_start < think_end:
             # 提取思考内容
             thinking_content = response[think_start + len('<think>'):think_end].strip()
             
-            # 移除思考标签和内容,保留其他部分
+            # 移除思考标签和内容,保留其他部分(包括Thought:和ReAct格式)
             clean_response = response[:think_start] + response[think_end + len('</think>'):]
             clean_response = clean_response.strip()
         
