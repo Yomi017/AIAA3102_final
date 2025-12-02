@@ -198,7 +198,7 @@ def main():
     try:
         logger.info("正在加载模型...")
         # llm = Qwen3VL()
-        llm = Qwen3VL(gpu_ids=[4, 5, 6, 7])
+        llm = Qwen3VL(gpu_ids=[0,1,2,3])
         logger.success("Model loaded successfully")
         
 

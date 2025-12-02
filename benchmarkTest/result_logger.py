@@ -13,21 +13,23 @@ from pathlib import Path
 class ResultLogger:
     """结果记录器"""
     
-    def __init__(self, log_dir: str = "benchmark_results"):
+    def __init__(self, log_dir: str = "benchmark_results", prefix: str = "agent"):
         """
         初始化结果记录器
         
         Args:
             log_dir: 日志目录路径
+            prefix: 测试类型前缀 ("agent" 或 "baseline")
         """
         self.log_dir = Path(log_dir)
         self.log_dir.mkdir(exist_ok=True)
+        self.prefix = prefix
         
         # 生成时间戳
         self.timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         
-        # 创建本次测试的目录
-        self.session_dir = self.log_dir / f"session_{self.timestamp}"
+        # 创建本次测试的目录（带前缀）
+        self.session_dir = self.log_dir / f"{prefix}_session_{self.timestamp}"
         self.session_dir.mkdir(exist_ok=True)
         
         # 文件路径
@@ -142,6 +144,10 @@ class ResultLogger:
     def save_statistics_txt(self):
         """保存可读的统计文本"""
         stats = self.calculate_statistics()
+        
+        if not stats or 'task_completion' not in stats:
+            print("⚠️  没有足够的数据生成统计报告")
+            return
         
         with open(self.statistics_file, 'w', encoding='utf-8') as f:
             f.write("=" * 70 + "\n")

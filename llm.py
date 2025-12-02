@@ -237,7 +237,7 @@ class Qwen3VL(BaseLLM):
                 model=self.path,
                 tensor_parallel_size=self.tensor_parallel_size,
                 trust_remote_code=True,
-                gpu_memory_utilization=0.9,
+                gpu_memory_utilization=0.8,
                 max_model_len=32768,  # 增加最大长度以支持更长的对话
                 limit_mm_per_prompt={"image": 10, "video": 10},  # 多模态限制
             )
@@ -311,7 +311,7 @@ class Qwen3VL(BaseLLM):
                 temperature=generate_kwargs.get("temperature", 0.7),
                 top_p=generate_kwargs.get("top_p", 0.8),
                 top_k=generate_kwargs.get("top_k", 20),
-                stop_token_ids=[self.processor.tokenizer.eos_token_id] + generate_kwargs.get("stop_token_ids", []),
+                stop_token_ids=[self.processor.eos_token_id] + generate_kwargs.get("stop_token_ids", []),
             )
             
             outputs = self.model.generate(
