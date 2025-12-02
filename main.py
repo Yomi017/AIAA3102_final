@@ -10,6 +10,7 @@ from loguru import logger
 from llm import Qwen3, Qwen3VL
 from agent import Agent
 from log_config import setup_logger
+from benchmarkTest.ALFworld import testALFworld
 
 # 修复中文输入问题并配置 readline
 try:
@@ -331,5 +332,62 @@ def main():
     logger.info("AIAA3102 Agent System stopped")
     logger.info("=" * 60)
 
+def test(benchmark_number: int = 1):
+    """测试模式入口函数"""
+    setup_logger()
+    logger.info("=" * 60)
+    logger.info(f"Running in TEST MODE (Benchmark #{benchmark_number})")
+    logger.info("=" * 60)
+    
+    # 加载配置
+    config = load_config()
+    security_config = config.get("security", {})
+    google_config = config.get("google", {})
+    
+    # 设置 Google 搜索凭证
+    credentials_path = google_config.get("credentials_path")
+    if credentials_path and os.path.exists(credentials_path):
+        os.environ.setdefault("GOOGLE_SEARCH_CREDENTIALS", credentials_path)
+    
+    # 初始化模型
+    try:
+        logger.info("正在加载模型...")
+        print("🔄 正在加载 Qwen3-VL 模型...")
+        llm = Qwen3VL()
+        logger.success("Model loaded successfully")
+        print("✅ 模型加载成功\n")
+    except Exception as e:
+        logger.error(f"模型初始化失败: {e}")
+        print(f"❌ 模型加载失败: {e}")
+        sys.exit(1)
+    
+    # 检查 RAG 数据库
+    rag_db_path = None
+    if os.path.exists("rag/wiki_vector_db"):
+        rag_db_path = "rag/wiki_vector_db"
+        logger.info(f"发现AI维基知识库: {rag_db_path}")
+    elif os.path.exists("rag/vector_db"):
+        rag_db_path = "rag/vector_db"
+        logger.info(f"发现知识库: {rag_db_path}")
+    
+    # 创建 Agent
+    agent = Agent(llm, rag_db_path=rag_db_path, security_config=security_config)
+    
+    # 根据 benchmark_number 选择测试
+    if benchmark_number == 1:
+        testALFworld(agent)
+    else:
+        print(f"❌ 未知的基准测试编号: {benchmark_number}")
+        logger.error(f"Unknown benchmark number: {benchmark_number}")
+        sys.exit(1)
+
 if __name__ == '__main__':
-    main()  
+    config = load_config()
+    state_of_model = config.get("STATE_OF_MODEL", 1)  # 1（正常使用模式）, 0（测试模式）
+    
+    if state_of_model == 0:
+        # 测试模式
+        test()
+    else:
+        # 正常使用模式
+        main()  
