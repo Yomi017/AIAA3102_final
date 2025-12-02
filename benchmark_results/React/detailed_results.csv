@@ -1,0 +1,16 @@
+game_num,success,steps,successful_steps,action_success_rate,task_preview
+1,✅,8,8,100.0%,clean some spatula and put it in drawer.
+2,✅,34,32,94.1%,put two keychain in safe.
+3,✅,4,4,100.0%,put a pencil in shelf.
+4,✅,37,30,81.1%,heat some apple and put it in garbagecan.
+7,✅,4,4,100.0%,put a pencil in shelf.
+8,✅,37,30,81.1%,heat some apple and put it in garbagecan.
+9,❌,8,3,37.5%,
+10,✅,22,22,100.0%,put two soapbar in garbagecan.
+11,❌,8,2,25.0%,
+12,✅,19,18,94.7%,put a clean mug in coffeemachine.
+13,❌,8,2,25.0%,
+14,✅,7,7,100.0%,clean some egg and put it in microwave.
+15,✅,15,15,100.0%,find two peppershaker and put them in drawer.
+16,✅,38,38,100.0%,heat some egg and put it in garbagecan.
+17,✅,7,7,100.0%,put a clean plate in countertop.
