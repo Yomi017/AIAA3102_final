@@ -10,3 +10,18 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Fix for KaTeX layout issues when using whitespace-pre-wrap */
+.whitespace-pre-wrap .katex {
+  white-space: normal;
+}
+
+.katex-display {
+  margin: 1em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.overflow-anchor-none {
+  overflow-anchor: none;
+}

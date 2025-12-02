@@ -83,7 +83,7 @@ function App() {
         </header>
 
         {/* Messages Area */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6 scroll-smooth">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6 scroll-smooth overflow-anchor-none">
           <div className="max-w-4xl mx-auto h-full flex flex-col">
             {currentSessionId ? (
               <>

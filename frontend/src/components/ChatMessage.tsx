@@ -131,7 +131,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
               remarkPlugins={[remarkMath]}
               rehypePlugins={[rehypeKatex]}
               components={{
-                p: ({node, ...props}) => <p className="whitespace-pre-wrap m-0" {...props} />,
+                p: ({node, ...props}) => <p className="whitespace-pre-wrap" {...props} />,
                 img: ({node, ...props}) => <img className="max-w-full rounded-lg my-2" {...props} />
               }}
             >
@@ -167,6 +167,10 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
                   <ReactMarkdown 
                     remarkPlugins={[remarkMath]}
                     rehypePlugins={[rehypeKatex]}
+                    components={{
+                      p: ({node, ...props}) => <p className="whitespace-pre-wrap" {...props} />,
+                      img: ({node, ...props}) => <img className="max-w-full rounded-lg my-2" {...props} />
+                    }}
                   >
                     {finalAnswer}
                   </ReactMarkdown>
