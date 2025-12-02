@@ -363,6 +363,11 @@ class Agent:
             response_formate_error, error_info =  self.check_response(no_thinking_response)
 
             if not response_formate_error:
+                
+                # 弹出最后一个历史记录
+                if len(history) > 0:
+                    history.pop()
+                
                 logger.warning("Response format check failed, asking model to retry")
                 error_message = "⚠️ System Error: Your previous response was not in the correct format. Please follow the specified format strictly:\n- Use exactly ONE 'Thought:', ONE 'Action:' (if needed), ONE 'Action Input:' (if Action present), or ONE 'Final Answer:'\n- Do NOT include multiple actions in one response"
                 history.append({"role": "system", "content": error_info + error_message})
@@ -396,6 +401,11 @@ class Agent:
             else:
                 if not self.have_final_answer(no_thinking_response):
                     logger.info("No final answer detected, continuing query")
+
+                    # 弹出最后一个历史记录
+                    if len(history) > 0:
+                        history.pop()
+                    
                     history.append({"role": "system", "content": "⚠️ Warning: No tool call detected and no Final Answer provided. Please either use a tool to get information or provide a Final Answer."})
                 else:
                     logger.info("Final answer detected, stopping query")
