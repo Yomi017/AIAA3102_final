@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException, UploadFile, File, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, FileResponse, StreamingResponse
+from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel
 from typing import List, Optional, Dict, Any
 from datetime import datetime
@@ -41,6 +42,7 @@ HISTORY_FILE = Path("chat_history.json")
 llm: Optional[Qwen3VL] = None
 agent: Optional[Agent] = None
 sessions: Dict[str, Dict[str, Any]] = {}
+chat_queue = asyncio.Queue()
 
 # ==================== 数据模型 ====================
 
@@ -110,6 +112,36 @@ class ErrorResponse(BaseModel):
 
 # ==================== 应用启动/关闭 ====================
 
+def process_agent_interaction(message: str, session_id: str, history: List[Dict], images: List[str] = None):
+    """Synchronous function to handle agent interaction"""
+    if not agent:
+        raise HTTPException(status_code=503, detail="Agent not initialized")
+    
+    # 调用 Agent
+    response, new_history = agent.text(message, history=history, images=images)
+    
+    # 保存消息到会话
+    if session_id in sessions:
+        sessions[session_id]["messages"] = new_history
+        sessions[session_id]["updated_at"] = get_timestamp()
+        save_history()
+        
+    return response, new_history
+
+async def worker_task():
+    logger.info("Worker task started")
+    while True:
+        future, func, args, kwargs = await chat_queue.get()
+        try:
+            result = await run_in_threadpool(func, *args, **kwargs)
+            if not future.cancelled():
+                future.set_result(result)
+        except Exception as e:
+            if not future.cancelled():
+                future.set_exception(e)
+        finally:
+            chat_queue.task_done()
+
 async def initialize_resources():
     """初始化模型和 Agent"""
     global llm, agent
@@ -136,6 +168,7 @@ async def startup_event():
     """应用启动事件"""
     setup_logger()
     await initialize_resources()
+    asyncio.create_task(worker_task())
 
 @app.on_event("shutdown")
 async def shutdown_event():
@@ -232,13 +265,12 @@ async def chat(request: ChatRequest):
         
         logger.info(f"Chat request - Session: {session_id}, Message: {request.message[:100]}")
         
-        # 调用 Agent
-        response, new_history = agent.text(request.message, history=history, images=request.images)
+        # Enqueue request
+        future = asyncio.get_event_loop().create_future()
+        await chat_queue.put((future, process_agent_interaction, (request.message, session_id, history, request.images), {}))
         
-        # 保存消息到会话
-        session["messages"] = new_history
-        session["updated_at"] = get_timestamp()
-        save_history()
+        # Wait for result
+        response, new_history = await future
         
         return ChatResponse(
             data={
@@ -282,13 +314,12 @@ async def chat_stream(message: str, session_id: Optional[str] = None, images: Op
             
             yield f"data: {json.dumps({'type': 'start', 'session_id': sid})}\n\n"
             
-            # 调用 Agent
-            response, new_history = agent.text(message, history=history, images=image_list)
+            # Enqueue request
+            future = asyncio.get_event_loop().create_future()
+            await chat_queue.put((future, process_agent_interaction, (message, sid, history, image_list), {}))
             
-            # 保存消息
-            session["messages"] = new_history
-            session["updated_at"] = get_timestamp()
-            save_history()
+            # Wait for result
+            response, new_history = await future
             
             yield f"data: {json.dumps({'type': 'response', 'content': response})}\n\n"
             yield f"data: {json.dumps({'type': 'done', 'session_id': sid})}\n\n"
