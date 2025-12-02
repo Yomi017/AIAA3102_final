@@ -10,6 +10,7 @@ from loguru import logger
 from llm import Qwen3, Qwen3VL
 from agent import Agent
 from log_config import setup_logger
+from benchmarkTest.ALFworld import testALFworld
 
 # 修复中文输入问题并配置 readline
 try:
@@ -331,15 +332,13 @@ def main():
     logger.info("AIAA3102 Agent System stopped")
     logger.info("=" * 60)
 
-
-def testALFworld():
-    """使用 ALFworld 测试案例测试 Agent"""
-    # 初始化日志系统
+def test(benchmark_number: int = 1):
+    """测试模式入口函数"""
     setup_logger()
     logger.info("=" * 60)
-    logger.info("AIAA3102 Agent System - ALFworld Test Mode")
+    logger.info(f"Running in TEST MODE (Benchmark #{benchmark_number})")
     logger.info("=" * 60)
-
+    
     # 加载配置
     config = load_config()
     security_config = config.get("security", {})
@@ -350,22 +349,6 @@ def testALFworld():
     if credentials_path and os.path.exists(credentials_path):
         os.environ.setdefault("GOOGLE_SEARCH_CREDENTIALS", credentials_path)
     
-    # 加载测试数据
-    test_file = "benchmark/ALFworld/test_cases_valid_unseen_30.json"
-    if not os.path.exists(test_file):
-        logger.error(f"测试文件不存在: {test_file}")
-        print(f"❌ 错误: 测试文件 {test_file} 不存在")
-        return
-    
-    try:
-        with open(test_file, 'r', encoding='utf-8') as f:
-            test_cases = json.load(f)
-        logger.info(f"成功加载 {len(test_cases)} 个测试案例")
-    except Exception as e:
-        logger.error(f"加载测试文件失败: {e}")
-        print(f"❌ 错误: 无法加载测试文件 - {e}")
-        return
-
     # 初始化模型
     try:
         logger.info("正在加载模型...")
@@ -376,8 +359,8 @@ def testALFworld():
     except Exception as e:
         logger.error(f"模型初始化失败: {e}")
         print(f"❌ 模型加载失败: {e}")
-        return
-
+        sys.exit(1)
+    
     # 检查 RAG 数据库
     rag_db_path = None
     if os.path.exists("rag/wiki_vector_db"):
@@ -390,248 +373,21 @@ def testALFworld():
     # 创建 Agent
     agent = Agent(llm, rag_db_path=rag_db_path, security_config=security_config)
     
-    # 打印测试横幅
-    print("╔════════════════════════════════════════════════════════╗")
-    print("║                                                        ║")
-    print("║          🧪 ALFworld Benchmark Test Mode 🧪          ║")
-    print("║                                                        ║")
-    print("╚════════════════════════════════════════════════════════╝")
-    print(f"\n📊 总共加载了 {len(test_cases)} 个测试案例")
-    print("━" * 60)
-    
-    # 交互式选择测试案例
-    while True:
-        print("\n请选择操作:")
-        print("  1. 测试单个案例")
-        print("  2. 测试所有案例")
-        print("  3. 测试指定范围")
-        print("  4. 查看案例列表")
-        print("  0. 退出")
-        
-        choice = input("\n💬 请输入选项 (0-4): ").strip()
-        
-        if choice == '0':
-            logger.info("User exited test mode")
-            break
-        
-        elif choice == '1':
-            # 测试单个案例
-            print(f"\n请输入案例编号 (1-{len(test_cases)}):")
-            try:
-                case_num = int(input("💬 案例编号: ").strip())
-                if 1 <= case_num <= len(test_cases):
-                    test_single_case(agent, test_cases[case_num - 1], case_num)
-                else:
-                    print(f"❌ 无效的案例编号，请输入 1-{len(test_cases)}")
-            except ValueError:
-                print("❌ 请输入有效的数字")
-            except KeyboardInterrupt:
-                print("\n\n⚠️ 测试中断")
-                continue
-        
-        elif choice == '2':
-            # 测试所有案例
-            confirm = input(f"\n确认要测试全部 {len(test_cases)} 个案例吗? (y/n): ").strip().lower()
-            if confirm == 'y':
-                test_all_cases(agent, test_cases)
-            else:
-                print("已取消")
-        
-        elif choice == '3':
-            # 测试指定范围
-            try:
-                start = int(input(f"💬 起始案例编号 (1-{len(test_cases)}): ").strip())
-                end = int(input(f"💬 结束案例编号 (1-{len(test_cases)}): ").strip())
-                if 1 <= start <= end <= len(test_cases):
-                    test_range_cases(agent, test_cases, start, end)
-                else:
-                    print(f"❌ 无效的范围，请输入 1-{len(test_cases)} 之间的数字")
-            except ValueError:
-                print("❌ 请输入有效的数字")
-            except KeyboardInterrupt:
-                print("\n\n⚠️ 测试中断")
-                continue
-        
-        elif choice == '4':
-            # 查看案例列表
-            print(f"\n{'='*60}")
-            print(f"{'编号':<6} {'任务类型':<30} {'任务描述':<20}")
-            print(f"{'='*60}")
-            for i, case in enumerate(test_cases, 1):
-                task_type = case.get('task_type', 'unknown')
-                task_desc = case.get('task_desc', 'No description')
-                # 截断过长的描述
-                if len(task_desc) > 40:
-                    task_desc = task_desc[:37] + "..."
-                print(f"{i:<6} {task_type:<30} {task_desc}")
-            print(f"{'='*60}")
-        
-        else:
-            print("❌ 无效的选项，请重新选择")
-    
-    logger.info("ALFworld test session ended")
-    logger.info("=" * 60)
-
-
-def test_single_case(agent: Agent, test_case: dict, case_num: int):
-    """测试单个案例"""
-    logger.info(f"Testing case #{case_num}: {test_case.get('task_id')}")
-    
-    print("\n" + "="*60)
-    print(f"测试案例 #{case_num}")
-    print("="*60)
-    print(f"任务ID: {test_case.get('task_id')}")
-    print(f"任务类型: {test_case.get('task_type')}")
-    print(f"场景编号: {test_case.get('scene_num')}")
-    print(f"\n📝 任务描述:")
-    print(f"  {test_case.get('task_desc')}")
-    
-    # 显示高层级步骤
-    high_level_steps = test_case.get('high_level_steps', [])
-    if high_level_steps:
-        print(f"\n📋 参考步骤:")
-        for i, step in enumerate(high_level_steps, 1):
-            print(f"  {i}. {step}")
-    
-    # 显示其他描述
-    alt_desc = test_case.get('alternative_descriptions', [])
-    if alt_desc:
-        print(f"\n🔄 其他描述:")
-        for desc in alt_desc:
-            print(f"  - {desc}")
-    
-    print("\n" + "-"*60)
-    
-    # 开始测试
-    agent_history = []
-    user_query = test_case.get('task_desc')
-    
-    try:
-        logger.info(f"Sending query: {user_query}")
-        print(f"\n💬 发送给 Agent: {user_query}")
-        print("\n🤖 Agent 思考中...")
-        
-        agent_output, agent_history = agent.text(user_query, agent_history)
-        
-        # 提取最终答案
-        final_answer_marker = "Final Answer:"
-        final_answer = agent_output.rfind(final_answer_marker)
-        if final_answer != -1:
-            final_answer = agent_output[final_answer + len(final_answer_marker):].strip()
-        else:
-            final_answer = agent_output.strip()
-        
-        print(f"\n{'='*60}")
-        print("🤖 Agent 回答:")
-        print(f"{'='*60}")
-        print(final_answer)
-        print(f"{'='*60}")
-        
-        logger.info(f"Case #{case_num} completed successfully")
-        
-    except KeyboardInterrupt:
-        logger.warning(f"Case #{case_num} interrupted by user")
-        raise
-    except Exception as e:
-        logger.error(f"Error testing case #{case_num}: {e}")
-        print(f"\n❌ 测试出错: {e}")
-
-
-def test_all_cases(agent: Agent, test_cases: list):
-    """测试所有案例"""
-    results = []
-    total = len(test_cases)
-    
-    print(f"\n🚀 开始测试全部 {total} 个案例...")
-    print("提示: 按 Ctrl+C 可以中断测试\n")
-    
-    for i, case in enumerate(test_cases, 1):
-        try:
-            print(f"\n{'='*60}")
-            print(f"进度: {i}/{total} - {case.get('task_id')}")
-            print(f"{'='*60}")
-            
-            test_single_case(agent, case, i)
-            results.append({'case_num': i, 'status': 'success', 'error': None})
-            
-        except KeyboardInterrupt:
-            print(f"\n\n⚠️ 测试在第 {i}/{total} 个案例时被中断")
-            results.append({'case_num': i, 'status': 'interrupted', 'error': 'User interrupted'})
-            break
-        except Exception as e:
-            logger.error(f"Case {i} failed: {e}")
-            results.append({'case_num': i, 'status': 'failed', 'error': str(e)})
-            print(f"\n❌ 案例 {i} 失败: {e}")
-            
-            # 询问是否继续
-            cont = input("\n是否继续测试下一个案例? (y/n): ").strip().lower()
-            if cont != 'y':
-                break
-    
-    # 打印测试总结
-    print(f"\n\n{'='*60}")
-    print("📊 测试总结")
-    print(f"{'='*60}")
-    success = sum(1 for r in results if r['status'] == 'success')
-    failed = sum(1 for r in results if r['status'] == 'failed')
-    interrupted = sum(1 for r in results if r['status'] == 'interrupted')
-    
-    print(f"总测试数: {len(results)}/{total}")
-    print(f"✅ 成功: {success}")
-    print(f"❌ 失败: {failed}")
-    print(f"⚠️  中断: {interrupted}")
-    print(f"{'='*60}")
-
-def test_range_cases(agent: Agent, test_cases: list, start: int, end: int):
-    """测试指定范围的案例"""
-    selected_cases = test_cases[start-1:end]
-    total = len(selected_cases)
-    
-    print(f"\n🚀 开始测试案例 {start}-{end} (共 {total} 个)...")
-    print("提示: 按 Ctrl+C 可以中断测试\n")
-    
-    results = []
-    for i, case in enumerate(selected_cases, start):
-        try:
-            print(f"\n{'='*60}")
-            print(f"进度: {i-start+1}/{total} - 案例 #{i}")
-            print(f"{'='*60}")
-            
-            test_single_case(agent, case, i)
-            results.append({'case_num': i, 'status': 'success', 'error': None})
-            
-        except KeyboardInterrupt:
-            print(f"\n\n⚠️ 测试在案例 #{i} 时被中断")
-            results.append({'case_num': i, 'status': 'interrupted', 'error': 'User interrupted'})
-            break
-        except Exception as e:
-            logger.error(f"Case {i} failed: {e}")
-            results.append({'case_num': i, 'status': 'failed', 'error': str(e)})
-            print(f"\n❌ 案例 {i} 失败: {e}")
-            
-            # 询问是否继续
-            cont = input("\n是否继续测试下一个案例? (y/n): ").strip().lower()
-            if cont != 'y':
-                break
-    
-    # 打印测试总结
-    print(f"\n\n{'='*60}")
-    print("📊 测试总结")
-    print(f"{'='*60}")
-    success = sum(1 for r in results if r['status'] == 'success')
-    failed = sum(1 for r in results if r['status'] == 'failed')
-    interrupted = sum(1 for r in results if r['status'] == 'interrupted')
-    
-    print(f"总测试数: {len(results)}/{total}")
-    print(f"✅ 成功: {success}")
-    print(f"❌ 失败: {failed}")
-    print(f"⚠️  中断: {interrupted}")
-    print(f"{'='*60}")
-
+    # 根据 benchmark_number 选择测试
+    if benchmark_number == 1:
+        testALFworld(agent)
+    else:
+        print(f"❌ 未知的基准测试编号: {benchmark_number}")
+        logger.error(f"Unknown benchmark number: {benchmark_number}")
+        sys.exit(1)
 
 if __name__ == '__main__':
-    # 检查命令行参数
-    if len(sys.argv) > 1 and sys.argv[1] == 'test':
-        testALFworld()
+    config = load_config()
+    state_of_model = config.get("STATE_OF_MODEL", 1)  # 1（正常使用模式）, 0（测试模式）
+    
+    if state_of_model == 0:
+        # 测试模式
+        test()
     else:
+        # 正常使用模式
         main()  
