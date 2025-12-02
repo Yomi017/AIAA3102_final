@@ -20,6 +20,8 @@ REACT_PROMPT = """Answer the following questions as best you can. You have acces
 
 {tool_description}
 
+Important: When you need current time or date information, use the get_cur_time tool to query it. DO NOT assume or guess the current time.
+
 CRITICAL RULES:
 1. You can ONLY use ONE tool at a time in each response
 2. Each field (Thought, Action, Action Input, Final Answer) must appear EXACTLY ONCE
@@ -29,6 +31,10 @@ CRITICAL RULES:
 6. NEVER make up information - ALL answers MUST be based on tool results
 7. If you don't have information from tools, admit it and use appropriate tools to find it
 8. Always cite the source of your information (which tool provided it)
+9. Distinguish between casual conversation and factual queries that need verification:
+   - Casual conversation (greetings, chitchat, general discussion): Can answer directly with Final Answer
+   - Factual queries (specific data, current events, calculations, etc.): MUST use tools to verify
+10. Even for casual conversation, you MUST follow the response format with Thought and Final Answer
 
 Information Accuracy Requirements:
 - DO NOT fabricate any facts, numbers, dates, or details
@@ -38,22 +44,32 @@ Information Accuracy Requirements:
 - When uncertain, use tools to verify before answering
 
 Response Format Requirements:
-- When you need to use a tool:
-  Thought: [your reasoning about what to do next]
+- For casual conversation (greetings, chitchat, opinions):
+  Thought: [recognize this is casual conversation that doesn't need verification]
+  Final Answer: [your friendly response]
+
+- When you need to use a tool for factual queries:
+  Thought: [your reasoning about what information needs verification and which tool to use]
   Action: [exactly ONE tool name from: {tool_names}]
   Action Input: [the input for that ONE tool only]
 
-- When you have the final answer:
-  Thought(Optional): [your reasoning about why this is the final answer based on tool results]
+- After getting tool results:
+  Thought: [analyze the tool results and decide if you have enough information]
   Final Answer: [your complete response based ONLY on verified information from tools]
 
-Remember: ONE tool per response. NEVER make up information. Every fact must come from a tool result.
+Remember: 
+- ONE tool per response
+- NEVER make up factual information - every fact must come from a tool result
+- Casual conversation can be answered directly but MUST follow the format
+- Factual queries MUST be verified with tools
 
 ---
 
 请尽你所能回答以下问题。你可以使用以下工具:
 
 {tool_description}
+
+重要提示: 当你需要当前时间或日期信息时,使用get_cur_time工具查询。不要假设或猜测当前时间。
 
 关键规则:
 1. 每次回复中只能使用一个工具
@@ -64,6 +80,10 @@ Remember: ONE tool per response. NEVER make up information. Every fact must come
 6. 绝对不要编造信息 - 所有答案必须基于工具结果
 7. 如果没有从工具获得信息,请承认并使用合适的工具去查找
 8. 始终标注信息来源(哪个工具提供的)
+9. 区分日常对话和需要验证的事实性查询:
+   - 日常对话(问候、闲聊、观点讨论): 可以直接用Final Answer回答
+   - 事实性查询(具体数据、时事、计算等): 必须使用工具验证
+10. 即使是日常对话,也必须遵循回复格式,包含Thought和Final Answer
 
 信息准确性要求:
 - 不要编造任何事实、数字、日期或细节
@@ -73,16 +93,24 @@ Remember: ONE tool per response. NEVER make up information. Every fact must come
 - 不确定时,使用工具验证后再回答
 
 回复格式要求:
-- 当需要使用工具时:
-  Thought: [你对下一步做什么的推理]
+- 对于日常对话(问候、闲聊、观点):
+  Thought: [识别这是不需要验证的日常对话]
+  Final Answer: [你的友好回复]
+
+- 当需要使用工具查询事实时:
+  Thought: [分析需要验证什么信息以及使用哪个工具]
   Action: [从以下工具中选择恰好一个: {tool_names}]
   Action Input: [仅针对该一个工具的输入]
 
-- 当有最终答案时:
-  Thought（可选的）: [基于工具结果,你对为什么这是最终答案的推理]
+- 获得工具结果后:
+  Thought: [分析工具结果并判断是否有足够信息]
   Final Answer: [仅基于工具验证信息的完整回复]
 
-记住: 每次回复只用一个工具。绝不编造信息。每个事实都必须来自工具结果。
+记住: 
+- 每次回复只用一个工具
+- 绝不编造事实信息 - 每个事实都必须来自工具结果
+- 日常对话可以直接回答但必须遵循格式
+- 事实性查询必须使用工具验证
 
 """
 
@@ -299,7 +327,9 @@ class Agent:
 
             if not self.check_response(no_thinking_response):
                 logger.warning("Response format check failed, asking model to retry")
-                response = "Your previous response was not in the correct format. Please follow the specified format strictly."
+                # 使用user角色返回格式错误提示
+                error_message = "⚠️ System Error: Your previous response was not in the correct format. Please follow the specified format strictly:\n- Use exactly ONE 'Thought:', ONE 'Action:' (if needed), ONE 'Action Input:' (if Action present), or ONE 'Final Answer:'\n- Do NOT include multiple actions in one response"
+                history.append({"role": "user", "content": error_message})
                 continue
 
             plugin_name, plugin_args, warning = self.parse_latest_plugin_call(no_thinking_response)
@@ -309,14 +339,24 @@ class Agent:
                     logger.info(f"Calling tool: {plugin_name}")
                     tool_observation = self.call_plugin(plugin_name, plugin_args)
                     logger.success(f"Tool {plugin_name} executed successfully")
-                    # 如果有警告,添加到observation中
+                    
+                    # 使用tool角色传递工具执行结果
+                    history.append({
+                        "role": "tool",
+                        "content": tool_observation,
+                        "name": plugin_name
+                    })
+                    
+                    # 如果有警告,追加user消息
                     if warning:
-                        tool_observation += f"\n{warning}"
+                        history.append({"role": "user", "content": warning})
+                    
+                    logger.debug(f"Tool observation added to history: {tool_observation[:200]}...")
                 except Exception as e:
                     logger.error(f"Tool execution error: {plugin_name}, {str(e)}")
-                    tool_observation = f"\nObservation: Error calling tools {plugin_name}: {e}. Please try another tool or correct the arguments."
-                response += tool_observation
-                logger.debug(f"Tool observation: {tool_observation[:200]}...")
+                    # 使用user角色返回工具错误
+                    error_message = f"⚠️ Tool Execution Error: Failed to call tool '{plugin_name}'. Error: {e}\nPlease try another tool or correct the arguments."
+                    history.append({"role": "user", "content": error_message})
             else:
                 logger.info("No tool call detected, completing response")
                 break
