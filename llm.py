@@ -5,6 +5,9 @@ import os
 import time
 from loguru import logger
 
+# 禁用 tokenizers 并行化以避免 vLLM 多进程中的死锁警告
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
 class BaseLLM:
     def __init__(self, path: str = ""):
         self.path = path
@@ -28,7 +31,7 @@ class Qwen3(BaseLLM):
     DEFAULT_MODEL = "Qwen/Qwen3-8B"
     THINKING_EOS_TOKEN_ID = 151668  # token id for </think>
 
-    def __init__(self, path: str = DEFAULT_MODEL, tensor_parallel_size: int = 8, gpu_ids: List[int] = None):
+    def __init__(self, path: str = DEFAULT_MODEL, gpu_ids: List[int] = None):
         # 如果指定了GPU序号,设置CUDA_VISIBLE_DEVICES并调整tensor_parallel_size
         if gpu_ids is not None:
             gpu_str = ",".join(map(str, gpu_ids))
@@ -36,7 +39,15 @@ class Qwen3(BaseLLM):
             self.tensor_parallel_size = len(gpu_ids)
             print(f"Using GPUs: {gpu_str} (mapped to {self.tensor_parallel_size} devices)")
         else:
-            self.tensor_parallel_size = tensor_parallel_size
+            # gpu_ids 为 None 时自动检测并使用全部 GPU
+            try:
+                import torch
+                gpu_count = torch.cuda.device_count()
+                self.tensor_parallel_size = gpu_count if gpu_count > 0 else 1
+                print(f"Using all available GPUs: {self.tensor_parallel_size} device(s)")
+            except:
+                self.tensor_parallel_size = 1
+                print("Could not detect GPU count, using tensor_parallel_size=1")
         
         self.use_vllm = False
         super().__init__(path or self.DEFAULT_MODEL)
@@ -161,12 +172,24 @@ class Qwen3VL(BaseLLM):
     THINKING_EOS_TOKEN_ID = 151668  # token id for </think>
     
     def __init__(self, path: str = "", gpu_ids: List[int] = None):
-        # 如果指定了GPU序号,设置CUDA_VISIBLE_DEVICES
+        # 如果指定了GPU序号,设置CUDA_VISIBLE_DEVICES并调整tensor_parallel_size
         if gpu_ids is not None:
             gpu_str = ",".join(map(str, gpu_ids))
             os.environ["CUDA_VISIBLE_DEVICES"] = gpu_str
-            logger.info(f"Using GPUs: {gpu_str}")
+            self.tensor_parallel_size = len(gpu_ids)
+            logger.info(f"Using GPUs: {gpu_str} (mapped to {self.tensor_parallel_size} devices)")
+        else:
+            # gpu_ids 为 None 时自动检测并使用全部 GPU
+            try:
+                import torch
+                gpu_count = torch.cuda.device_count()
+                self.tensor_parallel_size = gpu_count if gpu_count > 0 else 1
+                logger.info(f"Using all available GPUs: {self.tensor_parallel_size} device(s)")
+            except:
+                self.tensor_parallel_size = 1
+                logger.warning("Could not detect GPU count, using tensor_parallel_size=1")
         
+        self.use_vllm = False
         super().__init__(path or self.DEFAULT_MODEL)
         self.supports_multimodal = True  # 支持多模态
         self.load_model()
@@ -175,8 +198,20 @@ class Qwen3VL(BaseLLM):
         logger.info(f"Loading VL model from: {self.path}")
         start_time = time.time()
         
+        # 尝试使用 vLLM
         try:
-            from transformers import AutoModelForImageTextToText, AutoProcessor
+            from vllm import LLM, SamplingParams
+            self.use_vllm = True
+            self.vllm_class = LLM
+            self.sampling_params_class = SamplingParams
+            logger.info(f"vLLM detected. Initializing VL model with tensor_parallel_size={self.tensor_parallel_size}")
+        except ImportError:
+            logger.info("vLLM not found. Falling back to transformers for VL model.")
+            self.use_vllm = False
+        
+        # 加载 tokenizer/processor
+        try:
+            from transformers import AutoProcessor
             from qwen_vl_utils import process_vision_info
             
             self.process_vision_info = process_vision_info
@@ -188,23 +223,35 @@ class Qwen3VL(BaseLLM):
             )
             logger.success("Processor loaded")
             
-            logger.info("Initializing vision-language model...")
+        except ImportError as e:
+            logger.error(f"Failed to import required VL libraries: {e}")
+            raise ImportError(
+                "Please install required packages: pip install qwen-vl-utils transformers"
+            )
+        
+        # 根据后端加载模型
+        if self.use_vllm:
+            logger.info("Initializing vLLM VL model...")
+            self.model = self.vllm_class(
+                model=self.path,
+                tensor_parallel_size=self.tensor_parallel_size,
+                trust_remote_code=True,
+                gpu_memory_utilization=0.9,
+                max_model_len=16384,  # 降低最大长度以节省KV cache
+                limit_mm_per_prompt={"image": 10, "video": 10},  # 多模态限制
+            )
+        else:
+            logger.info("Initializing transformers VL model...")
+            from transformers import AutoModelForImageTextToText
             self.model = AutoModelForImageTextToText.from_pretrained(
                 self.path,
                 trust_remote_code=True,
                 torch_dtype="auto",
                 device_map="auto"
             ).eval()
-            
-            elapsed = time.time() - start_time
-            logger.success(f"VL model loaded successfully in {elapsed:.2f}s")
-            
-        except ImportError as e:
-            logger.error(f"Failed to import required VL libraries: {e}")
-            raise ImportError(
-                "Please install required packages: "
-                "pip install qwen-vl-utils transformers"
-            )
+        
+        elapsed = time.time() - start_time
+        logger.success(f"VL model loaded successfully in {elapsed:.2f}s (backend: {'vLLM' if self.use_vllm else 'transformers'})")
     
     def chat(
         self,
@@ -243,44 +290,78 @@ class Qwen3VL(BaseLLM):
         
         conversation.append({"role": "user", "content": content})
         
-        # 处理输入
-        text = self.processor.apply_chat_template(
-            conversation,
-            tokenize=False,
-            add_generation_prompt=True,
-            enable_thinking=enable_thinking
-        )
-        
-        image_inputs, video_inputs = self.process_vision_info(conversation)
-        
-        inputs = self.processor(
-            text=[text],
-            images=image_inputs,
-            videos=video_inputs,
-            padding=True,
-            return_tensors="pt"
-        ).to(self.model.device)
-        
-        # 生成
-        generated_ids = self.model.generate(
-            **inputs,
-            max_new_tokens=max_new_tokens,
-            **generate_kwargs
-        )
-        
-        # 处理thinking token（类似Qwen3的逻辑）
-        output_ids = generated_ids[0][inputs.input_ids.shape[-1]:].tolist()
-        
-        try:
-            index = len(output_ids) - output_ids[::-1].index(self.THINKING_EOS_TOKEN_ID)
-        except ValueError:
-            index = 0
-        
-        output_text = self.processor.decode(
-            output_ids[index:],
-            skip_special_tokens=True,
-            clean_up_tokenization_spaces=False
-        )
+        if self.use_vllm:
+            # vLLM 路径
+            # 处理输入格式
+            text = self.processor.apply_chat_template(
+                conversation,
+                tokenize=False,
+                add_generation_prompt=True,
+                enable_thinking=enable_thinking
+            )
+            
+            # vLLM 多模态输入格式
+            mm_data = {}
+            if images:
+                mm_data["image"] = images
+            
+            sampling_params = self.sampling_params_class(
+                max_tokens=max_new_tokens,
+                temperature=generate_kwargs.get("temperature", 0.7),
+                top_p=generate_kwargs.get("top_p", 0.8),
+                top_k=generate_kwargs.get("top_k", 20),
+                stop_token_ids=[self.processor.tokenizer.eos_token_id] + generate_kwargs.get("stop_token_ids", []),
+            )
+            
+            outputs = self.model.generate(
+                {
+                    "prompt": text,
+                    "multi_modal_data": mm_data,
+                },
+                sampling_params=sampling_params,
+            )
+            
+            output_text = outputs[0].outputs[0].text.strip()
+            
+        else:
+            # transformers 路径
+            text = self.processor.apply_chat_template(
+                conversation,
+                tokenize=False,
+                add_generation_prompt=True,
+                enable_thinking=enable_thinking
+            )
+            
+            image_inputs, video_inputs = self.process_vision_info(conversation)
+            
+            inputs = self.processor(
+                text=[text],
+                images=image_inputs,
+                videos=video_inputs,
+                padding=True,
+                return_tensors="pt"
+            ).to(self.model.device)
+            
+            # 生成
+            generated_ids = self.model.generate(
+                **inputs,
+                max_new_tokens=max_new_tokens,
+                **generate_kwargs
+            )
+            
+            # 处理thinking token
+            output_ids = generated_ids[0][inputs.input_ids.shape[-1]:].tolist()
+            
+            try:
+                index = len(output_ids) - output_ids[::-1].index(self.THINKING_EOS_TOKEN_ID)
+            except ValueError:
+                index = 0
+            
+            output_text = self.processor.decode(
+                output_ids[index:],
+                skip_special_tokens=True,
+                clean_up_tokenization_spaces=False
+            )
         
         # 更新历史 - 只保存文本内容
         new_history = deepcopy(conversation)
