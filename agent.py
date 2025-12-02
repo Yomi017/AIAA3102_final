@@ -225,7 +225,7 @@ class Agent:
         result = self.tool.call_tool(plugin_name, **plugin_args)
         return '\nObservation:' + result
         
-    def check_response(self, response: str) -> bool:
+    def check_response(self, response: str) -> Tuple[bool, str]:
         """
         Check if the model's response contains the required fields.
         Args:
@@ -239,33 +239,36 @@ class Agent:
         action_input_count = response.count('Action Input:')
         final_answer_count = response.count('Final Answer:')
         
-        # 检查Thought出现次数(应该正好1次)
-        # if thought_count == 0:
-        #     print("❌ Format Error: Missing 'Thought:'")
-        #     return False
+
         if thought_count > 1:
             logger.warning(f"Format error: 'Thought:' appears {thought_count} times")
-            return False
+            return False, "Format error: 'Thought:' appears more than once"
         
         # 如果有Action,检查出现次数和Action Input
         if action_count > 0:
             if action_count > 1:
                 logger.warning(f"Format error: 'Action:' appears {action_count} times")
-                return False
+                return False, "Format error: 'Action:' appears more than once"
             
             if action_input_count == 0:
                 logger.warning("Format error: 'Action:' found but 'Action Input:' missing")
-                return False
+                return False, "Format error: 'Action:' found but 'Action Input:' missing. If you don't need to use Action Input, please remove 'Action' from your response."
             elif action_input_count > 1:
                 logger.warning(f"Format error: 'Action Input:' appears {action_input_count} times")
-                return False
+                return False, f"Format error: 'Action Input:' appears {action_input_count} times. Please check your response."
         
         # 检查Final Answer出现次数
         if final_answer_count > 1:
             logger.warning(f"Format error: 'Final Answer:' appears {final_answer_count} times")
-            return False
+            return False , "Format error: 'Final Answer:' appears more than once"
         
-        return True
+        return True , ""
+    
+    def have_final_answer(self, response: str) -> bool:
+        """
+        判断response中是否包含Final Answer
+        """
+        return "Final Answer:" in response
     
     def split_response(self, response: str) -> Tuple[str, str]:
         """
@@ -352,16 +355,21 @@ class Agent:
             logger.debug(f"Thinking: {thinking_response}..." if thinking_response else "Thinking: None")
             logger.debug(f"Response: {no_thinking_response}...")
 
-            if not self.check_response(no_thinking_response):
+            response_formate_error, error_info =  self.check_response(no_thinking_response)
+
+            if not response_formate_error:
                 logger.warning("Response format check failed, asking model to retry")
                 # 使用user角色返回格式错误提示
                 error_message = "⚠️ System Error: Your previous response was not in the correct format. Please follow the specified format strictly:\n- Use exactly ONE 'Thought:', ONE 'Action:' (if needed), ONE 'Action Input:' (if Action present), or ONE 'Final Answer:'\n- Do NOT include multiple actions in one response"
-                history.append({"role": "user", "content": error_message})
+                history.append({"role": "user", "content": error_info + error_message})
                 continue
 
             plugin_name, plugin_args, warning = self.parse_latest_plugin_call(no_thinking_response)
             logger.info(f"Parsed tool call - Name: {plugin_name}, Args: {plugin_args if plugin_args else 'None'}...")
-            if plugin_name:
+            if self.have_final_answer(no_thinking_response):
+                logger.info("Final Answer detected in response, ending query")
+                break
+            elif plugin_name:
                 try:
                     logger.info(f"Calling tool: {plugin_name}")
                     tool_observation = self.call_plugin(plugin_name, plugin_args)

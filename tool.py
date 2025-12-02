@@ -4,6 +4,7 @@ import requests
 from typing import Any, Dict, List, Optional
 from abc import ABC, abstractmethod
 from loguru import logger
+from urllib.parse import urljoin, urlparse
 
 from langchain_google_community import GoogleSearchAPIWrapper
 from calculator import Calculator
@@ -16,6 +17,14 @@ try:
 except ImportError:
     HAS_TAVILY = False
     logger.warning("Tavily not installed. Install with: pip install tavily-python")
+
+# 尝试导入 BeautifulSoup 用于网页爬虫
+try:
+    from bs4 import BeautifulSoup
+    HAS_BEAUTIFULSOUP = True
+except ImportError:
+    HAS_BEAUTIFULSOUP = False
+    logger.warning("BeautifulSoup4 not installed. Install with: pip install beautifulsoup4")
 
 
 class ToolBase(ABC):
@@ -240,6 +249,140 @@ class TavilySearchTool(ToolBase):
         except Exception as e:
             logger.error(f"Tavily search failed: {e}")
             return f"Tavily 搜索失败: {str(e)}"
+
+
+class WebScraperTool(ToolBase):
+    """网页爬虫工具 - 直接获取网页内容"""
+    
+    TIMEOUT = 20  # 网页爬虫超时20秒
+    
+    def __init__(self):
+        self.session = requests.Session()
+        # 设置常见的User-Agent避免被拦截
+        self.session.headers.update({
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        })
+    
+    @property
+    def name_for_human(self) -> str:
+        return '网页爬虫'
+    
+    @property
+    def name_for_model(self) -> str:
+        return 'web_scraper'
+    
+    @property
+    def description_for_model(self) -> str:
+        return 'A web scraper tool that can fetch and extract text content from any webpage. Use this to get the full content of a specific URL, extract information from web pages, or retrieve detailed information when you have a direct link.'
+    
+    @property
+    def parameters(self) -> List[Dict[str, Any]]:
+        return [
+            {
+                'name': 'url',
+                'description': 'The complete URL of the webpage to scrape. Must start with http:// or https://',
+                'required': True,
+                'schema': {'type': 'string'},
+            },
+            {
+                'name': 'max_chars',
+                'description': '提取的最大字符数，默认为5000。用于控制输出大小。',
+                'required': False,
+                'schema': {'type': 'integer'},
+            }
+        ]
+    
+    def _is_valid_url(self, url: str) -> bool:
+        """验证URL是否有效"""
+        try:
+            result = urlparse(url)
+            return all([result.scheme in ['http', 'https'], result.netloc])
+        except:
+            return False
+    
+    def _extract_text_content(self, html: str, max_chars: int = 5000) -> str:
+        """从HTML中提取文本内容"""
+        if not HAS_BEAUTIFULSOUP:
+            # 如果没有BeautifulSoup，使用简单的正则表达式
+            import re
+            # 移除script和style标签
+            text = re.sub(r'<script[^>]*>.*?</script>', '', html, flags=re.DOTALL | re.IGNORECASE)
+            text = re.sub(r'<style[^>]*>.*?</style>', '', text, flags=re.DOTALL | re.IGNORECASE)
+            # 移除HTML标签
+            text = re.sub(r'<[^>]+>', '', text)
+            # 清理空白
+            text = re.sub(r'\s+', ' ', text).strip()
+        else:
+            try:
+                soup = BeautifulSoup(html, 'html.parser')
+                # 移除script和style
+                for script in soup(["script", "style"]):
+                    script.decompose()
+                text = soup.get_text()
+                # 清理空白
+                lines = (line.strip() for line in text.splitlines())
+                chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
+                text = ' '.join(chunk for chunk in chunks if chunk)
+            except Exception as e:
+                logger.warning(f"BeautifulSoup parsing failed, using fallback: {e}")
+                import re
+                text = re.sub(r'<script[^>]*>.*?</script>', '', html, flags=re.DOTALL | re.IGNORECASE)
+                text = re.sub(r'<style[^>]*>.*?</style>', '', text, flags=re.DOTALL | re.IGNORECASE)
+                text = re.sub(r'<[^>]+>', '', text)
+                text = re.sub(r'\s+', ' ', text).strip()
+        
+        # 限制长度
+        if len(text) > max_chars:
+            text = text[:max_chars] + f"\n\n[内容已截断，还有 {len(text) - max_chars} 个字符]"
+        
+        return text
+    
+    def execute(self, url: str, max_chars: int = 5000) -> str:
+        logger.info(f"Web scraping: {url}")
+        
+        # 验证URL
+        if not self._is_valid_url(url):
+            error_msg = f"无效的URL: {url}。请确保URL以 http:// 或 https:// 开头。"
+            logger.error(error_msg)
+            return error_msg
+        
+        try:
+            # 获取网页内容
+            response = self.session.get(
+                url,
+                timeout=self.TIMEOUT,
+                allow_redirects=True
+            )
+            response.raise_for_status()
+            
+            # 设置正确的编码
+            if response.encoding is None:
+                response.encoding = 'utf-8'
+            
+            # 提取文本内容
+            text_content = self._extract_text_content(response.text, max_chars)
+            
+            if not text_content or len(text_content.strip()) == 0:
+                return f"无法从 {url} 提取内容。页面可能为空或被加密。"
+            
+            logger.success(f"Web scraping completed for {url}")
+            return text_content
+            
+        except requests.exceptions.Timeout:
+            error_msg = f"网页获取超时 (超过 {self.TIMEOUT} 秒): {url}"
+            logger.error(error_msg)
+            return error_msg
+        except requests.exceptions.ConnectionError:
+            error_msg = f"无法连接到服务器: {url}"
+            logger.error(error_msg)
+            return error_msg
+        except requests.exceptions.HTTPError as e:
+            error_msg = f"HTTP错误 ({response.status_code}): {url}"
+            logger.error(error_msg)
+            return error_msg
+        except Exception as e:
+            logger.error(f"Web scraping failed: {e}")
+            return f"网页爬虫失败: {str(e)}"
 
 
 class WeatherQueryTool(ToolBase):
@@ -679,6 +822,7 @@ class ToolsManager:
         # 注册所有工具
         self._register_tool(GoogleSearchTool())
         self._register_tool(TavilySearchTool())
+        self._register_tool(WebScraperTool())
         self._register_tool(WeatherQueryTool())
         self._register_tool(TimeQueryTool())
         self._register_tool(BasicCalculatorTool())
