@@ -7,6 +7,7 @@ from loguru import logger
 
 # 禁用 tokenizers 并行化以避免 vLLM 多进程中的死锁警告
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
+os.environ["VLLM_WORKER_MULTIPROC_METHOD"] = "spawn"
 
 class BaseLLM:
     def __init__(self, path: str = ""):
