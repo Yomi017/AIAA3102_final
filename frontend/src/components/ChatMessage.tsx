@@ -125,7 +125,14 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
       )}>
         <div className="prose prose-sm max-w-none dark:prose-invert break-words leading-relaxed">
           {isUser ? (
-            <p className="whitespace-pre-wrap m-0">{contentStr}</p>
+            <ReactMarkdown 
+              components={{
+                p: ({node, ...props}) => <p className="whitespace-pre-wrap m-0" {...props} />,
+                img: ({node, ...props}) => <img className="max-w-full rounded-lg my-2" {...props} />
+              }}
+            >
+              {contentStr}
+            </ReactMarkdown>
           ) : (
             <>
               {thinking && (

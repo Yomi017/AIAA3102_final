@@ -869,22 +869,33 @@ class ToolsManager:
         
         try:
             import signal
+            import threading
             
-            def timeout_handler(signum, frame):
-                raise TimeoutError(f"工具执行超时 (限制时间: {timeout}秒)")
+            # 检查是否在主线程
+            is_main_thread = threading.current_thread() is threading.main_thread()
             
-            # 设置信号处理器
-            old_handler = signal.signal(signal.SIGALRM, timeout_handler)
-            signal.alarm(timeout)
-            
-            try:
+            if is_main_thread:
+                def timeout_handler(signum, frame):
+                    raise TimeoutError(f"工具执行超时 (限制时间: {timeout}秒)")
+                
+                # 设置信号处理器
+                old_handler = signal.signal(signal.SIGALRM, timeout_handler)
+                signal.alarm(timeout)
+                
+                try:
+                    result = tool.execute(**kwargs)
+                    signal.alarm(0)  # 取消闹钟
+                    logger.info(f"Tool '{tool_name}' executed successfully (timeout: {timeout}s)")
+                    return result
+                finally:
+                    signal.alarm(0)  # 确保取消闹钟
+                    signal.signal(signal.SIGALRM, old_handler)  # 恢复原处理器
+            else:
+                # 非主线程无法使用 signal，直接执行
+                # 大多数网络工具内部已有超时机制
+                logger.info(f"Running tool '{tool_name}' in background thread (signal timeout disabled)")
                 result = tool.execute(**kwargs)
-                signal.alarm(0)  # 取消闹钟
-                logger.info(f"Tool '{tool_name}' executed successfully (timeout: {timeout}s)")
                 return result
-            finally:
-                signal.alarm(0)  # 确保取消闹钟
-                signal.signal(signal.SIGALRM, old_handler)  # 恢复原处理器
                 
         except TimeoutError as e:
             logger.error(f"Tool '{tool_name}' execution timeout: {e}")
