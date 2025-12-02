@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException, UploadFile, File, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, FileResponse, StreamingResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel
 from typing import List, Optional, Dict, Any
@@ -37,6 +38,9 @@ app.add_middleware(
 UPLOAD_DIR = Path("uploads")
 UPLOAD_DIR.mkdir(exist_ok=True)
 HISTORY_FILE = Path("chat_history.json")
+
+# 挂载静态文件目录
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
 # 全局资源（延迟初始化）
 llm: Optional[Qwen3VL] = None
@@ -117,8 +121,35 @@ def process_agent_interaction(message: str, session_id: str, history: List[Dict]
     if not agent:
         raise HTTPException(status_code=503, detail="Agent not initialized")
     
+    # 处理图片路径：将前端传来的 filename (image code) 转换为绝对路径
+    # 并进行安全检查，防止目录遍历攻击
+    valid_images = []
+    if images:
+        for img_code in images:
+            # 简单的安全检查：不允许包含路径分隔符
+            if "/" in img_code or "\\" in img_code or ".." in img_code:
+                logger.warning(f"Invalid image code detected: {img_code}")
+                continue
+            
+            # 构建绝对路径
+            img_path = UPLOAD_DIR / img_code
+            
+            # 再次检查路径是否在 upload 目录下 (resolve() 处理符号链接等)
+            try:
+                if not img_path.resolve().is_relative_to(UPLOAD_DIR.resolve()):
+                    logger.warning(f"Path traversal attempt detected: {img_code}")
+                    continue
+                
+                if img_path.exists():
+                    valid_images.append(str(img_path.absolute()))
+                else:
+                    logger.warning(f"Image not found: {img_code}")
+            except Exception as e:
+                logger.error(f"Error processing image path {img_code}: {e}")
+                continue
+                
     # 调用 Agent
-    response, new_history = agent.text(message, history=history, images=images)
+    response, new_history = agent.text(message, history=history, images=valid_images)
     
     # 保存消息到会话
     if session_id in sessions:
@@ -181,6 +212,35 @@ def get_timestamp() -> str:
     """获取当前时间戳"""
     return datetime.now().isoformat()
 
+def format_messages(messages: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """格式化消息，将绝对路径转换为 URL"""
+    formatted = []
+    for msg in messages:
+        new_msg = msg.copy()
+        content = msg.get("content")
+        if isinstance(content, list):
+            new_content = []
+            for item in content:
+                if isinstance(item, dict) and item.get("type") == "image":
+                    img_path = item.get("image", "")
+                    try:
+                        p = Path(img_path)
+                        # 检查是否在 uploads 目录下
+                        if p.is_absolute() and p.resolve().is_relative_to(UPLOAD_DIR.resolve()):
+                            rel_path = p.relative_to(UPLOAD_DIR.resolve())
+                            item_copy = item.copy()
+                            item_copy["image"] = f"/uploads/{rel_path}"
+                            new_content.append(item_copy)
+                        else:
+                            new_content.append(item)
+                    except Exception:
+                        new_content.append(item)
+                else:
+                    new_content.append(item)
+            new_msg["content"] = new_content
+        formatted.append(new_msg)
+    return formatted
+
 def load_history():
     """从文件加载历史记录"""
     global sessions
@@ -224,7 +284,16 @@ def format_session(session_id: str) -> Session:
     preview = ""
     if messages:
         last_msg = messages[-1]
-        preview = last_msg.get("content", "")[:100]
+        content = last_msg.get("content", "")
+        if isinstance(content, str):
+            preview = content[:100]
+        elif isinstance(content, list):
+            # 提取文本内容作为预览
+            text_parts = []
+            for item in content:
+                if isinstance(item, dict) and item.get("type") == "text":
+                    text_parts.append(item.get("text", ""))
+            preview = " ".join(text_parts)[:100]
     
     return {
         "id": session_id,
@@ -276,7 +345,7 @@ async def chat(request: ChatRequest):
             data={
                 "response": response,
                 "session_id": session_id,
-                "history": new_history
+                "history": format_messages(new_history)
             },
             timestamp=get_timestamp()
         )
@@ -473,7 +542,7 @@ async def get_session(session_id: str):
                 "id": session_id,
                 "title": session["title"],
                 "created_at": session["created_at"],
-                "messages": session.get("messages", [])
+                "messages": format_messages(session.get("messages", []))
             },
             "timestamp": get_timestamp()
         }
@@ -618,9 +687,10 @@ async def upload_image(file: UploadFile = File(...)):
             "message": "success",
             "data": {
                 "url": f"/uploads/{filename}",
-                "path": str(filepath),
+                # "path": str(filepath), # 移除绝对路径，防止泄露
                 "size": len(content),
-                "filename": filename
+                "filename": filename, # 前端使用这个作为 image code
+                "id": filename 
             },
             "timestamp": get_timestamp()
         }

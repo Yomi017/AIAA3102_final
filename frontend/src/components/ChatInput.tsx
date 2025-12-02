@@ -8,13 +8,16 @@ interface ChatInputProps {
 
 export const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, disabled }) => {
   const [input, setInput] = useState('');
-  const [images, setImages] = useState<string[]>([]);
+  // Store objects with id (filename) and url (for preview)
+  const [images, setImages] = useState<{id: string, url: string}[]>([]);
   const [uploading, setUploading] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleSend = () => {
     if (!input.trim() && images.length === 0) return;
-    onSendMessage(input, images);
+    // Send only the IDs (filenames) to the backend
+    onSendMessage(input, images.map(img => img.id));
     setInput('');
     setImages([]);
   };
@@ -26,32 +29,79 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, disabled })
     }
   };
 
+  const uploadFile = async (file: File) => {
+    if (!file.type.startsWith('image/')) return;
+    setUploading(true);
+    try {
+      const res = await apiClient.uploadImage(file);
+      if (res.code === 200) {
+        setImages(prev => [...prev, { id: res.data.filename, url: res.data.url }]);
+      }
+    } catch (error) {
+      console.error('Upload failed', error);
+      alert('Upload failed');
+    } finally {
+      setUploading(false);
+    }
+  };
+
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      setUploading(true);
-      try {
-        const file = e.target.files[0];
-        const res = await apiClient.uploadImage(file);
-        if (res.code === 200) {
-          setImages([...images, res.data.url]);
-        }
-      } catch (error) {
-        console.error('Upload failed', error);
-        alert('Upload failed');
-      } finally {
-        setUploading(false);
-        if (fileInputRef.current) fileInputRef.current.value = '';
+      await uploadFile(e.target.files[0]);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    if (e.currentTarget.contains(e.relatedTarget as Node)) return;
+    setIsDragging(false);
+  };
+
+  const handleDrop = async (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+
+    // Handle Files
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      const files = Array.from(e.dataTransfer.files);
+      for (const file of files) {
+        await uploadFile(file);
       }
+    }
+
+    // Handle Text
+    const text = e.dataTransfer.getData('text');
+    if (text) {
+      setInput(prev => prev + (prev ? '\n' : '') + text);
     }
   };
 
   return (
-    <div className="relative">
+    <div 
+      className={`relative transition-all duration-200 ${isDragging ? 'scale-[1.02]' : ''}`}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
+    >
+      {isDragging && (
+        <div className="absolute inset-0 bg-blue-50/90 z-20 rounded-xl flex items-center justify-center border-2 border-dashed border-blue-400 backdrop-blur-sm">
+          <div className="text-blue-600 font-medium flex flex-col items-center animate-bounce">
+            <svg className="w-10 h-10 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+            <span className="text-lg">Drop text or images here</span>
+          </div>
+        </div>
+      )}
       {images.length > 0 && (
         <div className="flex gap-3 mb-3 overflow-x-auto p-2 bg-gray-50 rounded-lg border border-gray-100">
           {images.map((img, idx) => (
             <div key={idx} className="relative w-20 h-20 flex-shrink-0 group">
-              <img src={img} alt="uploaded" className="w-full h-full object-cover rounded-lg shadow-sm border border-gray-200" />
+              <img src={img.url} alt="uploaded" className="w-full h-full object-cover rounded-lg shadow-sm border border-gray-200" />
               <button
                 onClick={() => setImages(images.filter((_, i) => i !== idx))}
                 className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
