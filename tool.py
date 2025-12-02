@@ -13,6 +13,9 @@ from rag.rag_engine import RAGEngine
 class ToolBase(ABC):
     """工具基类"""
     
+    # 工具执行默认超时时间（秒），子类可以覆盖
+    TIMEOUT = 30
+    
     @property
     @abstractmethod
     def name_for_human(self) -> str:
@@ -50,10 +53,16 @@ class ToolBase(ABC):
             'description_for_model': self.description_for_model,
             'parameters': self.parameters
         }
+    
+    def get_timeout(self) -> int:
+        """获取工具执行超时时间（秒）"""
+        return self.TIMEOUT
 
 
 class GoogleSearchTool(ToolBase):
     """Google搜索工具"""
+    
+    TIMEOUT = 15  # Google搜索超时15秒
     
     def __init__(self, credentials_path: str = None):
         self.credentials_path = credentials_path or os.getenv("GOOGLE_SEARCH_CREDENTIALS", "jsons/goole_search.json")
@@ -130,6 +139,8 @@ class GoogleSearchTool(ToolBase):
 class WeatherQueryTool(ToolBase):
     """天气查询工具"""
     
+    TIMEOUT = 10  # 天气查询超时10秒
+    
     @property
     def name_for_human(self) -> str:
         return '天气查询'
@@ -184,6 +195,8 @@ class WeatherQueryTool(ToolBase):
 
 class TimeQueryTool(ToolBase):
     """时间查询工具"""
+    
+    TIMEOUT = 5  # 时间查询超时5秒
     
     @property
     def name_for_human(self) -> str:
@@ -601,10 +614,30 @@ class ToolsManager:
             return f"错误: 未找到工具 '{tool_name}'"
         
         tool = self._tools[tool_name]
+        timeout = tool.get_timeout()
+        
         try:
-            result = tool.execute(**kwargs)
-            logger.info(f"Tool '{tool_name}' executed successfully")
-            return result
+            import signal
+            
+            def timeout_handler(signum, frame):
+                raise TimeoutError(f"工具执行超时 (限制时间: {timeout}秒)")
+            
+            # 设置信号处理器
+            old_handler = signal.signal(signal.SIGALRM, timeout_handler)
+            signal.alarm(timeout)
+            
+            try:
+                result = tool.execute(**kwargs)
+                signal.alarm(0)  # 取消闹钟
+                logger.info(f"Tool '{tool_name}' executed successfully (timeout: {timeout}s)")
+                return result
+            finally:
+                signal.alarm(0)  # 确保取消闹钟
+                signal.signal(signal.SIGALRM, old_handler)  # 恢复原处理器
+                
+        except TimeoutError as e:
+            logger.error(f"Tool '{tool_name}' execution timeout: {e}")
+            return f"工具 '{tool_name}' 执行超时: {str(e)}"
         except TypeError as e:
             logger.error(f"Tool '{tool_name}' parameter error: {e}")
             return f"工具 '{tool_name}' 参数错误: {str(e)}"
