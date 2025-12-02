@@ -9,6 +9,14 @@ from langchain_google_community import GoogleSearchAPIWrapper
 from calculator import Calculator
 from rag.rag_engine import RAGEngine
 
+# 尝试导入 Tavily
+try:
+    from tavily import TavilyClient
+    HAS_TAVILY = True
+except ImportError:
+    HAS_TAVILY = False
+    logger.warning("Tavily not installed. Install with: pip install tavily-python")
+
 
 class ToolBase(ABC):
     """工具基类"""
@@ -134,6 +142,104 @@ class GoogleSearchTool(ToolBase):
         except Exception as e:
             logger.error(f"Google search failed: {e}")
             return f"Google 搜索失败: {str(e)}"
+
+
+class TavilySearchTool(ToolBase):
+    """Tavily 搜索工具 - 更高效的网络搜索"""
+    
+    TIMEOUT = 15  # Tavily搜索超时15秒
+    
+    def __init__(self, api_key: str = None):
+        self.api_key = api_key or os.getenv("TAVILY_API_KEY", "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")
+        self.client = None
+        if HAS_TAVILY and self.api_key:
+            try:
+                self.client = TavilyClient(api_key=self.api_key)
+                logger.info("Tavily client initialized successfully")
+            except Exception as e:
+                logger.error(f"Failed to initialize Tavily client: {e}")
+    
+    @property
+    def name_for_human(self) -> str:
+        return 'Tavily Search'
+    
+    @property
+    def name_for_model(self) -> str:
+        return 'tavily_search'
+    
+    @property
+    def description_for_model(self) -> str:
+        return 'A more efficient web search engine powered by Tavily API. Use this for real-time information, news, current events, and web content search. Returns high-quality, relevant results.'
+    
+    @property
+    def parameters(self) -> List[Dict[str, Any]]:
+        return [
+            {
+                'name': 'search_query',
+                'description': 'The search query to look up on the web using Tavily Search.',
+                'required': True,
+                'schema': {'type': 'string'},
+            },
+            {
+                'name': 'topic',
+                'description': '搜索主题，可选值: "general"(通用), "news"(新闻)。默认为"general"',
+                'required': False,
+                'schema': {'type': 'string'},
+            }
+        ]
+    
+    def execute(self, search_query: str, topic: str = "general") -> str:
+        logger.info(f"Tavily search: {search_query} (topic: {topic})")
+        
+        if not HAS_TAVILY:
+            message = "Tavily 未安装: 请运行 pip install tavily-python 来安装"
+            logger.error(message)
+            return message
+        
+        if not self.client:
+            message = "Tavily API key 未配置: 请设置 TAVILY_API_KEY 环境变量"
+            logger.error(message)
+            return message
+        
+        try:
+            response = self.client.search(
+                query=search_query,
+                topic=topic,
+                include_answer=True,
+                max_results=5
+            )
+            
+            if not response or 'results' not in response:
+                logger.warning("Tavily search returned no results")
+                return "未找到相关搜索结果"
+            
+            # 格式化结果
+            results = response.get('results', [])
+            answer = response.get('answer', '')
+            
+            formatted_results = []
+            
+            if answer:
+                formatted_results.append(f"直接答案: {answer}\n")
+            
+            for idx, result in enumerate(results[:5], start=1):
+                title = result.get('title', '无标题')
+                content = result.get('content', '无内容')
+                url = result.get('url', '')
+                
+                formatted_results.append(
+                    f"{idx}. {title}\n"
+                    f"   {content[:200]}...\n"
+                    f"   来源: {url}"
+                )
+            
+            result_text = "\n\n".join(formatted_results)
+            logger.success("Tavily search completed successfully")
+            return result_text
+            
+        except Exception as e:
+            logger.error(f"Tavily search failed: {e}")
+            return f"Tavily 搜索失败: {str(e)}"
 
 
 class WeatherQueryTool(ToolBase):
@@ -572,6 +678,7 @@ class ToolsManager:
         
         # 注册所有工具
         self._register_tool(GoogleSearchTool())
+        self._register_tool(TavilySearchTool())
         self._register_tool(WeatherQueryTool())
         self._register_tool(TimeQueryTool())
         self._register_tool(BasicCalculatorTool())
@@ -650,39 +757,3 @@ class ToolsManager:
     def toolConfig(self) -> List[Dict[str, Any]]:
         """向后兼容: 返回工具配置列表"""
         return self.get_all_tools_info()
-
-
-# 保持向后兼容的旧类名
-class Tools(ToolsManager):
-    """向后兼容的别名,保留旧的方法调用接口"""
-    
-    def _tools(self) -> list:
-        """向后兼容的方法"""
-        return self.get_all_tools_info()
-    
-    # 为每个工具保留向后兼容的直接调用方法
-    def google_search(self, search_query: str) -> str:
-        return self.call_tool('google_search', search_query=search_query)
-    
-    def query_weather(self, city: str, province: str) -> str:
-        return self.call_tool('query_weather', city=city, province=province)
-    
-    def query_time(self) -> str:
-        return self.call_tool('query_time')
-    
-    def basic_calculator(self, expression: str) -> str:
-        return self.call_tool('basic_calculator', expression=expression)
-    
-    def trig_calculator(self, function: str, x: float, degree: bool = False) -> str:
-        return self.call_tool('trig_calculator', function=function, x=x, degree=degree)
-    
-    def matrix_calculator(self, operation: str, matrix_a: List[List[float]], 
-                         matrix_b: List[List[float]] = None, scalar: float = None) -> str:
-        return self.call_tool('matrix_calculator', operation=operation, matrix_a=matrix_a, 
-                            matrix_b=matrix_b, scalar=scalar)
-    
-    def integral_calculator(self, func_str: str, a: float, b: float) -> str:
-        return self.call_tool('integral_calculator', func_str=func_str, a=a, b=b)
-    
-    def knowledge_base_query(self, question: str, top_k: int = 3) -> str:
-        return self.call_tool('knowledge_base_query', question=question, top_k=top_k)
