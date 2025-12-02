@@ -2,7 +2,7 @@
 STATE_OF_MODEL: 0
 
 security:
-  enable_prompt_guard: true
+  enable_prompt_guard: False
   lock_on_violation: true
 
 google:

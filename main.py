@@ -197,10 +197,11 @@ def main():
     
     try:
         logger.info("正在加载模型...")
-        llm = Qwen3VL()
+        # llm = Qwen3VL()
+        llm = Qwen3VL(gpu_ids=[4, 5, 6, 7])
         logger.success("Model loaded successfully")
         
-        # llm = Qwen3(model_path, gpu_ids=[0, 5, 8])
+
     except Exception as e:
         logger.error(f"模型初始化失败: {e}")
         return
@@ -353,7 +354,7 @@ def test(benchmark_number: int = 1):
     try:
         logger.info("正在加载模型...")
         print("🔄 正在加载 Qwen3-VL 模型...")
-        llm = Qwen3VL()
+        llm = Qwen3VL(gpu_ids=[4,5,6,7])
         logger.success("Model loaded successfully")
         print("✅ 模型加载成功\n")
     except Exception as e:
