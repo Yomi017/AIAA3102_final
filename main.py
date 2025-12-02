@@ -6,7 +6,7 @@ from datetime import datetime
 import yaml
 from loguru import logger
 
-from llm import Qwen3
+from llm import Qwen3, Qwen3VL
 from agent import Agent
 from log_config import setup_logger
 
@@ -114,11 +114,11 @@ def main():
                     exc,
                 )
 
-    model_path = "Qwen/Qwen3-8B"
+    # model_path = "Qwen/Qwen3-8B"
     
     try:
         logger.info("正在加载模型...")
-        llm = Qwen3(model_path, gpu_ids=[0])
+        llm = Qwen3VL()
         logger.success("Model loaded successfully")
         
         # llm = Qwen3(model_path, gpu_ids=[0, 5, 8])
