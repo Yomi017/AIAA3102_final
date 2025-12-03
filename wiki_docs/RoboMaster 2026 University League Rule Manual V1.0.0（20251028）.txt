@@ -1,0 +1,3574 @@
+Intellectual Property Statement
+The RoboMaster Organizing Committee (RMOC) encourages and promotes technical innovation and open-source
+technology and respects the intellectual property rights of participating teams. All rights related to the intellectual
+property developed during the competition are owned by individual teams. The RMOC will not participate in the
+handling of intellectual property disputes within the team. The participating teams must properly handle all aspects
+of intellectual property rights among internal school members, company members, and other members of the team.
+While using the RoboMaster Referee System and other supporting materials provided by the RMOC, participating
+teams should respect the ownership of all intellectual property. Participating teams are also prohibited from
+engaging in any behavior that violates intellectual property rights, including but not limited to reverse engineering,
+replication, or translation.
+Any behavior that may infringe upon the intellectual property rights of the RMOC or other organizers in relation to
+the provided educational materials for the competition will be investigated and the infringer will be held legally
+liable in strict accordance with the law.
+For suggestions regarding open-source materials, please refer to: https://bbs.robomaster.com/article/4820?source=1.
+
+Using this Manual
+The RoboMaster competition is a robotics event aimed at cultivating youth engineers. Documents related to the
+competition may contain sensitive terms, names, operations, and technical content. These do not reflect any existing
+technologies or actions in reality, nor do they intend to involve any specific country, organization, or individual.
+This manual is intended solely to explain the rules of the RoboMaster competition and must not be used for any
+other purposes. It should not be interpreted as being associated with any real events or entities.
+
+Legend for Battlefield Drawings
+
+Buff point for both sides
+
+One side penalty zone
+
+2
+
+Buff point for one side
+
+The plane on which the battlefield
+is located is its lowest plane
+
+© 2025 DJI All Rights Reserved.
+
+Penalty zone for both sides
+
+Dimensions are for reference only
+
+Release Notes
+Date
+
+Version
+
+Revisions
+
+October 21, 2025
+
+V1.0.0
+
+First release
+
+© 2025 DJI All Rights Reserved.
+
+3
+
+Table of Contents
+Intellectual Property Statement ................................................................................................................... 2
+Using this Manual ..................................................................................................................................... 2
+Legend for Battlefield Drawings ......................................................................................................... 2
+Release Notes ........................................................................................................................................... 3
+1.
+
+Foreword.......................................................................................................................................... 8
+1.1
+
+About the Competition ................................................................................................................ 8
+
+1.2
+
+Main Changes to New Season ...................................................................................................... 9
+
+1.3
+
+About the Competition Rule Documents ....................................................................................... 9
+
+1.4
+
+Q&A........................................................................................................................................ 10
+
+2.
+
+Key Terms...................................................................................................................................... 11
+
+3.
+
+3V3 Match...................................................................................................................................... 15
+3.1
+
+3.2
+
+3.3
+
+4.
+
+Robot and Operator................................................................................................................... 15
+3.1.1
+
+Hero ................................................................................................................................. 16
+
+3.1.2
+
+Infantry............................................................................................................................. 17
+
+3.1.3
+
+Sentry ............................................................................................................................... 19
+
+Competition Area ..................................................................................................................... 20
+3.2.1
+
+Battlefield Overview .......................................................................................................... 20
+
+3.2.2
+
+Starting Zone and Resupply Zone ....................................................................................... 22
+
+3.2.3
+
+Elevated Zone ................................................................................................................... 24
+
+3.2.4
+
+Control Zone ..................................................................................................................... 24
+
+3.2.5
+
+Miscellaneous ................................................................................................................... 26
+
+Competition Mechanism ........................................................................................................... 28
+3.3.1
+
+HP Loss and Penalty for Exceeding Limit ........................................................................... 28
+
+3.3.2
+
+HP Recovery and Respawn Mechanism............................................................................... 34
+
+3.3.3
+
+Economy System ............................................................................................................... 35
+
+3.3.4
+
+Control Zone and Victory Point Mechanism ........................................................................ 36
+
+3.3.5
+
+Match Format and Winning Criteria .................................................................................... 37
+
+Infantry Match ............................................................................................................................... 38
+4.1
+
+Robot and Operator................................................................................................................... 38
+
+4.2
+
+Infantry .................................................................................................................................... 39
+
+4.3
+
+Competition Area ..................................................................................................................... 40
+
+4.4
+
+Competition Mechanism ........................................................................................................... 44
+4.4.1
+
+4.5
+5.
+
+4
+
+HP Loss and Penalty for Exceeding Limit ........................................................................... 44
+
+Match Format and Winning Criteria ........................................................................................... 44
+Engineer Challenge ........................................................................................................................ 45
+
+5.1
+
+Robot and Operator................................................................................................................... 45
+
+5.2
+
+Competition Area ..................................................................................................................... 46
+© 2025 DJI All Rights Reserved.
+
+5.3
+6.
+
+5.2.1
+
+Starting Zone .................................................................................................................... 46
+
+5.2.2
+
+Resource Zone .................................................................................................................. 46
+
+5.2.3
+
+Assembly Zone ................................................................................................................. 47
+
+Mission .................................................................................................................................... 50
+Competition Process ....................................................................................................................... 52
+
+6.1
+
+Pre-Match Inspection ................................................................................................................ 53
+
+6.2
+
+Staging .................................................................................................................................... 54
+
+6.3
+
+Setup Period ............................................................................................................................. 54
+6.3.1
+
+Official Technical Timeout ................................................................................................. 55
+
+6.3.2
+
+Team Technical Timeout .................................................................................................... 56
+
+6.4
+
+15-Second Referee System Initialization Period .......................................................................... 57
+
+6.5
+
+5-Second Countdown ................................................................................................................ 57
+
+6.6
+
+Competition Stage .................................................................................................................... 57
+
+6.7
+
+End of Round ........................................................................................................................... 58
+
+6.8
+
+Result Confirmation .................................................................................................................. 58
+
+6.9
+
+Exit the Field ............................................................................................................................ 58
+
+7.
+
+Violations and Penalties ................................................................................................................. 59
+7.1
+
+7.2
+
+7.3
+
+Penalty System ......................................................................................................................... 59
+7.1.1
+
+Forms of Penalties ............................................................................................................. 59
+
+7.1.2
+
+Types of Penalties .............................................................................................................. 60
+
+Penalty Rules ........................................................................................................................... 62
+7.2.1
+
+Personnel .......................................................................................................................... 62
+
+7.2.2
+
+Robot ............................................................................................................................... 66
+
+7.2.3
+
+Interaction......................................................................................................................... 67
+
+Serious Violations..................................................................................................................... 70
+
+8.
+
+Irregularities .................................................................................................................................. 71
+
+9.
+
+Appeal ............................................................................................................................................ 73
+9.1
+
+Appeal Process ......................................................................................................................... 74
+
+9.2
+
+Appeal Materials ...................................................................................................................... 75
+
+9.3
+
+Appeal Decision ....................................................................................................................... 75
+
+© 2025 DJI All Rights Reserved.
+
+5
+
+Tables Directory
+Table 2-1 Overview of Key Terms .................................................................................................................11
+Table 3-1 Robot and Operator Lineup for 3V3 Match .................................................................................... 15
+Table 3-2 Key Features of Hero .................................................................................................................... 16
+Table 3-3 Key Features of Infantry ............................................................................................................... 17
+Table 3-4 Key Features of Sentry Robots ...................................................................................................... 19
+Table 3-5 Projectile Parameters and Scenarios of Use .................................................................................... 26
+Table 3-6 Speed Ranges of Different Types of Projectiles for Effective Detection by Armor Modules................ 28
+Table 3-7 Attack Damage and HP Loss Mechanism ....................................................................................... 29
+Table 3-8 Penalty Mechanism for Exceeding the Initial Launching Speed Limit .............................................. 29
+Table 3-9 Penalty Mechanism for Robots in Abnormal Disconnection Status ................................................... 32
+Table 3-10 Passive Gold Coin Gains ............................................................................................................. 35
+Table 3-11 Exchange Rules .......................................................................................................................... 36
+Table 4-1 Robot and Operator Lineup for Infantry Match ............................................................................... 38
+Table 4-2 Key Features of Infantry ............................................................................................................... 39
+Table 5-1 Robot and Operator Lineup for Engineer Challenge ........................................................................ 45
+Table 5-2 Pose Value Ranges and Assembly Requirements for Different Tech Cores ........................................ 50
+Table 6-1 Malfunctions ................................................................................................................................ 56
+Table 7-1 Forms of Penalties ........................................................................................................................ 59
+Table 7-2 Types of Penalties......................................................................................................................... 60
+Table 7-3 Collision Violation Penalty Standards ............................................................................................ 68
+Table 7-4 Types of Serious Violations ........................................................................................................... 70
+
+6
+
+© 2025 DJI All Rights Reserved.
+
+Figures Directory
+Figure 1-1 Talent Development Philosophy ..................................................................................................... 8
+Figure 3-1 Axonometric View of 3V3 Match Battlefield ................................................................................ 21
+Figure 3-2 3V3 Match Battlefield Modules ................................................................................................... 21
+Figure 3-3 3V3 Match Battlefield Dimensions............................................................................................... 22
+Figure 3-4 Starting Zone and Resupply Zone ................................................................................................ 22
+Figure 3-5 Starting Zone and Resupply Penalty Zone..................................................................................... 23
+Figure 3-6 Elevated Zone ............................................................................................................................ 24
+Figure 3-7 Control Zone .............................................................................................................................. 25
+Figure 3-8 Control Zone Dimensions ............................................................................................................ 25
+Figure 3-9 Layout of RFID Interaction Cards ................................................................................................ 26
+Figure 3-10 Penalty Mechanism for Exceeding the Barrel Heat Limit ............................................................. 30
+Figure 3-11 Barrel Heat Cooling Mechanism ................................................................................................ 30
+Figure 3-12 Robot Chassis Power Detection and Penalty for Exceeding Limit ................................................. 31
+Figure 3-13 HP Loss Mechanism for Armor Module and Supercapacitor Management Module Disconnection .. 33
+Figure 3-14 Power-off Mechanism for Speed Monitor Module Disconnection ................................................. 34
+Figure 4-1 Axonometric View of Infantry Match Battlefield ........................................................................... 40
+Figure 4-2 Top View of Infantry Match Battlefield ........................................................................................ 41
+Figure 4-3 Infantry Match Battlefield Dimensions ......................................................................................... 42
+Figure 4-4 Bunker ....................................................................................................................................... 43
+Figure 5-1 Starting Zone .............................................................................................................................. 46
+Figure 5-2 Energy Unit ................................................................................................................................ 47
+Figure 5-3 Energy Units - Interaction Areas within the Tech Core ................................................................... 48
+Figure 5-4 Interaction Areas and Typical Working Conditions ........................................................................ 49
+Figure 5-5 Spherical Coordinate System ....................................................................................................... 50
+Figure 6-1 Process of a Single Match............................................................................................................ 52
+Figure 6-2 Pre-Match Inspection Flowchart .................................................................................................. 53
+Figure 7-1 Battlefield Penalty Zone .............................................................................................................. 69
+Figure 9-1 Appeal Process ........................................................................................................................... 74
+
+© 2025 DJI All Rights Reserved.
+
+7
+
+1. Foreword
+1.1 About the Competition
+RoboMaster University League (RMUL), under China University Robot Competition, is organized by local
+academic institutions and universities, and engages nearby universities. The aim is to promote robotic technology
+exchanges among regional universities, foster a strong academic atmosphere, and boost regional technology
+innovation.
+RMUL is dedicated to cultivate excellent youth engineers. Participating team members are encouraged to put what
+they have learned into practice and achieve continued growth during the process.
+
+Figure 1-1 Talent Development Philosophy
+The RMUL 2026 comprises three formats: 3V3 Match, Infantry Match, and Engineer Challenge.
+
+
+For 3V3 Match, both teams need to independently develop their own Hero, Infantry, and Sentry Robots, and
+conduct tactical combat on the Battlefield by controlling the robots to launch projectiles against the opponent’s
+robots. At the end of the match, the winner will be the team with overwhelming advantage.
+
+
+
+For Infantry Match, both teams need to independently develop their own Infantry, and engage in 1V1 battles
+on the Battlefield by controlling their robots to launch projectiles. The winner at the end of the Match will be
+the team with the higher Infantry remaining HP.
+
+
+
+For Engineer Challenge, Engineer needs to complete Energy Unit assembly tasks. The teams will be scored
+and ranked based on their Engineer’s performance and time used for completing the energy unit assembly task.
+
+8
+
+© 2025 DJI All Rights Reserved.
+
+1.2 Main Changes to New Season
+The main changes for RMUL 2026 compared to RMUL 2025 are as follows:
+3V3 Match
+
+
+Adjusted the Battlefield, removing bunkers and visual markers and adding Elevated Ground
+
+
+
+Adjusted Attack Damage
+
+
+
+Removed the Projectile Re-loader
+
+
+
+Adjusted the Performance System and removed the Level-Up Mechanism
+
+
+
+Adjusted the Respawn Mechanism
+
+Infantry Match
+
+
+Adjusted the Performance System
+
+Engineer Challenge
+
+
+Adjusted challenge tasks and changed Ore exchange tasks to Energy Unit assembly tasks
+
+Penalties for Violations
+
+
+Adjusted the maximum number of Yellow Cards for Robots
+
+1.3 About the Competition Rule Documents
+The competition rule documents include the Rule Manual, Participant Manual, Robot Specification Manual, Referee
+System Serial Protocol, and supplements to these documents. The competition rule documents are applicable to all
+participating teams, referees, competition staff, and other partners.
+The RMOC reserves the right to update the competition rule documents outside of the competition period as
+necessary.
+The RMOC reserves the right of final interpretation over the competition rule documents. During the event, only
+the Chief Referee can answer queries on the competition rule documents on behalf of the RMOC. Any questions
+related to the competition rule documents may only be directed to the Chief Referee for consultation.
+For more reference materials on RMU, please refer to the “Rules/Resource Hub,” a site built and
+maintained by the RMOC that provides all the official materials required for participation, enabling teams
+to access information more efficiently. Materials on this site include:
+
+
+Rulebooks: rule manual, robot specification manual, participant manual, Referee System serial
+
+© 2025 DJI All Rights Reserved.
+
+9
+
+protocol
+
+
+Event Products: Referee System (including on-board modules and the RoboMaster Champion), robot
+kits & accessories, RM Assistant product details, downloads, purchase & after-sales policies
+
+
+
+Technical Assessment: assessment criteria, instructions for each stage
+
+
+
+Event Promotion Kit: promotional material package
+
+
+
+Event Sponsorship Guide: sponsorship guidelines
+
+
+
+Learning Labs: participation guide, course salon, open-source materials
+
+1.4 Q&A
+Any participating team or other relevant personnel who have questions about the competition rule documents may
+submit them through our official channel. The RMOC will reply to them through the following Q&A process.
+1.
+
+To submit questions about the competition rule documents, please complete a questionnaire available at:
+https://qingflow.com/f/c5rf6rkkbs02
+
+2.
+
+The RMOC will respond at:
+https://qingflow.com/appView/c5rf6rkkbs02/shareView/c5rf6slgbs02
+
+Notes about timeliness:
+
+
+Questions submitted during the Competition Period will be answered by the RMOC within one calendar day.
+
+
+
+Questions submitted during the Preparation Period will be answered by the RMOC within five business days.
+
+
+Competition Period: From the check-in day of the event until the end of the final competition day.
+
+
+
+Preparation Period: Any time outside of the competition period.
+
+Note: The Preparation Period and Competition Period are calculated separately for different events and
+stages.
+The Rules Q&A is considered as authoritative as the competition rule documents. In the case of any discrepancy
+between the Q&A and the competition rule documents, the latest document shall prevail. The Q&A for a given
+season applies only to that season.
+
+10
+
+© 2025 DJI All Rights Reserved.
+
+2. Key Terms
+In this chapter, we will provide a list of commonly used terms in the competition rules. For details on each term,
+please refer to the relevant chapter using associated keywords.
+Table 2-1 Overview of Key Terms
+Term
+
+Definition
+Robot
+
+
+Alive: The Referee System Main Control Module is normally connected to the
+Referee System server and the robot’s HP is not zero.
+
+
+
+Defeated: The robot’s HP drops to zero. (Reasons include: Armor Module suffering
+damage from attacks or collision, Referee System Onboard Module disconnection,
+and robot ejection.)
+
+A Robot’s Main
+States
+
+
+
+Ejected: A robot is issued a Red Card.
+
+
+
+Temporarily Activated: A robot’s chassis and gimbal is powered on
+temporarily after it has been defeated or ejected. The Launching Mechanism
+of the robot is powered off in this period.
+
+
+
+Abnormal Disconnection: The Referee System Main Control Module is
+disconnected from the Referee System server during the competition, due to a power
+outage on the robot or other reasons.
+
+Note: After a robot is defeated, the Referee System will cut off the power supply to the
+robot (except for the Mini PC).
+It is an electronic penalty system integrating computation, communication, and control
+features. It includes the onboard modules, as well as the RoboMaster Champion (Server,
+Referee System
+
+Referee’s Client, Player’s Client) installed on the PC. It can monitor robots’ power,
+projectile launches, and damage, and automatically determine the outcome according to
+competition rules.
+
+Inter-robot
+Communication
+Robot Chassis
+
+It is an interactive method for robots to communicate with one another through the Referee
+System serial protocol.
+It is a mechanism that carries the robot propulsion system and its accessories; a mechanism
+that supports the body of a robot.
+
+© 2025 DJI All Rights Reserved.
+
+11
+
+Term
+
+Definition
+The power of the system that enables robots to move horizontally and rotate; for details,
+
+Chassis Power
+
+please refer to the definition of Chassis Power in the “Referee System Mounting
+Specifications” section of the RoboMaster 2026 University Series Robot Specification
+Manual.
+
+Launching
+
+It is a mechanism capable of launching a projectile from a robot on a fixed trajectory and at
+
+Mechanism
+
+a certain initial speed.
+
+Locking of the
+Launching
+
+A locked Launching Mechanism is powered off.
+
+Mechanism
+Unlocking of the
+Launching
+Mechanism
+
+If the Launching Mechanism is unlocked, it will be powered on or off depending on its
+Projectile Allowance.
+A robot’s action of releasing projectiles or Darts. “Launch” mentioned in the following
+
+Launch
+
+“Competition Mechanism” section is considered valid when a launch action is detected by
+the Referee System.
+
+Initial Launching
+Speed
+Barrel Heat
+Projectile Allowance
+
+completed its acceleration.
+Barrel heat accumulates as a robot launches projectiles. It is used to limit continuous
+projectile firing.
+The quantity of projectiles each robot is allowed to launch currently.
+
+Initial HP
+
+The HP value set by the Referee System for a robot at the start of the competition.
+
+Current HP
+
+A robot’s real-time HP.
+
+Maximum HP
+
+The maximum value to which a robot’s HP can be restored.
+
+Invincible
+
+A state in which a robot is immune to a projectile attack or impact.
+
+Attack
+
+A robot’s behaviour in launching projectiles.
+
+Destroy
+
+12
+
+The velocity detected by the relevant modules of the Referee System after a projectile has
+
+Where a robot attacks the Armor Module of the opponent’s robot until the latter’s HP drops
+to zero.
+
+© 2025 DJI All Rights Reserved.
+
+Term
+
+Definition
+It refers to a situation where an alive robot has reached a Buff Point, its RFID Interaction
+
+Occupy
+
+Module has detected the RFID Interaction Card in the area or has met other conditions, and
+it has obtained certain special effects.
+Mechanisms of robots are entangled with one another during the competition, i.e., one robot
+
+Entanglement
+
+remains connected to the other robot and is pulled with said robot whichever direction it
+moves.
+
+Collision
+
+An active act of collision by a robot during the competition.
+Battlefield
+
+Buff Point
+
+A zone that, once occupied by a robot during the competition, will generate a special effect.
+
+Penalty Zone
+
+An area into which a robot’s entry is forbidden.
+
+Battlefield
+Component
+
+Composite elements of the Battlefield.
+Personnel
+
+Arbitration
+
+A body consisting of the Chief Referee and other members of the RMOC, responsible for
+
+Commission
+
+handling appeals.
+
+Referee
+Chief Referee
+
+Head Referee
+
+Head Inspector
+
+Participants
+
+Participating Teams
+
+Personnel responsible for maintaining the order of the competition and enforcing its rules.
+The person with the final right of interpretation over the competition rule documents during
+the competition.
+The lead referee responsible for maintaining the order of the competition and enforcing its
+rules.
+The referee responsible for leading and assigning pre-match inspection tasks, with the final
+right of interpretation over the inspection standards.
+Individuals who have registered and been recorded in the registration system for the current
+competition season.
+The teams that have registered and been recorded in the registration system for the current
+competition season.
+
+© 2025 DJI All Rights Reserved.
+
+13
+
+Term
+
+Definition
+Regular Member, Team Advisor, and Supervisor who have registered for this Season and
+
+Pit Crew
+
+have been entered into the registration system, can enter the Staging Area and Competition
+Area.
+
+Operator
+Offending Team
+Offender
+
+The Pit Crew members responsible for controlling robots during the competition.
+A participating team that violates the competition rules.
+Participants that violate the competition rules.
+Competition Process
+
+Round
+Match
+Official Technical
+Timeout
+Team Technical
+Timeout
+Regular Battle
+Damage
+
+A complete competition that includes the Setup Period, the Referee System Initialization
+Period, a Five-Second Countdown Period, and the competition round.
+Depending on the Competition System, a match may contain several rounds.
+A Technical Timeout initiated by the Head Referee during the Setup Period or Referee
+System Initialization Period.
+A Technical Timeout requested by a Participating Team during the Setup Period.
+During a Setup Period between rounds or during a round of a match, a Referee System
+Onboard Module experiences a fault.
+Victory Determination
+The HP a robot loses when the robot is hit by projectiles.
+
+Attack Damage
+
+Note: HP Loss caused by the imposition of penalty for the violation of one side’s robot is
+included in the opponent’s Attack Damage.
+
+Non-attack Damage
+Total Remaining HP
+
+14
+
+HP lost as a result of collision on an Armor Module or Referee System Onboard Module
+disconnection.
+The total remaining HP of one’s alive robots at the end of each round.
+
+© 2025 DJI All Rights Reserved.
+
+3. 3V3 Match
+During a five-minute round, both teams control their robots to engage in tactical combat in the core competition
+area: the Battlefield. The team that gains greater control over the Battlefield can cause their opponent to lose Victory
+Points. The team that reduces the Opponent’s Victory Points to zero first wins.
+
+3.1 Robot and Operator
+RoboMaster requires robots to fight together as a team with good coordination and teamwork. For the robot
+specifications, please refer to the RoboMaster 2026 University Series Robot Building Specifications Manual.
+The lineup of Robots and Operators is as follows:
+Table 3-1 Robot and Operator Lineup for 3V3 Match
+Robot Type
+
+No.
+
+Quantity (set)
+
+Operator Lineup
+
+Hero
+
+1
+
+1
+
+1 Operator/Robot
+
+Infantry
+
+3
+
+1
+
+1 Operator/Robot
+
+Sentry
+
+7
+
+1
+
+0 Operator/Robot
+
+
+
+The minimum lineup for the first round of each match is two robots.
+
+
+
+An Operator must be a Regular Member of a Participating Team or a Team Advisor for the current
+season.
+
+
+
+After the end of each round, the Operator can be replaced by a Regular Member or Team Advisor
+among the Pit Crew members for the current match.
+
+© 2025 DJI All Rights Reserved.
+
+15
+
+3.1.1
+
+Hero
+
+Hero is the only robots that can launch 42 mm projectiles on the Battlefield.
+Table 3-2 Key Features of Hero
+Key Feature
+Initial Zone
+Operating Mode
+Inter-robot
+Communication
+Launching Mechanism
+
+Performance
+
+HP Loss and Penalty for
+Exceeding Limit
+
+Description
+Starting Zone
+No restrictions. Up to one remote controller and one custom controller.
+
+Allowed
+
+One Launching Mechanism (42 mm projectile)
+
+
+Initial HP/Maximum HP: 350
+
+
+
+Chassis Power Limit: 100 W
+
+
+
+Initial Launching Speed Limit: 12 m/s
+
+
+
+Barrel Heat Limit: 200
+
+
+
+Barrel Heat Cooling Rate: 24/second
+
+
+
+Exceeding the Initial Launching Speed Limit: applicable
+
+
+
+Exceeding Barrel Heat Limit and Cooling: applicable
+
+
+
+Exceeding Chassis Power Consumption Limit: applicable
+
+
+
+Attack Damage or Collision: applicable
+
+
+
+Referee System Onboard Module Disconnection: applicable
+
+
+
+Penalty Damage: applicable
+
+See details in “3.3.1 HP Loss and Penalty for Exceeding Limit”.
+
+HP Recovery and Respawn
+Mechanism
+
+Projectile Loading and
+Reloading
+
+16
+
+
+
+HP Recovery Method: Occupy the Resupply Zone for HP Recovery
+
+
+
+Respawn Method: Progressive Respawn
+
+See details in “3.3.2 HP Recovery and Respawn Mechanism”.
+During the Three-Minute Setup Period, 42 mm projectiles can be preloaded. The Initial
+Projectile Allowance is 0.
+
+© 2025 DJI All Rights Reserved.
+
+Key Feature
+
+Description
+
+
+Buff Point Occupation
+
+Buff Point in the Control Zone (see “3.3.4 Control Zone and Victory Point
+Mechanism” ）
+
+
+
+Buff Point in the Resupply Zone (see “3.3.2 HP Recovery and Respawn
+Mechanism”)
+
+3.1.2
+
+Infantry
+
+Infantry can launch 17 mm projectiles.
+Table 3-3 Key Features of Infantry
+Key Feature
+Initial Zone
+Operating Mode
+Inter-robot
+Communication
+Launching Mechanism
+Initial Launching Speed
+Limit (m/s)
+
+Description
+Starting Zone
+No restrictions. Up to one remote controller and one custom controller.
+Allowed
+One Launching Mechanism (17 mm projectile)
+25
+After the beginning of the Setup Period, the operator of the Infantry can choose a Chassis
+Type (HP-focused or Power-focused) and a Launching Mechanism Type (Burst-focused or
+Cooling-focused). Once the round has begun, the robots’ chassis and launching mechanism
+types, once selected, cannot be changed during the entire round. If the chassis or launching
+mechanism types are not selected, after the start of the round, the chassis type will be
+automatically set to “HP-focused”, and the launching mechanism type will be automatically
+
+Performance
+
+set to “Cooling-focused”.
+Chassis Type
+
+
+
+
+Power-focused:
+
+
+Initial HP/Maximum HP: 300
+
+
+
+Chassis Power Limit: 90 W
+
+HP-focused:
+
+© 2025 DJI All Rights Reserved.
+
+17
+
+Key Feature
+
+Description
+
+
+Initial HP/Maximum HP: 350
+
+
+
+Chassis Power Limit: 75 W
+
+Launching Mechanism Type
+
+
+
+
+HP Loss and Penalty for
+Exceeding Limit
+
+Burst-focused:
+
+
+Barrel Heat Limit: 230
+
+
+
+Barrel Heat Cooling Rate: 14/second
+
+Cooling-focused:
+
+
+Barrel Heat Limit: 88
+
+
+
+Barrel Heat Cooling Rate: 24/second
+
+
+
+Exceeding the Initial Launching Speed Limit: applicable
+
+
+
+Exceeding Barrel Heat Limit and Cooling: applicable
+
+
+
+Exceeding Chassis Power Consumption Limit: applicable
+
+
+
+Attack Damage or Collision: applicable
+
+
+
+Referee System Onboard Module Disconnection: applicable
+
+
+
+Penalty Damage: applicable
+
+See details in “3.3.1 HP Loss and Penalty for Exceeding Limit”.
+
+HP Recovery and Respawn
+Mechanism
+
+Projectile Loading and
+Reloading
+
+
+
+HP Recovery Method: Occupy the Resupply Zone for HP Recovery
+
+
+
+Respawn Method: Progressive Respawn
+
+See details in “3.3.2 HP Recovery and Respawn Mechanism”.
+During the Three-Minute Setup Period, 17 mm projectiles can be preloaded. The Initial
+Projectile Allowance is 0.
+
+
+Mechanism”）
+
+Buff Point Occupation
+
+
+18
+
+Buff Point in the Control Zone (see “3.3.4 Control Zone and Victory Point
+
+Buff Point in the Resupply Zone (see “3.3.2 HP Recovery and Respawn Mechanism”)
+
+© 2025 DJI All Rights Reserved.
+
+3.1.3
+
+Sentry
+
+Sentry must operate fully automatically and can launch 17 mm projectiles.
+Table 3-4 Key Features of Sentry Robots
+Key Feature
+Initial Zone
+Operating Mode
+Inter-robot
+Communication
+Launching Mechanism
+Initial Launching Speed
+Limit (m/s)
+
+Description
+Starting Zone
+Autonomous, up to one remote controller for commissioning
+Not allowed
+One Launching Mechanism (17 mm projectile)
+25
+
+
+
+Initial HP/Maximum HP: 400
+
+
+
+Chassis Power Limit: 100 W
+
+
+
+Barrel Heat Limit: 260
+
+
+
+Barrel Heat Cooling Rate: 30/second
+
+
+
+Exceeding the Initial Launching Speed Limit: applicable
+
+
+
+Exceeding Barrel Heat Limit and Cooling: applicable
+
+
+
+Exceeding Chassis Power Consumption Limit: applicable
+
+
+
+Attack Damage or Collision: applicable
+
+
+
+Referee System Onboard Module Disconnection: applicable
+
+
+
+Penalty Damage: applicable
+
+Performance
+
+HP Loss and Penalty for
+Exceeding Limit
+
+See details in “3.3.1 HP Loss and Penalty for Exceeding Limit”.
+
+HP Recovery and Respawn
+Mechanism
+
+Projectile Loading and
+Reloading
+
+
+
+HP Recovery Method: Occupy the Resupply Zone for HP Recovery
+
+
+
+Respawn Method: Progressive Respawn
+
+See details in “3.3.2 HP Recovery and Respawn Mechanism”.
+
+
+During the Three-Minute Setup Period, 17 mm projectiles can be preloaded.
+
+
+
+During the Five-Minute Round, the Initial Projectile Allowance is 750 and cannot be
+increased during the match.
+
+© 2025 DJI All Rights Reserved.
+
+19
+
+Key Feature
+
+Description
+
+
+Buff Point in the Control Zone (see “3.3.4 Control Zone and Victory Point
+Mechanism”）
+
+Buff Point Occupation
+
+
+Buff Point in the Resupply Zone (see “3.3.2 HP Recovery and Respawn Mechanism”)
+
+3.2 Competition Area
+3.2.1
+
+Battlefield Overview
+
+
+Unless otherwise specified, all dimensional tolerances described in this document are within ±10%,
+Battlefield structure angular tolerances are within ±3°, Battlefield Component angular tolerances
+are within ±1°, and dimensional errors for structures smaller than 100 mm are within ±5 mm. All
+dimensional parameters in Battlefield Instruction drawings are indicated in mm. To ensure the
+stability and safety of the battlefield, adjustments may be made to specific dimensions and
+workmanship during actual construction. For battlefield elements or dimensions not explicitly
+specified in the drawings, please refer to the actual battlefield.
+
+
+
+The Battlefield has a centrally symmetrical layout. All descriptions and illustrations of Battlefield
+modules in this text will be based on the Red Team, with the same applying to the Blue Team. The
+Battlefield has a complex environment that may feature non-uniform magnetic fields, air
+conditioner winds, and other environmental conditions that are not fully symmetrical.
+
+The core competition area of the 3V3 Match is called the Battlefield. The Battlefield is 12 m x 8 m (L x W) in size.
+The interior features a wooden structure with a 3 mm PVC flooring surface, and certain areas are reinforced with a
+metal protective layer. There are separate Resupply Zones and Control Zones for both the red and blue teams within
+the area.
+
+20
+
+© 2025 DJI All Rights Reserved.
+
+Figure 3-1 Axonometric View of 3V3 Match Battlefield
+
+[1]
+
+Resupply Zone
+
+[2]
+
+Elevated Zone
+
+[3]
+
+Control Zone
+
+Figure 3-2 3V3 Match Battlefield Modules
+
+© 2025 DJI All Rights Reserved.
+
+21
+
+Figure 3-3 3V3 Match Battlefield Dimensions
+
+3.2.2
+
+Starting Zone and Resupply Zone
+
+The Starting Zone is the where robots are placed before a match. The Starting Zone is also used as the Resupply
+Zone, an important area for projectile allowance exchange and robot HP recovery, and is overlaid with RFID
+Interaction Cards.
+
+Figure 3-4 Starting Zone and Resupply Zone
+One team’s Resupply Zone is considered the Resupply Penalty Zone for the Opponent’s robots.
+
+22
+
+© 2025 DJI All Rights Reserved.
+
+Figure 3-5 Starting Zone and Resupply Penalty Zone
+
+© 2025 DJI All Rights Reserved.
+
+23
+
+3.2.3
+
+Elevated Zone
+
+Figure 3-6 Elevated Zone
+
+3.2.4
+
+Control Zone
+
+The Control Zone is located at the center of the Battlefield and is overlaid with RFID Interaction Cards.
+
+24
+
+© 2025 DJI All Rights Reserved.
+
+[1]
+
+Control Zone
+
+Figure 3-7 Control Zone
+
+Figure 3-8 Control Zone Dimensions
+
+© 2025 DJI All Rights Reserved.
+
+25
+
+[1]
+
+Locations where RFID Interaction Cards are lodged
+Figure 3-9 Layout of RFID Interaction Cards
+
+
+
+There may be deadbands for the RFID Interaction Cards in the Control Zone and the Resupply
+Zone. The teams have to adjust on their own.
+
+
+
+An additional layer of PVC flooring surface will be installed above the existing PVC flooring
+surface in the Control Zone and Resupply Zone, specifically on top of the RFID Interaction Cards.
+
+3.2.5
+
+Miscellaneous
+
+3.2.5.1
+
+Projectiles
+
+Robots deal damage by firing projectiles to attack Armor Modules. The parameters and scenarios of use for
+projectiles in the competition are as follows:
+Table 3-5 Projectile Parameters and Scenarios of Use
+Type
+
+Appearance
+
+42 mm
+
+Similar to a
+
+projectile
+
+golf ball
+
+17 mm
+projectile
+
+3.2.5.2
+
+Sphere
+
+Color
+
+Dimensions
+
+Weight
+
+42.5 mm ±
+
+41 g ±
+
+0.5 mm
+
+1g
+
+Yellow
+
+16.8 mm ±
+
+3.2 g ±
+
+-green
+
+0.2 mm
+
+0.1 g
+
+White
+
+Shore
+Hardness
+90 A
+
+90 A
+
+Material
+Plastic
+(TPE)
+Plastic
+(TPU)
+
+Scenarios of
+Use
+3V3 Match
+3V3 Match
+and Infantry
+Match
+
+Operation Room
+
+The Operation Room is equipped with the required number of computers, and each computer comes with its own
+
+26
+
+© 2025 DJI All Rights Reserved.
+
+display, mouse, keyboard, RoboMaster Referee System Video Transmitter Module (Receiver) and its mounting
+bracket, three USB Type-A receptacle ports, one RS232 plug port, and other official equipment.
+
+© 2025 DJI All Rights Reserved.
+
+27
+
+3.3 Competition Mechanism
+3.3.1
+
+HP Loss and Penalty for Exceeding Limit
+
+3.3.1.1
+
+Attack Damage or Collision
+
+Hero, Infantry, and Sentry Robots may lose HP when their Armor Modules are attacked or collide with other objects.
+The mechanism is as follows.
+An Armor Module can detect projectile attacks. The shortest detection interval for an Armor Module is 50 ms (when
+an Armor Module is hit with a 42 mm projectile, the detection interval can be extended to a maximum of 200 ms).
+The projectile needs to come into contact with the impact surface of the Armor Module at a certain speed in order
+to be successfully detected. The speed ranges in which Armor Modules can effectively detect different types of
+projectiles are as follows:
+Table 3-6 Speed Ranges of Different Types of Projectiles for Effective Detection by Armor Modules
+Armor Module
+Large Armor Module, Small
+Armor Module
+
+
+
+17 mm Projectile
+
+42 mm Projectile
+
+Higher than 12 m/s
+
+Higher than 10 m/s
+
+In an actual match, the normal speed of a projectile that touches the Armor Module attack surface
+is different from its Projectile Speed due to the projectile’s speed decay and its incident angle not
+being normal to the Armor Module attack surface. Damage detection is based on the normal
+component of the projectile’s speed upon contact with the Armor Module attack surface.
+
+
+
+If a Hero does not launch a 42 mm projectile for four consecutive seconds, the Armor Modules of
+the opponent’s robots will become immune to 42 mm projectile damage until the Hero launches a
+42 mm projectile again.
+
+
+
+The Referee System will round off the HP loss to the nearest integer when calculating the HP.
+
+The Armor Modules of a robot can probably register collision as projectile damage. However, causing damage
+through collision (including ramming with robots or throwing objects) is not allowed.
+
+28
+
+© 2025 DJI All Rights Reserved.
+
+Without buffs, the original damage shall be as follows:
+Table 3-7 Attack Damage and HP Loss Mechanism
+Damage Type
+Target
+Robot Armor Module
+
+3.3.1.2
+
+42 mm projectile
+
+17 mm projectile
+
+Collision
+
+200
+
+20
+
+2
+
+Exceeding the Initial Launching Speed Limit
+
+The Launching Mechanisms of Hero, Infantry, and Sentry will be locked for a certain duration if the robots exceed
+the Initial Launching Speed Limit. The duration does not accumulate.
+Locks and unlocks due to exceeding the Initial Launching Speed Limit are independent from locks and unlocks
+caused by other reasons. Assume the Initial Launching Speed Limit is V0 (m/s), and the actual speed detected by
+the Referee System is V1 (m/s). The specific lock durations are shown in the table below.
+Table 3-8 Penalty Mechanism for Exceeding the Initial Launching Speed Limit
+17 mm Projectile
+
+42 mm Projectile
+
+Lock Duration
+
+0 < V1 - V0 < 5
+
+V0 < V1 ≤ 1.1 * V0
+
+15 seconds
+
+5 ≤ V1 - V0 < 10
+
+1.1 * V0 < V1 ≤ 1.2 * V0
+
+20 seconds
+
+10 ≤ V1 - V0
+
+1.2 * V0 < V1
+
+The remainder of the current round
+
+3.3.1.3
+
+Exceeding Barrel Heat Limit and Cooling
+
+The Launching Mechanisms of Hero, Infantry, and Sentry will be locked when the robots exceed the Barrel Heat
+Limits. Locks and unlocks due to exceeding the Barrel Heat Limits are independent from locks and unlocks caused
+by other reasons. The calculations are performed as follows:
+Set Q0 as the Barrel Heat Limit and Q1 as the current Barrel Heat. For each 17 mm projectile detected by the Referee
+System, the current Barrel Heat Q1 is increased by 10 (regardless of the 17 mm projectile’s initial speed). For each
+42 mm projectile detected, the current Barrel Heat Q1 is increased by 100 (regardless of the 42 mm projectile’s
+initial speed). The Barrel Heat cools at a frequency of 10 Hz. The cooling value per detection cycle is equal to the
+cooling rate/10.
+When Q2 > Q1 > Q0, the First-Person-View (FPV) visibility of the robot operator’s computer will be reduced, and
+the Launching Mechanism of the robot will be locked. These restrictions will remain in place until Q1 = 0.
+When Q1 > Q2, the Launching Mechanism of the robot will be locked for the remainder of the current round.
+
+© 2025 DJI All Rights Reserved.
+
+29
+
+For the 17 mm Launching Mechanism, Q2=Q0+100.
+For the 42 mm Launching Mechanism, Q2=Q0+200.
+Start
+
+One projectile
+detected
+
+Projectile size is 17 mm
+
+Yes
+
+Q1 = Q1 + 10
+
+No
+
+Q1 = Q1 + 100
+
+No
+Q1 ≥ Q2
+
+Q1 > Q0
+
+No
+
+Yes
+
+Yes
+
+The Launching Mechanism of the
+robot will be locked for the
+remainder of the current round.
+
+The Launching Mechanism of the
+robot is locked, and the FPV
+visibility is reduced.
+
+Q1 = 0
+
+No
+
+Yes
+
+The Launching Mechanism of
+the robot is unlocked, and the
+FPV returns to normal.
+
+Figure 3-10 Penalty Mechanism for Exceeding the Barrel Heat Limit
+Start
+NO
+Q1 = 0
+100 ms detection
+cycle reached
+
+NO
+YES
+
+YES
+
+Q1 = Q1 - cooling rate / 10
+
+Q1 < 0
+
+Figure 3-11 Barrel Heat Cooling Mechanism
+
+3.3.1.4
+
+Exceeding Chassis Power Consumption Limit
+
+The chassis power of robots will be continuously monitored by the Referee System, and the robot chassis needs to
+run within the Chassis Power Limit. Hero, Infantry, and Sentry will have their buffer energy deducted when they
+exceed the Chassis Power Consumption Limit. Upon the exhaustion of buffer energy, if the chassis power is still
+above the limit, the chassis will be powered off for 5 seconds. The Referee System calculates chassis power
+consumption at a frequency of 10 Hz.
+Set Z as the buffer energy, Q as the Buffer Energy Limit (60 J), Pr as the instantaneous chassis output power, and
+
+30
+
+© 2025 DJI All Rights Reserved.
+
+Pl as the power limit.
+Start
+
+Buffer Energy Z = Q
+
+100 ms detection
+cycle reached
+
+No
+
+No
+
+Yes
+Calculate energy
+consumption Z = Z –
+(Pr-Pl) × 0.1
+
+Z≤0
+
+No
+
+Z>Q
+
+Yes
+
+Z=Q
+
+Yes
+Z = 0, and the chassis
+is powered off for 5
+seconds.
+
+Figure 3-12 Robot Chassis Power Detection and Penalty for Exceeding Limit
+
+© 2025 DJI All Rights Reserved.
+
+31
+
+3.3.1.5
+
+Referee System Onboard Module Disconnection
+
+Participating teams must mount the corresponding Referee System Onboard Module on their robots in accordance
+with the requirements of the RoboMaster 2026 University Series Robot Specification Manual, and ensure stable
+connection between each module of the Referee System and the server throughout the competition. The Referee
+System server detects the connectivity of each module at a frequency of 2 Hz.
+
+3.3.1.5.1
+
+Abnormal Disconnection
+
+If the Main Control Module of the robots becomes disconnected during the match and enters the “Abnormal
+Disconnection” state, it can reconnect to the competition.
+Table 3-9 Penalty Mechanism for Robots in Abnormal Disconnection Status
+Robot Type
+
+Consequences of Abnormal Disconnection
+
+
+The Launching Mechanism (if any), Gimbal, and Chassis are powered off, and
+5% of the Maximum HP is dealt for each second elapsed until it drops to zero.
+
+Hero, Infantry, and Sentry
+
+
+
+The RFID Interaction Module is disabled.
+
+
+
+The robot no longer detects any damage caused by collision and projectile hits
+and any HP Loss.
+
+3.3.1.5.2
+
+
+
+The respawn process stops.
+
+
+
+The inter-robot communication disconnects.
+
+Armour Module or Super-capacitor Management Module
+Disconnection
+
+If the design or structural issues of a Hero, Infantry or Sentry cause the disconnection of its Armor Module or
+Supercapacitor Management Module, the robot will lose HP.
+
+32
+
+© 2025 DJI All Rights Reserved.
+
+Start
+
+500 ms detection cycle
+reached
+
+No
+
+Yes
+
+Are any Armor Modules or
+Supercapacitor Management
+Modules disconnected?
+
+No
+
+Yes
+Count the number (N) of
+disconnected Armor
+Modules and Supercapacitor
+Management Modules
+
+Calculate the lost HP Value
+=4×N
+
+Robot HP loss
+
+Figure 3-13 HP Loss Mechanism for Armor Module and Supercapacitor Management Module Disconnection
+
+© 2025 DJI All Rights Reserved.
+
+33
+
+3.3.1.5.3
+
+Speed Monitor Module Disconnection
+
+If a Speed Monitor Module (17 mm or 42 mm projectile) mounted on a Hero, Infantry, or Sentry goes disconnected,
+the robot’s Launching Mechanism (17 mm or 42 mm projectile) will be powered off immediately.
+Start
+
+No
+500 ms detection
+cycle reached
+
+Yes
+
+Yes
+
+Speed Monitor
+Module disconnected
+
+17/42 mm Launching
+Mechanism locked
+
+No
+
+No additional
+treatment
+
+No
+
+Speed Monitor
+Module reconnected
+to the server
+
+Unlocking the
+corresponding 17/42
+mm Launching
+Mechanism
+
+Figure 3-14 Power-off Mechanism for Speed Monitor Module Disconnection
+
+3.3.1.6
+
+Penalty Damage
+
+When a Hero, Infantry, or Sentry receives penalties such as a Yellow Card or Red Card, the robot may lose HP. For
+details, refer to “7.1 Penalty System”.
+
+3.3.2
+
+HP Recovery and Respawn Mechanism
+
+Except when in an Abnormal Disconnection state or after being ejected, Ground Robots can recover their HP and
+
+34
+
+© 2025 DJI All Rights Reserved.
+
+respawn.
+
+3.3.2.1
+
+HP Recovery Mechanism
+
+When occupying their side’s Resupply Zone, the Hero, Infantry, and Sentry may restore up to 25% of maximum
+HP per second.
+
+3.3.2.2
+
+Respawn Mechanism
+
+When a robot is defeated, its Barrel Heat and Buffer Energy will be reset to 0. Defeated ground robots must complete
+the respawn timer in order to be automatically respawned. While robots are automatically respawned, the respawn
+time progresses 1 point per second. The respawn timer for a robot after its first defeat is 5. That value increases by
+5 each time after the same robot is defeated again.
+After robots revive, their HP is restored to 20% of the maximum, and they temporarily enter the “Weakened” state
+for 30 seconds. Robots in the “Weakened” state have the following characteristics:
+
+
+The Launching Mechanism is locked
+
+
+
+Unable to occupy the Control Zone
+
+Afterward, when the RFID Interaction Card in the own side’s Resupply Zone is detected, both the “Weakened” and
+“Invincible” states will be removed.
+
+3.3.3
+
+Economy System
+
+Both teams will receive Gold Coins regularly during the competition. Gold Coins can only be exchanged for
+Projectile Allowance.
+At the start of a round, each team receives a certain quantity of initial Gold Coins. As the competition progresses,
+both sides passively gain Gold Coins, as detailed in the table below.
+Table 3-10 Passive Gold Coin Gains
+Game Countdown
+
+Red Team
+
+Blue Team
+
+04:59
+
+200 (initial)
+
+200 (initial)
+
+03:59
+
+200
+
+200
+
+02:59
+
+200
+
+200
+
+01:59
+
+300
+
+300
+
+© 2025 DJI All Rights Reserved.
+
+35
+
+Game Countdown
+
+Red Team
+
+Blue Team
+
+00:59
+
+300
+
+300
+
+When the difference between two teams’ Victory Points reaches 70 or 140 for the first time, the team with fewer
+Victory Points can get 200 Gold Coins. In each round, one team’s robots are allowed to procure a maximum of 400
+Gold Coins. For details on the Victory Points mechanism, see “3.3.4 Control Zone and Victory Point Mechanism”.
+Table 3-11 Exchange Rules
+Exchange Items
+
+Exchange Ratio
+
+17 mm projectile
+
+10 Gold Coins/10 rounds
+
+42 mm projectile
+
+10 Gold Coins/1 round
+
+For every round of projectiles fired by a robot, the Projectile Allowance corresponding to the type of projectiles
+fired is reduced by one round. When the Launching Mechanism is locked, its power stays off; when it is unlocked
+and the Projectile Allowance for the corresponding projectile type is greater than zero, its power remains on,
+otherwise it is powered off.
+In the following special circumstances, the Armor Modules of the opponent’s robots will become immune to 42
+mm projectile damage until the Hero is alive and has a Projectile Allowance greater than 0:
+1. Three seconds after the Hero becomes defeated or abnormally disconnected
+2. When the Hero launches a 42 mm projectile despite having a Projectile Allowance of 0 (it launches more
+projectiles than its allowance)
+3. After the Hero launches the third 42 mm projectile after it is defeated
+When a Hero or Infantry occupies the Resupply Zone, the Operator can use the Referee System Player’s Client to
+exchange for 42 mm and 17 mm Projectile Allowance, respectively.
+
+3.3.4
+
+Control Zone and Victory Point Mechanism
+
+At the start of the round, each team receives 200 Victory Points. The Control Zone activates after the competition
+starts. At any given time, the Control Zone can only be occupied by one side (one or multiple robots). If robots from
+both teams enter the Control Zone simultaneously, the side that arrives first will occupy the zone. The calculations
+are performed as follows:
+
+
+36
+
+Each time when a robot occupies the Control Zone, the opponent team will lose 1 Victory Point per second.
+© 2025 DJI All Rights Reserved.
+
+
+
+Each time when a robot is defeated, that team will lose 20 Victory Points.
+If a robot does not detect the RFID Interaction Card of the Control Zone, the occupation will expire in
+two seconds.
+
+3.3.5
+
+Match Format and Winning Criteria
+
+The 3V3 Match consists of the Group Stage and the Knockout Stage. The competition format of Group Stage is
+BO2, and that of Knockout Stage is BO3 or BO5.
+The winning criteria for a single round are described below:
+1.
+
+When one team’s Victory Points drop to 0, the current round ends immediately, and the team whose Victory
+Points are not 0 wins.
+
+2.
+
+If a round has ended and both teams have more than 0 Victory Points, then the team with the higher Victory
+Points wins.
+
+3.
+
+If a round has ended, the two teams tie on Victory Points, and neither team has zero Victory Points, then the
+team that inflicts greater Attack Damage wins.
+
+4.
+
+If a round has ended, the two teams tie on Victory Points, neither team has zero Victory Points, and the two
+have inflicted the same Attack Damage, then the team with higher total robot remaining HP wins.
+
+5.
+
+If none of these criteria is met, the round shall be considered a draw. A draw in the Knockout Stage leads to
+an immediate tie-breaker round until a team wins.
+
+© 2025 DJI All Rights Reserved.
+
+37
+
+4. Infantry Match
+During a Two-Minute Round, the robots from both teams engage in a shooting battle on the Battlefield. The team
+that destroys the other’s robots will be the winner.
+
+4.1 Robot and Operator
+The lineup of Robots and Operators is as follows:
+Table 4-1 Robot and Operator Lineup for Infantry Match
+Type
+
+No.
+
+Quantity (set)
+
+Operator Lineup
+
+Infantry
+
+3
+
+1
+
+1 Operator/Robot
+
+
+
+Operators must be Regular Members of a Participating Team in the current season and Team
+Advisors.
+
+
+
+After the end of each round, the Operator can be replaced by a Regular Member or Team Advisor
+among the Pit Crew members for the current match.
+
+38
+
+© 2025 DJI All Rights Reserved.
+
+4.2 Infantry
+Infantry can launch 17 mm projectiles.
+Table 4-2 Key Features of Infantry
+Key Feature
+Initial Zone
+Operating Mode
+Inter-robot
+Communication
+Launching Mechanism
+Initial Launching Speed
+Limit (m/s)
+
+Performance
+
+HP Loss and Penalty for
+Exceeding Limit
+
+Description
+Starting Zone
+No restrictions. Up to one remote controller and one custom controller.
+Not applicable
+One Launching Mechanism (17 mm projectile)
+25
+
+
+Initial HP/Maximum HP: 200
+
+
+
+Barrel Heat Limit: 80
+
+
+
+Barrel Heat Cooling Rate: 12/second
+
+
+
+Chassis Power Limit: 120 W
+
+
+
+Exceeding the Initial Launching Speed Limit: applicable
+
+
+
+Exceeding Barrel Heat Limit and Cooling: applicable
+
+
+
+Exceeding Chassis Power Consumption Limit: applicable
+
+
+
+Attack Damage or Collision: applicable
+
+
+
+Referee System Onboard Module Disconnection: applicable
+
+
+
+Penalty Damage: applicable
+
+See details in “3.3.1HP Loss and Penalty for Exceeding Limit”.
+HP Recovery and Respawn
+Mechanism
+Projectile Loading and
+Reloading
+
+Not applicable
+
+
+During the Two-Minute Setup Period, 17 mm projectiles can be preloaded.
+
+
+
+During the Two-Minute Round, the Initial Projectile Allowance is 200 and cannot be
+increased during the match.
+
+© 2025 DJI All Rights Reserved.
+
+39
+
+4.3 Competition Area
+The core competition area of the Infantry Match is called the "Battlefield". The Battlefield is a 5 m x 5 m area that
+contains the Starting Zones and Bunkers for both the blue and red teams. For details about projectiles and the
+Operation Room, please refer to “3.2.5.1 Projectiles” and “3.2.5.2 Operation Room”.
+
+Figure 4-1 Axonometric View of Infantry Match Battlefield
+
+40
+
+© 2025 DJI All Rights Reserved.
+
+[1]
+
+Red Team’s Starting Zone
+
+[2]
+
+Bunker
+
+[3]
+
+Blue Team’s Starting Zone
+
+Figure 4-2 Top View of Infantry Match Battlefield
+
+© 2025 DJI All Rights Reserved.
+
+41
+
+Figure 4-3 Infantry Match Battlefield Dimensions
+
+42
+
+© 2025 DJI All Rights Reserved.
+
+Figure 4-4 Bunker
+
+© 2025 DJI All Rights Reserved.
+
+43
+
+4.4 Competition Mechanism
+4.4.1
+
+HP Loss and Penalty for Exceeding Limit
+
+See details in “3.3.1 HP Loss and Penalty for Exceeding Limit”.
+
+4.5 Match Format and Winning Criteria
+The Infantry Match consists of the Group Stage and the Knockout Stage. The competition format of Group Stage is
+BO2, and that of Knockout Stage is BO3.
+The winning criteria for a single round are described below:
+1.
+
+When one team’s HP drops to 0, the current round ends immediately, and the opponent team wins.
+
+2.
+
+If a round has ended and neither team’s HP is 0, then the team with higher Remaining HP wins.
+
+3.
+
+If a round has ended and both teams have the same Remaining HP (not 0), then the team whose Lost HP
+occurred later wins.
+
+4.
+
+If a round has ended and both teams are at full HP, then the team with higher total projectile count wins.
+
+5.
+
+If a round has ended and both teams are at full HP and have the same total projectile count, then the team that
+fired the first projectile earlier wins.
+
+6.
+
+44
+
+If none of these criteria is met, the round shall be considered a draw.
+
+© 2025 DJI All Rights Reserved.
+
+5. Engineer Challenge
+During the Three-Minute Round, the Engineer acquires and assembles Energy Units in the core competition area.
+Teams with higher scores are ranked higher.
+
+5.1 Robot and Operator
+The lineup of Robots and Operators is as follows:
+Table 5-1 Robot and Operator Lineup for Engineer Challenge
+Type
+
+No.
+
+Quantity (set)
+
+Operator Lineup
+
+Engineer
+
+2
+
+1
+
+1 Operator/Robot
+
+
+
+Operators must be Regular Members of a Participating Team in the current season and Team
+Advisors.
+
+
+
+Up to one remote controller and one Custom Controller can be configured for an Engineer.
+
+© 2025 DJI All Rights Reserved.
+
+45
+
+5.2 Competition Area
+The core Battlefield for the Engineer Challenge is a 5 m × 5 m (L × W) area, consisting mainly of the Starting Zone,
+Resource Zone, and Assembly Zone.
+The drawings of the competition area, Resource Zone, and Assembly Zone mentioned in this section
+will be updated later.
+
+5.2.1
+
+Starting Zone
+
+The Starting Zone is where the Engineer is placed before a match.
+
+Figure 5-1 Starting Zone
+
+5.2.2
+
+Resource Zone
+
+There are three Energy Units placed in the Resource Zone. An Energy Unit is a cylindrical component weighing
+approximately 400 to 500 g, with a height of 150 mm, an upper diameter of 95 mm, a lower diameter of 80 mm,
+and asymmetrical ends.
+
+46
+
+© 2025 DJI All Rights Reserved.
+
+[1]
+
+Axis of rotation
+
+Figure 5-2 Energy Unit
+
+5.2.3
+
+Assembly Zone
+
+The Assembly Zone is where Robots assemble Energy Units. Within the Assembly Zone, there are three
+independent Tech Cores, each with a distinct pose. For each Tech Core, establish a right-handed Cartesian
+coordinate system named Assembly Coordinate System OXYZ, where the origin O is set at the midpoint of the
+intersection line between the front of the base and the Battlefield surface. The negative X-axis is defined by the
+direction of the base front normal pointing toward the Tech Core, and the positive Z-axis points vertically upward.
+A right-hand orthogonal coordinate system EX’Y’Z’ is established using the geometric center of the front surface
+of the Tech Core’s entry as the origin E. The X’, Y’, and Z’ axes align parallel to, and share the same positive
+directions as, the X, Y, and Z axes. The unit normal vector of the front surface of the Tech Core’s entry is denoted
+as e⃗. A spherical coordinate system (r, θ, φ) is established based on the coordinate system of the Tech Core, where
+θ is the angle between the projection of vector e⃗ on the X’Y’ plane and the positive X’ axis, with θ ∈ [-90, 90]; φ
+© 2025 DJI All Rights Reserved.
+
+47
+
+is the angle between vector e⃗ and the positive Z’ axis, with φ ∈ [0, 90]. Additionally, α is defined as the rotation
+
+angle of the Tech Core around the direction of e⃗. A counterclockwise rotation is considered positive for α, where
+α ∈ [-45, 45].
+
+The pose of the Tech Core is defined as the combination of the coordinates (x, y, z) of the center point E on the
+
+front surface of the Tech Core’s entry in the OXYZ coordinate system, the orientation coordinates (θ, φ) of the unit
+normal vector e⃗ in the spherical coordinate system of the Tech Core, and the rotation angle α of the Tech Core
+around the direction of e⃗, forming (x, y, z, θ, φ, α).
+There is space inside the Tech Core, allowing an Energy Unit to be inserted up to a depth of 100 mm and moved
+horizontally up to 100 mm relative to the insertion surface. After placing the energy unit and performing horizontal
+movement, there is still additional space, allowing the energy unit to rotate up to 90° around the rotation axis. For
+details, see “Figure 5-2 Energy Unit”.
+The detailed shape and dimensions of the Tech Core will be updated later. However, when the Energy Unit is inside
+the Tech Core, there is an area relative to the Energy Unit for each difficulty level in which the Engineer can move
+freely without any structural interference with the Tech Core, as shown in the following figure:
+
+[1]
+
+Energy Unit
+
+[2]
+
+Interaction Area for Level 1 Difficulty
+
+[3]
+
+Interaction Area for Level 2, 3, and 4 Difficulty
+
+Figure 5-3 Energy Units - Interaction Areas within the Tech Core
+
+48
+
+© 2025 DJI All Rights Reserved.
+
+[1]
+
+Gripper
+
+[2]
+
+[1]
+
+Suction Cup
+
+Interaction Area
+
+[2]
+
+Interaction Area
+
+Figure 5-4 Interaction Areas and Typical Working Conditions
+
+For example, when assembling an Engineer at the Level 1 difficulty, its terminal executive mechanisms
+can secure the Energy Unit from both its top and side Interaction Areas. However, when assembling an
+Engineer at the Level 3 difficulty, the Energy Unit can only be secured from its side Interaction Area.
+
+© 2025 DJI All Rights Reserved.
+
+49
+
+Figure 5-5 Spherical Coordinate System
+Table 5-2 Pose Value Ranges and Assembly Requirements for Different Tech Cores
+Tech Core
+
+x
+
+y
+
+z
+
+θ
+
+φ
+
+α
+
+A
+
+[0,-100]
+
+[-100,100]
+
+800
+
+0
+
+90
+
+0
+
+Panning
+
+Spinning
+
+Requirements
+
+Requirements
+
+No panning
+
+No spinning
+
+requirements
+
+requirements
+
+100 mm
+B
+
+[0,-100]
+
+[-100,100]
+
+[700, 900]
+
+0
+
+[0,90]
+
+[-45,45]
+
+movement
+after insertion
+
+No spinning
+requirements
+After the translation is
+complete, use the
+specified axis of
+
+100 mm
+C
+
+[0,-100]
+
+[-100,100]
+
+[700, 900]
+
+[-90,90]
+
+[0,90]
+
+[-45,45]
+
+movement
+after insertion
+
+rotation, as detailed in
+“Figure 5-2 Energy
+Unit”, and rotate it to
+the designated angle
+within the permissible
+90° range, with 5°
+precision.
+
+5.3 Mission
+Engineer stands by in the Starting Zone before the match.
+
+50
+
+© 2025 DJI All Rights Reserved.
+
+After the round begins, Engineer Robots must retrieve Energy Units from the Resource Zone and assemble them
+into the Tech Core as required. The match ends after all the Energy Units have been successfully assembled and the
+robot returns to the Starting Zone, or when the match time runs out.
+Scoring Rules
+The Energy Units in Tech Cores A, B, and C are scored separately using different rules. Details are as follows:
+
+
+Tech Core A: 1 point for successful assembly
+
+
+
+Tech Core B: 10 points for successful assembly
+
+
+
+Tech Core C: 100 points for successful assembly
+
+
+
+If all three Energy Units are successfully assembled before the time of the match runs out, 1 additional point
+is awarded for each second remaining in the match.
+
+
+
+When the match time runs out, if the robot is outside the Starting Zone, the last assembled Energy Unit will
+not be counted for scoring.
+
+Ranking Rules
+Each team can attempt the challenge twice and take the highest total score out of the two attempts as its final score.
+Teams with higher scores are ranked higher.
+Award Criteria & Eligibility
+Engineer has assembled at least one Energy Unit.
+
+© 2025 DJI All Rights Reserved.
+
+51
+
+6. Competition Process
+
+
+In the Engineer Challenge, each challenge is called a match.
+
+
+
+Descriptions related to the Referee System Initialization Period, Five-Second Countdown, and
+projectiles do not apply to the Engineer Challenge.
+The team waits for inspection in the
+Preparation Area
+
+①The team installs the Referee System correctly.
+②Check if the robots meet the requirements of the
+specifications documents.
+
+NO
+Does the team
+pass Pre-Match
+Inspection?
+
+①The team arrives at the Inspection Area at the specified
+time before the match for the inspection.
+②The Captain signs and confirms the inspection results.
+
+YES
+The team arrives at the Staging Area
+
+The team arrives at the Waiting Area
+
+Setup Period
+
+Fifteen-second Referee System
+Initialization & Five-second Countdown
+
+①The team arrives at the Staging Area at the specified time
+before the match
+②The team abides by the rules of the Staging Area
+③The team waits to enter the Battlefield
+①Powers on the robots and check if the robots are operating
+normally
+②Connects the Referee System server
+③Acquires the initial projectiles
+④The Operators enter the Operator Room
+⑤In the last 30 seconds, all robots are required to power on
+and team members must leave the Battlefield
+⑥ Exceptional situations, Technical Timeout
+①Referee System initialization
+②Match countdown starts in the last 5 seconds
+
+YES
+①Both teams’ robots engage in a shooting battle on the
+Battlefield
+②The winning team is decided based on competition rules
+
+Round
+
+Any next round
+in the match?
+NO
+①Robots are powered off and leave the Battlefield.
+②The Captain signs and confirms the results or initiates an
+appeal within 5 seconds.
+
+One match ends
+
+The team leaves the Competition Area
+and arrives at the Projectile Unloading
+Area
+
+Recover projectiles, armbands, and pass cards.
+
+The team returns to the Preparation Area
+
+Return to the Preparation Area
+
+Figure 6-1 Process of a Single Match
+
+52
+
+© 2025 DJI All Rights Reserved.
+
+6.1 Pre-Match Inspection
+
+
+The inspection results of the Mock Inspection and Practice Match are for reference only and are not
+taken into account for the inspection in the actual competition.
+
+
+
+The inspection results during the competition are only applicable to the current match.
+
+
+
+Passing of inspection only means that the robot meets the standards at the time of inspection. Teams
+are required to ensure that their robots fulfill the requirements of
+the Building Specifications Manual at all times.
+
+To ensure that the Robots built by the Participating Teams comply with the requirements outlined in the RoboMaster
+2026 University Series Robot Specifications Manual, participating Teams in the 3V3 Match, Infantry Match, and
+Engineer Challenge are required to arrive at the Inspection Area 60 minutes, 40 minutes, and 30 minutes prior to
+their respective matches for Pre-Match Inspection. The inspection process is as follows:
+
+Team members bring their robots into the
+Inspection Area. (Pre-match inspection
+starts)
+
+Each Infantry is brought into the Inspection Area by one team member. Each
+of the other robots must be brought into the Inspection Area by no more than
+two team members, and another team member is responsible for coordinating
+during the Pre-Match Inspection. Without the permission of the Head
+Inspector, other team members are not allowed to enter the Inspection Area.
+No team members are allowed to enter the Inspection Area if their robots are
+not present in the Inspection Area.
+Staff will label the robots, darts, wireless charging devices, custom
+controllers, and custom clients that require inspection. Labeling methods
+include, but are not limited to, PASS cards, timestamp entries on the Referee
+System Onboard Module, and roster registration via Qingflow. Labels are
+updated based on the items that pass inspection. Only robots with complete
+identification are allowed to enter the Staging Area and Battlefield. Teams
+must modify their non-qualifying robots until they meet the requirements for
+passing the inspection. Teams must also check whether the structure and
+functions of the Referee System Onboard Module are normal and confirm the
+result.
+
+Inspection of robots
+
+The Captain signs and confirms the
+inspection result.
+
+After the Captain has signed and confirmed, no objections may
+be raised to the inspection results.
+
+Figure 6-2 Pre-Match Inspection Flowchart
+The rules regarding backup robots are as follows:
+
+
+During the Mock Inspection for the 3V3 Match, each team may bring up to four Robots for inspection; during
+the Mock Inspection for the Infantry Match and Engineer Challenge, each team may bring up to two Robots
+for inspection, respectively.
+
+
+
+Each team can carry no more than one backup robot for each round of competition.
+
+© 2025 DJI All Rights Reserved.
+
+53
+
+
+
+Team members are required to declare the types of backup robots they are carrying during the Pre-Match
+Inspection. The backup Hero must have an Armor Sticker affixed in the Inspection Area. If the backup robot
+needs to enter the field as an Infantry or Sentry, the Pit Crew must promptly obtain the appropriate Armor
+Sticker from the Referee. Armor stickers must be affixed in accordance with the requirements stated in the
+RoboMaster 2026 University Series Robot Specifications Manual.
+
+For all RMUL events, each team can borrow at most one backup robot’s Referee System.
+
+6.2 Staging
+After the Pre-Match Inspection, the teams should arrive at the Staging Area at least 10 minutes before the start of
+each round. In a 3V3 Match, each team is allowed to have a maximum of seven Pit Crew members, consisting of
+up to six Regular Members (including Team Advisor), and one Supervisor. In an Infantry Match or Engineer
+Challenge, each team is allowed to have a maximum of three Pit Crew members, consisting of up to two Regular
+Members (including Team Advisor) and one Supervisor. One Pit Crew Member should wear the "Captain" armband
+and undertake the Captain’s role. If any team needs to repair its robots after entering the Staging Area, they must
+obtain the permission of the referee. A robot may leave the Staging Area for repair only after the staff at the Staging
+Area have removed the Pass Card on the robot. When repair is finished, the robot needs to be brought back to the
+Inspection Area for another Pre-Match Inspection before re-entering the Staging Area. If the team is unable to arrive
+at the Staging Area in time as a result of this delay, the robot will not be able to enter the match, and the team will
+bear the consequences.
+Captain Armband: Any Regular Member that wears the Captain armband performs the Captain role
+during the match. The Captain is responsible for leading the team in the competition process, confirming
+results, and requesting for Team Technical Timeouts, appeals, etc.
+After leaving the Staging Area, the participating teams will enter the waiting area of the competition area to place
+their robots. With the permission of the referee, the participating teams will wait at the entrance of the Battlefield
+with their robots for further instructions. The referee will follow the competition process and open the door and lead
+the team members into the competition area. The countdown for the Setup Period will begin when the doors are
+opened.
+
+6.3 Setup Period
+After the end of the second and fourth round of a BO5 match, both teams have five minutes to commission
+their robots. When five minutes run out, the Setup Period of the next round begins.
+
+54
+
+© 2025 DJI All Rights Reserved.
+
+The Setup Period for a 3V3 Match is three minutes, and two minutes for an Infantry Match and Engineer
+Challenge. During the Setup Period, Pit Crew members need to place their robots in their respective Initial Zones,
+check whether their Referee Systems are operating normally, and preload the robots with projectiles. Pit Crew
+members may repair robots or replace equivalent parts, provided the requirements of the specifications documents
+are met. Pit Crew members are required to commission their robots near their team’s Robot Initial Zone. Only one
+Pit Crew member of each team is allowed to leave the Initialization Area to commission their robots.
+
+
+Equivalent Part: Standard modules or components having the same material, form and functions,
+for example, motors of the same model and self-built friction wheel modules. The main structure
+supporting the robot’s body, such as a robot’s chassis or the body of a Drone, cannot be replaced
+as equivalent parts.
+
+
+
+If the equivalent part includes Referee System Onboard Modules, the participating team must
+ensure that the Referee System Onboard Modules work properly, including version number, sensor
+calibration, and mounting specifications. When any Referee System Onboard Module in the
+equivalent part experiences an abnormality, it will not trigger an Official Technical Timeout.
+
+When there are 1 minute and 30 seconds remaining in the Setup Period, it is recommended that Operators enter the
+Operation Room to complete the commissioning of keyboards and mice (both of which may be brought by
+themselves). The USB keyboard and mouse connected to the Operation Room computer must be produced by
+qualified manufacturers with proper certification and comply with the USB HID protocol. Operators should check
+to confirm that the control of the Robots and the official equipment are functioning normally. If any official
+equipment does not operate normally, the Pit Crew members must raise the issue before entering the final 15 seconds
+of the Setup Period. Otherwise, no Technical Timeout will be allowed by the referee. Except for the Operators of
+the robots on the Battlefield, the Pit Crew are not allowed in the Operation Room.
+When the Setup Period is down to 30 seconds, all robots in the Battlefield must be powered up, robots that are not
+powered up must be removed from the Battlefield, and the staff in the Battlefield should leave the Competition Area
+in an orderly manner. After the end of the Setup Period, Pit Crew must place the Sentry’s remote controller in the
+designated area at the Battlefield entrance.
+
+6.3.1
+
+Official Technical Timeout
+
+During the Setup Period, if the Referee System or equipment inside the Operation Room malfunctions (for details,
+see the table below), or the robot needs temporary Pre-Match Inspection, the Head Referee can announce an Official
+Technical Timeout and pause the setup countdown. The starting time of the Timeout is decided by the Head Referee
+
+© 2025 DJI All Rights Reserved.
+
+55
+
+based on the situation.
+During an Official Technical Timeout, Pit Crew members cannot fix the malfunctions of the Referee System or
+other official equipment unless the fix is required by the referee. If a replacement is needed for a malfunctioning
+Referee System, replace the Referee System Onboard Modules within the time limit specified in the RoboMaster
+2026 University Series Robot Specification Manual. When the relevant malfunctions of the Referee System or
+official equipment have been eliminated and the Head Referee has resumed the countdown, Pit Crew members are
+required to follow the set procedures for the Three-Minute Setup Period and leave the Battlefield within the specified
+time.
+Table 6-1 Malfunctions
+Regul
+
+Description
+
+ation
+1
+
+A fault occurs with the official equipment in the Operation Room, and any key competition component in the
+Battlefield experiences structural damage or functional irregularity.
+
+2
+
+During the Setup Period of the first round, a Referee System Onboard Module experiences faults, such as
+damage to the Armor Module, Speed Monitor Module disconnection, etc.
+
+3
+
+During the Setup Period, the main controller of the Referee System is unable to connect to the server or a
+robot cannot transmit images to the Operation Room.
+
+4
+
+Other situations where the Head Referee deems it necessary to call an Official Technical Timeout.
+
+As it is impossible to determine whether the malfunction stems from the Referee System Onboard Module itself,
+flaws in the robot’s electrical or structural design, or damage caused during previous matches, an Official Technical
+Timeout will not be called for regular battle damage, except for the situations mentioned in Rule 3 above. The
+referee will provide backup Referee System Onboard Modules. Participating teams may request a “Team Technical
+Timeout” to repair their robots.
+If the referee determines that the malfunction referred to in Rule 2 and 3 above is caused by the team, the referee
+will explain the situation and end the Official Technical Timeout.
+
+6.3.2
+
+Team Technical Timeout
+
+If the mechanical structure of a robot, a software system, the keyboard or mouse in the Operation Room or other
+equipment experiences any faults, the team Captain may make a request to the referee in the Battlefield or Operation
+Room for “Team Technical Timeout” only before the 15-second countdown in the Setup Period, and indicate the
+requested timeout length and reasons for the request. Team Technical Timeout once requested and conveyed to the
+
+56
+
+© 2025 DJI All Rights Reserved.
+
+Head Referee, this Timeout cannot be cancelled or revised.
+After the Team Technical Timeout is confirmed by the Head Referee, the Referee will notify both teams at the same
+time regardless of which team initiated the timeout.
+The Head Referee may end the Technical Timeout once they determine that the teams are ready. Even if the
+participating team does not enter the Battlefield or ends the Technical Timeout early, the opportunity consumed is
+still the opportunity corresponding to the time declared by the participating team when applying for the timeout.
+To ensure that subsequent matches begin on time, only one Team Technical Timeout is allowed in each Setup Period
+on a first-come-first-served basis. The Technical Timeout usage is recorded in the Match Results Confirmation
+Form.
+During a 3V3 Match or Infantry Match, each team has 2 two-minute Technical Timeout opportunities. During an
+Engineer Challenge, each team has one two-minute Technical Timeout opportunity. A team cannot request Team
+Technical Timeout once their opportunities have been used up.
+
+6.4 15-Second Referee System Initialization Period
+After the Setup Period, the match enters a 15-Second Referee System Initialization Period. During the Initialization
+Period, the Referee System server automatically detects the connection status of the Referee System Player’s Client,
+the status of Referee System Onboard Modules, the status of Battlefield Components, and reset the HP of all robots
+to ensure their HP is full when the match officially begins.
+
+6.5 5-Second Countdown
+After the 15-Second Referee System Initialization Period, the match enters a 5-Second Countdown. At this time,
+the Referee System Player’s Client will not respond to control commands from robots (including Custom
+Controllers). Once the countdown ends, the keyboard is unlocked and the competition starts.
+
+6.6 Competition Stage
+3V3 Match and Infantry Match
+Robots from both teams engage in a shooting battle on the Battlefield.
+Engineer Challenge
+Engineer completes the mission.
+
+© 2025 DJI All Rights Reserved.
+
+57
+
+6.7 End of Round
+3V3 Match and Infantry Match
+When the time of one round of competition runs out or one team triggers the winning criteria in advance, this round
+of competition ends. The match is over when a winner has emerged or all rounds have ended.
+Engineer Challenge
+A match ends when its time has run out or teams fulfill the criteria for ending the challenge early.
+
+6.8 Result Confirmation
+During a match, the referee will record on the Match Results Confirmation Form the penalties issued for each round,
+the key competition data at the end of the match, the winning teams, the use of Team Technical Timeout
+opportunities by the teams, and other relevant details.
+Within 5 minutes after the end of a match, the Captains of both teams must sign and confirm the match results. If a
+team Captain does not sign and confirm the results within 5 minutes or has not requested an appeal, it is deemed
+that the team agrees with the match results.
+
+6.9 Exit the Field
+After a match is over, members from both teams in the 3V3 Match must power off all their robots, remove them
+from the Battlefield, and proceed to the Projectile Unloading Area to unload their projectiles. At the Projectile
+Unloading Area, teams must follow the instructions from the staff and return all armbands and pass cards, empty
+the projectiles in their robots, and return all projectiles used in the competition. Teams participating in the Infantry
+Match and Engineer Challenge should perform the aforementioned exiting operations in the Battlefield.
+
+58
+
+© 2025 DJI All Rights Reserved.
+
+7. Violations and Penalties
+In order to ensure the fairness of the competition and maintain competition discipline, the participating teams,
+participants, and participating robots must strictly follow the competition rules. If there is a violation, the referee
+will give a corresponding penalty for the violation. Some violation penalties issued before the official start of the
+competition will be enforced after the official start of the competition. Serious violations and all appeals in the
+competition will be publicized.
+Penalty for violation stated in this chapter will be determined by the Head Referee according to the actual situation.
+If an event that affects competition fairness happens during the competition but it does not involve penalty rules or
+serious violations, the Head Referee will make a decision based on the actual situation.
+If a team’s actions have directly caused the other team to commit a violation, the other team is not
+penalized but must cease its violating behavior immediately.
+
+7.1 Penalty System
+7.1.1
+
+Forms of Penalties
+
+During a match, the referee may issue penalties against participants and robots that have failed to comply with
+competition rules. The forms of penalties are as follows:
+Table 7-1 Forms of Penalties
+Forms of Penalties
+Automatic penalties by
+the Referee System
+
+Description
+All HP losses in “3.3.1 HP Loss and Penalty for Exceeding Limit”, except those caused
+by attacks or collision and the penalty damage, are automatic penalties by the Referee
+System.
+
+Manual penalties
+through the Referee
+
+Penalties issued by the referee through the server against robots for violation of rules.
+
+System
+Manual penalties by
+human referees
+
+Where penalties cannot be issued through the Referee System, for example issuing a
+Verbal Warning or disqualifying a team.
+
+© 2025 DJI All Rights Reserved.
+
+59
+
+7.1.2
+
+Types of Penalties
+
+The types of manual penalties are as shown below:
+Table 7-2 Types of Penalties
+Types of Penalties
+A Verbal Warning
+
+Description
+A Verbal Alert
+
+
+
+One team receives a Yellow Card:
+
+
+If the offending robot is a Sentry, its chassis is powered off for 2 seconds while
+the operating interface of other alive robots is blocked for 2 seconds.
+
+
+
+If the offending robot is not a Sentry, the operating interface for the offending
+robot is blocked for 5 seconds and those for other robots are blocked for 2
+seconds.
+
+
+
+The Referee System will automatically deduct the offending robot’s HP by 15%
+of its current Maximum HP, while the remaining alive robots will have their HP
+deducted by 5% of their current Maximum HP. If the robot receives a Yellow
+Card again within 30 seconds after it receives a Yellow Card, the percentage of
+their current Maximum HP lost will be twice that of the previous loss for that
+robot, and 5% for the other alive robots on the team.
+
+A Yellow Card
+
+
+
+In each round, a robot that has been issued three Yellow Cards in total will receive
+a Red Card.
+
+
+
+Both teams receive a Yellow Card:
+The interface of all operators is blocked for 2 seconds and all robots lose 5% of their
+maximum HP, without taking into account the cumulative number of Yellow Cards
+received by one robot.
+
+
+
+If a robot receives successive Yellow Cards, the time that the operation
+interface is blocked will add up accordingly. The 30-second period will
+be reset.
+
+
+
+If a robot’s remaining HP is less than or equal to that needs to be
+deducted from penalty, this robot’s HP reduces to 1.
+
+60
+
+© 2025 DJI All Rights Reserved.
+
+Types of Penalties
+
+Description
+
+
+
+The duration of chassis power off, blockage of the operation interface,
+and other such situations caused by violation penalties is independent
+from the Competition Mechanism and will not be combined.
+
+
+
+Ejection of robots:
+
+
+If a robot is ejected before entering the 15-Second Referee System Initialization
+Period, the offending robot will not be allowed to enter and must be removed
+from the Battlefield, nor can it be replaced by other robots in any round of the
+current match.
+
+
+
+If a robot is ejected during the 15-Second Referee System Initialization Period,
+the Red Card should be issued after the competition starts.
+
+Red Card (Ejection)
+
+
+If a robot is ejected during the competition, the robot’s HP will turn zero and the
+transmitted images will become monochrome.
+
+ Pit Crew members ejected by a referee must leave the Competition Area immediately
+and cannot be replaced by other Pit Crew for all rounds in the current match. All robots
+controlled by an ejected Operator must also be ejected for the current round, and will
+not be allowed to join the Battlefield nor can they be replaced by other robots for all
+rounds in the current match.
+
+
+
+If a Forfeiture is issued for a round (hereinafter referred to as "Round Forfeiture"), the
+following rules shall apply.
+3V3 Match:
+
+
+If a Forfeiture is issued before the Five-Minute Round (including during the
+Setup Period and Referee System Initialization Period), the offending team’s
+Victory Points will be zero, its robots (except the rule-violating one) will be at
+
+Forfeiture
+
+full HP, and the opponent team’s Victory Points and robots’ HP will be full.
+
+
+If a Forfeiture is issued during the Five-Minute Round, the round will end
+immediately. The offending team’s Victory Points will be zero, and the team’s
+robots (except the rule-violating one) will maintain their HP levels at the end of
+the round. The opposing team’s Victory Points and robots’ HP will remain at
+the levels when the round ends.
+
+© 2025 DJI All Rights Reserved.
+
+61
+
+Types of Penalties
+
+Description
+
+
+If a Forfeiture is issued after a Five-Minute Round, the offending team’s Victory
+Points will be zero, and the team’s robots (except the rule-violating one) will
+maintain their HP levels at the end of the round. The opposing team’s Victory
+Points and robots’ HP will remain at the levels when the round ends.
+
+Infantry Match:
+
+
+If a Forfeiture is issued before the Two-Minute round (including the setup period
+and Referee System Initialization Period), the HP of the offending team’s robot
+will become zero, and the HP of the other team’s robots will be full.
+
+
+
+When a Forfeiture is issued during the two-minute match, this round of the
+match ends immediately. The HP of both teams’ robots will be recorded as it is
+when the round ends.
+
+
+
+When a Forfeiture is issued after the two-minute match, the HP of both teams’
+robots will be recorded as it is when the round ends.
+
+ If a Forfeiture is issued in a match (hereinafter referred to as "Match Forfeiture"), it
+applies to all rounds in the match, and the HP for each round should be calculated
+according to the above descriptions.
+Exclusion from
+
+
+
+Participants are excluded from awards.
+
+Awards
+
+
+
+Participating teams are excluded from awards.
+
+Disqualification from
+the competition
+
+ The team member is disqualified from the current season.
+ The team is disqualified from the current season, but its results in the season will be
+maintained as a basis for other teams’ advancement.
+
+7.2 Penalty Rules
+This section introduces the Penalty Rules. The rules numbered R# clearly specify the regulations that Participating
+Teams, Participants, and Robots must follow.
+
+7.2.1
+
+Personnel
+
+7.2.1.1
+
+General Rules
+
+R1 Participating Teams must comply with the requirements outlined in the RoboMaster 2026 University League
+
+62
+
+© 2025 DJI All Rights Reserved.
+
+Participant Manual.
+Penalty: The highest penalty that can be imposed on the offending team is disqualification.
+R2 Participants and their actions must not interfere with the normal operation of the Official Equipment,
+competition processes, or the regular work of the RMOC staff.
+Penalty: The highest penalty that can be imposed on the offending team is disqualification.
+R3 Teams must not set up their own wireless networks or communicate with team members using walkie-talkies
+in the relevant competition areas (including but not limited to the Preparation Area, Inspection Area, Staging
+Area, and Competition Area).
+Penalty: The highest penalty that can be imposed on the offending team is disqualification.
+R4 Teams must not damage any official equipment (including but not limited to equipment in the Competition
+Area, Staging Area, Preparation Area, and Inspection Area).
+Penalty: The highest penalty that can be imposed on the offending team is disqualification and compensation
+as per the price.
+R5 Apart from Pit Crew members who have entered the Staging Area and Competition Area due to match-related
+reasons, no participants are allowed inside either area without special reasons.
+Penalty: The highest penalty that can be imposed on the offender is disqualification.
+R6 Any Pit Crew member who has entered the Staging Area and Competition Area for competition may not leave
+either area or be replaced by another Pit Crew member without the permission of the referee.
+Penalty: Offenders are not allowed to enter the Staging Area and Competition Area. The highest penalty that
+can be imposed is disqualification from the competition.
+R7 Except for the projectiles preloaded in the Inspection Area, participating teams are not allowed to bring any
+projectiles intended for use in the competition into the Staging Area or Competition Area.
+Penalty: Confiscation of projectiles and Verbal Warning. If the warning is ineffective, the offender may be
+disqualified as the highest penalty.
+R8 After a match is over, the Pit Crew must power off all their robots, remove them from the Competition Area
+and empty all projectiles inside the robots at the projectile unloading area.
+Penalty: The offending robot will be detained in the Projectile Unloading Area, until its projectiles are cleared.
+R9 After a match ends, Pit Crew must return all projectiles used in the competition to the Projectile Unloading
+Area.
+
+© 2025 DJI All Rights Reserved.
+
+63
+
+Penalty: Confiscation of projectiles and disqualification of the offender from subsequent matches held at the
+same competition site. The highest penalty that can be imposed on the offender is disqualification.
+R10 Except for emergency situations, teams must be present at the Inspection Area before the start of each match
+(see “6.1 Pre-Match Inspection”) for Pre-match Inspection. The team must stand by at the Staging Area 10
+minutes before each match.
+Penalty: The highest penalty is an immediate Round Forfeiture.
+R11 Without the permission of the referee, a team may not power on and commission or repair a robot in areas
+outside the Battlefield from the time the robot passes an Inspection to the end of a match.
+Penalty: The highest penalty is an immediate Round Forfeiture.
+R12 The identities and number of personnel of each team entering designated areas such as the Preparation,
+Inspection, Staging, and Competition Areas must meet the relevant requirements.
+Penalty: The highest penalty that can be imposed on the offending team is disqualification.
+R13 One member of a Pit Crew must wear the "Captain" armband, which must not be covered.
+Penalty: The highest penalty that can be imposed on the offender is disqualification.
+R14 Without the permission of the referee, Pit Crew members entering the Battlefield must not communicate with
+anyone from the outside.
+Penalty: Verbal Warning. If the warning is ineffective, the offender may be disqualified as the highest penalty.
+R15 Pit Crew members are not allowed to power their equipment using the power supply for official equipment in
+the Competition Area. However, they may bring their own power supply.
+Penalty: Verbal Warning. If the warning is ineffective, the offender will be issued a Red Card. The highest
+penalty that can be imposed on the offending team is disqualification.
+R16 Except for special circumstances, Pit Crew are prohibited from wearing slippers into the Competition Area.
+Penalty: The offender may receive a Red Card as the highest penalty.
+R17 The team that makes an appeal must provide valid evidence or the specifications or rules in the official
+documents they are citing.
+Penalty: The highest penalty that can be imposed on the offender is disqualification.
+
+7.2.1.2
+
+Battlefield Regulations
+
+R18 Participants must wear goggles when inside the Battlefield (except for Engineer Challenge).
+Penalty: The offender will be barred from the Battlefield.
+
+64
+
+© 2025 DJI All Rights Reserved.
+
+R19 During an Official Technical Timeout, Pit Crew members are not allowed to fix faults other than those in
+modules related to the Referee System.
+Penalty: Verbal Warning. If the warning is ineffective, the offender will be issued a Red Card.
+R20 After the end of the Setup Period, Pit Crew members must return to the designated area outside the Battlefield.
+During the competition, Pit Crew are not allowed to leave the area without the permission from the referee.
+Penalty: Verbal Warning. If the warning is ineffective, the offender will be issued a Red Card.
+R21 After the preparation phase ends, the pit crew must place the commissioning remote controller for the Sentry
+at the battlefield entrance, and may not use the remote controller to commission the Sentry after the five-second
+countdown has begun.
+Penalty: If the violation is committed is before the five-minute round, a Verbal Warning will be issued. If the
+warning is ineffective, the offending robot will be issued a Red Card; if it is during the five-minute
+round, the offending robot will be issued a Red Card.
+R22 After the Five-Second Countdown, the Pit Crew must not operate remote controllers located outside the
+Operation Room that correspond to deployed robots.
+Penalty: The offending robot will be issued a Red Card, with the highest penalty being a Round Forfeiture.
+R23 Pit crew members must ensure their robots are operating safely and will not cause harm to any person or
+equipment in the Competition Area.
+Penalty: The offending team must bear the corresponding responsibility.
+
+7.2.1.3
+
+Operation Room Regulations
+
+R24 Except for the Operators of the robots on the Battlefield, the Pit Crew are not allowed in the Operation Room.
+Penalty: Verbal Warning. If the warning is ineffective, the offender will be issued a Red Card.
+R25 Operators must operate the relevant robot control equipment in the relevant Operation Room during the 15Second Referee System Initialization Period and the Five-Minute Round, and must remain in their location
+after the Setup Period, unless otherwise permitted by the referee.
+Penalty: Verbal Warning. If the warning is ineffective, the offender will be issued a Red Card.
+R26 During the competition, each operator is equipped with at most one remote controller and one custom controller.
+Penalty: Verbal Warning. If the warning is ineffective, the offender will be issued a Red Card.
+R27 Operators are not allowed to use their own headphones or computers in the Operation Room.
+
+© 2025 DJI All Rights Reserved.
+
+65
+
+Penalty: Verbal Warning. If the warning is ineffective, the team will be issued a Round Forfeiture.
+R28 USB keyboards and mice that are produced by unqualified manufacturers, modified, homemade, or do not
+comply with the USB HID protocol are not allowed to be connected to the Operation Room computer.
+Penalty: Verbal Warning and prohibition of using the violating device. If the warning is ineffective, the
+offender will be issued a Red Card.
+
+7.2.2
+
+Robot
+
+R29 Robots and custom controllers to be deployed in a match must pass the Pre-Match Inspection.
+Penalty: Round Forfeiture.
+R30 In the first round of a match, the robots must meet the minimum battle team lineup.
+Penalty: Match Forfeiture.
+R31 Robots must meet the requirements in the RoboMaster 2026 University Series Robot Specification Manual.
+Penalty: The highest penalty that can be imposed on the offending team is disqualification.
+
+
+The RMOC will conduct random checks on robots.
+
+
+
+Any report made against a robot for not complying with the robot building specifications
+manual must be supported by the relevant evidence.
+
+
+
+If the Speed Monitor Module or Armor Module is not installed according to requirements during
+the match, the corresponding module will be considered offline.
+
+R32 Before the 15-Second Referee System Initialization Period, armor stickers that meet the requirements in the
+specifications documents must be attached to robots equipped with Armor Modules.
+Penalty: Verbal Warning. If the warning is ineffective, the offending robot will be issued a Red Card.
+R33 When waiting in the Staging Area, team members are not allowed to bring robots out of the Staging Area
+without permission.
+Penalty: Verbal Warning. If the warning is ineffective, the offenders and robots will be issued a Red Card, with
+the highest penalty being disqualification.
+R34 Robots must not have, or develop, any safety hazards, including but not limited to short circuits, crashes, smoke,
+open flames, falling to the ground, or gas cylinder explosions. If any safety hazard is identified, participants
+must cooperate with the referee to carry out the necessary actions.
+Penalty: If it happens before the start of a match, the Pit Crew need to resolve the safety issue as required by
+
+66
+
+© 2025 DJI All Rights Reserved.
+
+the referee. Otherwise, the offending robot will not be allowed to appear on the Battlefield. If it is during the
+competition, a Verbal Warning shall be issued. If the warning is ineffective, the offender or the offending robot
+will be issued a Red Card. Any incident involving serious safety hazards must be handled by the Head Referee
+in accordance with “8 Irregularities”.
+R35 Robots are not allowed to launch projectiles off the Battlefield.
+Penalty: Verbal Warning. If the warning is ineffective, the offending robot will be issued a Red Card.
+R36 During the Setup Period and the 15-Second Referee System Initialization Period, robots in the Battlefield are
+not allowed to leave their corresponding Initial Zones.
+Penalty: The offending robot may be issued a Red Card as the highest penalty.
+R37 If any projectile needs to be launched during the Setup Period, it must be launched into the projectile clearance
+bag offered by the referee.
+Penalty: The offender and the offending robot may be issued a Red Card as the highest penalty.
+R38 During the competition, the robot is not allowed to disintegrate into sub-robots or sub-systems connected by
+multiple flexible cables, and must not cast or launch their own parts.
+Penalty: The offending robot will be issued a Red Card.
+R39 During the competition, alive robots are not allowed to block any of its Armor Modules with its body or
+transform beyond its maximum expansion size.
+Penalty: Warnings are issued against the offending team based on their subjective intention. If the blocking
+was intentional, a Yellow Card will be issued along with a Verbal Warning. If the Verbal Warning is ineffective,
+a Red Card will be issued. If the blocking was passive in nature, the offender will be issued a Yellow Card.
+R40 During the setup period, replacement modules or parts used on robots must comply with the requirements for
+“Equivalent Parts.” For details, please refer to “6.3 Setup Period”.
+Penalty: The offending robot may be issued a Red Card as the highest penalty.
+
+7.2.3
+7.2.3.1
+
+Interaction
+Interaction between Robots
+
+R41 A robot may not use any of its body structures to strike an opponent robot in collision. If a defeated robot is
+blocking a key path, the robot can be slowly pushed away.
+
+© 2025 DJI All Rights Reserved.
+
+67
+
+In any collision between robots, the offending robot will be deemed by the referee as the initiator.
+Penalty: Warnings shall be issued against the offending robot based on their subjective intention and the degree
+of collision.
+Table 7-3 Collision Violation Penalty Standards
+Violation Level
+
+A Yellow Card
+
+A Red Card
+
+Description
+
+
+Actively causing frontal and high-speed collision
+
+
+
+Active pushing that causes the other team’s robot to move noticeably
+
+
+
+Active pushing that impedes the normal movement of the other team’s robot
+
+
+
+Actively causing high-speed, repeated, and intense frontal collision
+
+
+
+Active pushing that causes the other team’s robot to move for a longer distance
+
+
+
+Active pushing that seriously impedes the normal movement of the other team’s robot
+
+R42 A robot must not get stuck together with any other robot due to active interference, blocking, or collision.
+Penalty: Counting from when an entanglement is determined, warnings should be issued against the offending
+robot based on the length of the violation. If it exceeds 10 seconds, a first Yellow Card will be issued. Thereafter,
+each 20 seconds will incur a further Yellow Card. This should carry on until the offending robot is ejected.
+Regardless of whether the offending robot is alive, if the violation lasts longer than 90 seconds, the offending
+team may be issued a Round Forfeiture, which is the highest penalty, based on their subjective intention.
+R43 A robot must not interrupt any opponent robot’s regular HP recovery by any means of contact.
+Penalty: The offending robot will be issued a Yellow Card.
+
+7.2.3.2
+
+Interaction between Robots and Battlefield Components
+
+To ensure the fairness of the competition and that robots in the Battlefield are able to receive buffs and reloads
+effectively, Resupply Penalty Zones have been set up in the Battlefield where the robots of one or both teams are
+forbidden from entering, as shown below. The Resupply Zone of one team is the Resupply Penalty Zone for the
+other.
+
+68
+
+© 2025 DJI All Rights Reserved.
+
+[1]
+
+Resupply Penalty Zone
+
+Figure 7-1 Battlefield Penalty Zone
+R44 Robots are not allowed to enter the Resupply Penalty Zone.
+Penalty: Warnings will be issued against the offending team based on how long the robot remained in the
+Penalty Zone and the impact of its violation. If the violation lasts longer than 3 seconds, a Yellow Card warning
+will be issued for the first time. Thereafter, a Yellow Card warning will be issued every 10 seconds until the
+robot is defeated or goes Abnormal Disconnection. An offending robot that causes serious damage to an
+opponent robot by remaining in a Penalty Zone will be issued a Red Card.
+R45 During the competition, robots may only use projectiles supplied by the RMOC.
+Penalty: The highest penalty that can be imposed on the offending team is disqualification.
+R46 During the competition, robots are not allowed to destroy the Battlefield Components or projectiles nor affect
+the normal function of the Battlefield Components.
+Penalty: The highest penalty that can be imposed on the offending team is disqualification.
+
+© 2025 DJI All Rights Reserved.
+
+69
+
+7.3 Serious Violations
+The following actions are considered serious violations of rules. The highest penalty the RMOC may impose on an
+offending team for serious violations is disqualification. In the event of any violation of local laws and regulations,
+the RMOC will fully cooperate with the relevant authorities to hold the offender legally responsible.
+Table 7-4 Types of Serious Violations
+Regul
+
+Type
+
+ation
+1.
+2.
+3.
+
+4.
+
+5.
+6.
+7.
+
+8.
+
+Malicious destruction of the Battlefield, Battlefield Components, other official equipment, or the robots or
+equipment of other teams.
+Falsification, assumption of a false identity, or any other behavior determined as cheating.
+Tampering with or damaging the Referee System, or interfering with any detecting function of the Referee
+System through technical means.
+Circumstances that violate the specifications documents and are determined by the Chief Referee as a serious
+violation.
+Disobedience over penalties, refusal to cooperate, deliberate delay, disrupting the competition, forfeiting
+without valid reasons, boycotting, or other behavior that hinders the competition.
+Match throwing or manipulation.
+Providing property to others or illegally soliciting or accepting property from others for the purpose of
+obtaining an unjust competition outcome or improper benefits.
+Uncivilized and immoral conduct involving defamation, verbal abuse, rude gestures, malicious heckling, or
+malicious throwing of objects.
+
+9.
+
+Publishing, spreading, or disseminating to the media false or irresponsible remarks.
+
+10.
+
+Deliberately attacking or colliding with others in a manner that endangers themselves or others.
+
+11.
+
+Carrying hazardous items or contrabands.
+
+12.
+
+Other behavior that violates the spirit of the competition and are deemed a serious violation.
+
+13.
+
+70
+
+Other conduct that violates core socialist values, sports ethics, public order and norms, the culture and
+discipline of the competition, laws and regulations, or that causes an adverse impact on society.
+
+© 2025 DJI All Rights Reserved.
+
+8. Irregularities
+There will be a certain delay in the referee’s manual penalties and handling of abnormal situations. If it
+has a major impact on the result of the competition, the Chief Referee will determine the final result
+according to the actual situation.
+If any of the following anomalies occur during the competition, it will be handled according to the corresponding
+process, to which both teams cannot object. The handling process is as follows:
+When a serious safety hazard or abnormality has occurred, such as: a battery explosion, stadium power outage,
+explosion of a compressed gas cylinder, or interpersonal conflict, the Head Referee will notify both teams’
+operators after discovering and confirming the emergency, and eject all robots through the Referee System.
+The result of the round will be invalidated. The round will restart after the safety hazard or abnormality has
+been eliminated. The RMOC will give priority to addressing safety issues and will make every effort to protect
+Robots within reasonable limits. However, it cannot guarantee that Robots will be entirely unaffected, and any
+loss or impact resulting from safety measures shall be borne by the participating teams.
+If non-key Battlefield Components are damaged during a match (e.g., damage to the PVC Flooring) and the
+damage does not affect the fairness of the match, the match will proceed as usual.
+The competition will carry on despite any anomaly with a robot’s armor light effects or light indicator effects
+or any damage to an Armor Module Sticker.
+If key Battlefield Components experience logical or structural faults, for example, where the network
+connections are disrupted causing a robot to disconnect or a Battlefield Component does not operate normally,
+the referee will solve the problem manually through the Referee System. If the failure cannot be dealt with
+manually, the referee will notify the operators of both sides and eject all robots at the same time. The
+competition will end immediately, and the result of the competition will be invalid. When problems are solved,
+there will be a rematch.
+During a match, if there is structural damage or malfunction of key Battlefield Components that affects the
+fairness of the competition but the Head Referee did not confirm and end the competition round in time, and
+as a result, a round that should have ended continues and has a winner, the results of the round will be
+invalidated once the Chief Referee has confirmed the issue within five minutes after the end of the round, and
+a round of rematch will be held.
+In the case of a serious violation that would clearly have triggered a penalty of forfeiture, and the Head Referee
+did not confirm and execute it in time, the results for the round shall be invalidated once the Head Referee has
+
+© 2025 DJI All Rights Reserved.
+
+71
+
+made a determination to that effect within five minutes after the end of the round, and the offending team will
+be issued a forfeiture.
+During the competition, if any situation has occurred that may affect the fairness of the competition, the Chief
+Referee shall notify the Captains of both teams of the situation and suspend the results confirmation process
+within five minutes after the end of the match, and shall make a determination within 60 minutes and notify
+both Captains of the final course of action. The handling outcome is final and cannot be challenged by both
+teams.
+
+72
+
+© 2025 DJI All Rights Reserved.
+
+9. Appeal
+Each team has one opportunity to appeal in each event of each competition site during the RMUL 2026. Such
+opportunities cannot be accumulated. If an appeal is successful, the team involved retains its right to appeal again
+in future matches. If it is unsuccessful, the team will have exhausted its one opportunity to appeal. When a team has
+exhausted its opportunity to appeal, the Arbitration Commission will no longer accept any appeal from the team.
+After the appeal is accepted, the Arbitration Commission will deliberate on the appeal materials and relevant
+evidence. On behalf of the Arbitration Commission, the Chief Referee will then communicate the appeal decision
+to both teams. The Arbitration Commission has the right to final interpretation of the appeal decision.
+The following situations do not constitute a basis for appeal:
+
+
+Verbal Warnings and Yellow and Red Cards issued as penalties for violations.
+
+
+
+The types and processes of Technical Timeouts initiated.
+
+
+
+"Regular battle damage" occurred at the Referee System Onboard Modules.
+
+
+
+Human timing error in Engineer Challenge.
+
+No appeal is allowed five minutes after a Match Results Confirmation Form has been signed or a match has ended.
+
+© 2025 DJI All Rights Reserved.
+
+73
+
+9.1 Appeal Process
+Teams filing an appeal need to follow the procedures as shown below:
+
+Lodging of an ap peal
+
+A team may lodge an appeal within 5 minutes after the end of a match (based on the time recorded on the Match
+Results Confirmation Form). Teams d uring the Group Stage may appeal on all ro unds of a match, while in the
+Knockout Stag e the losing team is only allowed to appeal on the rounds in which it has lost. Team Captains can
+lodge an appeal at the Result Confirmation site. After a Captain lod ges an appeal, an appeal process is initiated.
+The team consumes an opportunity to lodge an appeal. Any ap peal made 5 minutes after a Match Results
+Confirmatio n Form has been signed or a match has ended will be deemed invalid. No ap peals are allowed before
+an d durin g the competition.
+Note:
+If robots of both teams are involved in the appeal, the Arbitration Commission has the authority to isolate any
+relevant robots from both teams after an appeal has been lodged. These robots will be returned to the teams no later
+than when the appeal decision is an nounced.
+
+Filling in an d signing the Appeal Form
+
+Gathering of evidence or defense materials
+
+Informing both teams of the appeal decision
+
+After an Appeal From is provided, th e Captain of th e appealing team must fill in and sign the Appeal Form with in
+10 minutes at the Result Confirmation site. When the Captain o f the appealing team fills in the Ap peal Form, a
+maximum of two Pit Crew Members are allo wed to provide assistance. The Arbitration Commission shall conduct
+arbitration based on the reason for appeal specified in the Appeal Form. The appealing team is not allowed to
+modify or supplement the reason for appeal. If the Appeal Form is not signed and submitted within 10 minutes, the
+ap pealing team wo uld be deemed to have no reason for appeal and skip the following steps. In this case, th e appeal
+decision would be “Maintaining the original match results”.
+
+If either team needs to collect appeal materials, the materials h ave to be submitted to the Chief Referee within 30
+minutes after the appeal req uest has b een accepted . The time and location of the submission must be agreed
+beforehan d, and the team is required to ex plain the appeal materials during the submission. The Arb itration
+Commission will not accept an y new appeal materials furnished beyond the submission period. If both teams do not
+need to collect appeal materials, or the Arbitration Commission has determined that there is sufficient evidence or
+the groun ds provid ed by the appealin g team cann ot be used as a basis for appeal, the parties shall proceed directly to
+the nex t step.
+
+The Arbitration Commission calls the Captains of both teams to the Arbitration Room, show how and wh y the
+ap peal decision is made, and info rm them of the decision. Both teams must b e present in the Arbitration Room
+within 10 minutes after being notified by the Arbitration Commission. This session must be attended in person. No
+more than three members from each team may be present, consisting of only Regular Members and the Supervisor.
+The absence of an y team shall be deemed as giving up their chan ce to attend the communication session . If the
+gro unds of appeal relied on by the ap pealing team are clearly inconsistent with facts or cannot be used as a basis for
+ap peal, the Arbitration Commission may maintain the original match results only after explaining its decision to the
+ap pealing team. If the representatives of both teams agree on the app eal decision or the Arbitration Commission
+co nsiders that the n ecessary communication has been completed, the appeal shall p roceed to the next step.
+
+Confirming the appeal decision
+
+The Arbitration Commission will indicate its final decision on the Appeal Form. One member in the Arbitration
+Room from each team must sign the Appeal Form on behalf of the team. Th e signing of the Form means that the
+ap peal decision is confirmed and no lon ger disputable. If the Appeal Form is not signed within 5 minutes after the
+decision has been announced, the decision is d eemed to be communicated to th e teams. If the grounds of appeal
+relied on by the appealing team are clearly incon sistent with facts or cannot be used as a basis for appeal, the
+Arbitration Commission shall maintain the origin al match results after explaining its decision to the appealing team.
+The other team involved in the appeal is n ot required to provide signature and shall be deemed to have been
+informed of th e appeal decision.
+
+Continued appeal
+
+If a rematch h as occurred for a round due to an appeal decision requiring a “Rematch”, teams still having appeal
+opportu nities may ap peal ag ain after the rematch. In this scenario, if the team that made the initial appeal wants to
+ap peal ag ain (known as a “co ntinued appeal”), the appeal opp ortunity of the team will be used regardless of the
+ap peal decision.
+
+Figure 9-1 Appeal Process
+
+74
+
+© 2025 DJI All Rights Reserved.
+
+9.2 Appeal Materials
+Each file submitted by participating teams as appeal materials must not exceed 500 MB in size. No more than 10
+files can be submitted.
+
+9.3 Appeal Decision
+Appeal Decisions include: Maintaining the original match results, Forfeiture against the respondent, and Rematch
+between both teams. After the Arbitration Commission confirms the appeal decision, neither team is allowed to
+challenge it.
+
+
+Successful appeal: Forfeiture against the respondent, Rematch between both teams
+
+
+
+Appeal failed: Maintaining the original match results
+
+If the communicated appeal decision is a rematch, but neither team is willing to accept a rematch, the appeal will
+be deemed failed and the original match results will be maintained.
+
+
+Provided it does not affect the schedule of the entire competition, the rematch will in principle be
+held on the same day after all the other matches, depending on the actual situation.
+
+
+
+The flow of the rematch will be the same as regular matches. Both teams are required to compete
+according to the time stipulated by the RMOC and comply with relevant rules.
+
+If the round involved in the appeal decides the final winner of a match, the match winner must be re-decided.
+Example: In a BO3 match with a result of 1:2, the Red Team wins the first round, while the Blue Team wins
+the second and third rounds. After the end of round, the Red Team files an appeal regarding the second round,
+and the appeal decision is a rematch between both teams. If the Red Team wins the rematch round, the final
+match result becomes 2:0; if the Blue Team wins the rematch round, the final result remains 1:2.
+
+© 2025 DJI All Rights Reserved.
+
+75
+
+76
+
+© 2025 DJI All Rights Reserved.
+
+

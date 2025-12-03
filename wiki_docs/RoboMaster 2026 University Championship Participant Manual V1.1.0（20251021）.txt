@@ -1,0 +1,3270 @@
+Statement
+Participants are forbidden from engaging or participating in any actions determined by the RoboMaster Organizing
+Committee (hereinafter referred to as “the RMOC”) as involving public disputes or sensitive issues or causing
+offence to the public or certain social groups, or damaging the image of RoboMaster; otherwise, RMOC shall have
+the right to disqualify offending persons permanently from the competition.
+
+Release Notes
+
+2
+
+Date
+
+Version
+
+Release Notes
+
+2025.10.21
+
+V1.0.0
+
+First release
+
+© 2025 DJI All Rights Reserved.
+
+Table of Contents
+Statement.................................................................................................................................................. 2
+Release Notes ........................................................................................................................................... 2
+1.
+
+Foreword.......................................................................................................................................... 6
+1.1
+
+About the Competition ................................................................................................................ 6
+
+1.2
+
+Main Changes to New Competition Season................................................................................... 6
+
+2.
+
+Participation .................................................................................................................................... 7
+2.1
+
+Registration Requirements........................................................................................................... 7
+
+2.2
+
+Participating Teams .................................................................................................................... 7
+
+2.3
+
+Participants ................................................................................................................................ 9
+
+2.4
+
+Technical Direction................................................................................................................... 17
+
+2.5
+
+Rule Q&A ................................................................................................................................ 19
+
+3.
+
+Season Schedule ............................................................................................................................. 20
+
+4.
+
+Technical Assessment ..................................................................................................................... 23
+4.1
+
+Season Planning ....................................................................................................................... 24
+
+4.2
+
+Rules Exam .............................................................................................................................. 24
+
+4.3
+
+Mid-term Progress Documentation ............................................................................................. 24
+
+4.4
+
+Final Robot Assessment ............................................................................................................ 24
+
+4.5
+
+Referee System Assessment ...................................................................................................... 25
+
+4.6
+
+Season Summary ...................................................................................................................... 25
+
+5.
+
+Awards ........................................................................................................................................... 26
+5.1
+
+Regional Competition ............................................................................................................... 26
+
+5.2
+
+Final Tournament ..................................................................................................................... 27
+
+5.3
+
+Open Source Award .................................................................................................................. 28
+
+5.4
+
+5.5
+
+5.6
+
+5.7
+
+5.3.1
+
+Awards ............................................................................................................................. 29
+
+5.3.2
+
+Selection Criteria and Process ............................................................................................ 29
+
+Organization Award .................................................................................................................. 30
+5.4.1
+
+Awards ............................................................................................................................. 30
+
+5.4.2
+
+Selection Criteria and Process ............................................................................................ 31
+
+Robot Combat Award ............................................................................................................... 34
+5.5.1
+
+Awards ............................................................................................................................. 34
+
+5.5.2
+
+Selection Criteria and Process ............................................................................................ 35
+
+Annual Technical Breakthrough Award ...................................................................................... 36
+5.6.1
+
+Awards ............................................................................................................................. 36
+
+5.6.2
+
+Selection Criteria and Process ............................................................................................ 36
+
+Outstanding Contribution Award ............................................................................................... 36
+5.7.1
+
+Awards ............................................................................................................................. 37
+
+5.7.2
+
+Selection Criteria and Process ............................................................................................ 37
+
+© 2025 DJI All Rights Reserved.
+
+3
+
+5.8
+
+RM Award ............................................................................................................................... 41
+5.8.1
+
+Awards ............................................................................................................................. 41
+
+5.8.2
+
+Selection Criteria and Process ............................................................................................ 41
+
+Appendix: Safety Instructions ................................................................................................................... 43
+
+4
+
+© 2025 DJI All Rights Reserved.
+
+Tables Directory
+Table 2-1 Roles and Responsibilities of Participants ...................................................................................... 10
+Table 2-2 Regular Member Positions and Responsibilities .............................................................................. 13
+Table 2-3 Concurrently Held Positions.......................................................................................................... 16
+Table 2-4 Technical Direction Classification ................................................................................................. 18
+Table 2-5 Communication Channels ............................................................................................................. 19
+Table 3-1 Online Schedule ........................................................................................................................... 21
+Table 3-2 On-site Schedule .......................................................................................................................... 22
+Table 4-1 Submission Specifications............................................................................................................. 23
+Table 5-1 Regional Competiton Awards ........................................................................................................ 26
+Table 5-2 Final Tournament Awards.............................................................................................................. 27
+Table 5-3 Open Source Awards .................................................................................................................... 29
+Table 5-4 Organization Awards .................................................................................................................... 30
+Table 5-5 Organization Award Selection Criteria and Process ......................................................................... 31
+Table 5-6 Robot Combat Awards .................................................................................................................. 34
+Table 5-7 Selection Criteria and Process for Robots Combat Awards ............................................................... 35
+Table 5-8 Annual Technical Breakthrough Awards ......................................................................................... 36
+Table 5-9 Outstanding Contribution Awards .................................................................................................. 37
+Table 5-10 Selection Criteria and Process for Outstanding Contribution Awards .............................................. 37
+Table 5-11 RM Award Awards ...................................................................................................................... 41
+Table 5-12 RM Award Selection Criteria and Process..................................................................................... 41
+
+© 2025 DJI All Rights Reserved.
+
+5
+
+1. Foreword
+1.1 About the Competition
+Affiliated with the China University Robot Competition, the RoboMaster University Series (RMU) provides a
+platform for robotic competitions and academic exchanges among global technology enthusiasts. Since its
+establishment in 2013, the RoboMaster has been committed to its mission – “empowering young learners to
+transform their world with the power of engineering and technology”. The RoboMaster is also dedicated to tapping
+the potential of young talents with engineering backgrounds while widely passing on the beauty of science &
+technology as well as innovation to the public.
+The RoboMaster University Championship (RMUC) focuses on evaluating the participants’ abilities to apply
+scientific and technical knowledge in an integrated and practical context. It deeply incorporates a wide array of
+robotics technologies, including “machine vision,” “embedded system design,” “mechanical engineering,”
+“autonomous navigation,” “human-robot interaction,” and “RF front-end.” Furthermore, it ingeniously blends
+engaging presentation styles with thrilling robot combat, resulting in more intuitive and fierce confrontations that
+capture the keen interest of technology enthusiasts and the wider public.
+
+1.2 Main Changes to New Season
+
+
+Adjusted the registration requirements
+
+
+
+Adjusted the definition of participating teams and merge team categories.
+
+
+
+Revised the definition and responsibilities of the Team Advisor
+
+
+
+Cancelled the division for Hong Kong, Macau, Taiwan, and overseas teams
+
+
+
+Adjusted the technical assessment system and removed non-required sections for Tier-1 Teams.
+
+
+
+Adjusted certain awards and prize distribution
+
+6
+
+© 2025 DJI All Rights Reserved.
+
+2. Participation
+2.1 Registration Requirements
+You are eligible for registration if you meet any of the following criteria:
+
+
+Teams that have successfully passed the Mid-Term Progress Assessment in RMUC 2024 or RMUC 2025
+
+
+
+Teams that successfully advance from the Group Stage of the 3V3 Match in RMUL 2025 (if there are two
+rounds in the Group Stage, advancement in the first round will be the benchmark); the requirements for Tier2 Teams may be relaxed to allow those that have won second prize in the main awards.
+ To form a joint team, at least one of the participating teams must meet the RMUC eligibility
+requirements for registration.
+ The RMUC registration requirements will be adjusted each season based on actual circumstances and
+will be finalized when registration opens for that season.
+
+2.2 Participating Teams
+ Due to legal and regulatory restrictions in overseas regions and countries, overseas teams are currently
+unable to create a team or complete registration on the official RoboMaster platform. Overseas team
+creation, registration, subsequent technical assessment sections, and roster collection will all be
+conducted via Wenjuanxing. Overseas team registration portal:
+https://djistore.wjx.cn/vm/QUtHCIK.aspx
+ The distinction in naming teams from Mainland China, Hong Kong, Macao, Taiwan, and overseas
+Teams is provided solely to clarify instances where different participation procedures apply due to
+the geographic location of the university.
+Teams must adhere to the following rules:
+R1 All participating teams must be created on the RoboMaster forum by the team’s Head Supervisor or Captain.
+If a team already exists, there is no need to create it again. When creating a team, you need to provide all
+required team information as specified by the platform. To obtain the invitation code, please contact the
+RoboMaster Event Staff. After preparing the team, the team leader can invite team members to join via an
+invitation link. In the team space, click Registration for the competition to enter the competition registration
+module. Select the event you wish to register for, click Register Now, and follow the instructions to complete
+the Registration submission process. If all the requirements in this section are met, the registration will be
+successful. The RMOC will periodically open the Entry List adjustment function during the season, allowing
+participating teams to change their team members during the open period. All information is based on the final
+
+© 2025 DJI All Rights Reserved.
+
+7
+
+Entry List confirmed during the current open period. No changes can be made after the period has ended. The
+Registration Center will be open for one last time before the competition starts. The RMOC will follow the
+final information submitted in preparing and giving out award certificates.
+R2 Any team participating in different competitions must use the same team name. A team’s name must be in the
+format of “XXX Team”, where “XXX” is the team’s self-chosen name. The total length of the team name
+should not exceed 16 English letters or 8 Chinese characters. The team name must not include the university
+or college name or its abbreviation in Chinese/English, or such Chinese characters as “队”, “团队”, and “战
+
+队” which mean “team” in English, or other special symbols such as “*/-+”. The team name must reflect the
+
+positive and pioneering spirit of the team and comply with relevant state laws and regulations. If the RMOC
+determines that a team’s name does not align with the spirit of the competition, it has the right to require the
+team to change its name.
+After submitting their registration materials, participating teams are not allowed to change their
+team names.
+R3 A participating team must be affiliated with a higher education institution, and must meet the requirements for
+personnel roles, team size, and qualifications as specified in “2 Participation ”.
+R4 In principle, each college or university is only allowed to have one qualified team for one competition
+(challenge). Some institutions have multiple campuses in different cities, making it difficult for inter-campus
+students to compete as a team. Such institutions are allowed to form more than one campus-based teams once
+the situation has been verified by the RMOC. If a school has more than one participating team submitting a
+registration, please refer to the “List of Representative Teams for RoboMaster 2026 University Series” for the
+detailed Registration review guidelines. The applicant must ensure that their registration information is
+complete and accurate, and that they will undertake the corresponding responsibilities. The applicant must bear
+all consequences caused by any missing or inaccurate information. For special circumstances, the applicant
+may contact the RMOC, which will handle the case based on actual circumstances. The RMOC reserves the
+right of final interpretation.
+The RMOC will reject the registration of any team that does not meet any of R1-R4. The participating
+team can reapply until it meets the requirements.
+R5 Any two schools that do not have their own individual teams can form an intercollegiate team.
+A.
+
+Before establishing an intercollegiate team, members must consider all their respective circumstances and
+communicate with each other thoroughly about team planning. Any operating and R&D costs, personnel
+arrangements or disputes arising therefrom must be handled by the intercollegiate team itself, for which
+the RMOC bears no responsibility.
+
+8
+
+© 2025 DJI All Rights Reserved.
+
+B.
+
+Intercollegiate teams are not allowed to be split after they’re officially established. They can only
+participate in the RMUC 2026 as intercollegiate teams. If an intercollegiate team that has passed
+registration review is split up, it will be considered as voluntarily forfeiting participation eligibility.
+
+C.
+
+The intercollegiate team’s name should be “XXX Intercollegiate Team” instead of “XXX Team.” An
+intercollegiate team is required to upload an Intercollegiate Team Statement issued by its college or
+university to the registration system. The Intercollegiate Team Statement template can be found in the
+Registration system section instruction.
+
+R6 In this season, each participant can only join one team for the competition.
+R7 If any two or more teams do not meet any requirement under the “Five Differences” Rule, they will be treated
+as the same team.
+“Five Differences” Rule: different team names, different team members, different supervisors,
+different affiliated institutions (college or other educational institutions), and different robots.
+R8 Provided the relevant registration requirements are met, one team can sign up for more than one RoboMaster
+competition (including RMUC and RMUL).
+R9 The RMOC will deem a team participating in different competitions in the same season as one and the same
+group to handle the various competition processes more efficiently (including free material supply, material
+purchases, and support for participants). A team cannot be broken up after completing registration for the
+season.
+
+2.3 Participants
+The RoboMaster Competitions advocate teamwork and cooperation. To encourage participants to actively take on
+key roles within the Team, the RoboMaster Organizing Committee will select awards such as Outstanding Captain
+and Outstanding Supervisor to recognize Participants who have made significant contributions to the RoboMaster
+competition. For more details, please refer to “5.7 Outstanding Contribution Award”.
+The roles and responsibilities of participants are as follows:
+
+
+Participants are not permitted to hold multiple positions concurrently.
+
+
+
+All participants must meet the corresponding eligibility requirements and, if necessary, present
+relevant proof at the competition venue.
+
+
+
+Regarding eligibility for awards: Team Advisors and reserve members are not eligible for awards
+and may only receive the electronic certificate of participation issued by the RMOC for the current
+season. Senior Advisors are not eligible for awards and may only enjoy event participation
+
+© 2025 DJI All Rights Reserved.
+
+9
+
+benefits.
+Table 2-1 Roles and Responsibilities of Participants
+Position
+
+Position Description
+
+Responsibilities
+
+Supervisor
+
+The team’s supervisor
+
+ Responsible for team
+
+Identity
+
+Number
+of
+Personnel
+0-7
+
+formation, management, and
+ The head of
+supervisors
+
+major decision-making
+ Responsible for building team
+
+ The main liaison
+
+culture and fostering positive
+
+with the RMOC
+
+values among team members
+ Responsible for the team’s
+legacy building and
+development
+ Guide the team in building
+their robots
+
+Head
+Supervisor
+
+ Coordinate on-campus
+resources, guide the team in
+developing project plans, and
+help the team successfully
+conclude the match
+ Responsible for safeguarding
+the personal safety of the
+team and its property
+ Cooperate with the RMOC
+proactively during the
+competition
+
+10
+
+© 2025 DJI All Rights Reserved.
+
+Faculty personnel
+who will graduate
+before March 2026
+and have research
+or teaching
+qualifications at
+the university from
+September 2025 to
+August 2026.
+
+1
+
+Position
+
+Position Description
+
+Responsibilities
+
+Identity
+
+
+Number
+of
+Personnel
+
+Has
+participation
+experience as
+a Regular
+Member of
+any Team in
+previous
+
+
+
+Provide guidance and
+
+RMU
+
+support to the team in terms
+
+seasons.
+
+of technological innovation,
+tactical design, team
+
+Team
+Advisor
+
+Provide guidance and
+
+management, and team
+
+support on
+
+building, etc.
+
+Participation
+experience for the
+
+
+
+team
+
+
+
+
+Full-time
+college
+students,
+including
+
+Support the legacy and
+
+associate,
+
+continuity of the team
+
+bachelor's,
+
+Capable of handling practical
+
+master's, and
+
+robots construction tasks and
+
+doctoral
+
+miscellaneous participation-
+
+students, with
+
+related matters.
+
+proof of
+
+0-5
+
+enrollment at
+this
+institution
+between
+September
+2025 and
+August 2026.
+
+© 2025 DJI All Rights Reserved.
+
+11
+
+Position
+
+Position Description
+
+Responsibilities
+
+Identity
+
+Number
+of
+Personnel
+
+Team members
+who graduated in
+previous seasons,
+as well as
+engineers,
+A professional who
+Senior
+Advisor
+
+researchers, and
+
+provides effective
+
+Provide the team with strategic,
+
+teaching staff
+
+support and assistance
+
+technical, management,
+
+currently
+
+to the team in a
+
+and funding support
+
+employed in
+
+0-5
+
+enterprises,
+
+specific area.
+
+research
+institutions, or
+working as
+independent
+professionals.
+
+Regular
+Member
+
+Include the Captain,
+
+Full-time students
+
+Vice Captain, Project
+
+at higher education
+
+Manager, Operation
+
+Please refer to the table below.
+
+Manager, and general
+
+including associate
+
+members.
+
+degree,
+master's, and
+
+of the team will be
+
+doctoral students,
+
+temporarily engaged
+
+Member
+
+in personal study and
+growth and may
+become Regular
+Members after being
+observed and
+promoted by the team.
+
+12
+
+© 2025 DJI All Rights Reserved.
+
+10-35
+
+undergraduate,
+
+The Reserve Members
+
+Reserve
+
+institutions,
+
+who can provide
+Assist Regular Members in the
+
+proof of
+
+competition
+
+enrollment from
+their university
+between
+September 2025
+and August 2026.
+
+0–20
+
+Table 2-2 Regular Member Positions and Responsibilities
+Position
+
+Position Description
+
+Responsibilities
+
+ Core team member
+
+ Responsible for forming the team, selecting and
+
+ The technical and
+
+appointing personnel wisely, and developing
+
+tactical leader of the
+
+effective strategies and lineups. Overall
+
+team
+
+responsibility for personnel selection and
+
+ Person in charge of
+building team
+culture
+ The main liaison
+with the RMOC
+
+Number of
+personnel
+
+training, allocation of team spots and award
+quotas, day-to-day management of personnel,
+and replacement of team members.
+ Responsible for overseeing the formulation and
+evaluation of technical proposals and tactical
+plans, assessing risks, and making key decisions.
+ Responsible for building team culture and
+
+Captain
+
+1
+
+fostering positive values among team members
+ Responsible for maintaining and preserving
+documentation related to technology and
+management, establishing and iterating on team
+processes and mechanisms, and supporting the
+team’s continuity and development.
+ During the competition, participation in the
+Captains Meeting is required, as well as
+involvement in key event processes such as
+Result Confirmation and Appeals for each
+Match.
+ Form the core management team along with the
+
+Vice
+Captain
+
+Core team member
+
+Captain
+ Assist the Captain with the management of the
+
+0-3
+
+team
+ Core team member
+Project
+Manager
+
+ Oversee project
+progress and risk
+management
+
+ Responsible for developing plans for each stage
+of the match, including setting objectives,
+
+1
+
+timelines, and budgeting.
+
+© 2025 DJI All Rights Reserved.
+
+13
+
+Position
+
+Position Description
+
+Responsibilities
+
+Number of
+personnel
+
+ Collect feedback on relevant requirements and
+suggestions, ensure effective process control for
+all tasks, identify and provide early warning of
+project risks, and ensure successful project
+delivery and closure.
+ Responsible for internal communication and
+coordination within the team, supporting team
+building and the development of organizational
+systems, and addressing resource and scheduling
+issues encountered during projects.
+ Study project management processes, methods,
+tools, and rules, and promote and implement
+them within the team
+Note:
+ Project managers are advised to acquire basic
+knowledge required by Project Management
+Professional (PMP) education and familiarize
+themselves with general concepts and theories of
+project management.
+ As a key management member of the
+participating team, the project manager is advised
+to collaborate closely with each robot R&D subproject team, engage in and observe the entire
+process from robot design to production, and
+acquire the necessary fundamental knowledge
+
+Operations
+Manager
+
+14
+
+
+
+Core team member
+
+
+
+Responsible for
+
+set by the RMOC, the operation manager
+
+team publicity,
+
+consolidates the team’s publicity efforts to
+
+investment
+
+convey consistent messages, enhances cultural
+
+attraction, logistics,
+
+building, and creates a comprehensive publicity
+
+finance, and other
+
+system. Relevant responsibilities include, but are
+
+operations
+
+not limited to:
+
+© 2025 DJI All Rights Reserved.
+
+
+
+According to the annual assessment requirements
+
+1–4
+
+Position
+
+Position Description
+
+
+Responsibilities
+
+The one who
+
+
+
+inherits, builds, and
+
+Number of
+personnel
+
+Plan and implement cultural building
+initiatives to sustain a positive team culture
+
+promotes team
+
+
+
+culture
+
+Keep track of the team’s R&D progress,
+explore the cultural elements in the robot
+development process, write and disseminate
+compelling team narratives, and build team
+identity around core figures
+
+
+
+Integrate the event’s culture with team
+culture and promote it through
+documentation, promotion, and other
+initiatives
+
+
+
+Utilize images, videos, activities, and create
+other types of content to showcase the
+team’s exceptional skills and expertise,
+document the competition process, and
+provide ample promotional materials for the
+team
+
+
+
+Responsible for the organization and systematic
+implementation of other team operations,
+including but not limited to:
+
+
+Plan and organize team recruitment, teambuilding activities, and technical exchanges
+
+
+
+Oversee the team’s financial affairs and
+process management, and engage in R&D
+cost control
+
+© 2025 DJI All Rights Reserved.
+
+15
+
+Position
+
+Position Description
+
+Number of
+personnel
+
+Responsibilities
+
+
+Communicate with the departments of their
+university or college, alumni companies,
+and industrial parks, create and pitch the
+team’s business proposal, identify partners
+through various channels, and secure
+technical support and sponsorship for the
+team in accordance with the requirements
+set by the RMOC
+
+
+
+Provide logistical support to the team and
+assist the Captain in planning and executing
+travel arrangements
+
+Ordinary members of the
+team, including the
+General
+
+Standby Captain,
+
+Member
+
+Technical Lead, Robot
+
+-
+
+0–32
+
+Team Lead, Quality
+Management, and others.
+Participating Teams may also assign the following concurrent roles as needed, including but not limited to: Standby
+Captain, Technical Lead, Robot Team Lead, and Quality Management.
+Table 2-3 Concurrently Held Positions
+Position
+
+Position Instruction
+The individual selected
+
+Standby
+Captain
+
+
+
+as the next Captain,
+already confirmed and
+announced within the
+team.
+
+16
+
+Responsibilities
+
+© 2025 DJI All Rights Reserved.
+
+
+
+Quantity
+
+Gradually get familiar with the team’s
+
+Each team must
+
+management processes to prepare for taking
+
+specify a Standby
+
+the role of Captain next season.
+
+Captain when
+
+Engage in the core competition processes
+
+submitting the roster
+
+and team management at the event.
+
+for the Regional
+Competition.
+
+Position
+
+Position Instruction
+Leader of a single
+
+Responsibilities
+
+
+Lead
+
+mechanics,
+embedded/electrical
+
+training schemes for new team members
+
+
+Support Robot Team Leads in assigning
+personnel specializing in the technical area
+
+system, algorithm, and
+
+0 or 1 lead per
+technical area
+
+to different robot teams, through the lens of
+
+hardware
+Leader for a single robot
+
+Manage personnel and other resources in
+the specific technical area, as well as design
+
+technical area, such as
+Technical
+
+Quantity
+
+technical expertise
+
+
+Design the underlying architecture for the
+
+type, such as Hero,
+
+corresponding robot type and make
+
+Robot
+
+Engineer, Infantry,
+
+decisions on key technical directions
+
+Team
+
+Drone, Sentry, Radar,
+
+ Help Technical Leads manage the resources
+
+Lead
+
+and Dart System
+
+1 lead per robot type
+
+that can be allocated to the corresponding
+robot type from the perspective of the robot
+team
+
+
+
+Quality
+Manage
+ment
+
+
+
+Person in charge of
+
+
+
+Design robot test processes, test cases, and
+
+quality assurance
+
+test methods, and organize functional,
+
+during robot
+
+stability, life, and other tests at each stage
+
+development
+
+of the development process to ensure the
+
+Establish and
+
+stability of robots’ preset functions
+
+maintain a quality
+
+
+
+1-2
+
+Engage in test method improvement and
+
+management
+
+test tool development to improve test
+
+system
+
+efficiency and quality
+
+2.4 Technical Direction
+When submitting the list in the registration system, the Captain must select the technical areas of all Regular
+Members and Reserve Members, categorized as follows:
+
+© 2025 DJI All Rights Reserved.
+
+17
+
+Table 2-4 Technical Direction Classification
+Direction
+
+Instruction
+
+Relevant Majors
+Theoretical and Applied
+
+Conduct robot structure design, assembly, and
+Mechanical
+
+maintenance; responsible for the design costs and
+reliability of the robot structure.
+
+Mechanics; Engineering
+Mechanics; Mechanical
+Engineering; Mechanical Design,
+Manufacturing, and Automation;
+Mechatronics Engineering.
+
+Design and develop robot control systems
+(including but not limited to kinematic and
+Embedded
+System/Electrical
+
+dynamic control systems); select, verify, and
+
+Mechatronics Engineering;
+
+debug robot sensors and other peripherals; and
+
+Automation; Artificial Intelligence;
+
+take responsibility for the design costs and
+
+Electronic Information Engineering
+
+reliability of the robot’s embedded components
+and control algorithms.
+Design and develop robot vision and navigation
+systems, as well as planning and decision-making
+Algorithm
+
+algorithms; select and debug robot computing
+platforms; take responsibility for the design costs
+and reliability of components related to the robot
+computing platform and host computer algorithms.
+Select, design, and develop robot hardware
+platform (including but not limited to
+
+Hardware
+
+supercapacitors, control boards, motor ESCs); take
+responsibility for the design costs and reliability of
+the robot hardware platform.
+Carry out development of custom client for
+competition robots, control software, various
+
+Software
+
+debug tools, as well as other application software
+that contribute to team building and development,
+such as member management system development
+and simulator development.
+
+18
+
+© 2025 DJI All Rights Reserved.
+
+Automation; Artificial Intelligence;
+Robotics Engineering; Computer
+Science and Technology; Software
+Engineering; Electronic and
+Computer Engineering
+Electronic Information
+Engineering; Electronic Science
+and Technology; Microelectronics
+Science and Engineering;
+Integrated Circuit Design and
+Integrated Systems
+Computer Science and Technology;
+Software Engineering; Data
+Science and Big Data Technology;
+Network Engineering; Electronic
+Information Engineering, etc.
+
+Direction
+
+Instruction
+
+Relevant Majors
+
+The operations track is further divided into:
+Operations
+
+communications, business development, logistics,
+
+/
+
+and finance.
+
+2.5 Rule Q&A
+The RMOC can be reached via the following contact channels. Working hours: Weekdays, 10:30–12:30 and 14:00–
+19:30. For more contact information and Q&A guidelines for the RMOC, please refer to the RoboMaster Organizing
+Committee official channel summary and Q&A guidelines.
+Table 2-5 Communication Channels
+Channel
+
+Contact Information
+
+Forum
+
+bbs.robomaster.com
+
+E-mail
+
+robomaster@dji.com
+
+Phone
+
++86 0755-84357613
+
+WeChat
+When sending a WeChat friend request, please indicate “institution name + position+
+name”
+
+© 2025 DJI All Rights Reserved.
+
+19
+
+3. Season Schedule
+The following season schedule is for reference only. The specific time is subject to the latest
+announcement by the RMOC.
+The RMUC 2026 consists of two schedules: the Online Schedule and the On-Site Schedule. The RMOC
+recommends that each team formulates a preparation plan and a robot production budget and plan before the
+competition to estimate the manpower and funds needed and avoid wasting such resources.
+Participating teams must complete registration, and only after finishing and passing the corresponding Technical
+Assessment before the deadline will they be eligible for participation and receive the corresponding RoboMaster
+product Educational Discount (hereinafter referred to as “product discount”) provided by the RMOC.
+
+
+For the Technical Assessment guidelines, please refer to “4 Technical Assessment”.
+
+
+
+For details on the product discounts corresponding to each Technical Assessment section, please refer to the
+“RMU 2026 Instructions for Purchasing Materials.”
+
+20
+
+© 2025 DJI All Rights Reserved.
+
+Table 3-1 Online Schedule
+Schedule
+October 29, 2025, 18:00 November 6, 2025, 18:00
+
+Section
+Registration
+
+Instruction
+Log in to the RoboMaster forum and
+complete the registration as required.
+
+
+November 26, 2025, 18:00 -
+
+Technical Assessment: Season
+
+November 27, 2025, 18:00
+
+Planning
+
+Eligible to the product discounts
+corresponding to the section.
+
+
+
+Obtain submission permissions for the
+Rule Exam
+
+ Eligible to the product discounts
+December 24, 2025, 18:00 -
+
+Technical Assessment: Rule
+
+December 25, 2025, 18:00
+
+Exam
+
+corresponding to the section.
+ Obtain permissions to submit the MidTerm Progress Documentation
+
+
+Eligible to borrowing a Hero Referee
+System, an Infantry Referee System, and
+a Sentry Referee System
+
+January 28, 2026, 18:00 -
+
+Technical Assessment: Mid-
+
+
+
+January 29, 2026, 18:00
+
+term Progress Documentation
+
+Teams participating in the RMUL 2026 3V3
+
+Eligible to the Final Robot Assessment
+
+Match and those that have passed this section
+are allowed to claim no more than one set of
+Referee System for each robot type.
+
+
+Eligible to borrowing a full set of
+Referee Systems
+
+
+March 16, 2026, 18:00 -
+
+Technical Assessment: Final
+
+March 19, 2026, 18:00
+
+Robot Assessment
+
+Obtain Permissions to submit
+Competition Feedback for the Referee
+System Assessment
+
+The scores received for the Project
+Documents and Technical Proposal will affect
+the team’s initial gold coin for each round
+during the Regional Competition.
+
+April 8, 2026, 18:00 –
+
+Technical Assessment: Referee
+
+April 22, 2026, 18:00
+
+System Assessment
+
+Obtain eligibility for Participation in on-site
+competitions.
+
+© 2025 DJI All Rights Reserved.
+
+21
+
+The participating teams first choose their
+preferred division. The RMOC will then
+April 10, 2026, 18:00 –
+
+determine the final list of participating teams
+
+Competition Feedback
+
+April 13, 2026, 18:00
+
+for each division based on the region in which
+the team’s college or university is located and
+their ranking on the Score and Rank Chart.
+
+Technical Assessment: Regional
+
+June 2026
+
+Season Summary
+
+distribution
+
+Technical Assessment: Final
+
+August 2026
+
+Season Summary
+
+Eligible for Regional Competition prize
+
+Eligible for Finals prize distribution
+
+Table 3-2 On-site Schedule
+
+
+
+Schedule
+
+Project
+
+May – June 2026
+
+Regional Competition (Mainland China)
+
+July – August 2026
+
+Finals (including Wildcard and Final Tournament)
+
+RMUC 2026 will not include Regional Competitions for Hong Kong, Macao, Taiwan, and overseas
+teams or Invitational Competitions.
+
+
+
+Teams from Hong Kong, Macau, Taiwan and overseas will participate in the Regional Competition
+(Mainland China) together with Teams from Mainland China to compete for places in the Finals.
+
+22
+
+© 2025 DJI All Rights Reserved.
+
+4. Technical Assessment
+The purpose of the Technical Assessment is for the teams to demonstrate their technical skills and guide them in
+their plans and preparations as well as development based on previous experience. It also offers an opportunity for
+team members to polish their skills, including requirements analysis, budgeting, data analysis and report drafting.
+All teams must complete the Technical Assessment in accordance with the requirements of the RMOC and within
+the time specified.
+RMUC 2026 mainly features six Technical Assessment sections: Season Planning, Rule Exam, Mid-Term Progress
+Documentation, Final Robot Assessment, Referee System Assessment, and Season Summary. The latest tasks and
+requirements for each section of the Technical Assessment are subject to forum announcements. For the schedule
+of each section, please refer to “3 Season Schedule”.
+In addition, the pilot of a participating team must pass the Pilot Assessment to qualify for flying the team’s Drone.
+Otherwise, the Drone can enter the field but cannot take off. Failing the Pilot Assessment does not affect the
+qualification of the team and the Pilot for participating in the competition. The tasks and requirements for the Pilot
+Assessment will later be published in a forum announcement.
+Below are the specifications for the video and other files to be submitted for the Technical Assessment:
+Participating teams must attach forms and videos as attachments to the forum reports for each section.
+Table 4-1 Submission Specifications
+Document
+Type
+
+Table/Form
+
+Specifications
+
+
+Format: Excel
+
+
+
+Source Han Serif-Regular (Chinese) or OpenSans-Regular (English)
+
+
+
+Table format: Enable text wrapping, and automatically adjust row height and column width.
+
+
+
+Vertically center the text, and left- or center-align the text horizontally, unless otherwise
+specially requested.
+
+Video
+
+
+
+4. Videos must have a resolution of 720p or higher.
+
+
+
+Upload method: Upload the video as a report attachment.
+
+
+
+Content:
+
+
+Subtitles or commentaries should be included to explain each process in the video.
+
+
+
+Only relevant content should be shown, with the video well-paced and its duration not
+exceeding the set limit.
+
+© 2025 DJI All Rights Reserved.
+
+23
+
+4.1 Season Planning
+Number of submissions: 1
+Passing criteria: Achieve a Level of “C” or above
+Content to be submitted and requirements:
+
+
+Season Plan: RoboMaster forum report text, without word limit (be concise)
+
+
+
+Progress Report: Excel document
+
+
+
+Budget Report: Excel document
+
+4.2 Rules Exam
+Rule Exam content includes: “RoboMaster 2026 RoboMaster University Series Robot Specification Manual,”
+“RoboMaster 2026 RoboMaster University Championship Rule Manual,” and other relevant competition terms.
+
+4.3 Mid-term Progress Documentation
+Number of submissions: 1
+Passing criteria:
+The project documents are rated C or above.
+
+
+
+Content to be submitted and requirements:
+
+
+Progress Report (updated): Excel document
+
+
+
+Project analysis: RoboMaster forum report text
+
+4.4 Final Robot Assessment
+Chance for submission: 1
+Passing criteria: Teams will be ranked by their scores in the Final Robot Assessment, and the top 96 teams will
+qualify.
+Content to be submitted and requirements:
+
+
+Final Robot Presentation: Video
+
+
+
+Technical Proposal: RoboMaster forum report text
+
+
+
+Project documents:
+
+
+Cost Report: RoboMaster forum report text
+
+
+
+Expenditure Record: Excel document
+
+24
+
+© 2025 DJI All Rights Reserved.
+
+
+
+Robot BOM Record: Excel document
+The ratings of the Project Documentation and Technical Proposal in the Final Robot Assessment will
+affect the initial gold coin allocation for the Regional Competition (Mainland China). For details on the
+impact, please refer to the “RoboMaster 2026 University Championship Rule Manual.”
+
+4.5 Referee System Assessment
+The Referee System Assessment mainly covers the following content: “RoboMaster 2026 RoboMaster University
+Series Robot Specification Manual,” “RoboMaster Referee System User Manual,” Referee System FAQ, manuals
+for each Referee System Onboard Module, and other related materials regarding mounting specifications, usage,
+and common troubleshooting for the Referee System Onboard Modules. The Referee System Assessment is
+conducted through random selection. If all randomly selected team members pass the evaluation, the team will be
+considered to have passed this section and will qualify for participation.
+
+4.6 Season Summary
+Number of submissions: 1
+Passing criteria: Achieve a Level of “C” or above
+Content to be submitted and requirements:
+
+
+Season Summary: RoboMaster Forum Report Text
+
+© 2025 DJI All Rights Reserved.
+
+25
+
+5. Awards
+This chapter sets out the awards structure for the RMUC 2026.
+The names of the awards may differ from those on the actual certificates issued.
+
+5.1 Regional Competition
+The Regional Competition Awards are as follows:
+Table 5-1 Regional Competiton Awards
+Awards
+
+Rank
+
+Quantity
+
+Reward
+ Champion trophy
+
+Regional Champion: Regional
+First Place
+
+1 per region
+
+ Regional first prize certificate
+ Cash prize of RMB 30,000 (pretax)
+ Second place trophy
+
+Regional First Runner-up:
+Regional Second Place
+
+1 per region
+
+ Regional first prize certificate
+ Cash prize of RMB 30,000 (pretax)
+ Third place trophy
+
+Regional First
+Prize
+
+Regional Second Runner-up:
+Regional Third Place
+
+1 per region
+
+ Regional first prize certificate
+ Cash prize of RMB 30,000 (pretax)
+ Third runner-up trophy
+
+Regional Third Runner-up:
+Regional Fourth Place
+
+1 per region
+
+ Regional first prize certificate
+ Cash prize of RMB 30,000 (pretax)
+
+Regional Fifth – Eighth Places
+
+Regional Ninth – Sixteenth
+Places
+
+26
+
+© 2025 DJI All Rights Reserved.
+
+1 per region, 4
+in total
+
+8 per region
+
+ Regional first prize certificate
+ Cash prize of RMB 15,000 (pretax)
+ Regional first prize certificate
+ Cash prize of RMB 8,000 (pre-tax)
+
+Awards
+
+Rank
+
+Regional
+
+Regional Seventeenth – Thirty
+
+Second Prize
+
+Second Places
+
+Quantity
+
+Reward
+
+16 per region
+
+ Regional second prize certificate
+
+5.2 Final Tournament
+The Final Tournament Awards are as follows:
+For teams ranked among the top 16 or higher in the Final Tournament (including the top 16), the prize
+money is divided into three independent components. Completing the requirements for each part will
+earn the corresponding portion of the prize. The sum of these awards constitutes the total prize amount.
+
+
+Part I: Competition results, accounting for 80%
+
+
+
+Part II: Open source technology, accounting for 10%. Winning teams must follow the official
+guidelines to open source the robot data specified by the RMOC. The RMOC will grant additional
+Open Source Awards based on the extent of open source contributions.
+
+
+
+Part III: Legacy analysis, accounting for 10%. Winning teams must submit documentation related
+to personnel retention and technical knowledge accumulation as evidence of building team legacy,
+and open source the “Team Legacy Analysis” section in their Season Summary; the RMOC may
+award the “Torchbearer Award” based on the submitted materials.
+
+Table 5-2 Final Tournament Awards
+Awards
+
+Rank
+
+Quantity
+
+Reward
+ Champion trophy
+ Champion medal
+
+Champion: First place
+
+1
+
+ First prize certificate
+ Cash prize of RMB 150,000 (pretax)
+
+National First
+
+ Second place trophy
+
+Prize
+
+ Second place medal
+First Runner-up: Second place
+
+1
+
+ First prize certificate
+ Cash prize of RMB 150,000 (pretax)
+
+Second Runner-up: Third place
+
+1
+
+ Third place trophy
+ Third place medal
+
+© 2025 DJI All Rights Reserved.
+
+27
+
+Awards
+
+Rank
+
+Quantity
+
+Reward
+ First prize certificate
+ Cash prize of RMB 150,000 (pretax)
+ Third runner-up trophy
+ Third runner-up medal
+
+Third Runner-up: Fourth place
+
+1
+
+ First prize certificate
+ Cash prize of RMB 150,000 (pretax)
+ First prize certificate
+
+Fifth to sixteenth places
+
+12
+
+ Cash prize of RMB 30,000 (pretax)
+
+Seventeenth to thirty second
+places
+National Second
+
+Teams that have advanced from
+
+Prize
+
+the Regional Competition to the
+Wild Card Competition but have
+
+ Second prize certificate
+16
+
+ Cash prize of RMB 10,000 (pretax)
+
+12
+
+not advanced to the Final
+
+ Second prize certificate
+ Cash prize of RMB 8,000 (pre-tax)
+
+Tournament
+Teams from Chinese mainland
+that have won the First Prize in
+National Third
+Prize
+
+the Regional Competition but
+
+4
+
+ Third prize certificate
+
+48
+
+ Third prize certificate
+
+have not advanced to the Final
+Tournament
+Seventeenth to thirty second
+place in each region
+
+5.3 Open Source Award
+Teams applying for the Open Source Award are required to make their core technologies or operation management
+approaches open-source during the 2026 season (May to August 2026) via RoboMaster forums and other channels,
+to advance the development of the RoboMaster competition and promote the culture and spirit of engineers.
+
+28
+
+© 2025 DJI All Rights Reserved.
+
+There is no fixed number of winners for each open-source award. The RMOC will select winners based
+on the completeness and quality of the submitted open-source material proposals (including, but not
+limited to, software, hardware, and mechanical aspects). If there are no open-source projects of an
+outstanding nature, no winner will be announced for the Open Source Grand Prize. But if there is more
+than one outstanding open-source project, the Grand Prize may be awarded to multiple winners.
+
+5.3.1
+
+Awards
+
+The Open Source Awards are as follows:
+Table 5-3 Open Source Awards
+Awards
+
+Quantity
+
+Grand Prize
+
+Several winners
+
+First Prize
+
+Several winners
+
+Reward
+ Award certificate (for teams)
+ RMB 100,000 (pre-tax)
+ Award certificate (for teams)
+ RMB 50,000 (pre-tax)
+ Award certificate (for teams)
+
+Second Prize
+
+Several winners
+
+ Cash prize of RMB 15,000 - 30,000 (pre-tax),
+awarded based on an overall assessment of the
+open-source materials
+
+Third Prize
+
+Several winners
+
+ Award certificate (for teams)
+ RMB 10,000 (pre-tax)
+ Award certificate (for teams)
+
+Outstanding Award
+
+Several winners
+
+ Cash prize of RMB 2,000 - 5,000 (pre-tax),
+awarded based on an overall assessment of the
+open-source materials
+
+5.3.2
+
+Selection Criteria and Process
+
+The RMOC will score the open source materials according to the following two criteria: basic format and content.
+For detailed selection criteria, please refer to the “RoboMaster University Series (RMU) Open Source Award
+Guidelines and Selection Criteria.”
+1.
+
+Teams from Mainland China should upload their open-source files to the forum and assign the appropriate
+content tags based on the open-source materials as follows: RM2026 + school name + team name + opensource direction + content description.
+
+© 2025 DJI All Rights Reserved.
+
+29
+
+2.
+
+To apply, teams are required to complete a questionnaire (to be provided later).
+
+3.
+
+The RMOC will assess and select the winners based on the questionnaires and the quality of the open-source
+content submitted by the teams.
+
+5.4 Organization Award
+5.4.1
+
+Awards
+
+The Organization Awards are as follows:
+Table 5-4 Organization Awards
+Awards
+
+Quantity
+
+Torchbearer Award
+
+Several winners
+
+Rookie Award
+
+No more than 5 teams
+
+Mainstay Award
+
+No more than 5 teams
+
+Reward
+ Award certificate (for teams)
+ Cash prize of RMB 5,000 (pre-tax)
+ Award certificate (for teams)
+ Cash prize of RMB 5,000 (pre-tax)
+ Award certificate (for teams)
+ Cash prize of RMB 5,000 (pre-tax)
+ Award certificate (for teams)
+
+Cost Control Award
+
+No more than 5 teams
+
+ Cash prize of RMB 1,000 - 3,000 (pre-tax), awarded
+based on an assessment of the submitted materials.
+ Award certificate (for teams)
+
+Top Tactician Award
+
+No more than 5 teams
+
+ Cash prize of RMB 1,000 - 3,000 (pre-tax), awarded
+based on an assessment of the submitted materials.
+
+Best Season Schedule
+Award
+
+Best Technical Report
+Award
+
+30
+
+ Award certificate (for teams)
+No more than 10 teams
+
+ Cash prize of RMB 1,000 - 5,000 (pre-tax), awarded
+based on an assessment of the submitted materials
+ Award certificate (for teams)
+
+No more than 5 teams
+
+ Cash prize of RMB 1,000 - 5,000 (pre-tax), awarded
+based on an assessment of the submitted materials
+
+Competitive Spirit
+
+No more than 5 teams in
+
+Award
+
+the season
+
+© 2025 DJI All Rights Reserved.
+
+ Award certificate (for teams)
+
+5.4.2
+
+Selection Criteria and Process
+
+Table 5-5 Organization Award Selection Criteria and Process
+Awards
+
+Selection Criteria
+
+
+Selection Process
+
+Demonstrates a strong awareness of
+team succession, capable of
+analyzing succession needs in terms
+of personnel, technology, and culture.
+They establish appropriate systems
+for team building, achieve tangible
+results, and enable the team to attain
+
+Torchbearer
+Award
+
+
+
+
+
+Applicants are required to complete a
+
+better competitive outcomes.
+
+questionnaire to apply, and the RMOC
+
+Able to evaluate each season's
+
+will select the best candidates based on
+
+circumstances, summarize effective
+
+the application forms.
+
+strategies and experiences related to
+team legacy, and continuously iterate
+and improve.
+
+
+Able to summarize effective legacy
+measures or models that offer
+valuable insights and have a positive
+influence on other Teams.
+
+
+Teams showing greater improvement
+will be given priority for the award.
+
+
+Including participating teams with stable
+and improved performance for two or
+Rookie Award
+
+three consecutive years, including the
+current season, with priority given to
+teams that have shown greater progress.
+
+Placement levels:
+1.
+
+Not qualified for Regional
+
+2.
+
+Top 32 in Regional Competition
+
+3.
+
+4.
+
+5.
+
+Competition
+
+Top 16 in Regional Competition
+Top 32 in Final Tournament
+Top 4 in Regional
+Competition/Top 16 in Regional
+Competition
+
+© 2025 DJI All Rights Reserved.
+
+31
+
+Awards
+
+Selection Criteria
+
+Selection Process
+6.
+7.
+
+Top 8 in Final Tournament
+Top 4 in Final Tournament
+
+Including teams that have placed between
+ninth and thirty second in the Final
+Mainstay Award
+
+Tournament for three consecutive seasons,
+
+Teams with a longer participation history
+
+including this season, with preference
+
+and better results will be given priority.
+
+given to teams demonstrating steady and
+strong performance.
+
+
+Cost Control
+
+
+
+Cost data is clear and complete and
+
+
+
+bbs.robomaster, teams are required to
+
+the result of cost control.
+
+submit materials for appraisal, such as
+cost reports, etc.
+
+Cost control schemes and methods
+
+
+assessment scores and submitted
+materials from each stage of the
+
+replicable cost control method and
+
+Technical Assessment.
+
+case publicly
+
+Top Tactician
+
+
+
+The team displays a good competitive
+
+
+
+The team submits application
+materials, such as tactics development
+
+competition rules and proper
+
+process, documents on tactics-related
+
+standards of conduct.
+
+actions (operator training), etc.
+
+The team achieves good team results
+
+The team’s tactics are instructive to
+other participating teams, having a
+positive impact on the overall
+performance of teams in the event.
+
+32
+
+
+
+spirit, with no serious violations of
+
+via tactical operations.
+
+Award
+
+The RMOC will select the best
+candidates based on the cost-related
+
+During the match preparation stage,
+actively share the effective and
+
+
+
+After sharing their methods on the
+
+can reflect the cost management or
+
+are highly executable.
+
+Award
+
+
+
+© 2025 DJI All Rights Reserved.
+
+
+
+The RMOC selects the best according
+to teams’ performance and submitted
+materials.
+
+Awards
+
+Selection Criteria
+
+Selection Process
+
+
+The team is required to complete a
+questionnaire to apply.
+
+The team shares their 2026 Season Plan on
+Best Season
+Schedule Award
+
+
+
+The RMOC will collect the open
+
+the forum (bbs.robomaster) and gains high
+
+source materials from the RoboMaster
+
+rankings in this section in the Technical
+
+forum and select the winners based on
+
+Assessment among all teams that also
+
+the rankings.
+
+share their plans.
+
+*Name the open-source post: “[Season
+Planning + School Name Team Name +
+RM2026 Season Planning Open-Source]”
+At the end of the season, the RMOC will
+communicate with teams that have a highly
+
+The team has gained a high rating for their
+
+rated Technical Proposal. Teams that
+
+Technical Proposal during the Final Robot
+
+improve their Proposal upon the request and
+
+Best Technical
+
+Assessment, compiled a Technical Report
+
+make it openly available will be selected as
+
+Report Award
+
+based on the proposal, and shared the
+
+candidates for the award.
+
+report on the forum at the end of the
+
+*Open source post should be titled:
+
+season, as per the RMOC’s request.
+
+[Technical Report + School Name Team
+Name + RM2026 Technical Report Open
+Source]
+
+
+
+The team displays a good competitive
+
+Selections to be made according to the
+
+spirit (as reflected by their penalty
+
+feedback given by the staff of the
+
+records in official competitions), with
+
+RMOC, other teams, and volunteers of
+
+no serious violations of competition
+
+the competition.
+
+Competitive
+
+rules and proper standards of
+
+Spirit Award
+
+conduct.
+
+
+
+
+The team is active in forums, WeChat
+
+
+
+Teams with more positive feedback
+from the RMOC staff, other teams, and
+event volunteers will be given priority.
+
+groups, etc., and interacts well with
+the RMOC, volunteers, and other
+teams.
+
+© 2025 DJI All Rights Reserved.
+
+33
+
+Awards
+
+Selection Criteria
+
+
+Selection Process
+
+The team is helpful, active, and an
+open source of information for
+others, enthusiastically sharing their
+experience and willing to provide
+resources to other teams.
+
+5.5 Robot Combat Award
+The number of Robot Combat Awards will be determined based on the selection criteria and the total number of
+participating teams in each Regional Competition, following the ratios outlined in the table below. If the calculated
+result is not an integer, the number will be rounded to the nearest whole number according to standard rounding
+rules, using the digit in the second decimal place. If the number of teams falls below four, the allocation of each
+award will be manually reviewed and determined. Please refer to future official announcements for final details.
+
+5.5.1
+
+Awards
+
+The Robot Combat Awards are as follows:
+Table 5-6 Robot Combat Awards
+Awards
+
+Instruction
+
+Robot Type
+
+Infantry, Engineer, Hero, Drone, Sentry, Dart System, and Radar
+
+Quantity
+
+
+
+First Prize: approximately 15%
+
+
+
+Second Prize: approximately 25%
+
+
+
+Third Prize: Several
+
+
+
+Honorable Mention: Several
+
+Note: The number of awards for each Level of each robot type will be adjusted based on the
+actual number of participating teams eligible for awards and the actual performance of each
+Robot in the competitions.
+Reward
+
+34
+
+Award certificate (for teams)
+
+© 2025 DJI All Rights Reserved.
+
+5.5.2
+
+Selection Criteria and Process
+
+Table 5-7 Selection Criteria and Process for Robots Combat Awards
+Robot Type
+
+Selection Criteria
+
+Selection Process
+
+Average damage per second (total damage caused by
+Hero
+
+
+
+the robot/total official competition duration of the
+
+performance of each robot in
+
+robot’s team)
+
+the competition, specific data
+is selected for ranking. If
+
+Average assembly score per round (1 point for each
+Engineer
+
+there are multiple robots of
+
+Level 1 difficulty, 10 points for each Level 2 difficulty,
+
+the same type, the robot with
+
+20 points for each Level 3 difficulty, and 100 points for
+
+the best data will be used for
+
+each Level 4 difficulty)
+
+Infantry
+
+Drone
+
+ranking. Evaluation will be
+
+Average damage per second (total damage caused by
+
+conducted according to a
+
+the robot/total official competition duration of the
+
+certain proportion. Robots
+
+robot’s team)
+
+that qualify for nomination
+
+Average damage per second (total damage caused by
+
+and meet the minimum award
+
+the robot/total official competition duration of the
+
+requirements must have server
+
+robot’s team)
+
+records of entering the field
+during the competition.
+
+Average damage per second (total damage caused by
+Sentry
+
+
+
+the robot/total official competition duration of the
+
+The data is selected from the
+Regional Competition.
+
+robot’s team)
+
+
+Average hits per round score (1 point for a hit on the
+
+Due to technical reasons,
+when robots inflict projectile
+
+Outpost, 5 points for a hit on a fixed Base target, 10
+Dart System
+
+Based on the actual
+
+damage during a match, there
+
+points for a hit on a random fixed Base target, 100
+
+may be instances where the
+
+points for a hit on a randomly moving Base target, and
+
+referee system fails to detect
+
+200 points for a hit on a terminal moving Base target)
+
+the specific source of the
+damage. In such cases, this
+untraceable damage will be
+
+Radar
+
+Average Radar performance score per minute ((total
+
+allocated based on the
+
+accurate tracking time * 1 + number of anti-drone
+
+proportion of this type of
+
+actions * 20 + number of successfully decoded
+
+projectile damage previously
+
+information wave difficulty levels * 200) / total official
+
+inflicted by each robot within
+
+match duration for the team with the Radar)
+
+the respective target category,
+and used as the final basis for
+awards.
+
+© 2025 DJI All Rights Reserved.
+
+35
+
+5.6 Annual Technical Breakthrough Award
+The winners of the Annual Technical Breakthrough Awards must share their relevant robot types as open-source
+content in accordance with the rules and specifications. Otherwise, the payment of the cash prizes may be affected.
+The RMOC may grant the winner an additional Open Source Award depending on their open-source contribution
+(the prize money is whichever higher of the two awards).
+
+5.6.1
+
+Awards
+
+Table 5-8 Annual Technical Breakthrough Awards
+Awards
+First Prize
+
+Second Prize
+
+Third Prize
+
+Quantity
+No more than 1 for each
+robot type
+No more than 2 for each
+robot type
+No more than 3 for each
+
+Excellence Prize
+
+5.6.2
+
+robot type
+Several winners
+
+Reward
+ Award certificate (for teams)
+ Cash prize of RMB 15,000 (pre-tax)
+ Award certificate (for teams)
+ Cash prize of RMB 10,000 (pre-tax)
+ Award certificate (for teams)
+ Cash prize of RMB 5,000 (pre-tax)
+ Award certificate (for teams)
+
+Selection Criteria and Process
+
+The RMOC conducts a comprehensive evaluation based on multiple aspects, including the theoretical guidance and
+practical application in robot category design, competition performance, technical innovation, and breakthroughs,
+to select the first, second, and third prizes, as well as the excellence award.
+
+5.7 Outstanding Contribution Award
+Outstanding Supervisor (Team) award recipients, Outstanding Captain (Team) award recipients, and Outstanding
+Project Manager award recipients are required to submit a personal work summary and experience description
+within one month after the selection result is announced and are obligated to participate in the sharing sessions and
+surveys conducted by the RMOC.
+The team of the Outstanding Contribution Award recipient demonstrates excellent sportsmanship and has not
+committed any serious violations of competition rules or the spirit of fair play.
+
+36
+
+© 2025 DJI All Rights Reserved.
+
+5.7.1
+
+Awards
+
+The Outstanding Contribution Awards are as follows:
+Table 5-9 Outstanding Contribution Awards
+Awards
+Outstanding
+Supervisor
+
+Quantity
+No more than 10 teams in total
+
+ Award certificate (for individuals)
+
+for this season
+
+ Cash prize of RMB 8,000 (pre-tax)
+
+No more than 8 groups in total
+
+ Award certificate (for individuals)
+
+for this season
+
+ Cash prize of RMB 5,000 (pre-tax)
+
+No more than 8 people in total
+
+ Award certificate (for individuals)
+
+for this season
+
+ Cash prize of RMB 5,000 (pre-tax)
+
+(Team)
+Outstanding
+Captain
+(Team)
+Outstanding
+Project
+Manager
+Outstanding
+Operations
+
+Reward
+
+No more than 8 people in total
+
+ Award certificate (for teams)
+
+for this season
+
+ Cash prize of RMB 5,000 (pre-tax)
+
+Outstanding
+
+No more than 8 people in total
+
+ Award certificate (for individuals)
+
+Supervisor
+
+for this season
+
+ Cash prize of RMB 3,000 (pre-tax)
+
+Manager
+
+5.7.2
+
+Selection Criteria and Process
+
+Table 5-10 Selection Criteria and Process for Outstanding Contribution Awards
+Awards
+
+Selection Criteria
+
+
+The supervisor guides the team and
+
+Selection Method
+
+
+Applicants must complete a
+
+instills team culture, displays a high
+
+questionnaire to apply. Meanwhile, the
+
+sense of responsibility, takes care of
+
+organizing committee will make
+
+each team member, promotes the
+
+internal nominations based on the
+
+Outstanding
+
+growth and development of students
+
+season's circumstances and select the
+
+Supervisor
+
+in the field of competition, and is
+
+most outstanding candidates through a
+
+deeply revered by students.
+
+comprehensive review of the
+
+(Team)
+
+questionnaire materials.
+
+
+If the requirements of the “RoboMaster
+University Series Supervisor
+Recommendation Policy” are met, the
+
+© 2025 DJI All Rights Reserved.
+
+37
+
+
+
+Lead the team in achieving sustained,
+
+RMOC will award an additional bonus
+
+healthy development and progress,
+
+based on the number of successful
+
+and guide the team in knowledge
+
+recommendations: RMB 1,000 per
+
+transfer by ensuring technical
+
+person recommended (pre-tax).
+
+expertise, retention of key personnel,
+and effective resource coordination.
+
+
+Identify outstanding talent within the
+team, provide guidance and support
+for further study and career
+development, and actively support
+and participate in RoboMaster talent
+recommendation according to
+relevant procedures.
+
+
+
+Develop reasonable team
+
+questionnaire to apply, and the
+
+objectives, plan key technical
+
+selection committee will review the
+
+pathways, identify core challenges,
+
+materials and choose the best
+
+organize technical breakthroughs,
+
+candidates.
+
+The Captain plans effective resources
+within the team and properly
+
+Outstanding
+
+allocates tasks to ensure efficient
+
+Captain (Team)
+
+Placement levels:
+1.
+
+Not qualified for Regional
+Competition
+Top 32 in Regional Competition
+
+3.
+
+Top 16 in Regional Competition
+
+to the event and the team, leads by
+
+4.
+
+Top 32 in Final Tournament
+
+example, spearheads team building
+
+5.
+
+Top 4 in Regional
+
+Possesses a strong sense of belonging
+
+while embodying positive cultural
+
+Competition/Top 16 in Regional
+
+values, and focuses on the
+
+Competition
+
+development and growth of team
+members.
+
+38
+
+
+
+2.
+
+completion of tasks.
+
+
+Applicants are required to complete a
+
+development directions and
+
+and lead major decisions.
+
+
+
+
+© 2025 DJI All Rights Reserved.
+
+6.
+
+Top 8 in Final Tournament
+
+7.
+
+Top 4 in Final Tournament
+
+
+
+Demonstrates strong management
+
+A Captain (Team) who wins an RM Award
+
+awareness, able to establish or
+
+(Management) in this season will
+
+continuously iterate and optimize
+
+automatically receive the Outstanding
+
+internal team processes and
+
+Captain (Team) Award, and this will not
+
+mechanisms based on the team's
+
+count towards the total quota. The higher
+
+actual needs, leading the team toward
+
+cash prize will be distributed.
+
+healthy development.
+
+
+The team’s final placement (total
+score) in this season is on a par with
+or has improved compared with their
+results in the previous season.
+
+
+
+The project manager does a good job
+
+questionnaire to apply, and the
+
+including effectively coordinating
+
+selection committee will review the
+
+and promoting team members to
+
+materials and choose the best
+
+work in concert, making project
+
+candidates.
+
+and risks, and communicating to
+ensure that projects advance as
+planned.
+
+
+Project Manager
+
+Applicants are required to complete a
+
+of managing the team's projects,
+
+schedules, controlling project quality
+
+Outstanding
+
+
+
+
+
+A Project Manager who wins an RM
+Award (Management) in this season
+will automatically receive the
+Outstanding Project Manager Award,
+
+The project manager assists the
+
+and this will not count towards the total
+
+captain (team) in work such as
+
+quota. The higher cash prize will be
+
+requirement management, version
+
+distributed.
+
+planning, project process formulation
+and optimization.
+
+
+Strong sense of process closure,
+exceptional drive, responsible for
+coordinating and aligning resources,
+proactively establishes efficient
+process mechanisms, and effectively
+addresses resource and scheduling
+challenges within the project.
+
+© 2025 DJI All Rights Reserved.
+
+39
+
+
+
+Able to effectively capture and
+document project experience, ensure
+its application and ongoing
+improvement within the Team.
+
+
+
+Oversee the team’s operations,
+
+Applicants are required to complete a
+
+integrate internal and external Team
+
+questionnaire to apply, and the RMOC will
+
+resources, enhance the team’s
+
+select the best candidates based on the
+
+influence, and help alleviate resource
+
+application forms.
+
+pressures such as funding for the
+team.
+
+Outstanding
+Operations
+
+
+
+Dedicated to building the team’s
+culture.
+
+Manager
+
+
+Able to effectively consolidate
+operational experience, ensure its
+continued implementation within the
+Team, and drive ongoing
+improvement.
+
+
+
+The supervisor provides constructive
+and practical suggestions to the team
+in terms of technological innovation,
+tactical design, team management,
+team building, etc., and provides
+guidance and support to the team in
+terms of strategy, technology,
+management, etc.
+
+Outstanding
+Supervisor
+
+
+
+Able to preserve personal experience
+in the form of technical
+documentation or process
+mechanisms for the Team, guide
+veteran members to provide the Team
+with necessary support, and help the
+Team effectively retain technical
+knowledge.
+
+40
+
+© 2025 DJI All Rights Reserved.
+
+Applicants are required to complete a
+questionnaire to apply, and the RMOC will
+select the best candidates based on the
+application forms.
+
+5.8 RM Award
+The RM Awards recognize and reward outstanding team members who are at the forefront of technical innovation
+and breakthroughs.
+There is no fixed number of RM Awards, and the RMOC will assess candidates according to their submitted
+materials and interview performance.
+
+5.8.1
+
+Awards
+
+Table 5-11 RM Award Awards
+Awards
+
+Quantity
+
+ Award certificate (for individuals)
+
+RM Award
+
+Several winners
+
+(Technical)
+
+ Cash prize of RMB 10,000 (pre-tax)
+ Invitation to a job interview
+ Award certificate (for individuals)
+
+RM Award
+
+Several winners
+
+(Management)
+
+5.8.2
+
+Reward
+
+ Cash prize of RMB 10,000 (pre-tax)
+ Invitation to a job interview
+
+Selection Criteria and Process
+
+Table 5-12 RM Award Selection Criteria and Process
+Awards
+
+
+
+RM Award
+(Technical)
+
+
+
+Selection Criteria
+
+Selection Process
+
+Embody the ethos of the competition – “pushing
+
+ After the Regional
+
+the boundaries of knowledge through research and
+
+Competition,
+
+practice” – in daily R&D work.
+
+candidates submit
+
+Show willingness and ability to learn, capable of
+
+the application
+
+exploring the principles of new areas of knowledge
+
+materials according
+
+and applying them to real R&D tasks.
+
+to the requirements.
+
+Brace for challenges and rise to difficulties, make
+
+ Upon receipt of
+
+significant contribution to overcoming cutting-
+
+applications, the
+
+edge technical issues or bottlenecks, and inspire
+
+RMOC will screen
+
+the rest of the team to strive for technical
+
+the application
+
+breakthroughs.
+
+materials.
+
+© 2025 DJI All Rights Reserved.
+
+41
+
+Awards
+
+
+
+
+Selection Criteria
+
+Selection Process
+
+Provide high-quality technical solutions for
+
+ Among candidates
+
+specific tasks or problems encountered during the
+
+who pass the
+
+competition.
+
+preliminary
+
+The core content of the application materials
+
+screening, the
+
+should demonstrate either a breakthrough or
+
+RMOC will select
+
+significant improvement achieved by the applicant
+
+the winners
+
+for the first time during the competition compared
+
+according to their
+
+to existing solutions, and the technical proposal
+
+interview
+
+must have been practically applied during the
+
+performance.
+
+preparation or competition process.
+
+
+Demonstrates strong management awareness,
+proactively establishes and refines internal
+management systems for personnel, schedule, and
+cost control, and leads the team to achieve its
+goals.
+
+
+
+Strong analytical skills, able to identify key issues
+and analyze root causes; capable of recognizing
+team risks and making critical decisions.
+
+RM Award
+(Management)
+
+
+
+Highly driven, sets high standards, actively tackles
+challenges, and is willing to break boundaries;
+leads by example and champions the competition's
+culture and spirit.
+
+
+
+The core content of the application materials
+should focus on the applicant’s primary
+contributions and improvements since assuming
+the role.
+
+42
+
+© 2025 DJI All Rights Reserved.
+
+ Keep an eye out for
+subsequent
+announcements
+concerning the full
+selection process of
+the RM Awards
+2026.
+
+Appendix: Safety Instructions
+Every participant must fully understand and accept that safety is the most crucial prerequisite for the sustainable
+development of the RoboMaster Competitions. In order to protect the rights and interests of all team members and
+the event organizers, and according to relevant laws and regulations, all team members who have registered for the
+RoboMaster Competitions will be deemed to have acknowledged and agreed to abide by the following safety terms:
+1.
+
+All team members who have registered to participate in the RoboMaster Competitions must confirm that they
+have full capacity for civil conduct and they are able to build and operate robots independently. They must also
+make sure that they have read in detail the Registration Guide and Competition Regulations among other
+important documents stating the rules and regulations of the competition, before starting to use any products
+by SZ DJI Technology Co., Ltd. to build robots.
+
+2.
+
+During the competition, all team members should make sure that their actions including the creation, testing,
+and use of robots, will not cause any injury or damage to his or her teammates, members of the opposing teams,
+referees, competition staff, audience, equipment, or the Competition Area.
+
+3.
+
+All teams must ensure that the structural design of their robots will not hinder safety inspection during the Prematch Inspection and agree to fully cooperate with the Pre-match Inspection carried out by RoboMaster’s
+organizers.
+
+4.
+
+It is prohibited to use fuel-powered engines, explosives, hazardous chemical materials, and hydraulic or other
+propulsion methods that may cause pollution.
+
+5.
+
+During any stage of development, preparation, and Participation, each Team Member must pay close attention
+to safety, comply with the Battery Safety Regulations of the RoboMaster University Series (RMU), and
+instructors are responsible for providing safety guidance and supervision.
+
+6.
+
+The team must guarantee the safety of all the robots. This includes ensuring the Launching Mechanisms
+installed on the robots are safe and that they will not cause any harm (either directly or indirectly) to any team
+members, referees, staff, and audience.
+
+7.
+
+All teams shall take sufficient and necessary safety measures during the R&D, training, and competition
+periods regarding any hazardous situations that may occur. These include but are not limited to: preventing the
+control system from becoming unstable; anticipating every operation step prior to execution to avoid errors or
+collisions between team members or between robots and team members; prohibiting team members from
+engaging in solo training and making sure there are always personnel present to respond to any emergencies;
+wearing goggles; applying appropriate locks and adding safety features such as an emergency stop button to
+robot systems during commissioning.
+
+8.
+
+In the event of accidents resulting from technical faults of robots, loss of control of Drones, or any other
+unexpected circumstances, all liability and losses shall be borne by the team causing the accident.
+
+© 2025 DJI All Rights Reserved.
+
+43
+
+9.
+
+The aerial robots of participating teams are allowed to fly only above certain restricted areas in competition
+venues. Therefore, no flight permit is required. To ensure the flight safety of an aerial robot, use an aerial safety
+rope to connect the aerial robot to a fixing pile on the ground. If an accident occurs, for example, if the aerial
+robot breaks away from the safety rope, the pilot must stop the motors and land the aerial robot as soon as
+possible. It is strictly prohibited to continue to fly in case of an accident. Participating teams are strictly
+prohibited from flying aerial robots outdoors.
+
+10. The materials bought from or provided by the organizer SZ DJI Technology Co., Ltd., such as batteries and
+the Referee System, must be used in accordance with their instructions. SZ DJI Technology Co., Ltd. will not
+be held responsible for any injuries that arise from improper use of these materials. Teams will be held
+responsible for any injuries caused to their own members or any third party and for any property loss arising
+from creating and operating any robots.
+11. All team members must remain in strict compliance with the laws and regulations of the country or region. All
+team members must also pledge that their robots will only be used for the RoboMaster competitions and that
+their robots will not be illegally modified or used for any illicit purpose(s).
+
+44
+
+© 2025 DJI All Rights Reserved.
+
+© 2025 DJI All Rights Reserved.
+
+45
+
+
