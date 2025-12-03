@@ -9,6 +9,7 @@ from loguru import logger
 
 from llm import Qwen3, Qwen3VL
 from agent import Agent
+from base import BaselineAgent
 from log_config import setup_logger
 from benchmarkTest.ALFworld import testALFworld
 
@@ -333,7 +334,7 @@ def main():
     logger.info("AIAA3102 Agent System stopped")
     logger.info("=" * 60)
 
-def test(benchmark_number: int = 1):
+def test(benchmark_number: int = 2):
     """测试模式入口函数"""
     setup_logger()
     logger.info("=" * 60)
@@ -371,12 +372,17 @@ def test(benchmark_number: int = 1):
         rag_db_path = "rag/vector_db"
         logger.info(f"发现知识库: {rag_db_path}")
     
-    # 创建 Agent
-    agent = Agent(llm, rag_db_path=rag_db_path, security_config=security_config)
-    
-    # 根据 benchmark_number 选择测试
+    # 根据 benchmark_number 创建不同的 Agent
     if benchmark_number == 1:
-        testALFworld(agent)
+        # Full Agent 测试
+        print("🎯 模式: Full Agent (完整框架 + ReAct + 工具)\n")
+        agent = Agent(llm, rag_db_path=rag_db_path, security_config=security_config)
+        testALFworld(agent, num_games=20)  # 只测前20个
+    elif benchmark_number == 2:
+        # Baseline 测试 - 使用 BaselineAgent
+        print("🎯 模式: Baseline (仅 LLM，无 Agent 框架)\n")
+        agent = BaselineAgent(llm, rag_db_path=rag_db_path, security_config=security_config)
+        testALFworld(agent, num_games=20)  # 只测前20个
     else:
         print(f"❌ 未知的基准测试编号: {benchmark_number}")
         logger.error(f"Unknown benchmark number: {benchmark_number}")
