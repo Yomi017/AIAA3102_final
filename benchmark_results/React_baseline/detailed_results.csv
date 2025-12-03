@@ -1,0 +1,21 @@
+game_num,success,steps,successful_steps,action_success_rate,task_preview
+1,✅,8,8,100.0%,clean some spatula and put it in drawer.
+2,❌,40,34,85.0%,put two keychain in safe.
+3,✅,4,4,100.0%,put a pencil in shelf.
+4,❌,40,21,52.5%,heat some apple and put it in garbagecan.
+5,❌,40,5,12.5%,examine the mug with the desklamp.
+6,✅,19,19,100.0%,put two soapbar in garbagecan.
+7,❌,40,1,2.5%,examine the cd with the desklamp.
+8,❌,40,4,10.0%,examine the cd with the desklamp.
+9,❌,40,9,22.5%,put two cd in safe.
+10,❌,40,3,7.5%,cool some bread and put it in countertop.
+11,❌,40,13,32.5%,find two pillow and put them in sofa.
+12,✅,7,7,100.0%,put a clean mug in coffeemachine.
+13,✅,5,5,100.0%,put a cool mug in coffeemachine.
+14,✅,7,7,100.0%,clean some egg and put it in microwave.
+15,❌,40,5,12.5%,find two peppershaker and put them in drawer.
+16,❌,40,32,80.0%,heat some egg and put it in garbagecan.
+17,✅,8,7,87.5%,put a clean plate in countertop.
+18,❌,40,40,100.0%,clean some pan and put it in countertop.
+19,❌,40,22,55.0%,heat some apple and put it in garbagecan.
+20,✅,4,4,100.0%,put some mug on desk.
