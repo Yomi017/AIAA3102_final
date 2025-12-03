@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 import { Message } from '../api';
 import clsx from 'clsx';
 
@@ -116,16 +118,25 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
       )}
 
       <div className={clsx(
-        "max-w-[85%] rounded-2xl p-4 shadow-sm transition-all duration-200",
+        "max-w-[85%] min-w-0 rounded-2xl p-4 shadow-sm transition-all duration-200 overflow-hidden",
         isUser 
           ? "bg-blue-600 text-white rounded-tr-none hover:shadow-md" 
           : isSystem 
             ? "bg-red-50 text-red-800 border border-red-100 rounded-tl-none" 
             : "bg-white text-gray-800 border border-gray-100 rounded-tl-none hover:shadow-md"
       )}>
-        <div className="prose prose-sm max-w-none dark:prose-invert break-words leading-relaxed">
+        <div className="prose prose-sm max-w-none dark:prose-invert break-words leading-relaxed min-w-0 w-full overflow-hidden">
           {isUser ? (
-            <p className="whitespace-pre-wrap m-0">{contentStr}</p>
+            <ReactMarkdown 
+              remarkPlugins={[remarkMath]}
+              rehypePlugins={[rehypeKatex]}
+              components={{
+                p: ({node, ...props}) => <p className="whitespace-pre-wrap" {...props} />,
+                img: ({node, ...props}) => <img className="max-w-full rounded-lg my-2" {...props} />
+              }}
+            >
+              {contentStr}
+            </ReactMarkdown>
           ) : (
             <>
               {thinking && (
@@ -142,13 +153,27 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
                     <svg className="w-3 h-3 opacity-50 transition-transform group-open/think:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                   </summary>
                   <div className="p-3 text-xs text-gray-600 whitespace-pre-wrap border-t border-gray-200 bg-white/50 font-mono">
-                    <ReactMarkdown>{thinking}</ReactMarkdown>
+                    <ReactMarkdown 
+                      remarkPlugins={[remarkMath]}
+                      rehypePlugins={[rehypeKatex]}
+                    >
+                      {thinking}
+                    </ReactMarkdown>
                   </div>
                 </details>
               )}
               {finalAnswer && (
                 <div className="markdown-body">
-                  <ReactMarkdown>{finalAnswer}</ReactMarkdown>
+                  <ReactMarkdown 
+                    remarkPlugins={[remarkMath]}
+                    rehypePlugins={[rehypeKatex]}
+                    components={{
+                      p: ({node, ...props}) => <p className="whitespace-pre-wrap" {...props} />,
+                      img: ({node, ...props}) => <img className="max-w-full rounded-lg my-2" {...props} />
+                    }}
+                  >
+                    {finalAnswer}
+                  </ReactMarkdown>
                 </div>
               )}
               {!finalAnswer && !thinking && <span className="text-gray-400 italic">Empty response</span>}

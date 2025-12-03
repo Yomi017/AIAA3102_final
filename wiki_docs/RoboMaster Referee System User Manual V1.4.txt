@@ -1,0 +1,2372 @@
+Disclaimer
+Please read this disclaimer carefully before using this product. By using this product, you hereby signify that
+you have read and agreed to all content herein. Please install and use this product properly and in strict accordance with the User Manual and product instructions, as well as any relevant laws, regulations, and policies. Users shall be responsible for the consequences resulting from their behavior while using this product.
+DJI™ Innovations (DJI™) shall not be liable for any losses incurred from using, installing, or modifying this
+product improperly.
+DJI™ and RoboMaster™ are trademarks of SZ DJI Technology Co., Ltd and its affiliates. Names of products,
+brands, etc. herein are trademarks or registered trademarks of their respective owner companies. This product, the manual, and the software and driver that work with the Referee System (RoboMaster Client, RoboMaster Server, RoboMaster Tool 2, and DJI WIN driver) are copyrighted by DJI with all rights reserved, and
+shall not be modified, reproduced, or transmitted in any form without the prior consent of DJI. DJI reserves
+the right of final interpretation of this disclaimer.
+
+Warning
+Read the ENTIRE user manual to become familiar with the features of this product before operating. Failure to
+operate the product correctly can result in damage to the product or personal property and cause serious injury. This is a sophisticated product. It must be operated with caution and common sense and requires some
+basic mechanical ability. Taking into account the importance of the various modules of the Referee System in
+the competition, the Referee System has been fully tested in the factory and each module cannot be damaged easily. A user should not disassemble or modify any parts of the Referee System without authorization.
+Damage to the Referee System resulting from unauthorized disassembly will void the warranty. This product
+is not intended for use by children without direct adult supervision. DO NOT use with incompatible components or alter this product in any way outside of the documents provided by RoboMaster. Install and use this
+product in strict accordance with the guidelines provided by RoboMaster. It is essential to read and follow all
+of the instructions and warnings in the user manual, prior to assembly, setup or use.
+
+Product Usage Precautions
+1. Please ensure that the robot side of the Referee System is installed correctly and firmly before use.
+2. Please ensure that the wiring connection between each module on the Referee System’s robot side is correct before use.
+3. Please ensure that the components are intact before use. Replace any worn or damaged components.
+
+Using This Manual
+Legend
+Important
+
+2
+
+© 2025 DJI All Rights Reserved.
+
+Hints and Tips
+
+Reference
+
+Related Documents
+Specification of Each Referee System Module
+It is recommended to read the aforementioned documents to understand the features and installation methods of each Referee System module. Reserve any necessary installation holes and spaces so that each module on the Referee System’s Robot Side may be correctly installed, and then read the User Manual to explore
+the features of the Referee System.
+Release Notes
+Date
+
+Version
+
+Revision Record
+
+Jan. 2019
+
+v1.0
+
+First Release
+
+Mar. 2019
+
+v1.1
+
+Added VT02 & VT12 Video Transmitter Modules and Instructions
+
+Jan. 2020
+
+v1.2
+
+Main Controller function to synchronously edit and delete VT01 & VT11 Video
+Transmitter Modules
+
+Feb. 2022
+
+v1.3
+
+The functions of the Main Controller have been modified synchronously. Some
+of the links and descriptions have been updated.
+
+Mar. 2025
+
+v1.4
+
+Revised descriptions of certain robot side functions and RoboMaster Champion
+features to align with the new firmware version.
+
+© 2025 DJI All Rights Reserved.
+
+3
+
+Contents
+Disclaimer
+
+2
+
+Warning
+
+2
+
+Product Usage Precautions
+
+2
+
+Using This Manual
+
+2
+
+Legend
+
+2
+
+Related Documents
+
+3
+
+Referee System Overview
+
+6
+
+Overview of RoboMaster Champion
+
+10
+
+RoboMaster Server
+
+10
+
+Server Configuration
+
+10
+
+RoboMaster Client
+
+10
+
+Client Configuration
+
+11
+
+RoboMaster Champion Network Configuration Guide
+
+11
+
+Referee System Quick Start Guide
+
+12
+
+Robot Side Configuration
+
+12
+
+Robot Property Descriptions
+
+12
+
+Competition Configuration
+
+13
+
+1v1 Mode
+
+13
+
+3v3 Mode
+
+14
+
+Description of Robot Side Functions
+
+15
+
+Robot Side Interaction Instructions
+
+15
+
+Homepage UI Description
+
+15
+
+Homepage
+
+15
+
+Real-time Information Page
+
+16
+
+Descriptions of Key Functions
+
+16
+
+Function Page
+
+16
+
+UI Function Descriptions
+
+4
+
+17
+
+Set Robot ID
+
+17
+
+Set Robot Type
+
+17
+
+© 2025 DJI All Rights Reserved.
+
+Module Settings
+
+18
+
+Positioning Module Compass Calibration
+
+20
+
+Rule Parameter Settings
+
+21
+
+WiFi Settings
+
+22
+
+Debug Function
+
+23
+
+View Version Information
+
+25
+
+Language Setting
+
+26
+
+Help Menu
+
+26
+
+Introduction to the Robot Side Module Initialization
+
+27
+
+Video Transmitter Module (VT02 & VT12) Instructions
+
+27
+
+Activation of the VTM Transmitter
+
+27
+
+Activation of the VTM Receiver
+
+28
+
+VTM Channel Configuration
+
+29
+
+RoboMaster Referee System User Interface Guide
+
+33
+
+Checking Functions on the Robot Side
+
+33
+
+RoboMaster Tool 2 Upgrade Procedure
+
+34
+
+Introduction to the Main Upgrade Interface
+
+34
+
+Upgrade Procedure
+
+35
+
+© 2025 DJI All Rights Reserved.
+
+5
+
+Referee System Overview
+The Referee System is a fully automated electronic penalty system with features that can detect projectile
+attacks, display the robot's current HP and status, and monitor chassis movement power. The Speed
+Monitor Module monitors the robot's initial speed and speed; the Video Transmitter Module provides
+the user with a first-person view of the robot; the RFID Interaction Module interacts with the battlefield;
+and the Positioning System Module provides information on the robot's battlefield location. Users can
+establish a multi-robot combat system using the RoboMaster Champion and multiple robot sides.
+The Referee System is composed of the following:
+1. The robot side of the Referee System (hereinafter referred to as "robot side")
+2. The Referee System RoboMaster Champion (hereinafter uniformly referred to as the RoboMaster
+Champion) comprises three components: Server, Referee and Client.
+Robot Side Modules
+1) Main Controller Module (MC02): The Main Controller Module is the core control unit of the
+Referee System that monitors the operation of the entire system and includes human-machine
+interaction, wireless communication and status display features.
+
+Main Controller Module (MC02)
+
+2) Power Management Module (PM02): The Power Management Module functions control power to the
+chassis, gimbal, and launching mechanism, transmit data, detect the chassis power consumption,
+and automatically cut off power supply for propulsion when a robot's HP drops to zero.
+
+Power Management Module (PM02)
+
+6
+
+© 2025 DJI All Rights Reserved.
+
+3) Light Indicator Module (LI01): The Light Indicator Module shows the current HP and status of your
+robot. By observing the status of the light indicator, you can identify the remaining HP and status of
+your robot.
+
+Light Indicator
+Module (LI01)
+
+4) Armor Modules (AM02&AM12/AM03&AM13): The Armor Modules detect the status of incoming
+projectile attacks and collisions. They are divided into the Small Armor Module and the Large Armor
+Module.
+
+Small Armor Module
+(AM02/AM03 )
+
+Large Armor Module
+(AM12/AM13 )
+
+Armor Module Support
+Frame A (AH02)
+
+5) Speed Monitor Modules (SM01 & SM11): The Speed Monitor Modules detect the robot's initial
+speed and speed. This includes one Speed Monitor Module for 17mm projectiles and one for 42mm
+projectiles.
+
+Speed Monitor Module for
+17mm projectiles (SM01)
+
+Speed Monitor Module for
+42mm projectiles (SM11)
+
+6) RFID Interaction Module (FI02): This module enables the Robot Side to interact with the battlefield.
+
+RFID Interaction Module (FI02)
+
+RFID Interaction Module
+© 2025 DJI All Rights Reserved.
+
+7
+
+7) Video Transmitter Modules (VT02 & VT12): The Video Transmitter Modules provide the user with
+a first-person view. This includes the VTM Transmitter and the VTM Receiver. The VTM Transmitter
+is mounted on the Robot Side, while the VTM Receiver is mounted on the Client.
+
+VTM Transmitter (VT02)
+
+VTM Receiver (VT12)
+
+8) Positioning System Module (UW01): This module obtains the location of the robot on the battlefield.
+
+Positioning System Module (UW01)
+
+Module Installation on the Robot Side
+The figure below shows the installation of each module of the robot side.
+
+VTM Transmitter
+
+Speed Monitor
+Module (17mm
+Projectiles)
+
+Armor Module
+
+8
+
+© 2025 DJI All Rights Reserved.
+
+Power Management
+Module
+Positioning System
+Module
+Light Indicator
+Module
+Main Controller
+Module
+
+Armor Module
+
+RFID Interaction
+Module
+
+Module Connection Diagram on the Robot Side
+The figure below shows the connection of each module of the robot side.
+
+* Module installation and use may vary for different robots. Please refer to the latest RoboMaster university series robot
+building specifications manual.
+
+Download: https://www.robomaster.com/en-US/resource/announcement/competition
+
+© 2025 DJI All Rights Reserved.
+
+9
+
+Overview of RoboMaster Champion
+RoboMaster Server
+The Server is the control center of the entire Referee System. During competitions, it collects real-time battlefield
+data, visually presents the data to users, and automatically determines the outcome of the competition.
+Go to https://www.robomaster.com/en-US/products/components/referee to download the Server.
+Run RoboMasterEngine.exe. After setting up the local IP and passing network tests, log in to access
+the main interface. The server and logging system will start automatically. The server interface is
+shown as follows (Note: Layouts may vary slightly between versions):
+
+Server Configuration
+The computer host on which the RoboMaster Server is running must have the IP address set to
+192.168.1.2 and any firewalls must be disabled. For other configurations, refer to RoboMaster Champion
+Network Configuration Guide.
+
+RoboMaster Client
+After the Client runs the first-person view application and connects to the server, the robot-related data
+uploaded by the Referee System can be viewed through the first-person view screen. Data includes
+the robot’s current HP, real-time projectile initial speed and speed, real-time chassis status, thermal
+dynamics of launching mechanisms, power output, module connectivity, battlefield mini-map, and
+teammate information.
+Go to https://www.robomaster.com/en-US/products/components/referee to download the Client.
+The full UI page is shown in the figure below:
+
+10
+
+© 2025 DJI All Rights Reserved.
+
+Client Configuration
+To connect the Client to the competition server, the PC host on which the Client is running must work in
+the same LAN as the Server. The Client can obtain the IP automatically.
+1. Client Hardware Configuration
+a. VTM Receiver Module (Video Transmitter Module, outputs video signals)
+b. Robot Remote Controller (Optional, user-supplied; only supports DT7&DR16 receiver systems)
+2. Client Software Configuration
+a. DJI WIN Driver (controls robot remote controller)
+Download:
+https://www.robomaster.com/en-US/products/components/detail/122
+(Critical: Set system date to January 1, 2019 or earlier via Control Panel > Clock and Region)
+b. RoboMaster Client Software (competition control interface)
+Download:
+https://www.robomaster.com/en-US//products/components/referee
+c. DJI Phantom 4 Driver (drives Camera VTM Receiver Module)
+Download:
+https://www.robomaster.com/en-US//products/components/detail/2596
+
+RoboMaster Champion Network Configuration Guide
+For details, refer to:
+https://terra-1-g.djicdn.com/b2a076471c6c4b72b574a977334d3e05/RoboMaster%E8%B5%9B%E4%BA
+%8B%E5%BC%95%E6%93%8E%E8%81%94%E7%BD%91%E6%93%8D%E4%BD%9C%E6%89%8B%
+E5%86%8C.pdf
+
+© 2025 DJI All Rights Reserved.
+
+11
+
+Referee System Quick Start Guide
+Robot Side Configuration
+Different types of robot can be set up through the Main Controller Module. At the same time, the type and quantity
+of robot Referee System Modules can also be customized on the Server. The table below shows the configuration
+of a single robot Referee System module. (The type and number of modules required depend on the robot type.
+For installation details, please refer to the latest RoboMaster university series robot building specifications manual.
+Module Name
+
+Quantity
+
+Main Controller Module
+
+1
+
+Power Management Module
+
+1
+
+Light Indicator Module
+
+0-1
+
+Large and Small Armor Modules
+
+0-6
+
+Speed Monitor Module (17mm Projectiles)
+
+0-4
+
+Speed Monitor Module (42mm Projectiles)
+
+0-1
+
+RFID Interaction Module
+
+0-1
+
+VTM Transmitter
+
+0-1
+
+VTM Receiver
+
+0-1
+
+Robot Property Descriptions
+The properties of different types of robots can be configured on the Server and synchronized to the Main
+Controller Module.
+The table below shows the properties that can be configured:
+Property Name
+
+Property Information
+
+Referee System module type and quantity Refer to the "Robot Side Configuration" section
+Initial HP
+
+0-65535
+
+Maximum HP
+
+The maximum HP if the robot's level can be upgraded in
+competition: Initial HP - 65535
+
+Damage from 17mm projectiles
+
+HP deducted when the Armor Module receives attacks from
+17mm projectiles: 0-Initial HP
+
+Damage from 42mm projectiles
+17mm projectile Initial Speed limit
+42mm projectile Initial Speed limit
+Robot's barrel heat limit
+
+HP deducted when the Armor Module receives attacks from
+42mm projectiles: 0-Initial HP
+Forced LM power disconnection will be triggered when the
+limit is exceeded.
+Forced LM power disconnection will be triggered when the
+limit is exceeded.
+Forced LM power disconnection will be triggered when the
+limit is exceeded.
+
+Robot's module offline
+
+HP will be deducted from the robot when some modules are
+offline
+
+Robot chassis power consumption limit
+
+Forced Chassis power disconnection will be triggered when
+the power limit is exceeded.
+
+12
+
+© 2025 DJI All Rights Reserved.
+
+Competition Configuration
+Multiple robot sides can be combined to form a multi-robot combat mode. Users can choose to set up a
+local area network (LAN) for online combat based on their current status and conditions.
+If a local area network (LAN) is set up, the Server must be used, and users must be able to check the
+HP and Referee System status of all Robot Sides on the Server. Users may also use the Client, paired
+with the VTM Receiver, to operate a robot from a first-person view, check the HP and status of all Robot
+Sides, and determine the outcome of the competition automatically with the aid of the Server.
+If a LAN is not being used, a server is not required, but the outcome of the competition can only be
+determined by the HP displayed on the Light Indicator Module of the Referee System. Additionally, users
+may use the Client paired with the VTM Receiver to operate a robot from a first-person view, but cannot
+check HPs on the Robot Side nor determine the outcome of the competition automatically.
+Users can create LAN-based matches for “1v1” or “3v3” battles, customize match rules, and experience
+competitive gameplay. Example match modes include:
+1v1 Battle
+3v3 Team Battle
+
+1v1 Mode
+Users can select any two Robot Side configurations from the configuration table to be applied to two
+robots respectively. One robot will be assigned to the Red team, and the other to the Blue team. You can
+choose whether to set up a LAN or use a base for the 1v1 contest. (Note: Only the server of the Super
+RMUC rule version supports the use of a Base.)
+The table below gives an example of a starting lineup:
+Combatants
+
+Robot type
+
+Quantity
+
+Remarks
+
+Red team
+
+Standard
+
+1
+
+/
+
+Blue team
+
+Standard
+
+1
+
+/
+
+The table below shows the configurations of the Referee System modules required to set up the combat
+system (except the base) above:
+Module Name
+
+Quantity
+
+Remarks
+
+Main Controller Module
+
+2
+
+/
+
+Power Management Module
+
+2
+
+/
+
+Light Indicator Module
+
+2
+
+/
+
+Large Armor Module
+
+0
+
+/
+
+Small Armor Module
+
+0-8
+
+/
+
+Speed Monitor Module
+(17mm Projectiles)
+
+0-2
+
+Can be ignored if the launch initial speed and speed is
+unlimited
+
+Speed Monitor Module
+(42mm Projectiles)
+
+0
+
+/
+
+RFID Interaction Module
+
+0-2
+
+Can be ignored if no interaction with a battlefield is required
+
+VTM Transmitter
+
+2
+
+/
+
+VTM Receiver
+
+2
+
+/
+© 2025 DJI All Rights Reserved.
+
+13
+
+3v3 Mode
+You may arbitrarily select six sets of Robot Side configurations according to the Robot Side configuration
+table and install them to six robots respectively. Each set of Robot Sides can be set as Red Team or Blue
+team. Make sure that three of them are set as Red team and the rest of them as Blue Team. The Robot
+Side can choose whether to set up a LAN or use a base for the 3v3 contest. (Note: Only the server of the
+Super RMUC rule version supports the use of a Base.)
+The table below gives an example of a starting lineup:
+Combatants
+
+Robot type
+
+Quantity
+
+Standard
+
+1
+
+/
+
+Hero
+
+1
+
+/
+
+Engineer
+
+1
+
+/
+
+Standard
+
+1
+
+/
+
+Hero
+
+1
+
+/
+
+Engineer
+
+1
+
+/
+
+Red team
+
+Blue team
+
+Remarks
+
+The table below shows the configurations of the Referee System modules required to set up the 3v3
+combat system (except the base) above:
+Module Name
+
+Quantity
+
+Remarks
+
+Main Controller Module
+
+6
+
+/
+
+Power Management Module
+
+6
+
+/
+
+Light Indicator Module
+
+6
+
+/
+
+Large Armor Module
+
+0-8
+
+/
+
+Small Armor Module
+
+0-16
+
+/
+
+Speed Monitor Module
+(17mm Projectiles)
+
+0-4
+
+Can be ignored if the launch initial speed and speed
+is unlimited
+
+Speed Monitor Module
+(42mm Projectiles)
+
+0-2
+
+Can be ignored if the launch initial speed and speed
+is unlimited
+
+RFID Interaction Module
+
+0-6
+
+Can be ignored if no interaction with a battlefield is
+required
+
+VTM Transmitter
+
+6
+
+/
+
+VTM Receiver
+
+6
+
+/
+
+14
+
+© 2025 DJI All Rights Reserved.
+
+Description of Robot Side Functions
+Robot Side Interaction Instructions
+The human-computer interaction interface of the Referee System consists of a display screen and four
+keys. As shown in the figure below, pressing a key will enable the corresponding function. Pressing and
+holding the same key will enable a different function.
+Display
+
+OK
+
+PgUp
+
+Cancel
+
+PgDn
+
+Main Controller panel diagram
+
+Homepage UI Description
+Homepage
+This interactive webpage displays the initialization status of the Referee System. When the initialization is
+complete, the RoboMaster logo is displayed, as shown in the figure below:
+
+Or the quantity and names of the offline modules are displayed, as shown in the figure below:
+The QR codes shown in this section
+are examples. Please use the QR
+codes shown on the Main Controller
+panel during actual operation.
+
+11 MODULES
+FAULT
+LightInd Offline
+
+1. The " " in the upper left corner indicates that the Robot Side is not connected to the Server.
+2. The "
+" in the upper right corner indicates the WiFi connection status and signal strength.
+3. The " " in the upper right corner indicates the current WiFi connection type. The significance of the
+pattern descriptions is as follows:
+a)
+: The currently connected WiFi is the User AP. A solid line means it is connected, and a dotted
+line means it is connecting.
+b)
+: The currently connected WiFi is the Inspection AP. A solid line means it is connected, and
+a dotted line means it is connecting.
+c)
+: The currently connected WiFi is the Competition AP. A solid line means it is connected, and a
+dotted line means it is connecting.
+© 2025 DJI All Rights Reserved.
+
+15
+
+4. The QR code on the left from the center corresponds to the current fault. You can scan the QR code
+for a solution to the fault.
+5. “11 MODULES FAULT” in the center means 11 modules are currently offline or defective.
+6. "LightInd Offline" at the bottom means that the current Light Indicator Module is offline.
+7. " " in the bottom left corner means that there is more than one defective module. By pressing the up or
+down keys, you can see the error information for the current offline or defective modules.
+
+Descriptions of Key Functions
+
+• Press and hold the OK key: On the homepage or real-time information display page, press and hold
+the OK key to enter the robot function page. For some function pages, the current settings can be
+saved.
+• Press the OK key: On the homepage, press the OK key to enter the real-time information display page.
+On the function page, if there is a page link in the selected line on the current page, pressing the OK
+key will direct you to the linked page; otherwise, pressing the OK key will select a function.
+• Press and hold the Cancel key: On a page other than the homepage, pressing and holding the Cancel
+key will bring you back to the homepage. On the homepage, pressing and holding the Cancel key will
+refresh the screen display.
+• Press the Cancel key: Return to the previous page.
+• Press or press and hold the PgUp key: On the function page, press the PgUp key to move up one line.
+On other pages, press the PgUp key to move up one page.
+• Press or press and hold the PgDn key: On the function page, press the PgDn key to move down one
+line. On other pages, press the PgDn key to move down one page.
+• On a page other than the homepage, if no keys are pressed during a 30-second period, you will be
+automatically directed to the homepage.
+
+Function Page
+
+The function page is used to display and set the robot functions, such as setting the Robot ID.
+The function page is shown below:
+
+11 MODULES
+FAULT
+
+Press and
+hold the
+OK key
+
+LightInd Offline
+
+Robot ID
+
+Setup
+
+Robot Type Setup
+Module
+
+Setup
+
+Game
+
+Setup
+
+WiFi
+
+Setup
+
+Rule Parameter Settings
+
+Real-time Information Page
+The real-time information page displays the real-time parameters of a robot, such as robot chassis power.
+The real-time information page is shown below:
+
+11 MODULES
+FAULT
+
+Press the
+OK key
+
+Hero
+
+Red 1
+
+17mmINSPD: 0.0/
+
+30
+
+17mmHeat:
+
+240
+
+0.0/
+
+17mmSpeed: 0.0
+
+LightInd Offline
+
+Real-time HP/Total HP
+
+HP: 300/300
+
+Robot Type/ID
+Real-time launch initial speed of a 17mm projectile/
+maximum launch initial speed
+Real-time heat of a 17mm projectile/maximum heat
+Real-time launch speed of 17mm projectiles
+Communication Quality Detection Status:
+“None” indicates the test has not started, “Poor”
+and “Good” represent detection results, while
+“Error” signifies an abnormal test.
+
+16
+
+© 2025 DJI All Rights Reserved.
+
+Press the
+PgDn key
+
+Pos(0.0,0.0,0)
+42mmINSPD: 0.0/
+
+16
+
+42mmHeat:
+
+200
+
+0.0/
+
+Real-time robot coordinates
+Real-time launch initial speed of a 42mm projectile/
+maximum launch initial speed
+Real-time heat of a 42mm projectile/maximum heat
+
+42mmSpeed: 0.0
+
+Real-time launch speed of 42mm projectiles
+
+Camera: 0/0
+
+Last digit of the Main Controller version number
+
+Ver: 0.0
+
+Current transmission channel/pre-set channel
+
+Press the
+PgDn key
+
+PowerBuf
+
+0.0/
+
+60
+
+Power
+
+0.0
+
+80
+
+BUFF: No Buff
+Customer AP Connected
+Can't find server
+
+Real-time power buff energy level/Maximum
+power buff energy level
+Real-time power/Maximum power
+Current buff increase
+WiFi connection status
+Server connection status
+
+UI Function Descriptions
+This chapter explains the actual use of the Main Controller UI, which includes functions such as the
+Robot ID settings, robot type settings, module settings, rule parameter settings, and WiFi settings.
+
+Set Robot ID
+E.g. Set Robot ID to Red 1 Hero:
+
+11 MODULES
+FAULT
+
+Press and hold
+the OK key
+
+LightInd Offline
+
+RED
+
+Press the
+OK key
+
+BLUE
+NEUTRAL
+Help
+
+Robot ID
+
+Setup
+
+Robot Type Setup
+Module
+
+Setup
+
+Game
+
+Setup
+
+WiFi
+
+Setup
+
+RED 1
+
+Hero
+
+RED 2
+
+Engineer
+
+RED 3
+
+Standard
+
+RED 4
+
+Standard
+
+RED 5
+
+Standard
+
+Press the
+OK key
+
+Press the
+OK key
+
+In the Robot ID setup, the Robot Type corresponding to the ID is the default setting. You can
+change the Robot Type in "Robot Type Setup".
+
+Set Robot Type
+E.g. Set Robot Type to Standard:
+
+11 MODULES
+FAULT
+LightInd Offline
+
+Press and hold
+the OK key
+
+Robot ID
+
+Setup
+
+Robot Type Setup
+Module
+
+Setup
+
+Game
+
+Setup
+
+WiFi
+
+Setup
+
+Press the
+OK key
+
+Robot
+
+Standard
+
+Robot
+
+Hero
+
+Robot
+
+Engineer
+
+Robot
+
+Sentry
+
+Robot
+
+Aerial
+
+© 2025 DJI All Rights Reserved.
+
+17
+
+Module Settings
+Set Armor Module ID
+The Robot can have several Armor Modules, but they must have the correct ID settings.
+The steps to configure the Armor Module ID are as follows:
+a. On the function page of the Main Controller Module, proceed as shown to enter the Armor ID Setup
+page:
+
+11 MODULES
+FAULT
+
+Press and hold
+the OK key
+
+LightInd Offline
+
+Robot ID
+
+Setup
+
+Robot Type Setup
+Module
+
+Setup
+
+Game
+
+Setup
+
+WiFi
+
+Setup
+
+Press the
+OK key
+
+Armor ID Reset
+Speed Mon ID Reset
+Speed Compass Cali
+Cap Measure
+UWB Compass Cali
+
+b. On this page, select “Armor ID Reset” to enter the Armor ID reset status. The panel light will flash at
+a certain frequency (for a red robot, the red light flashes; for a blue robot, the blue light flashes).
+c. Strike each Armor Module in succession with a consistent amount of force. If the armor light goes off
+and then comes back on, the Armor ID has been set successfully. The ID of the Armor Module that
+is hit first is 0, and the ID is sequentially incremented according to the order in which the modules
+are struck.
+d. After completing the above operations, check whether the armor ID has been set successfully by
+looking up the version number of the Armor Modules. If the read number of effective Armor Modules
+is the same as the number of Armor Modules installed, the procedure is complete.
+Be sure to set the ID of an Armor Module before use and ensure that the IDs of Armor Modules
+connected to the same Main Controller Module are not repeated. If there is a configuration error,
+the Robot Side self-test will detect that the Armor Module is offline.
+Set Speed Monitor Module ID
+The Robot can have several Speed Monitor Modules, but they must have the correct ID settings.
+The Robot can distinguish between the detected projectile information and the module’s own angle
+information based on the Speed Monitor Module ID.
+The steps to configure the Speed Monitor Module ID are as follows:
+a. On the function page of the Main Controller Module, proceed as shown to enter the Speed Monitor
+ID Setup page:
+
+11 MODULES
+FAULT
+
+Press and
+hold the
+OK key
+
+LightInd Offline
+
+18
+
+© 2025 DJI All Rights Reserved.
+
+Robot ID
+
+Setup
+
+Robot Type Setup
+Module
+
+Setup
+
+Game
+
+Setup
+
+WiFi
+
+Setup
+
+Press the
+OK key
+
+Armor ID Reset
+Speed Mon ID Reset
+Speed Compass Cali
+Cap Measure
+UWB Compass Cali
+
+b. On this page, select “Speed Mon ID Reset” to enter the Speed Monitor Module ID reset status. The
+side light panel of the Speed Monitor Module will flash red and blue at a set frequency.
+c. Insert opaque objects into the muzzle of the speed monitoring module sequentially from the front
+end to trigger the infrared sensor on the front end of the module. The side light panel will flash
+yellow, then go out and restart. Configuration of the Speed Monitor Module ID is now complete.
+The ID of the first 17mm-projectile Speed Monitor Module triggered is set to 0, and for each 17mmprojectile Speed Monitor Module triggered after that, this goes up in increments of 2: 2, 4, 6, etc.
+The ID of the first 42mm-projectile Speed Monitor Module triggered is set to 1, and for each 42mmprojectile Speed Monitor Module triggered after that, this goes up in increments of 2: 3, 5, 7, etc.
+d. After completing the above operations, check whether the Speed Monitor ID has been set
+successfully by looking up the version number of the Speed Monitor Module. If the read number of
+effective Speed Monitor Modules is the same as the number of Speed Monitor Modules installed,
+the Speed Monitor Module ID configuration is complete.
+Speed Monitor Module Compass Calibration
+The compass on the Speed Monitor Module can be calibrated through the interactive interface. This
+provides data for the Robot Side and the Server to help determine the robots destroyed.
+The steps to calibrate the Speed Monitor Module are as follows:
+a. On the function page of the Main Controller Module, proceed as shown to enter the Speed Monitor
+Module Calibration Setup page.
+
+11 MODULES
+FAULT
+LightInd Offline
+
+Press and
+hold the
+OK key
+
+Robot ID
+
+Setup
+
+Robot Type Setup
+Module
+
+Setup
+
+Game
+
+Setup
+
+WiFi
+
+Setup
+
+Press the
+OK key
+
+Armor ID Reset
+Speed Mon ID Reset
+Speed Compass Cali
+Cap Measure
+UWB Compass Cali
+
+b. On this page, select “Speed Compass Cali” to enter the Speed Monitor Module calibration status.
+The side light panel of the Speed Monitor Module will show a row of green lights, which is the
+horizontal calibration progress bar.
+c. Keep the barrel of the Speed Monitor Module horizontal (the angle of the Pitch and Roll axes should
+be less than 10°), and on the same spot, rotate 360° along the Yaw axis of the Speed Monitor
+Module. The horizontal calibration progress bar indicated by the side light panel of the Speed
+Monitor Module will gradually fill until the horizontal calibration is complete.
+d. When the horizontal calibration is complete, the side light panel of the Speed Monitor Module will
+show a row of purple lights, which is the vertical calibration progress bar.
+e. Keep the barrel of the Speed Monitor Module in the positive or negative direction of gravity (the
+angle difference should be less than 10°), and on the same spot, rotate 360° along the Roll axis of
+the Speed Monitor Module. The vertical calibration progress bar indicated by the side light panel of
+the speed measurement module will gradually fill until the vertical calibration is complete.
+f. If the calibration is unsuccessful, please repeat the above steps, or refer to the Speed Monitor
+Module installation guidelines in the the latest RoboMaster university series robot building
+specifications manual to check whether the Speed Monitor Module has been installed correctly.
+
+© 2025 DJI All Rights Reserved.
+
+19
+
+Positioning Module Compass Calibration
+Through the interactive interface, the compass on the positioning module can be calibrated to provide
+orientation data for the server.
+Operation steps:
+a. On the Main Controller Module’s function page, navigate to the positioning module calibration settings
+page.
+
+11 MODULES
+FAULT
+
+Press and
+hold the
+OK key
+
+LightInd Offline
+
+Robot ID
+
+Setup
+
+Robot Type Setup
+Module
+
+Setup
+
+Game
+
+Setup
+
+WiFi
+
+Setup
+
+Press the
+OK key
+
+Armor ID Reset
+Speed Mon ID Reset
+Speed Compass Cali
+Cap Measure
+UWB Compass Cali
+
+b. Select "UWB Compass Cali" to enter the calibration status.
+c. Keep the module horizontally aligned (the angle of the Pitch and Roll axes should be less than 10°)
+and rotate it 360° around the Yaw axis.
+d. Upon successful calibration, the SYS indicator light will flash green rapidly (2Hz). If it flashes green
+slowly (1Hz), calibration failed.
+e. If the calibration is unsuccessful, please repeat the above steps, or refer to the Speed Monitor Module
+installation guidelines in the the latest RoboMaster university series robot building specifications
+manual to check whether the Speed Monitor Module has been installed correctly.
+
+20
+
+© 2025 DJI All Rights Reserved.
+
+Rule Parameter Settings
+In offline mode, through the interactive interface, you can set the robot’s maximum HP, the maximum
+projectile initial speed, and the barrel heat limit.
+For example, you can set the robot’s power limit to infinite:
+
+11 MODULES
+FAULT
+
+Press and
+hold the
+OK key
+
+LightInd Offline
+
+Set the max. launch initial
+speed of a 17mm projectile
+Set the max. launch initial
+speed of a 42mm projectile
+
+Robot ID
+
+Setup
+
+Robot Type Setup
+Module
+
+Setup
+
+Game
+
+Setup
+
+WiFi
+
+Setup
+
+Reset
+
+HP
+
+MaxHP
+
+Setup
+
+MaxPower
+
+Setup
+
+Reset
+
+HP
+
+MaxHP
+
+Setup
+
+MaxPower
+
+Setup
+
+MaxINSPD0
+
+Setup
+
+MaxINSPD0
+
+Setup
+
+MaxINSPD1
+
+Setup
+
+MaxINSPD1
+
+Setup
+
+MaxPower: 80
+MaxPower: 120
+MaxPower: Unlimited
+
+Press the
+PgDn key
+2 times
+
+Press the
+PgDn key
+2 times
+
+MaxPower: 80
+MaxPower: 120
+
+Press the
+OK key
+
+Press the
+OK key
+
+Press the
+OK key
+
+MaxPower: Unlimited
+
+Set MaxPower Success
+
+Based on the procedures above, you can also configure the following functions:
+1. Reset HP
+2. Set max. HP
+3. Set max. power
+4. Set max. launch initial speed of a 17mm projectile
+5. Set max. launch initial speed of a 42mm projectile
+6. Set max. heat of a 17mm projectile
+7. Set max. heat of a 42mm projectile
+
+© 2025 DJI All Rights Reserved.
+
+21
+
+WiFi Settings
+WiFi Connection
+Through the interaction interface, users can choose a pre-set SSID configuration (the WiFi name) on the
+Main Controller Module to connect and communicate with the Server, as shown below:
+
+11 MODULES
+FAULT
+
+Robot ID
+
+Press and
+hold the
+OK key
+
+LightInd Offline
+
+Scan SSID
+Forget SSID
+Connect Information
+
+Press the
+OK key
+
+Setup
+
+Robot Type Setup
+Module
+
+Setup
+
+Game
+
+Setup
+
+WiFi
+
+Setup
+
+test0_AP
+test1_AP
+test2_AP
+
+Press the
+OK key
+
+Select a pre-set
+configured SSID
+
+test3_AP
+test4_AP
+
+Connecting to:
+test0_AP
+
+Connect Success
+
+After scanning the SSID, select it, and press and hold the OK key to remember it. The Main Controller
+Module will automatically connect to this SSID upon startup. Click "Forget SSID" to ignore the remembered SSID.
+After connection, the main interface will display the WiFi signal strength, as shown below.
+
+11 MODULES
+FAULT
+LightInd Offline
+
+22
+
+© 2025 DJI All Rights Reserved.
+
+WiFi Information Search
+Through the interaction interface, you can check the WiFi information for the current connection on the
+Main Controller Module, as shown below:
+Press and
+hold the
+OK key
+
+11 MODULES
+FAULT
+LightInd Offline
+
+Scan SSID
+
+Press the
+OK key
+
+Forget SSID
+Connect Information
+
+Robot ID
+
+Setup
+
+Robot Type Setup
+Module
+
+Setup
+
+Game
+
+Setup
+
+WiFi
+
+Setup
+
+Press the
+OK key
+
+SSID: test0_AP
+
+Current WiFi connection name
+
+Signal: -25dBm
+
+Signal strength
+
+Rssi: 100.00%
+
+Signal quality
+
+Rate: 72Mbit/s
+
+Sending rate
+
+Debug Function
+Through the interaction interface, access the “Debug Option” menu, where you can modify the advanced
+settings of the Referee System, as shown in detail below:
+
+Press and hold
+the OK key
+
+11 MODULES
+FAULT
+
+Press the PgDn
+key 5 times
+
+LightInd Offline
+
+Module State Info
+
+Robot Type Setup
+Module
+
+Setup
+
+Game
+
+Setup
+
+WiFi
+
+Setup
+
+Debug
+
+Option
+
+Module Detection
+
+Ext Module Setup
+
+Offline Mode
+
+Ext Speed Mon
+
+√
+
+All Lights Control
+
+Module Detection
+
+√
+
+Pellet Test
+
+Offline Mode
+
+Press the
+OK key
+
+√
+√
+
+Communication Quality Test
+
+"Ext Speed Mon" indicates that the robot is equipped with an extra 17mm-projectile Speed Monitor
+Module. This setting is saved when powered off.
+"Module Detection" can test whether the module is offline. If the module is offline, the Light Indicator
+Module will display the offline light and the UI will display the offline information. This setting is not saved
+when powered off.
+In "Offline Mode", the Robot Side is offline. One of its features enables the "Chassis", "Gimbal", and
+"Ammo-Booster" power output ports of the Power Management Module to have normal power supply.
+This setting is saved when powered off.
+"All Lights Control": The robot indicator lights show that this function is enabled. This setting is not saved
+when powered off.
+"Pellet Test": The 17mm-projectile Speed Monitor Module is used for a fluorescent projectile brightness
+test. This setting is not saved when powered off.
+© 2025 DJI All Rights Reserved.
+
+23
+
+Tap “Communication Quality Test” to initiate testing. The robot will perform predefined actions in a
+simulated competition environment. The robot side will detect communication quality between the speed
+measurement module and Main Controller Module, with real-time test results displayed on the interface.
+You can use the RFID Interaction Module to upload functions onto the IC card in "Ext Module Setup" as
+follows:
+First, connect the Main Controller Module, Power Management Module and RFID Interaction Module,
+and place the IC card in the identification area of the RFID Interaction Module. As the light of the RFID
+Interaction Module blinks red/blue, operate the interactive interface as follows.
+
+11 MODULES
+FAULT
+LightInd Offline
+
+Module State Info
+
+Press the
+PgDn key 5
+times
+
+Press the
+OK key
+
+Ext Module Setup
+Ext Speed Mon
+Module Detection
+
+Press and hold
+the OK key
+
+√
+
+Offline Mode
+
+Press the
+PgDn key
+2 times
+
+Red RFID Card Write
+Blue RFID Card Write
+ICRA RFID Card Write
+
+Robot Type Setup
+Module
+
+Setup
+
+Game
+
+Setup
+
+WiFi
+
+Setup
+
+Debug
+
+Option
+
+Armor ID
+
+Setup
+
+Speed Mon Setup
+RFID
+
+Setup
+
+Bsae Zone 0
+Press the
+OK key
+
+Bsae Zone 1
+Bsae Zone 2
+Elevated Ground
+Power Rune Card
+
+Press the
+OK key
+Press the
+PgDn key
+1 time
+
+Press the
+OK key
+
+Information of uploadable card types will
+be updated in RoboMaster University
+Series Rules Manuals and is subjected to
+the actual display.
+Press the
+OK key
+
+The RFID Interaction Module blinking once indicates that the functions
+are uploaded to the IC card, which
+is set as Red Base Zone 0.
+
+To change the IC card in the identification area of the RFID Interaction Module as needed, select the
+card type again, and upload functions onto the card.
+
+24
+
+© 2025 DJI All Rights Reserved.
+
+View Version Information
+Through the interaction interface, you can check the version number of each module on the Robot Side
+and check the Armor Module version information, as shown below:
+
+11 MODULES
+FAULT
+LightInd Offline
+
+Press and
+hold the
+OK key
+Press the
+PgDn key 6
+times
+
+Module
+
+Setup
+
+Game
+
+Setup
+
+WiFi
+
+Setup
+
+Debug
+
+Option
+
+Read
+
+Version
+
+Main
+
+Control
+
+Armor
+
+Module
+
+Power
+
+Manager
+
+Speed
+
+Monitor
+
+Module3: 5.0.0.6
+
+RFID
+
+Module
+
+Module4: 5.0.0.6
+
+Press the
+OK key
+
+Module0: 5.0.0.6
+Press the
+OK key
+
+Module1: 5.0.0.6
+Module2: 5.0.0.6
+
+© 2025 DJI All Rights Reserved.
+
+25
+
+Language Setting
+You can change the display language through the interactive interface. The settings are as follows:
+
+11 MODULES
+FAULT
+LightInd Offline
+
+Press and hold
+the OK key
+Press the
+PgUp key
+2 times
+
+Game
+
+Setup
+
+WiFi
+
+Setup
+
+Debug
+
+Option
+
+Read
+
+Version
+
+Language
+
+Setup
+
+Press the
+OK key
+Press the
+PgDn key
+1 time
+
+English
+简体中文
+
+Press the
+OK key
+
+Set Sucess
+
+Language settings are automatically saved, and the robot will display information in this language after it is powered on
+next time.
+
+Help Menu
+After entering "Help Menu" through the interactive interface, you can view common operations, manuals, etc.,
+as follows:
+Press and hold
+the OK key
+11 MODULES
+FAULT
+LightInd Offline
+
+Press the
+PgUp key
+1 time
+
+WiFi
+
+Setup
+
+Debug
+
+Option
+
+Read
+
+Version
+
+Language
+
+Setup
+
+Help
+
+Menu
+
+Press the
+OK key
+
+Help
+
+Manual
+
+Setting
+
+Operation
+
+"Help Manual" contains the QR codes linked to the RoboMaster University Series Robot Building Specifications Manual and the manuals for the Referee System. Users can scan the codes to view them.
+Users can scan the QR codes for common settings assistance under "Setting Operation" .
+Users can click on the Help pages under some menus on the interactive interface to access relevant information for assistance. Operational tips and QR codes for help links may also pop up during certain steps. Users
+may follow the instructions or scan the codes for assistance. For example:
+
+ID and type setting method
+
+26
+
+© 2025 DJI All Rights Reserved.
+
+Introduction to the Robot Side Module Initialization
+To ensure fair competition, it is important that all of the Referee System modules are working properly.
+Therefore, the Robot Side will initialize each module after powering up. When the initialization of an
+important module fails, a solid yellow light will appear on the Light Indicator Module.
+
+Video Transmitter Module (VT02 & VT12) Instructions
+The Video Transmitter Module has a transmitter and a receiver.
+When the Video Transmitter Module is used for the first time, the VTM Transmitter and VTM Receiver
+must be respectively activated in your region by using RoboMaster Tool 2. For the download website,
+refer to the "RoboMaster Tool 2 Upgrade Procedure" section.
+
+Activation of the VTM Transmitter
+1. Install the USB driver of the Main Controller Module by referring to the "RoboMaster Tool 2 Upgrade
+Procedure" section.
+2. Connect the VTM Transmitter and the Main Controller Module to the Power Management Module of
+the Referee System, and use a micro-USB data cable to connect your PC to the USB port of the Main
+Controller Module to supply power to the Power Management Module.
+3. Open RoboMaster Tool 2 and check that your PC is properly connected to the Internet.
+4. On the serial device management area on the left side of the main interface, select a correct serial
+device number, then click Open.
+[3]
+
+[4]
+
+[2]
+
+[1]
+
+[1] Serial device management area
+[2] VTM Activation page
+[3] VTM Transmitter Activation button
+[4] VTM Receiver Activation button
+
+© 2025 DJI All Rights Reserved.
+
+27
+
+5. Click the "VTM Activation" page on the left side of the software tool to display the VTM activation
+interface, where you can click the "VTM Transmitter Activation" button to access the activation
+procedure. Please re-check your activation region and then click the "Activate" button.
+
+6. If activation fails, please check the connection and network status of the VTM, and then repeat the
+activation operation in step 5.
+7. After activation, check whether your activation region matches your mode: Mode 1 for Mainland China
+and other regions, and Mode 2 for Japan. Once completed, activation cannot be repeated again.
+
+Activation of the VTM Receiver
+1. Use a USB Type-C data cable to connect your PC to the USB port of the VTM Receiver, and use an
+adapter to supply power to the VTM Receiver.
+2. Open RoboMaster Tool 2 and check that your PC is properly connected to the Internet.
+3. Install DJI Phantom 4 Drivers_1.2_Installer for the VTM Receiver. Driver download URL:
+https://www.robomaster.com/en-US/products/components/detail/1497
+4. Click the “VTM Activation” page on the left side of the software tool to display the VTM activation
+interface, where you can click the “VTM Receiver Activation” button to display the VTM Receiver
+Activation window.
+5. In the VTM Receiver Activation window, select the corresponding serial port number and click Open.
+Please re-check your activation region and then click the “Activate” button.
+
+28
+
+© 2025 DJI All Rights Reserved.
+
+6. If activation fails, please check the connection and network status of the VTM, and then repeat the
+activation operation in step 5.
+7. After activation, check whether your activation region matches your mode: Mode 1 for Mainland
+China and other regions, and Mode 2 for Japan. Once completed, activation cannot be repeated
+again.
+
+VTM Channel Configuration
+Each Robot ID is bound with a VTM channel ID. Their correspondence is shown in the table below:
+(The VTM Channel ID may be adjusted according to competition requirements, subject to the latest
+version of the referee system FAQ or related official notices.)
+Mainland China and other regions:
+Robot ID
+
+VTM Channel ID
+
+Red 1
+
+1
+
+Red 2
+
+6
+
+Red 3
+
+2
+
+Red 4
+
+3
+
+Red 5
+
+5
+
+Red Aerial (corresponding to the VTM Transmitter ID of the red team's Aerial)
+
+4
+
+Blue 1
+
+4
+
+Blue 2
+
+3
+
+Blue 3
+
+5
+
+Blue 4
+
+6
+
+Blue 5
+
+2
+
+Blue Aerial (corresponding to the VTM Transmitter ID of the blue team's Aerial)
+
+1
+
+Japan:
+Robot ID
+
+VTM Channel ID
+
+Red 1
+
+20
+
+Red 2
+
+21
+
+Red 3
+
+24
+
+Red 4
+
+25
+
+Red 5
+
+26
+
+Red Aerial (corresponding to the VTM Transmitter ID of the red team's Aerial)
+
+27
+
+Blue 1
+
+22
+
+Blue 2
+
+23
+
+Blue 3
+
+28
+
+Blue 4
+
+27
+
+Blue 5
+
+26
+
+Blue Aerial (corresponding to the VTM Transmitter ID of the blue team's Aerial)
+
+25
+
+© 2025 DJI All Rights Reserved.
+
+29
+
+The steps to configure the VTM channel are as follows:
+
+1. Connect the VTM Transmitter to the Main Controller Module and set the Robot ID. For details,
+please refer to the "Set Robot ID" section under "UI Function Descriptions".
+2. The VTM Receiver ID and image display must be configured through the "RoboMaster Client" on the
+PC, as follows:
+a. Use a USB Type-C data cable to connect your PC to the USB port of the VTM Receiver, and use
+a power adapter to power the VTM Receiver. Wait about 20 seconds until the status indicator is
+solid green, indicating that the Receiver startup is complete.
+
+Aerial
+
+USB Type-C interface
+
+Status LED
+
+12 V power port
+
+b. Open the Device Manager of your PC and expand the Network Adapter submenu to check for
+a "Remote NDIS based Internet Sharing Device", as shown in the figure below:
+
+After using a USB cable to connect the Receiver to your PC, for Windows 7 and Windows 10
+operating systems, this driver will be automatically installed. If it is not, check the Internet settings
+of your PC or look for a third-party driver.
+c. Install DJI Phantom 4 Drivers_1.2_Installer for the VTM Receiver by referring to the "Activation of the
+VTM Receiver" section.
+d. Open "RoboMaster Client" and click the "Enter Client" button to enter the client screen, as shown in
+the figure below:
+
+30
+
+© 2025 DJI All Rights Reserved.
+
+To download "RoboMaster Client", refer to the "RoboMaster Client" section.
+e. On the client screen, press the "p" key on your computer keyboard to show the "Settings Panel"
+page, and select the Robot ID corresponding to the VTM Receiver from the drop-down box under
+the "Login" menu. The client will automatically set the VTM channel ID for the VTM Receiver.
+
+f. You can check the VTM status under the settings panel, including the serial port, connection status,
+rate, mode, and channel, indicating the connection status of the VTM Receiver's serial port, VTM
+connection status, transmission rate, operating mode, and VTM channel ID.
+g. After receiving the VTM channel ID, the VTM Receiver will automatically pair with the VTM
+Transmitter with the same VTM channel ID. After successful pairing, the client will display the
+screen transmitted from the VTM, and at the same time, the VTM connection status indicator on the
+settings panel of the client will change to green, as shown in the figure below:
+
+© 2025 DJI All Rights Reserved.
+
+31
+
+In this case, the status indicator on the VTM Transmitter will also change to green.
+
+USB Type-C interface
+
+Status LED
+UART serial port
+
+h. If connection is not carried out for a long period of time, please restart the VTM Receiver and VTM
+Transmitter, and then repeat the steps above to link again.
+i. If there is still no video output on the Client after the connection is established, check whether the
+IP address of the network card of the VTM Receiver on your PC is set to 192.168.42.105. If the IP
+address is wrong, you need to set it manually.
+
+When using several Video Transmitter Modules to transmit video at once, to avoid unclear
+images due to mutual interference, you should first ensure that one set of Video Transmitter
+Modules is connected, and then after the Client displays the images, enable the other Video
+Transmitter Modules.
+Only six VTM channels are available for user debugging in Mainland China and other regions.
+When more than six video transmitter modules work at the same time, transmission interference
+may occur. Therefore, you can select only the red team or only the blue team for debugging, or
+during combat, set Red 1-Red 3 and Blue 1-Blue 3 to avoid conflict.
+Only nine VTM channels are available for user debugging in Japan, of which channels 20-23
+are W52-enabled, and channels 24-28 are 5.7 GHz-enabled. For 5.7 GHz-enabled channels,
+please apply for the usage license. If the 5.7 GHz usage license is not obtained, please set
+Red 1-Red 2 and Blue 1-Blue 2 for debugging to carry out a combat not exceeding 2v2. If the
+5.7 GHz usage license is obtained, you can select only the red team or only the blue team for
+debugging, or during combat, set Red 1-Red 4 and Blue 1-Blue 4 to avoid conflict.
+
+32
+
+© 2025 DJI All Rights Reserved.
+
+RoboMaster Referee System User Interface Guide
+To help users carry out automatic control and obtain real-time competition data, a UART interface is
+available on the Robot Side to output Robot Side data.
+Output data includes the remaining time in the competition, the robots' remaining HP, and real-time
+power output from the chassis. In addition, user-customized data can be uploaded to the Client and will
+be displayed on the operator UI. For more information about the Referee System Serial Port Protocol,
+select “Document Download” at the following URL:
+https://www.robomaster.com/en-US/products/components/referee
+The Referee System user interface is part of the Power Management Module. The exact location is
+shown below:
+
+Student
+Serial Port
+
+Line sequence descriptions:
+1. Rx: receiving line for serial
+communication data
+2. Tx: transmission line for
+serial communication data
+3. G: GND line for serial
+communication
+
+Checking Functions on the Robot Side
+After the Robot Side is installed, follow the instructions to connect each module and carefully read all the
+usage instructions mentioned above.
+On first power-up, carry out the following checks:
+1. Check that the supply voltage is correct and whether the polarity of the power supply is reversed (the
+input voltage for the Referee System must not exceed 24 V).
+2. Ensure that the wires are firmly connected to each module and that there is no risk of them being
+entangled in a moving mechanism.
+3. Turn on the battery power, wait until the Main Controller Module of the Referee System has started
+up (startup may take about 20 seconds), and then check the color of the bar on the Light Indicator
+Module. When the Main Controller Module of the Referee System is powered on for the first time after
+installation, a yellow light is displayed after startup. As the Armor Module IDs have not been set, the
+Main Controller Module is not connected to the Server.
+4. Set the Armor Module IDs (for details, refer to "Set Armor Module ID").
+5. N
+ ormally, when the above operations are complete and all the Robot Side modules are connected, the
+Main Controller Module light bar will change from yellow to red or blue. If the robot is in offline mode,
+the chassis, gimbal and launch ports will have voltage output. If the yellow light does not change color,
+view the message on the interactive OLED screen to check whether the faulty module is properly
+connected. Refer to the "Robot Side Interaction Instructions" and "Robot Property Descriptions" to set
+the correct robot type. The features of the Referee System can be further checked once the Referee
+System displays normally.
+6. Tap the armor modules in succession, and check whether the deducted HP value on the real-time
+data display page of the Main Controller Module interactive OLED screen is correct.
+7. Launch a projectile and check whether the launch initial speed/speed values are displayed on the
+Main Controller Module interaction screen.
+8. U se an RFID Interaction Module card to test the features and detection distance of the RFID
+Interaction Module. If the RFID Interaction Module card data can be read correctly, the module's light
+bar will flash red or blue, depending on the robot. (Pay attention to the detection distance. If the RFID
+Interaction Module and card come into contact with a magnetic object, the detection distance and
+detection accuracy will be affected).
+© 2025 DJI All Rights Reserved.
+
+33
+
+9. Set the VTM Receiver and the VTM Transmitter (for details, refer to the Video Transmission Module
+Instructions). After setup is complete, check the video data of the VTM Receiver.
+10. R ead the user interface data of the Main Controller Module of the Referee System and check
+whether the data is correct.
+After the Robot Side is installed, you may proceed to the function debugging of the Referee System.
+
+RoboMaster Tool 2 Upgrade Procedure
+RoboMaster Tool 2 is used to upgrade the Referee System modules.
+Tool download link:
+https://www.robomaster.com/en-US/products/components/referee
+(Select the download link under the "RoboMaster Tool 2" icon to download it)
+Main Controller USB driver download link:
+https://www.robomaster.com/en-US/products/components/detail/1837
+(Note: The "RoboMaster remote controller driver" can be used as the Main Controller USB driver.)
+
+Introduction to the Main Upgrade Interface
+[1]
+
+[2]
+
+[3]
+
+[4]
+
+[5]
+
+[6]
+
+[1] Automatic upgrade checkbox
+[2] Upgrade button
+
+[3] Serial device management area
+
+[4] Internet connection status indicator
+[5] Firmware update instructions
+[6] Firmware download button
+
+34
+
+© 2025 DJI All Rights Reserved.
+
+Upgrade Procedure
+1. Connect the Main Controller Module, the Power Management Module and the module to be upgraded,
+and use a micro-USB data cable to connect your computer to the USB port of the Main Controller
+Module to supply power to the Robot Side.
+2. Open the RoboMaster Tool 2 upgrade tool and check your Internet connection status.
+3. On the serial device management area on the left side of the main interface, select the correct serial
+device number, then click Open.
+4. Now the upgrade page will display the basic robot information and all module information, as shown in
+the figure below.
+
+Upgrade Page
+
+5. If the firmware update instructions at the bottom of the interface say "Remote server has found the
+latest firmware", then click on "Firmware Download" to download the firmware to your local computer.
+6. When the download is complete, the app version number of the module to be upgraded will be shown
+in red, and the "Upgrade" button will change from grayed out to active, as shown in the figure below.
+Automatic Upgrade
+
+Upgrade
+
+The "Automatic Upgrade" checkbox shows that you can automatically upgrade all currently
+connected modules as required.
+
+© 2025 DJI All Rights Reserved.
+
+35
+
+7. The upgrade page will display the basic robot information and the firmware information for all modules.
+Click the "Upgrade" button, as shown in the figure below.
+
+8. When the upgrade progress bar has finished updating, the module firmware update is complete.
+
+36
+
+© 2025 DJI All Rights Reserved.
+
+WeChat
+
+Weibo
+
+
