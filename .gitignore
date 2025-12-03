@@ -7,3 +7,4 @@ logs/
 jsons/
 uploads/
 chat_history.json
+benchmark_results/

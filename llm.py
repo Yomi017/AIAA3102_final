@@ -83,7 +83,7 @@ class Qwen3(BaseLLM):
                 model=self.path,
                 tensor_parallel_size=self.tensor_parallel_size,
                 trust_remote_code=True,
-                gpu_memory_utilization=0.5,
+                gpu_memory_utilization=0.7,
             )
         else:
             logger.info("Initializing transformers model...")
@@ -238,7 +238,7 @@ class Qwen3VL(BaseLLM):
                 model=self.path,
                 tensor_parallel_size=self.tensor_parallel_size,
                 trust_remote_code=True,
-                gpu_memory_utilization=0.9,
+                gpu_memory_utilization=0.6,
                 max_model_len=32768,  # 增加最大长度以支持更长的对话
                 limit_mm_per_prompt={"image": 10, "video": 10},  # 多模态限制
             )

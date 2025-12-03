@@ -819,16 +819,19 @@ class ToolsManager:
         # 初始化所有工具
         self._tools: Dict[str, ToolBase] = {}
         
-        # 注册所有工具
+        # Web Tools
         self._register_tool(GoogleSearchTool())
         self._register_tool(TavilySearchTool())
-        self._register_tool(WebScraperTool())
-        self._register_tool(WeatherQueryTool())
-        self._register_tool(TimeQueryTool())
+        self._register_tool(WebScraperTool()) 
+        # Query Tools
+        self._register_tool(WeatherQueryTool()) 
+        self._register_tool(TimeQueryTool()) 
+        # Calculator Tools
         self._register_tool(BasicCalculatorTool())
         self._register_tool(TrigCalculatorTool())
         self._register_tool(MatrixCalculatorTool())
         self._register_tool(IntegralCalculatorTool())
+        # RAG 
         self._register_tool(KnowledgeBaseQueryTool(rag_db_path))
         
         # 注册工具信息查询工具(需要引用自己)
