@@ -2,24 +2,81 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+html, body {
+  height: 100%;
+  width: 100%;
   margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent body scroll */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  max-width: 100vw;
 }
 
-/* Fix for KaTeX layout issues when using whitespace-pre-wrap */
-.whitespace-pre-wrap .katex {
+#root {
+  height: 100%;
+  width: 100%;
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+/* Fix for KaTeX layout issues */
+.katex-display {
+  display: block;
+  margin: 1em 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.katex-display > .katex {
+  display: block; /* Changed from inline-block to block to respect width */
+  white-space: normal; /* Allow wrapping if possible, though math usually doesn't wrap well */
+  max-width: 100%;
+  text-align: center; /* Center the math */
+}
+
+.katex-display > .katex > .katex-html {
+  display: block;
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  padding-bottom: 4px; /* Space for scrollbar */
+}
+
+/* Inline math */
+.katex {
+  max-width: 100%;
+  font-size: 1.1em;
+  white-space: nowrap; /* Inline math should not wrap usually */
+}
+
+/* Override for display math inside katex to allow scrolling */
+.katex-display .katex {
   white-space: normal;
 }
 
-.katex-display {
-  margin: 1em 0;
+/* Ensure prose content doesn't overflow */
+.prose {
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.prose p {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.prose pre {
+  max-width: 100%;
   overflow-x: auto;
-  overflow-y: hidden;
+  white-space: pre-wrap; /* Allow wrapping in code blocks if needed, or keep pre */
+  white-space: pre; /* Usually code blocks scroll */
 }
 
 .overflow-anchor-none {
