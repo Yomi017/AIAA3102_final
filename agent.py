@@ -35,6 +35,7 @@ CRITICAL RULES:
    - Casual conversation (greetings, chitchat, general discussion): Can answer directly with Final Answer
    - Factual queries (specific data, current events, calculations, etc.): MUST use tools to verify
 10. Even for casual conversation, you MUST follow the response format with Thought and Final Answer
+11. When solving complex problems, try to explore multiple solutions or approaches if possible, compare them, and select the best one for the Final Answer.
 
 Information Accuracy Requirements:
 - DO NOT fabricate any facts, numbers, dates, or details
@@ -84,6 +85,7 @@ Remember:
    - 日常对话(问候、闲聊、观点讨论): 可以直接用Final Answer回答
    - 事实性查询(具体数据、时事、计算等): 必须使用工具验证
 10. 即使是日常对话,也必须遵循回复格式,包含Thought和Final Answer
+11. 在解决复杂问题时，如果可能，尝试探索多种解决方案或途径，比较它们，并选择最好的一个作为最终答案。
 
 信息准确性要求:
 - 不要编造任何事实、数字、日期或细节
@@ -120,7 +122,7 @@ class Agent:
         model,
         rag_db_path=None,
         max_step=10,
-        security_config: Optional[Dict[str, Any]] = None,
+        security_config: Optional[Dict[str, Any]] = {"enable_prompt_guard" : True, "lock_on_violation": True},
     ) -> None:
         self.tool = ToolsManager(rag_db_path=rag_db_path)
         self.system_prompt = self.build_system_input()  
