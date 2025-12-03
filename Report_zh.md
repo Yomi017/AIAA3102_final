@@ -69,11 +69,13 @@
 **四、实验设置与评估方案**
 
 1. **ReAct / 环境交互评估（ALFWorld）**  
-  - 评测脚本：ALFworld.py + ALFworld 数据。  
-  - 任务类型示例：放置物体、加热食物、清理物件等。  
+  - 评测脚本：`benchmarks/React/ALFworld.py`，统一使用官方 ALFWorld 20 个标准关卡（“放置”“加热”“清洁”等混合任务），每回合限制 40 步。  
+  - 数据收集：对「React」与「React_baseline」两个配置分别运行一整套关卡，自动落盘 `detailed_results.csv/json`。  
   - 评估指标：  
-    - 任务成功率（按游戏成功 / 总游戏数）。  
-    - 步数统计（总步数、成功步数、动作成功率）。  
+    - **任务成功率**：成功局数 / 总局数。  
+    - **动作执行质量**：平均步数、平均成功步数、动作成功率（成功步 / 总步）。  
+    - **失败原因分类**：解析 `task_preview` 或 `error` 字段，统计触发频率，用于定位瓶颈（例如 decoder prompt limit）。  
+  - 以 `analysis/analyze_react.py` 生成的 Markdown 与图表为准，可一键扩展到更多实验批次。  
 
 2. **RAG 评估**  
   - 数据来源与构造方式（针对 wiki_docs 的问答对）。  
@@ -100,16 +102,20 @@
 **五、实验结果与失败分析**
 
 1. **ALFWorld 结果汇总**  
-   - 实验数据位置：  
-     - `benchmarks/React/`。
-   - 核心结果：  
-     - 总游戏数、成功/失败数、成功率。  
-     - 总执行步数、成功步数、动作成功率，平均每局步数/成功步数。  
+   - 数据来源：`benchmark_results/React` 与 `React_baseline`，由 `analysis/analyze_react.py` 自动汇总为 `react_analysis.md`。  
+   - 关键指标：  
+     - **React（ReAct Agent）**：22 局中完成 17 局，成功率 **77.27%**，平均步数 17.95，动作成功率 83.03%。失败 5 局全部可追溯到 “decoder prompt limit” 的截断。  
+     - **React_baseline（无 ReAct Loop）**：20 局仅完成 8 局，成功率 **40.00%**，平均步数 27.10、动作成功率 63.00%。除个别 “clean/heat” 任务外，大部分因为世界状态探索失败或同样的解码截断。  
+  
+    ![React vs. Baseline 成功率对比](benchmark_results/charts/react_success_rates.png)
    - 结果解读：  
-     - 哪些任务类型成功率高（例如简单“放置类” vs 多步骤“清洗+加热+丢弃”）。  
-     - 哪些任务容易失败（例如长链条操作、需要精确定位的任务）。  
+     - ReAct Agent 在长链条任务（例如 *put two keychain in safe*、*find two pillow and put them in sofa*）保持 80%+ 动作准确率，说明“Thought→Action→Observation” 带来的上下文记忆确实减少了无效动作。  
+     - 基线在所有 “examine with desklamp”/“heat food and trash it” 任务上几乎全败（动作成功率 < 30%），体现出缺少工具调用/规划时，模型更容易在高分支环境中迷路。  
    - 失败案例分析：  
-     - 我们看到失败基本都是因为decoder tokens超过限制
+     - React 的 5 次失败全部是 “Decoder prompt limit”——即多轮 ReAct 导致 token 超限后，中断了 Observation 写回；后续会通过截断思维链或适配 `max_new_tokens` 来规避。  
+     - Baseline 的失败则更多出现在「Examine + 清洁」组合，说明没有链式思考时很难保持场景状态。  
+  
+  ![React 失败原因分布](benchmark_results/charts/react_failures.png)
 
 3. **RAG / Web模块结果汇总**  
    - 实验数据位置：  
@@ -127,17 +133,11 @@
 
 **六、消融实验设计与分析**
 
-1. **有/无React循环**  
-   - 设置：  
-     - 有React：在React架构下使用模型。  
-     - 无React：直接使用模型。  
-   - 对比方式：  
-     - ALFworld测试下模型的完成度。  
-   - 对比结果：
-     - 
-   - 分析：  
-     - React 对于模型与环境交互能力的加成程度。  
-     - 失败案例：。  
+1. **有/无 React 循环**  
+   - 设置：同一套 ALFWorld 20 局，分别启用 ReAct Prompt（`React`）与关闭 ReAct（`React_baseline`）。  
+   - 对比结果：`React` 成功率 **+37.3 pct**（77.27% vs 40.00%），平均动作成功率 +20 pct（83.03% vs 63.00%），同时平均步数更低（17.95 vs 27.10）。  
+   - 分析：ReAct 带来的显著收益主要来自（1）显式记录 Thought，减少重复探索；（2）Observation 反馈让模型及时矫正错误，从而在多步骤任务中保持 80%+ 的步骤准确率。基线由于一次性生成整条执行序列，在“examine/clean/heat”复合任务中经常迷失或堆叠无效动作。  
+   - 失败案例：ReAct 的 5 次失败集中在 `decoder prompt limit`——ReAct 输出过长导致截断；基线失败遍布所有需要工具联动的地图，且常见 “Examine the cd with the desklamp.”、 “Cool some bread and put it in countertop.” 等动作用尽上限仍未完成。  
 
 2. **有/无检索（RAG Ablation）**  
    - 设置：  
