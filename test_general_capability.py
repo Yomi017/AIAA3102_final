@@ -36,6 +36,12 @@ def main():
         help='每个类型最多测试多少个案例（None 表示全部）'
     )
     parser.add_argument(
+        '--rag_file',
+        type=str,
+        default=None,
+        help='指定 RAG 测试文件路径（默认: benchmark/RAG/test_cases_RAG_AI.txt）'
+    )
+    parser.add_argument(
         '--gpu_ids',
         type=str,
         default=None,
@@ -102,14 +108,29 @@ def main():
             print("⚠️  未找到知识库，RAG 测试可能无法正常工作")
             print("   请先运行: python rag/build_vector_db.py")
     
-    # 创建 Agent
+    # 创建 Agent（根据测试类型限制可用工具）
     print("\n🔄 正在初始化 Agent...")
-    agent = Agent(llm, rag_db_path=rag_db_path)
+    
+    # 根据测试类型设置允许的工具
+    allowed_tools = None
+    if args.type == 'rag':
+        # RAG 测试：只允许使用知识库查询工具
+        allowed_tools = ['knowledge_base_query']
+        print("🔒 工具限制：仅使用 knowledge_base_query（RAG 知识库查询）")
+    elif args.type == 'web':
+        # Web 测试：允许搜索相关工具
+        allowed_tools = ['google_search', 'tavily_search', 'get_time']
+        print("🔒 工具限制：仅使用 google_search, tavily_search, get_time")
+    else:
+        # both：不限制，使用所有工具
+        print("🔓 工具限制：无限制，使用所有可用工具")
+    
+    agent = Agent(llm, rag_db_path=rag_db_path, allowed_tools=allowed_tools)
     print("✅ Agent 初始化成功\n")
     
     # 运行测试
     try:
-        test_general_capability(agent, test_type=args.type, max_cases=args.max_cases)
+        test_general_capability(agent, test_type=args.type, max_cases=args.max_cases, rag_file=args.rag_file)
     except KeyboardInterrupt:
         print("\n\n⚠️  测试被用户中断")
         sys.exit(0)

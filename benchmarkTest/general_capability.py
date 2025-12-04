@@ -86,12 +86,14 @@ class GeneralCapabilityTester:
             
             lines = section.split('\n')
             
+            mode = None
             for line in lines:
                 line = line.strip()
                 if line.startswith('测试案例 #'):
                     if current_case:
                         test_cases.append(current_case)
                     current_case = {}
+                    mode = None
                 elif line.startswith('任务ID:'):
                     current_case['id'] = line.split(':', 1)[1].strip()
                 elif line.startswith('任务类型:'):
@@ -105,12 +107,17 @@ class GeneralCapabilityTester:
                 elif line.startswith('评估要点:'):
                     current_case['evaluation_points'] = []
                     mode = 'evaluation'
+                elif line.startswith('标准答案:'):
+                    current_case['standard_answer'] = []
+                    mode = 'standard_answer'
                 elif line and mode == 'description':
                     current_case['description'].append(line)
                 elif line and mode == 'user_input':
                     current_case['user_input'].append(line)
                 elif line and mode == 'evaluation':
                     current_case['evaluation_points'].append(line)
+                elif line and mode == 'standard_answer':
+                    current_case['standard_answer'].append(line)
         
         # 添加最后一个案例
         if current_case:
@@ -124,6 +131,8 @@ class GeneralCapabilityTester:
                 case['user_input'] = '\n'.join(case['user_input'])
             if 'evaluation_points' in case:
                 case['evaluation_points'] = '\n'.join(case['evaluation_points'])
+            if 'standard_answer' in case:
+                case['standard_answer'] = '\n'.join(case['standard_answer'])
         
         logger.info(f"Loaded {len(test_cases)} test cases from {file_path}")
         return test_cases
@@ -140,6 +149,7 @@ class GeneralCapabilityTester:
             格式化的轨迹字符串
         """
         trajectory_parts = []
+        tool_results_summary = []  # 收集所有工具返回内容
         
         for msg in history:
             role = msg.get('role', '')
@@ -159,12 +169,19 @@ class GeneralCapabilityTester:
                 # Agent 的思考和行动
                 trajectory_parts.append(f"[Agent Response]\n{content}\n")
             elif role == 'tool':
-                # 工具执行结果
+                # 工具执行结果 - 高亮显示
                 tool_name = msg.get('name', 'unknown_tool')
-                trajectory_parts.append(f"[Tool Result: {tool_name}]\n{content}\n")
+                tool_content = f"{'='*60}\n⚠️ 【工具返回内容 - {tool_name}】⚠️\n{'='*60}\n{content}\n{'='*60}\n"
+                trajectory_parts.append(tool_content)
+                tool_results_summary.append(f"- {tool_name}: {content[:200]}...")  # 收集摘要
         
-        # 添加最终输出
-        trajectory_parts.append(f"[Final Output]\n{final_output}\n")
+        # 在开头添加工具调用摘要
+        if tool_results_summary:
+            summary = "【工具调用摘要】\n" + "\n".join(tool_results_summary) + "\n\n"
+            trajectory_parts.insert(0, summary)
+        
+        # 添加最终输出 - 也高亮显示
+        trajectory_parts.append(f"{'='*60}\n🎯 【Agent 最终回答】\n{'='*60}\n{final_output}\n{'='*60}\n")
         
         return "\n".join(trajectory_parts)
     
@@ -225,6 +242,7 @@ class GeneralCapabilityTester:
                 'full_trajectory': full_trajectory,  # 新增：完整执行轨迹
                 'elapsed_time': elapsed_time,
                 'evaluation_points': test_case.get('evaluation_points', ''),
+                'standard_answer': test_case.get('standard_answer', ''),  # 新增：标准答案
                 'error': None
             }
             
@@ -245,10 +263,95 @@ class GeneralCapabilityTester:
                 'final_answer': None,
                 'elapsed_time': elapsed_time,
                 'evaluation_points': test_case.get('evaluation_points', ''),
+                'standard_answer': test_case.get('standard_answer', ''),
                 'error': error_msg
             }
         
         return result
+    
+    def calculate_f1_score(self, result: Dict[str, Any]) -> Tuple[float, str]:
+        """
+        计算 F1 分数：衡量最终答案与标准答案的匹配度
+        
+        Args:
+            result: 测试结果
+            
+        Returns:
+            (F1分数, 评分说明)
+        """
+        if result['error']:
+            return 0.0, f"Agent execution error: {result['error']}"
+        
+        # 获取标准答案
+        standard_answer = result.get('standard_answer', '')
+        
+        # 提取最终答案
+        final_answer = result.get('final_answer', '')
+        if not final_answer:
+            # 尝试从 agent_output 中提取
+            agent_output = result.get('agent_output', '')
+            if 'Final Answer:' in agent_output:
+                final_answer = agent_output.split('Final Answer:')[-1].strip()
+            else:
+                final_answer = agent_output
+        
+        if not standard_answer:
+            return 0.0, "未找到标准答案"
+        
+        if not final_answer:
+            return 0.0, "未检测到最终答案"
+        
+        # 计算 F1 分数（比较 Agent 答案和标准答案）
+        f1, precision, recall = self._compute_text_f1(final_answer, standard_answer)
+        
+        reason = f"""F1 评分分析（与标准答案对比）:
+- Precision (精确率): {precision:.2%} - Agent 答案中有 {precision:.0%} 与标准答案匹配
+- Recall (召回率): {recall:.2%} - 标准答案中有 {recall:.0%} 被 Agent 覆盖
+- F1 Score: {f1:.2%} - 综合准确度
+
+标准答案长度: {len(standard_answer)} 字符
+Agent 答案长度: {len(final_answer)} 字符
+"""
+        
+        return f1, reason
+    
+    def _compute_text_f1(self, answer: str, reference: str) -> Tuple[float, float, float]:
+        """
+        计算文本 F1 分数（基于字符级别的匹配）
+        
+        Args:
+            answer: 最终答案文本
+            reference: 参考文本（工具返回内容）
+            
+        Returns:
+            (f1, precision, recall)
+        """
+        # 简单的字符级 n-gram 匹配（使用 3-gram）
+        def get_ngrams(text: str, n: int = 3) -> set:
+            """提取 n-gram"""
+            text = ''.join(text.split())  # 移除空格
+            return set(text[i:i+n] for i in range(len(text) - n + 1))
+        
+        answer_ngrams = get_ngrams(answer, n=3)
+        reference_ngrams = get_ngrams(reference, n=3)
+        
+        if not answer_ngrams or not reference_ngrams:
+            return 0.0, 0.0, 0.0
+        
+        # 计算交集
+        common = answer_ngrams & reference_ngrams
+        
+        # 计算 precision 和 recall
+        precision = len(common) / len(answer_ngrams) if answer_ngrams else 0.0
+        recall = len(common) / len(reference_ngrams) if reference_ngrams else 0.0
+        
+        # 计算 F1
+        if precision + recall == 0:
+            f1 = 0.0
+        else:
+            f1 = 2 * (precision * recall) / (precision + recall)
+        
+        return f1, precision, recall
     
     def score_with_deepseek(self, result: Dict[str, Any], is_web_search: bool = False) -> Tuple[float, str]:
         """
@@ -282,24 +385,30 @@ class GeneralCapabilityTester:
 【评估要点】
 {result['evaluation_points']}
 
-【Agent 完整执行轨迹】（包含工具调用过程）
+【Agent 完整执行轨迹】（包含工具调用过程和返回的内容）
 {result.get('full_trajectory', result['agent_output'])}
 
-【重要说明】
--  不要评判搜索结果的事实准确性（如日期、新闻内容真实性等）！
--  只评估 Agent 是否正确理解任务、使用了搜索工具、按要求整理了信息！！！
+【重要评估规则】
+⚠️ 请仔细查看上面的【Agent 完整执行轨迹】：
+1. 查看 ⚠️【工具返回内容】部分 - 这是搜索工具实际返回的内容
+2. 查看 🎯【Agent 最终回答】部分 - 这是 Agent 整理后的答案
+3. 核心评估点（仅评估流程，不评判事实准确性）：
+   - Agent 是否正确调用了搜索工具？
+   - Agent 是否基于搜索结果进行了合理整理？
+   - Agent 是否按要求的格式输出？
+   - ⚠️ 不要评判搜索结果的事实准确性（如日期、新闻真实性等）！
 
 【评分标准】（仅评估流程和完成度）
-- 1.0: 完美完成任务流程，正确使用搜索工具，信息整理完整规范
-- 0.8-0.9: 优秀，基本完成任务流程，搜索和整理方法正确
-- 0.6-0.7: 良好，完成了主要流程，但信息整理有遗漏或格式问题
-- 0.4-0.5: 及格，理解任务并尝试搜索，但执行不完整
-- 0.2-0.3: 差，部分理解任务但搜索方法错误或未整理信息
-- 0.0-0.1: 极差，未理解任务或未使用搜索工具
+- 1.0: 完美流程，正确调用搜索工具，基于返回内容合理整理，格式规范
+- 0.8-0.9: 优秀流程，调用搜索正确，整理基本合理，格式清晰
+- 0.6-0.7: 良好流程，调用了搜索，但整理有遗漏或格式问题
+- 0.4-0.5: 及格流程，尝试搜索但整合不完整
+- 0.2-0.3: 差流程，搜索方法错误或未能整理信息
+- 0.0-0.1: 极差流程，未调用搜索工具或完全不理解任务
 
 请输出：
 1. 分数（0.0-1.0 之间的小数，保留一位小数）
-2. 评分理由（100-200字，说明流程执行情况、优点和不足）
+2. 评分理由（150-250字，必须说明：①是否正确调用搜索 ②如何整理搜索结果 ③流程的优缺点）
 
 输出格式：
 分数: 0.X
@@ -318,20 +427,32 @@ class GeneralCapabilityTester:
 【评估要点】
 {result['evaluation_points']}
 
-【Agent 完整执行轨迹】（包含工具调用过程）
+【Agent 完整执行轨迹】（包含工具调用过程和返回的内容）
 {result.get('full_trajectory', result['agent_output'])}
 
+【重要评估规则】
+⚠️ 请仔细查看上面的【Agent 完整执行轨迹】：
+1. 查看 [Tool Result: xxx] 部分 - 这是知识库/工具实际返回的内容
+2. 查看 [Final Output] 部分 - 这是 Agent 的最终回答
+3. 核心评估点：Agent 的最终回答是否基于工具返回的内容？
+   - 如果 Agent 回答的内容在工具返回结果中有依据 → 分数高
+   - 比如："根据《RoboMaster 2026 机甲大师高校联盟赛比赛规则手册》相关内容，英雄、步兵、工程三类机器人的对比分析如下：  1. **裁判系统模块与武器规格**  
+   - **英雄机器人**：必须安装主控模块、装甲模块及超级电容管理模块（共3个核心模块），允许配置1个42mm发射机构（武器规格上限）。  
+   - **步兵机器人**：需安装主控模块和测速模块（共2个核心模块），允许安装近战武器（如刀刃）或辅助武器（如激光指示器）。  
+   - **工程机器人**：需安装主控模块和任务执行模块（如搬运臂或搭建模块），禁止安装攻击性武器，武器规格以任务需求为准。 " 评分0.9
+
+
 【评分标准】
-- 1.0: 完美回答，完全满足所有评估要点，信息准确、完整、来源可靠
-- 0.8-0.9: 优秀回答，满足大部分评估要点，信息基本准确完整
-- 0.6-0.7: 良好回答，满足部分评估要点，但有明显遗漏或不足
-- 0.4-0.5: 及格回答，基本理解任务但执行不完整或有较多错误
-- 0.2-0.3: 差回答，严重偏离任务要求或信息错误较多
-- 0.0-0.1: 极差回答，完全未理解任务或未能提供有效信息
+- 1.0: 完美回答，完全基于工具返回内容，满足所有评估要点，信息准确、完整
+- 0.8-0.9: 优秀回答，基本基于工具返回内容，满足大部分评估要点，少量合理推理
+- 0.6-0.7: 良好回答，部分基于工具内容，但有遗漏或格式问题
+- 0.4-0.5: 及格回答，尝试使用工具但整合不当，或有较多不准确推理
+- 0.2-0.3: 差回答，大量编造工具未提供的信息，或严重偏离任务
+- 0.0-0.1: 极差回答，完全编造内容或未使用工具
 
 请输出：
 1. 分数（0.0-1.0 之间的小数，保留一位小数）
-2. 评分理由（100-200字，说明优点、不足和改进建议）
+2. 评分理由（150-250字，必须说明：①工具返回了什么 ②Agent如何使用这些内容 ③哪些是有依据的，哪些是编造的）
 
 输出格式：
 分数: 0.X
@@ -463,23 +584,19 @@ class GeneralCapabilityTester:
             # 运行测试案例
             result = self.run_test_case(test_case)
             
-            # 使用 DeepSeek 评分
+            # 使用 F1 分数评分（代替 DeepSeek）
             if not result['error']:
-                # 判断是否为在线搜索任务（包含：web、search、搜索、谷歌等关键词）
-                case_type_lower = result['case_type'].lower()
-                is_web_search = any(keyword in case_type_lower for keyword in ['web', 'search', '搜索', '谷歌', 'google'])
-                score, reason = self.score_with_deepseek(result, is_web_search=is_web_search)
+                score, reason = self.calculate_f1_score(result)
                 result['score'] = score
                 result['score_reason'] = reason
+                
+                print(f"\n📊 F1 评分: {score:.2%}")
+                print(f"💬 评分说明:\n{reason}")
             else:
                 result['score'] = 0.0
                 result['score_reason'] = f"Execution error: {result['error']}"
             
             self.results.append(result)
-            
-            # 每个案例后暂停，避免 API 限流
-            if i < len(test_cases):
-                time.sleep(2)
         
         # 保存结果
         self.save_results()
@@ -548,10 +665,10 @@ class GeneralCapabilityTester:
         avg_time = sum(r['elapsed_time'] for r in self.results) / total_cases if total_cases > 0 else 0
         
         print(f"\n\n{'='*70}")
-        print("📊 测试总结")
+        print("📊 测试总结 (F1 Score)")
         print(f"{'='*70}")
         print(f"总测试案例数: {total_cases}")
-        print(f"平均分数: {avg_score:.2f} / 1.00")
+        print(f"平均 F1 分数: {avg_score:.2%} (内容匹配度)")
         print(f"平均响应时间: {avg_time:.1f}秒")
         
         # 按分数段统计
@@ -560,15 +677,22 @@ class GeneralCapabilityTester:
         fair = sum(1 for r in self.results if 0.4 <= r['score'] < 0.6)
         poor = sum(1 for r in self.results if r['score'] < 0.4)
         
-        print(f"\n分数分布:")
-        print(f"  🌟 优秀 (≥0.8): {excellent} 个")
-        print(f"  👍 良好 (0.6-0.8): {good} 个")
-        print(f"  📖 及格 (0.4-0.6): {fair} 个")
-        print(f"  ⚠️  不及格 (<0.4): {poor} 个")
+        print(f"\nF1 分数分布:")
+        print(f"  🌟 优秀 (≥80%): {excellent} 个")
+        print(f"  👍 良好 (60-80%): {good} 个")
+        print(f"  📖 及格 (40-60%): {fair} 个")
+        print(f"  ⚠️  不及格 (<40%): {poor} 个")
+        
+        # 显示各案例分数
+        print(f"\n各案例 F1 分数:")
+        for r in self.results:
+            status = "✅" if r['score'] >= 0.6 else "⚠️"
+            print(f"  {status} 案例 #{r['case_id']}: {r['score']:.2%}")
+        
         print(f"{'='*70}\n")
 
 
-def test_general_capability(agent: Agent, test_type: str = "both", max_cases: int = None):
+def test_general_capability(agent: Agent, test_type: str = "both", max_cases: int = None, rag_file: str = None):
     """
     测试 Agent 的通用能力
     
@@ -576,14 +700,22 @@ def test_general_capability(agent: Agent, test_type: str = "both", max_cases: in
         agent: Agent 实例
         test_type: 测试类型 ("rag", "web", "both")
         max_cases: 每个类型最多测试多少个案例
+        rag_file: 指定 RAG 测试文件路径（可选）
     """
     tester = GeneralCapabilityTester(agent)
     
     if test_type in ["rag", "both"]:
-        rag_file = "benchmark/RAG/test_cases_RAG.txt"
-        if os.path.exists(rag_file):
+        # 如果没有指定文件，尝试使用默认文件
+        if rag_file is None:
+            # 优先使用 AI 测试集
+            if os.path.exists("benchmark/RAG/test_cases_RAG_AI.txt"):
+                rag_file = "benchmark/RAG/test_cases_RAG_AI.txt"
+            elif os.path.exists("benchmark/RAG/test_cases_RAG.txt"):
+                rag_file = "benchmark/RAG/test_cases_RAG.txt"
+        
+        if rag_file and os.path.exists(rag_file):
             print(f"\n{'#'*70}")
-            print("  🔍 开始 RAG 测试")
+            print(f"  🔍 开始 RAG 测试 - {os.path.basename(rag_file)}")
             print(f"{'#'*70}")
             tester.run_all_tests(rag_file, max_cases=max_cases)
         else:

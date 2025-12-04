@@ -122,8 +122,10 @@ class Agent:
         rag_db_path=None,
         max_step=10,
         security_config: Optional[Dict[str, Any]] = {"enable_prompt_guard" : True, "lock_on_violation": True},
+        allowed_tools: Optional[List[str]] = None,
     ) -> None:
         self.tool = ToolsManager(rag_db_path=rag_db_path)
+        self.allowed_tools = allowed_tools  # 限制可用工具列表
         self.system_prompt = self.build_system_input()  
         self.model = model
         self.max_step = max_step
@@ -136,17 +138,21 @@ class Agent:
         self.supports_multimodal = getattr(model, 'supports_multimodal', False)
         
         logger.info(
-            "Agent initialized | max_step={}, rag_db_path={}, prompt_guard={}, multimodal={}",
+            "Agent initialized | max_step={}, rag_db_path={}, prompt_guard={}, multimodal={}, allowed_tools={}",
             max_step,
             rag_db_path,
             "ON" if self.prompt_guard_enabled else "OFF",
             "YES" if self.supports_multimodal else "NO",
+            allowed_tools if allowed_tools else "ALL",
         )
     
     def build_system_input(self):
         tool_description, tool_names = [], []
 
         for tool in self.tool.get_all_tools_info():
+            # 如果设置了 allowed_tools，只包含允许的工具
+            if self.allowed_tools and tool['name_for_model'] not in self.allowed_tools:
+                continue
             tool_description.append(TOOL_DESC.format(**tool))
             tool_names.append(tool['name_for_model'])
         tool_description = '\n\n'.join(tool_description)
@@ -220,6 +226,11 @@ class Agent:
             plugin_args (str): The parameter of the plugin, which is a string in JSON format. 
         Returns: str: The observation result after the tool is executed. 
         """
+        # 检查工具是否在允许列表中
+        if self.allowed_tools and plugin_name not in self.allowed_tools:
+            logger.warning(f"Tool {plugin_name} is not in allowed tools list: {self.allowed_tools}")
+            return f'\nObservation: ⚠️ Error: Tool "{plugin_name}" is not available. Available tools: {", ".join(self.allowed_tools)}'
+        
         plugin_args = json5.loads(plugin_args) if plugin_args else {}
         
         # 使用统一的工具调用接口
