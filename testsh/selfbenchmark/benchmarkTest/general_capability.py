@@ -48,7 +48,23 @@ class GeneralCapabilityTester:
         # 初始化 DeepSeek
         self.deepseek_client = None
         if DEEPSEEK_AVAILABLE:
+            # 优先从环境变量读取，其次从配置文件读取
             api_key = os.getenv("DEEPSEEK_API_KEY")
+            
+            if not api_key:
+                # 尝试从 config.yaml 读取
+                try:
+                    import yaml
+                    config_path = Path(__file__).parent.parent.parent.parent / "config.yaml"
+                    if config_path.exists():
+                        with open(config_path, 'r', encoding='utf-8') as f:
+                            config = yaml.safe_load(f)
+                            api_key = config.get("DEEPSEEK_API")
+                            if api_key:
+                                logger.info("DeepSeek API key loaded from config.yaml")
+                except Exception as e:
+                    logger.warning(f"Failed to load config.yaml: {e}")
+            
             if api_key:
                 self.deepseek_client = OpenAI(
                     api_key=api_key,
@@ -56,7 +72,7 @@ class GeneralCapabilityTester:
                 )
                 logger.info("DeepSeek API initialized")
             else:
-                logger.warning("DEEPSEEK_API_KEY not set. Scoring will be disabled.")
+                logger.warning("DEEPSEEK_API_KEY not set (check environment variable or config.yaml). Scoring will be disabled.")
         
         self.results = []
     
@@ -272,12 +288,13 @@ class GeneralCapabilityTester:
     def calculate_f1_score(self, result: Dict[str, Any]) -> Tuple[float, str]:
         """
         计算 F1 分数：衡量最终答案与标准答案的匹配度
+        如果没有标准答案（如 Web 搜索测试），则使用 DeepSeek API 评分
         
         Args:
             result: 测试结果
             
         Returns:
-            (F1分数, 评分说明)
+            (F1分数/DeepSeek分数, 评分说明)
         """
         if result['error']:
             return 0.0, f"Agent execution error: {result['error']}"
@@ -295,13 +312,15 @@ class GeneralCapabilityTester:
             else:
                 final_answer = agent_output
         
-        if not standard_answer:
-            return 0.0, "未找到标准答案"
-        
         if not final_answer:
             return 0.0, "未检测到最终答案"
         
-        # 计算 F1 分数（比较 Agent 答案和标准答案）
+        # 如果没有标准答案，使用 DeepSeek 评分（适用于 Web 搜索等无标准答案的测试）
+        if not standard_answer:
+            logger.info("No standard answer found, using DeepSeek scoring")
+            return self.score_with_deepseek(result)
+        
+        # 有标准答案：计算 F1 分数
         f1, precision, recall = self._compute_text_f1(final_answer, standard_answer)
         
         reason = f"""F1 评分分析（与标准答案对比）:
@@ -359,17 +378,22 @@ Agent 答案长度: {len(final_answer)} 字符
         
         Args:
             result: 测试结果
-            is_web_search: 是否为在线搜索任务
+            is_web_search: 是否为在线搜索任务（自动检测：无标准答案时为 True）
             
         Returns:
             (分数, 评分理由)
         """
         if not self.deepseek_client:
             logger.warning("DeepSeek client not available, skipping scoring")
-            return 0.0, "DeepSeek API not available"
+            return 0.0, "DeepSeek API 未配置（需设置 DEEPSEEK_API_KEY 环境变量）"
         
         if result['error']:
             return 0.0, f"Agent execution error: {result['error']}"
+        
+        # 自动检测是否为 Web 搜索任务（无标准答案）
+        if not is_web_search and not result.get('standard_answer'):
+            is_web_search = True
+            logger.info("Auto-detected as web search task (no standard answer)")
         
         # 根据任务类型选择不同的评分提示
         if is_web_search:

@@ -10,3 +10,4 @@ chat_history.json
 extract_expert_trajectories.py
 manual_test_alfworld.py
 benchmark_results
+TotalResults

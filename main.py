@@ -10,7 +10,7 @@ from loguru import logger
 from llm import Qwen3, Qwen3VL
 from agent import Agent
 from log_config import setup_logger
-from benchmarkTest.ALFworld import testALFworld
+from testsh.selfbenchmark.benchmarkTest.ALFworld import testALFworld
 
 # 修复中文输入问题并配置 readline
 try:
@@ -200,7 +200,7 @@ def main():
         # llm = Qwen3VL()
         logger.success("Model loaded successfully")
         
-        llm = Qwen3VL(model_path, gpu_ids=[0,1,2,3,4,5,6,7])
+        llm = Qwen3VL(gpu_ids=[0,1,2,3,4,5,6,7])
     except Exception as e:
         logger.error(f"模型初始化失败: {e}")
         return

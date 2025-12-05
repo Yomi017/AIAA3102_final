@@ -7,3 +7,6 @@ security:
 
 google:
   credentials_path: jsons/goole_search.json
+
+# DeepSeek API Key 
+DEEPSEEK_API: "" 

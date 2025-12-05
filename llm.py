@@ -325,7 +325,7 @@ class Qwen3VL(BaseLLM):
                 temperature=generate_kwargs.get("temperature", 0.7),
                 top_p=generate_kwargs.get("top_p", 0.8),
                 top_k=generate_kwargs.get("top_k", 20),
-                stop_token_ids=[self.processor.eos_token_id] + generate_kwargs.get("stop_token_ids", []),
+                stop_token_ids=[self.processor.tokenizer.eos_token_id] + generate_kwargs.get("stop_token_ids", []),
             )
             
             outputs = self.model.generate(
