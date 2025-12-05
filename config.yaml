@@ -1,8 +1,8 @@
 # 模型运行模式: 0=测试模式(Benchmark Test), 1=正常使用模式(Interactive Chat)
-STATE_OF_MODEL: 1
+STATE_OF_MODEL: 0
 
 security:
-  enable_prompt_guard: true
+  enable_prompt_guard: False
   lock_on_violation: true
 
 google:
