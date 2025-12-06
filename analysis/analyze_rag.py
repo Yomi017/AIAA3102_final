@@ -37,8 +37,10 @@ def parse_args() -> argparse.Namespace:
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     parser.add_argument("--results-root", type=Path, default=default_results)
-    parser.add_argument("--runs", nargs="*", default=None)
-    parser.add_argument("--prefix", default="RAG")
+    parser.add_argument("--rag-dir", type=Path, default=default_results / "RAG", help="Directory containing RAG sessions")
+    parser.add_argument(
+        "--baseline-dir", type=Path, default=default_results / "RAG_baseline", help="Directory containing baseline sessions"
+    )
     parser.add_argument(
         "--output-md",
         type=Path,
@@ -56,18 +58,53 @@ def parse_args() -> argparse.Namespace:
 
 
 def discover_runs(results_root: Path, runs: List[str] | None, prefix: str) -> List[Path]:
+    """Locate run directories containing result JSONs.
+
+    New folder format nests sessions under a model folder (e.g., RAG/session_x/). We
+    therefore check both the top-level prefix directories and their immediate
+    subdirectories for a results JSON.
+    """
+
+    def has_results(dir_path: Path) -> bool:
+        return any((dir_path / candidate).exists() for candidate in ("detailed_results.json", "ablation_results.json"))
+
     if runs:
         run_dirs = [results_root / r for r in runs]
     else:
-        run_dirs = [
-            p for p in sorted(results_root.iterdir()) if p.is_dir() and p.name.lower().startswith(prefix.lower())
-        ]
+        run_dirs: list[Path] = []
+        for root in sorted(results_root.iterdir()):
+            if not root.is_dir() or not root.name.lower().startswith(prefix.lower()):
+                continue
+            if has_results(root):
+                run_dirs.append(root)
+            for child in sorted(root.iterdir()):
+                if child.is_dir() and has_results(child):
+                    run_dirs.append(child)
+
     if not run_dirs:
         raise ValueError("No run directories discovered. Pass --runs or adjust --prefix.")
     missing = [str(p) for p in run_dirs if not p.exists()]
     if missing:
         raise FileNotFoundError(f"Missing run directories: {missing}")
     return run_dirs
+
+
+def load_model_cases(model_dir: Path) -> list[dict]:
+    """Aggregate all detailed/ablation JSON cases under a model directory."""
+
+    if not model_dir.exists():
+        raise FileNotFoundError(f"Model directory not found: {model_dir}")
+
+    candidates = list(model_dir.rglob("detailed_results.json")) + list(model_dir.rglob("ablation_results.json"))
+    candidates = sorted({p.resolve() for p in candidates if p.is_file()})
+    if not candidates:
+        raise FileNotFoundError(f"No detailed_results.json or ablation_results.json under {model_dir}")
+
+    cases: list[dict] = []
+    for json_path in candidates:
+        with json_path.open(encoding="utf-8") as fh:
+            cases.extend(json.load(fh))
+    return cases
 
 
 def load_cases(run_dir: Path) -> list[dict]:
@@ -79,8 +116,7 @@ def load_cases(run_dir: Path) -> list[dict]:
     raise FileNotFoundError(f"No JSON results found in {run_dir}")
 
 
-def summarise_run(run_dir: Path) -> RAGRunStats:
-    cases = load_cases(run_dir)
+def summarise_cases(run_name: str, cases: list[dict]) -> RAGRunStats:
     scores = [float(case.get("score", 0.0)) for case in cases]
     elapsed = [float(case.get("elapsed_time", 0.0)) for case in cases]
     case_type_values: dict[str, list[float]] = defaultdict(list)
@@ -93,7 +129,7 @@ def summarise_run(run_dir: Path) -> RAGRunStats:
     case_type_avgs = {ctype: statistics.fmean(values) for ctype, values in case_type_values.items()}
 
     return RAGRunStats(
-        name=run_dir.name,
+        name=run_name,
         num_cases=len(cases),
         avg_score=statistics.fmean(scores) if scores else 0.0,
         median_score=statistics.median(scores) if scores else 0.0,
@@ -112,8 +148,8 @@ def plot_average_scores(stats: Iterable[RAGRunStats], chart_path: Path, dpi: int
     values = [s.avg_score for s in stats]
     bars = ax.bar(names, values, color="#55a868")
     ax.set_ylabel("Average score")
-    ax.set_ylim(0, 1.05)
     ax.set_title("Average RAG score by run")
+    ax.autoscale(enable=True, axis="y", tight=True)
     for bar, value in zip(bars, values, strict=False):
         ax.annotate(f"{value:.2f}",
                     xy=(bar.get_x() + bar.get_width() / 2, value),
@@ -123,6 +159,18 @@ def plot_average_scores(stats: Iterable[RAGRunStats], chart_path: Path, dpi: int
     chart_path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(chart_path, dpi=dpi)
     plt.close(fig)
+
+
+def _sanitize_label(label: str) -> str:
+    mapping = {
+        "RAG+计算": "RAG+calc",
+        "RAG测试": "RAG test",
+        "RAG问答": "RAG QA",
+    }
+    if label in mapping:
+        return mapping[label]
+    ascii_only = "".join(ch for ch in label if ch.isascii())
+    return ascii_only or "type"
 
 
 def plot_case_type_scores(stats: Iterable[RAGRunStats], chart_path: Path, dpi: int) -> None:
@@ -142,11 +190,11 @@ def plot_case_type_scores(stats: Iterable[RAGRunStats], chart_path: Path, dpi: i
     for idx, ctype in enumerate(all_case_types):
         offsets = [val + idx * width for val in x]
         values = [s.case_type_avgs.get(ctype, 0.0) for s in stats]
-        ax.bar([o - 0.4 + width / 2 for o in offsets], values, width, label=ctype)
+        ax.bar([o - 0.4 + width / 2 for o in offsets], values, width, label=_sanitize_label(ctype))
     ax.set_xticks(list(x), [s.name for s in stats])
     ax.set_ylabel("Average score")
-    ax.set_ylim(0, 1.05)
     ax.set_title("Average score per case type")
+    ax.autoscale(enable=True, axis="y", tight=True)
     ax.legend(loc="upper right", fontsize=8)
     fig.tight_layout()
     chart_path.parent.mkdir(parents=True, exist_ok=True)
@@ -160,8 +208,8 @@ def plot_score_boxplot(stats: Iterable[RAGRunStats], chart_path: Path, dpi: int)
     data = [s.scores for s in stats]
     ax.boxplot(data, labels=[s.name for s in stats], showmeans=True)
     ax.set_ylabel("Score")
-    ax.set_ylim(0, 1.05)
     ax.set_title("Score distribution per run")
+    ax.autoscale(enable=True, axis="y", tight=True)
     fig.tight_layout()
     chart_path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(chart_path, dpi=dpi)
@@ -230,8 +278,12 @@ def build_markdown(stats: List[RAGRunStats], charts: dict[str, Path]) -> str:
 
 def main() -> None:
     args = parse_args()
-    run_dirs = discover_runs(args.results_root, args.runs, args.prefix)
-    stats = [summarise_run(run_dir) for run_dir in run_dirs]
+    rag_cases = load_model_cases(args.rag_dir)
+    baseline_cases = load_model_cases(args.baseline_dir)
+    stats = [
+        summarise_cases("RAG", rag_cases),
+        summarise_cases("RAG_baseline", baseline_cases),
+    ]
 
     charts = {}
     avg_chart = args.chart_dir / "rag_average_scores.png"
