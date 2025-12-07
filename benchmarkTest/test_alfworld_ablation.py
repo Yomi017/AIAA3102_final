@@ -1,8 +1,8 @@
 """
 ALFworld 消融实验 - Baseline (无 Agent)
-直接使用 LLM 模型，不使用 Agent 框架
+使用 BaselineAgent（无 ReAct 框架、无工具）
 
-关键：使用与 Agent 相同的 LLM 实例，只是不套用 Agent 的 ReAct 框架
+关键：使用 BaselineAgent 类，保持与 RAG/Web 消融实验一致
 """
 
 import argparse
@@ -16,6 +16,8 @@ from typing import Dict, Any, List
 from loguru import logger
 
 from llm import Qwen3VL
+from base import BaselineAgent  # 使用统一的 BaselineAgent
+from benchmarkTest.result_logger import ResultLogger  # 使用统一的结果记录
 from log_config import setup_logger
 
 # 尝试导入 ALFWorld
@@ -74,16 +76,15 @@ def extract_action_from_response(response: str) -> str:
     return None
 
 
-def run_baseline_game(llm, env, game_num: int, max_steps: int = 40, save_dir: Path = None) -> Dict[str, Any]:
+def run_baseline_game(baseline: BaselineAgent, env, game_num: int, max_steps: int = 40) -> Dict[str, Any]:
     """
-    运行单个游戏 - Baseline 模式（无 Agent）
+    运行单个游戏 - Baseline 模式（使用 BaselineAgent）
     
     Args:
-        llm: LLM 实例（与 Agent 使用相同的实例）
+        baseline: BaselineAgent 实例（与 RAG/Web 测试一致）
         env: ALFWorld 环境
         game_num: 游戏编号
         max_steps: 最大步数
-        save_dir: 结果保存目录
         
     Returns:
         游戏结果字典
@@ -93,7 +94,7 @@ def run_baseline_game(llm, env, game_num: int, max_steps: int = 40, save_dir: Pa
     task_desc = obs[0]
     
     print(f"\n{'='*70}")
-    print(f"🎮 游戏 {game_num} - Baseline (无 Agent)")
+    print(f"🎮 游戏 {game_num} - Baseline (使用 BaselineAgent)")
     print(f"{'='*70}")
     print(f"\n📝 任务: {task_desc}\n")
     
@@ -105,11 +106,9 @@ def run_baseline_game(llm, env, game_num: int, max_steps: int = 40, save_dir: Pa
     done = False
     success = False
     action_history = []
+    baseline_history = []  # BaselineAgent 的对话历史
     
-    # 简单的系统提示（无 ReAct 框架）
-    system_prompt = """你是一个 AI 助手。请直接回答问题或执行指令。"""
-    
-    # 第一次提示（使用与 Agent 相同的游戏规则说明）
+    # 第一次提示
     initial_prompt = f"""你正在玩一个基于文本的交互式游戏。
 
 任务: {task_desc}
@@ -153,42 +152,18 @@ def run_baseline_game(llm, env, game_num: int, max_steps: int = 40, save_dir: Pa
 
 请给出下一个动作（只给出命令）："""
             
-            # 直接调用 LLM（无 Agent 框架，但保留对话历史）
-            logger.info(f"Baseline Game #{game_num} Step {step_count} - Calling LLM")
+            # 使用 BaselineAgent.text() 方法（与 RAG/Web 测试一致）
+            logger.info(f"Baseline Game #{game_num} Step {step_count} - Calling BaselineAgent")
             
             step_start = time.time()
             
-            # 构建对话历史（保留任务上下文和之前的交互）
-            if step_count == 1:
-                # 第一步：只有任务描述
-                conversation_history = []
-            else:
-                # 后续步骤：保留之前的所有交互
-                # 这样 LLM 可以看到整个游戏过程
-                conversation_history = []
-                for prev_action_info in action_history:
-                    # 添加用户的动作提示
-                    conversation_history.append({
-                        "role": "user",
-                        "content": f"请给出下一个动作："
-                    })
-                    # 添加 LLM 的动作回应
-                    conversation_history.append({
-                        "role": "assistant", 
-                        "content": prev_action_info['action']
-                    })
-                    # 添加环境反馈（作为系统消息）
-                    conversation_history.append({
-                        "role": "user",
-                        "content": f"环境反馈: {prev_action_info['observation']}"
-                    })
-            
-            response, _ = llm.chat(
+            # 调用 BaselineAgent（保留对话历史）
+            response, baseline_history = baseline.text(
                 prompt,
-                history=conversation_history,  # Baseline: 保留对话历史，但无 ReAct 框架
-                meta_instruction=system_prompt,
+                history=baseline_history,
                 images=None
             )
+            
             step_time = time.time() - step_start
             
             print(f"\n步骤 {step_count}:")
@@ -271,8 +246,8 @@ def run_baseline_game(llm, env, game_num: int, max_steps: int = 40, save_dir: Pa
 
 
 def main():
-    parser = argparse.ArgumentParser(description="ALFworld 消融实验 - Baseline (无 Agent)")
-    parser.add_argument('--config', type=str, default='config.yaml', help='ALFworld 配置文件')
+    parser = argparse.ArgumentParser(description="ALFworld 消融实验 - Baseline (使用 BaselineAgent)")
+    parser.add_argument('--config', type=str, default='configs/base_config.yaml', help='ALFworld 配置文件')
     parser.add_argument('--num_games', type=int, default=None, help='测试游戏数量')
     parser.add_argument('--gpu_ids', type=str, default=None, help='GPU IDs (逗号分隔)')
     
@@ -282,8 +257,13 @@ def main():
     setup_logger()
     
     print("=" * 70)
-    print("  🧪 ALFworld 消融实验 - Baseline (无 Agent 框架)")
+    print("  🧪 ALFworld 消融实验 - Baseline (BaselineAgent)")
     print("=" * 70)
+    print("\n⚠️  使用 BaselineAgent（与 RAG/Web 测试一致）:")
+    print("  - ❌ 无 ReAct 推理框架")
+    print("  - ❌ 无工具调用")
+    print("  - ❌ 无多轮优化")
+    print("  - ✅ 直接调用 LLM\n")
     
     # 检查 ALFWorld
     if not ALFWORLD_AVAILABLE:
@@ -297,7 +277,7 @@ def main():
     print(f"GPU: {gpu_ids}")
     print("=" * 70)
     
-    # 加载 LLM（使用与 Agent 相同的模型）
+    # 加载 LLM
     print("\n🔄 正在加载模型...")
     try:
         llm = Qwen3VL(path="Qwen3-8B", gpu_ids=gpu_ids)
@@ -306,6 +286,11 @@ def main():
         logger.error(f"模型加载失败: {e}")
         print(f"❌ 模型加载失败: {e}")
         sys.exit(1)
+    
+    # 创建 BaselineAgent（与 RAG/Web 测试一致）
+    print("🔄 正在初始化 BaselineAgent...")
+    baseline = BaselineAgent(llm)
+    print("✅ BaselineAgent 初始化成功\n")
     
     # 加载 ALFWorld 配置
     if not os.path.exists(args.config):
@@ -327,56 +312,42 @@ def main():
         print(f"❌ 环境初始化失败: {e}")
         sys.exit(1)
     
-    # 创建结果目录
-    results_dir = Path("benchmark_results/alfworld_ablation")
-    results_dir.mkdir(parents=True, exist_ok=True)
+    # 创建 ResultLogger（与 Agent 测试一致）
+    result_logger = ResultLogger(log_dir="benchmark_results/alfworld_baseline")
     
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    session_dir = results_dir / f"session_{timestamp}"
-    session_dir.mkdir(parents=True, exist_ok=True)
+    # 询问测试数量
+    if args.num_games is None:
+        while True:
+            try:
+                num_input = input("\n请输入要测试的游戏数量 (1-30): ").strip()
+                args.num_games = int(num_input)
+                if 1 <= args.num_games <= 30:
+                    break
+                print("⚠️ 请输入 1-30 之间的数字")
+            except ValueError:
+                print("⚠️ 请输入有效的数字")
+    
+    print(f"\n准备测试 {args.num_games} 个游戏场景...")
     
     # 运行测试
-    results = []
-    game_count = 0
-    
     try:
-        while args.num_games is None or game_count < args.num_games:
-            game_count += 1
-            result = run_baseline_game(llm, env, game_count, save_dir=session_dir)
-            results.append(result)
+        for game_count in range(1, args.num_games + 1):
+            result = run_baseline_game(baseline, env, game_count)
+            result_logger.add_result(result)
             
-            if args.num_games is None or game_count < args.num_games:
-                time.sleep(2)
+            if game_count < args.num_games:
+                time.sleep(1)
     
     except KeyboardInterrupt:
         print("\n\n⚠️ 测试被用户中断")
+    except Exception as e:
+        logger.error(f"测试过程出错: {e}")
+        print(f"\n❌ 测试出错: {e}")
     
-    # 保存结果
-    import json
+    # 保存结果并打印总结（使用 ResultLogger）
+    result_logger.finalize()
     
-    results_file = session_dir / "alfworld_ablation_results.json"
-    with open(results_file, 'w', encoding='utf-8') as f:
-        json.dump(results, f, indent=2, ensure_ascii=False)
-    print(f"\n✅ 结果已保存: {results_file}")
-    
-    # 打印总结
-    total_games = len(results)
-    success_games = sum(1 for r in results if r['success'])
-    total_steps = sum(r['steps'] for r in results)
-    successful_steps = sum(r['successful_steps'] for r in results)
-    avg_time = sum(r['elapsed_time'] for r in results) / total_games if total_games > 0 else 0
-    
-    print(f"\n{'='*70}")
-    print("📊 Baseline 测试总结")
-    print(f"{'='*70}")
-    print(f"总游戏数: {total_games}")
-    print(f"完成游戏数: {success_games}")
-    print(f"任务完成率: {success_games/total_games*100 if total_games > 0 else 0:.1f}%")
-    print(f"总步数: {total_steps}")
-    print(f"成功步数: {successful_steps}")
-    print(f"动作成功率: {successful_steps/total_steps*100 if total_steps > 0 else 0:.1f}%")
-    print(f"平均每局用时: {avg_time:.1f}秒")
-    print(f"\n注意: 此为消融实验 Baseline，无 Agent 框架")
+    print(f"\n注意: 使用 BaselineAgent（与 RAG/Web 消融实验一致）")
     print(f"{'='*70}\n")
 
 
