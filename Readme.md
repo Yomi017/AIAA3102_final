@@ -19,3 +19,9 @@
 ### web 运行
 
 cd 到 frontend 目录下，运行 `npm install && npm run dev`
+
+### Menber list
+
+1. 黄田 50026884
+2. 李棋轩 50027589
+3. 莫子竣 50027008
