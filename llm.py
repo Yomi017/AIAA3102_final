@@ -173,7 +173,7 @@ class Qwen3VL(BaseLLM):
     DEFAULT_MODEL = "Qwen/Qwen3-VL-8B-Thinking"
     THINKING_EOS_TOKEN_ID = 151668  # token id for </think>
     
-    def __init__(self, path: str = "", gpu_ids: List[int] = None, gpu_memory_utilization: float = 0.9):
+    def __init__(self, path: str = "", gpu_ids: List[int] = None):
         # 如果指定了GPU序号,设置CUDA_VISIBLE_DEVICES并调整tensor_parallel_size
         if gpu_ids is not None:
             gpu_str = ",".join(map(str, gpu_ids))
@@ -194,7 +194,6 @@ class Qwen3VL(BaseLLM):
         self.use_vllm = False
         super().__init__(path or self.DEFAULT_MODEL)
         self.supports_multimodal = True  # 支持多模态
-        self.gpu_memory_utilization = gpu_memory_utilization
         self.load_model()
     
     def load_model(self):
@@ -239,7 +238,7 @@ class Qwen3VL(BaseLLM):
                 model=self.path,
                 tensor_parallel_size=self.tensor_parallel_size,
                 trust_remote_code=True,
-                gpu_memory_utilization=self.gpu_memory_utilization,
+                gpu_memory_utilization=0.9,
                 max_model_len=32768,  # 增加最大长度以支持更长的对话
                 limit_mm_per_prompt={"image": 10, "video": 10},  # 多模态限制
             )
