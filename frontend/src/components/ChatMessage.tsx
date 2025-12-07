@@ -118,14 +118,14 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
       )}
 
       <div className={clsx(
-        "max-w-[85%] rounded-2xl p-4 shadow-sm transition-all duration-200",
+        "max-w-[85%] min-w-0 rounded-2xl p-4 shadow-sm transition-all duration-200 overflow-hidden",
         isUser 
           ? "bg-blue-600 text-white rounded-tr-none hover:shadow-md" 
           : isSystem 
             ? "bg-red-50 text-red-800 border border-red-100 rounded-tl-none" 
             : "bg-white text-gray-800 border border-gray-100 rounded-tl-none hover:shadow-md"
       )}>
-        <div className="prose prose-sm max-w-none dark:prose-invert break-words leading-relaxed">
+        <div className="prose prose-sm max-w-none dark:prose-invert break-words leading-relaxed min-w-0 w-full overflow-hidden">
           {isUser ? (
             <ReactMarkdown 
               remarkPlugins={[remarkMath]}

@@ -1,0 +1,5458 @@
+Intellectual Property Statement
+The RoboMaster Organizing Committee (RMOC) encourages and promotes technical innovation and open-source
+technology and respects the intellectual property rights of participating teams. All rights related to the intellectual
+property developed during the competition are owned by individual teams. The RMOC will not participate in the
+handling of intellectual property disputes within the team. The participating teams must properly handle all aspects
+of intellectual property rights among internal school members, company members, and other members of the team.
+While using the RoboMaster Referee System and other supporting materials provided by the RMOC, participating
+teams should respect the ownership of all intellectual property. Participating teams are also prohibited from
+engaging in any behavior that violates intellectual property rights, including but not limited to reverse engineering,
+replication, or translation.
+Any behavior that may infringe upon the intellectual property rights of the RMOC or other organizers in relation to
+the provided educational materials for the competition will be investigated and the infringer will be held legally
+liable in strict accordance with the law.
+For suggestions regarding open-source materials, please refer to: https://bbs.robomaster.com/article/4820?source=1.
+
+Using this Manual
+The RoboMaster competition is a robotics event aimed at cultivating youth engineers. Documents related to the
+competition may contain sensitive terms, names, operations, and technical content. These do not reflect any existing
+technologies or actions in reality, nor do they intend to involve any specific country, organization, or individual.
+This manual is intended solely to explain the rules of the RoboMaster competition and must not be used for any
+other purposes. It should not be interpreted as being associated with any real events or entities.
+
+Release Notes
+Date
+
+Version
+
+Revisions
+
+October 21, 2025
+
+V1.0.0
+
+First release
+
+© 2025 DJI All Rights Reserved.
+
+2
+
+Table of Contents
+Intellectual Property Statement ................................................................................................................... 2
+Using this Manual ..................................................................................................................................... 2
+Release Notes ........................................................................................................................................... 2
+1.
+
+Foreword.......................................................................................................................................... 9
+
+2.
+
+Technical Specifications ................................................................................................................. 10
+2.1
+
+2.2
+
+2.3
+
+3.
+
+2.1.1
+
+Energy Source ................................................................................................................... 10
+
+2.1.2
+
+Communication Equipment ................................................................................................ 12
+
+2.1.3
+
+Optical Equipment ............................................................................................................. 15
+
+2.1.4
+
+Visual Features .................................................................................................................. 16
+
+2.1.5
+
+Armor Stickers .................................................................................................................. 16
+
+2.1.6
+
+Aesthetic Design ............................................................................................................... 17
+
+2.1.7
+
+Launching Mechanism ....................................................................................................... 18
+
+2.1.8
+
+Custom Controller ............................................................................................................. 19
+
+2.1.9
+
+Custom Client ................................................................................................................... 20
+
+2.1.10
+
+17 mm Fluorescent Projectile Energy-Charging Device ........................................................ 22
+
+2.1.11
+
+Wireless Charging Device .................................................................................................. 24
+
+2.1.12
+
+Miscellaneous ................................................................................................................... 26
+
+Rules of Usage for Fully Assembled Robots and Open-Source Robots.......................................... 26
+2.2.1
+
+Complete Redesign............................................................................................................ 28
+
+2.2.2
+
+Partial Redesign ................................................................................................................ 29
+
+2.2.3
+
+Minimal Redesign ............................................................................................................. 30
+
+Robot Technical Specifications .................................................................................................. 30
+2.3.1
+
+Hero ................................................................................................................................. 31
+
+2.3.2
+
+Engineer ........................................................................................................................... 32
+
+2.3.3
+
+Infantry............................................................................................................................. 34
+
+2.3.4
+
+Drone ............................................................................................................................... 36
+
+2.3.5
+
+Sentry ............................................................................................................................... 40
+
+2.3.6
+
+Dart System ...................................................................................................................... 41
+
+2.3.7
+
+Radar................................................................................................................................ 48
+
+Referee System Mounting Specifications ........................................................................................ 51
+3.1
+
+Referee System Overview ......................................................................................................... 52
+
+3.2
+
+Configuration of Referee System Onboard Modules .................................................................... 55
+
+3.3
+
+Mounting Specifications for Main Control Module...................................................................... 56
+
+3.4
+3
+
+General Technical Specifications ............................................................................................... 10
+
+3.3.1
+
+Installation Steps ............................................................................................................... 57
+
+3.3.2
+
+Installation Requirements ................................................................................................... 58
+
+Mounting Specifications for Power Management Module ............................................................ 62
+
+© 2025 DJI All Rights Reserved.
+
+3.5
+
+3.6
+
+3.7
+
+3.8
+
+3.9
+
+3.10
+
+3.4.1
+
+Installation Steps ............................................................................................................... 63
+
+3.4.2
+
+Installation Requirements ................................................................................................... 65
+
+Mounting Specifications for Light Indicator Module ................................................................... 68
+3.5.1
+
+Installation Steps ............................................................................................................... 68
+
+3.5.2
+
+Installation Requirements ................................................................................................... 70
+
+Mounting Specifications for Armor Module................................................................................ 71
+3.6.1
+
+General Specifications ....................................................................................................... 73
+
+3.6.2
+
+Installation Steps ............................................................................................................... 76
+
+3.6.3
+
+Installation Requirements ................................................................................................... 79
+
+Mounting Specifications for Speed Monitor Module.................................................................... 82
+3.7.1
+
+Installation Steps ............................................................................................................... 83
+
+3.7.2
+
+Installation Requirements ................................................................................................... 89
+
+Mounting Specifications for RFID Interaction Module ................................................................ 92
+3.8.1
+
+Installation Steps ............................................................................................................... 92
+
+3.8.2
+
+Installation Requirements ................................................................................................... 93
+
+Mounting Specifications for Video Transmitter Module (Transmitter) .......................................... 94
+3.9.1
+
+Installation Steps ............................................................................................................... 95
+
+3.9.2
+
+Installation Requirements ................................................................................................... 96
+
+Rules of Usage for Video Transmitter Module (Receiver) ............................................................ 98
+3.10.1
+
+3.11
+
+3.12
+
+3.13
+
+Installation Requirements ................................................................................................... 98
+
+Mounting Specifications for UWB Positioning Module ............................................................... 98
+3.11.1
+
+Installation Steps ............................................................................................................... 99
+
+3.11.2
+
+Installation Requirements ................................................................................................. 100
+
+Mounting Specifications for Supercapacitor Management Module.............................................. 101
+3.12.1
+
+Installation Steps ............................................................................................................. 101
+
+3.12.2
+
+Installation Requirements ................................................................................................. 103
+
+Laser Detection Module .......................................................................................................... 104
+
+Appendix I: Speed Monitor Module (17mm Projectile) Adapter Block Engineering Drawing ................. 105
+Appendix II Reference Drawings............................................................................................................. 106
+
+© 2025 DJI All Rights Reserved.
+
+4
+
+Tables Directory
+Table 2-1 Battery Type Summary ................................................................................................................. 10
+Table 2-2 Control Method Summary............................................................................................................. 12
+Table 2-3 Remote Controller Summary ......................................................................................................... 13
+Table 2-4 Production Parameters for Custom Controller ................................................................................. 19
+Table 2-5 Production Parameters for Custom Client ....................................................................................... 21
+Table 2-6 Production Parameters for Hero..................................................................................................... 31
+Table 2-7 Production Parameters for Engineer ............................................................................................... 32
+Table 2-8 Production Parameters for Infantry ................................................................................................ 34
+Table 2-9 Production Parameters for Drone ................................................................................................... 36
+Table 2-10 Production Parameters for Sentry................................................................................................. 40
+Table 2-11 Production Parameters for Dart .................................................................................................... 42
+Table 2-12 Production Parameters for Dart Launcher ..................................................................................... 43
+Table 2-13 Production Parameters for Radar Computing Platform .................................................................. 48
+Table 2-14 Radar Sensor Parameters ............................................................................................................. 49
+Table 3-1 Maximum Replacement Time for Referee System Onboard Modules ............................................... 51
+Table 3-2 Referee System Modules .............................................................................................................. 53
+Table 3-3 Configuration of Referee System Onboard Modules........................................................................ 55
+Table 3-4 Ports of the Power Management Module ........................................................................................ 66
+
+5
+
+© 2025 DJI All Rights Reserved.
+
+Figures Directory
+Figure 2-1 17 mm Fluorescent Projectile Energy-Charging Device ................................................................. 22
+Figure 2-2 UV Light Panel Installation ......................................................................................................... 23
+Figure 2-3 Fully Enclosed Propeller Guard ................................................................................................... 37
+Figure 2-4 Aerial Safety Rope Hook Dimensions........................................................................................... 39
+Figure 2-5 Dart Flight Direction ................................................................................................................... 43
+Figure 2-6 Dart System Size Limits .............................................................................................................. 45
+Figure 2-7 Dart Trigger................................................................................................................................ 46
+Figure 2-8 Prohibited Blockage Areas for Dart Trigger .................................................................................. 47
+Figure 2-9 Internal Cavity of Dart Trigger ..................................................................................................... 47
+Figure 3-1 Main Control Module .................................................................................................................. 57
+Figure 3-2 Main Control Module Installation ................................................................................................ 57
+Figure 3-3 Wiring of Main Control Module ................................................................................................... 58
+Figure 3-4 Prohibited Blockage Areas for Main Control Module..................................................................... 59
+Figure 3-5 Installation Location of Main Control Module .............................................................................. 60
+Figure 3-6 Location of the Referee System Aviation Cable in Dart Launching Station ...................................... 61
+Figure 3-7 Power Management Module ........................................................................................................ 62
+Figure 3-8 Mounting of Power Management Module ..................................................................................... 63
+Figure 3-9 Ports of Power Management Module ............................................................................................ 64
+Figure 3-10 Wiring of Power Management Module ....................................................................................... 65
+Figure 3-11 Light Indicator Module .............................................................................................................. 68
+Figure 3-12 Mounting of Light Indicator Module .......................................................................................... 69
+Figure 3-13 Bottom of the Light Indicator Module ........................................................................................ 70
+Figure 3-14 Wiring of Light Indicator Module............................................................................................... 70
+Figure 3-15 Designated Armor Support Frame .............................................................................................. 71
+Figure 3-16 Small Armor Module................................................................................................................. 72
+Figure 3-17 Large Armor Module ................................................................................................................. 72
+Figure 3-18 Robot Coordinate System .......................................................................................................... 73
+Figure 3-19 Graph of X-axis Orientation in Different Chassis Configurations of Robots ................................... 73
+Figure 3-20 Forces on the Armor Module...................................................................................................... 75
+Figure 3-21 Robot Protection ....................................................................................................................... 76
+Figure 3-22 Chassis Reserved Holes ............................................................................................................. 77
+Figure 3-23 Armor Support Frame Mounting ................................................................................................ 77
+Figure 3-24 Armor Module Mounting ........................................................................................................... 78
+Figure 3-25 Wiring of Armor Module ........................................................................................................... 79
+© 2025 DJI All Rights Reserved.
+
+6
+
+Figure 3-26 Mounting Specifications for Armor Module ................................................................................ 79
+Figure 3-27 Prohibited Blockage Areas for Armor Module on Hero, Infantry, and Sentry ................................. 80
+Figure 3-28 Prohibited Blockage Areas for Armor Module on Engineer .......................................................... 81
+Figure 3-29 Speed Monitor Module (17 mm Projectile) ................................................................................. 82
+Figure 3-30 Speed Monitor Module (42 mm Projectile) ................................................................................. 83
+Figure 3-31 17 mm Barrel............................................................................................................................ 84
+Figure 3-32 Mounting of Speed Monitor Module........................................................................................... 85
+Figure 3-33 17mm Adapter Block ................................................................................................................ 85
+Figure 3-34 17mm Adapter Block Securing Method ...................................................................................... 86
+Figure 3-35 17mm Short Barrel Installation .................................................................................................. 87
+Figure 3-36 42 mm Barrel............................................................................................................................ 88
+Figure 3-37 Speed Monitor Module Installation ............................................................................................ 90
+Figure 3-38 Mounting Specifications for Speed Monitor Module .................................................................... 91
+Figure 3-39 RFID Interaction Module........................................................................................................... 92
+Figure 3-40 Wiring of RFID Interaction Module............................................................................................ 93
+Figure 3-41 Mounting of RFID Interaction Module ....................................................................................... 93
+Figure 3-42 Video Transmitter Module (Transmitter) ..................................................................................... 95
+Figure 3-43 Mounting of Video Transmitter Module (Transmitter) .................................................................. 96
+Figure 3-44 Prohibited Blockage Areas for Video Transmitter Module (Transmitter) ........................................ 97
+Figure 3-45 Video Transmitter Module (Receiver) ......................................................................................... 98
+Figure 3-46 UWB Positioning Module.......................................................................................................... 99
+Figure 3-47 Mounting of UWB Positioning Module ...................................................................................... 99
+Figure 3-48 Wiring of UWB Positioning Module......................................................................................... 100
+Figure 3-49 Mounting of UWB Positioning Module .................................................................................... 100
+Figure 3-50 Wiring of Supercapacitor Management Module ......................................................................... 103
+Figure 3-51 Laser Detection Module .......................................................................................................... 104
+
+7
+
+© 2025 DJI All Rights Reserved.
+
+Appendix Figures Directory
+Appendix Figure 1 Hero Armor Sticker - No. 1 ........................................................................................... 106
+Appendix Figure 2 Engineer Armor Sticker - No. 2 ..................................................................................... 106
+Appendix Figure 3 Infantry Armor Sticker - No. 3 ....................................................................................... 107
+Appendix Figure 4 Infantry Armor Sticker - No. 4 ....................................................................................... 107
+Appendix Figure 5 Sentry Armor Sticker .................................................................................................... 108
+Appendix Figure 6 Outpost Armor Sticker .................................................................................................. 108
+Appendix Figure 7 Base Small Armor Sticker ............................................................................................. 109
+Appendix Figure 8 Base Large Armor Sticker ............................................................................................. 109
+
+© 2025 DJI All Rights Reserved.
+
+8
+
+1. Foreword
+Teams participating in RoboMaster are required to develop and build their robots. Participating robots are required
+to meet all specifications listed in this document and inspection staff will conduct random spot checks of robots in
+accordance with these rules. Additionally, participating robots must comply with relevant laws and regulations and
+must not pose any safety risks. If any safety incident has occurred due to a violation of the specifications, the RMOC
+reserves the right to hold the offending team legally responsible. Any dispute arising from this specifications manual
+will be settled based on interpretations provided by the Chief Referee or Head Inspector.
+
+To help participating teams understand and comply with the regulations outlined in this manual, the binding nature
+of these regulations and their potential consequences are explained as follows:
+
+
+Any rule in this document preceded by “S#” (for example, S10) is considered a mandatory regulation.
+Mandatory regulations focus on key requirements such as safety, dimensions/weight, electromagnetic
+compatibility, and Battlefield regulations, and must be strictly followed. Violation of mandatory regulations
+entitles the RMOC to reject the robot’s participation, require rectification within a specified period, or
+disqualify it directly, depending on the nature of the violation.
+
+
+
+Regulations not preceded by “S#” are recommended guidelines. These recommendations are intended to
+optimize performance, enhance stability, or reduce the risk of malfunctions, but they are not mandatory
+requirements for Pre-Match Inspection compliance. Failure to follow recommended guidelines does not
+directly affect Pre-Match Inspection approval, but it may lead to component malfunctions, limited performance
+during the match, additional repair or assessment costs, or create safety risks; therefore, any losses or
+consequences arising from this are the sole responsibility of the participating teams.
+
+Unless otherwise specified in the regulations, all mandatory regulations in this manual apply to RMUC and RMUL
+robots. If a regulation pertains to a type of Robots, Battlefield Components, or Competition Rules that is not relevant
+to RMUL, then RMUL participating teams’ robots may be exempt from that specific requirement. The exemption
+clauses for RMUL are as follows:
+
+
+UWB Positioning Modules shall be mounted on robots. Please refer to “P56”.
+
+
+
+Robots with a Launching Mechanism (17 mm projectile) shall be equipped with a fluorescent energy-charging
+device. Please refer to “P19”.
+
+
+
+A Speed Monitor Module shall avoid the influence of ferromagnetic materials on the angle of magnetic force
+on the module. Please refer to “P90“.
+
+9
+
+© 2025 DJI All Rights Reserved.
+
+2. Technical Specifications
+2.1 General Technical Specifications
+2.1.1
+
+Energy Source
+
+S1 Robots are only allowed to use a power supply or gas source as the energy source.
+S2 For robots restricted by chassis power limits, the power source for the horizontal movements of their chassis
+is limited to electricity only.
+
+
+The use of combustion engines, explosives, and hazardous chemicals is prohibited.
+
+
+
+The use of mains supply in the Competition Area is prohibited (except for Radar Computing
+Platforms).
+
+
+
+2.1.1.1
+
+The use of hydraulic or other potentially polluting power systems is prohibited.
+
+Power Supply
+
+S3 The types of batteries that are allowed to be used in robots and certain modules are limited to those listed in
+the following table:
+Table 2-1 Battery Type Summary
+Battery Type
+
+Batteries Produced by
+SZ DJI Technology
+
+Dry Cell Batteries
+
+Lithium Batteries
+
+Produced by
+
+Produced by
+
+Other Reputable
+
+Other Reputable
+
+Manufacturers
+
+Manufacturers
+
+Robot/Module
+
+Co., Ltd.
+
+Hero
+
+Allowed
+
+Allowed
+
+Not allowed
+
+Engineer
+
+Allowed
+
+Allowed
+
+Not allowed
+
+Infantry
+
+Allowed
+
+Allowed
+
+Not allowed
+
+Drone
+
+Allowed
+
+Allowed
+
+Not allowed
+
+Sentry
+
+Allowed
+
+Allowed
+
+Not allowed
+
+Dart Launcher
+
+Allowed
+
+Allowed
+
+Not allowed
+
+Dart
+
+Allowed
+
+Allowed
+
+Allowed
+
+© 2025 DJI All Rights Reserved.
+
+10
+
+Battery Type
+
+Batteries Produced by
+SZ DJI Technology
+Co., Ltd.
+
+Robot/Module
+
+Dry Cell Batteries
+
+Lithium Batteries
+
+Produced by
+
+Produced by
+
+Other Reputable
+
+Other Reputable
+
+Manufacturers
+
+Manufacturers
+
+Radar Sensor
+
+Allowed
+
+Allowed
+
+Allowed
+
+Radar Computing
+
+Allowed
+
+Allowed
+
+Allowed
+
+Custom Controller
+
+Allowed
+
+Allowed
+
+Allowed
+
+Custom Client
+
+Allowed
+
+Allowed
+
+Allowed
+
+Wireless Charging
+
+Not allowed
+
+Not allowed
+
+Not allowed
+
+Platform
+
+Device
+
+S4 The battery shall be installed firmly on the battery rack.
+Given the complex terrain in the Battlefield, it is recommended to provide adequate cushioning for the
+battery.
+S5 Only Hero, Infantry, and Sentry are allowed to mount the Supercapacitor Module. Each robot is allowed to
+mount no more than one Supercapacitor Module.
+S6 The nominal energy of a single Supercapacitor Module of Hero, Infantry and Sentry shall not exceed 2,000 J,
+and their actual measured energy shall not exceed 2,200 J. The formula for calculating the nominal energy of
+1
+
+one Capacitor Module is E = ∗ C ∗ U 2(U is the withstand voltage of the capacitor, C is capacitance).
+2
+
+S7 For the chassis power source of a robot subjected to power limits, except for the capacitor bank within the
+Supercapacitor Module that contributes to chassis power, the maximum total capacitance of all other capacitors
+is 10 mF.
+If the capacitor group used in the Supercapacitor Module does not contribute to chassis power, the
+corresponding schematic diagram must be provided as supporting documentation at the Pre-Match
+Inspection.
+
+2.1.1.2
+
+Gas Source
+
+S8 The compressed gas pressure inside the gas cylinder shall not exceed 20 Mpa, and the nominal pressure
+resistance of the gas cylinder shall not be less than 30 MPa. A double-gauge constant pressure valve should be
+mounted directly at the outlet of the gas cylinder. The operating pressure shall not exceed 0.8 Mpa.
+11
+
+© 2025 DJI All Rights Reserved.
+
+S9 The working gas shall be non-flammable, non-toxic and non-polluting, such as air, nitrogen, and carbon
+dioxide.
+S10 Any mechanism for using or storing gas (gas cylinder, pneumatic cylinder, air spring, etc.) shall come with an
+approval certificate or nameplate stamp that is easy to inspect when required.
+S11 If a gas cylinder is still within its service life, it shall be returned to the factory for maintenance within the
+period specified by the user manual or product label, after which the proof of maintenance shall be submitted.
+S12 The gas cylinder shall be issued an approval certificate by an officially recognized approving institution in its
+country of manufacture.
+S13 The gas cylinder shall be firmly and safely mounted on the robot, with at least two fixed points that are more
+than 1/5 of its length apart or with one fixed surface that is more than 1/5 of its length. The gas cylinder and
+pipe shall be protected to avoid any damage caused by tumbling over, collision, rotation, or faulty moving
+parts. The cylinder’s opening shall not be exposed, so as to prevent it from being struck and damaged by
+projectiles. To ensure safety, the cylinder’s opening shall be kept horizontal or facing upwards.
+S14 The gas cylinder must be mounted in a way that the cylinder and the gas pipe never touch the ground, even if
+the robot rolls over at any angle.
+S15 All gas pipes and parts shall be able to withstand the maximum operating pressure of the system.
+
+2.1.2
+
+
+
+It is recommended that a safety relief valve is installed on the low-pressure gas circuits.
+
+
+
+It is recommended that no flammable materials should exist within 50 mm of the gas cylinder.
+
+Communication Equipment
+
+S16 The control methods specified for this season are shown in the table below.
+Table 2-2 Control Method Summary
+Data Link
+
+Information Transmitted
+
+DT7 Remote Controller
+
+Mouse and keyboard commands, control stick movements
+
+Other Remote Controllers
+
+Control stick movements
+
+Video Transmitter Module (Receiver)
+
+Mouse and keyboard commands, control stick movements
+
+VTM Link
+
+Custom controller
+
+Referee System Serial Port
+
+Inter-robot communication
+
+© 2025 DJI All Rights Reserved.
+
+12
+
+
+
+The RMOC recommends that participating teams use the Video Transmitter Module Link
+(hereinafter referred to as “VTM Link”) or the Video Transmitter Module (Receiver) to control
+their robots.
+
+
+
+The Video Transmitter Module (Receiver) has its own remote control data transmission function
+(when used with the Player’s Client, it can transmit keyboard and mouse data simultaneously),
+making it a suitable replacement for the DT7 Remote Controller. For protocols related to the Video
+Transmitter Module (Receiver), please refer to the Video Transmitter Module User Manual.
+
+
+
+The VTM Link refers to the link in the Video Transmitter Module used to transmit data. For
+protocols related to the VTM Link, please refer to the Referee System Serial Port Protocol.
+
+S17 Robots must be equipped with remote controllers for commissioning that meet the requirements, so that
+functions such as launching projectiles, chassis movement, and gimbal movement can be demonstrated at the
+Pre-Match Inspection.
+S18 The remote controllers specified for this season are shown in the table below. Other models of the same style
+are not permitted. Only remote controllers operating on the 2.4G frequency band are permitted. The RMOC
+does not guarantee their stability, and only the DT7 Remote Controller can connect to the Player’s Client.
+The Video Transmitter Module (Receiver) has the remote control function, but is not considered a remote
+controller. During the competition, the RMOC only ensures the stability of the Video Transmitter
+Module (Receiver) located in the Operation Room.
+Table 2-3 Remote Controller Summary
+Name
+
+DT7
+
+13
+
+© 2025 DJI All Rights Reserved.
+
+Picture (For Reference Only)
+
+Name
+
+Picture (For Reference Only)
+
+FS-i6X
+
+WFLY ET08 and WFLY ET08A
+
+WFLY ET16S and WFLY ET16
+
+
+
+Given the complex wireless conditions at the competition venue, the above remote controllers may
+still be subject to interference. It is advised to implement multiple redundancy control methods to
+prevent control failure.
+
+
+
+Robots entering the Battlefield will automatically connect to the Operation Room’s Video
+Transmitter Module (Receiver). Video Transmitter Modules (Receivers) brought by participating
+teams cannot be used. The default state of the joystick on the Operation Room’s Video Transmitter
+Module (Receiver) is centered, and the switch is set to position C by default.
+
+S19 Remote controllers have a one-to-one correspondence with Receivers.
+S20 The radio frequency module of remote controllers cannot be modified. Adjustments to the way antenna is
+mounted, antenna damage, and repairs to the antenna through official after-sales channels are not considered
+© 2025 DJI All Rights Reserved.
+
+14
+
+modifications.
+S21 Robots are not allowed to carry wireless communication equipment other than remote controllers, Referee
+Systems, wireless charging devices, and radar receivers.
+S22 Devices installed on robots must not generate wireless signal interference in the frequency ranges of 0.428–
+0.438 GHz, 2.3–2.55 GHz, 3.75–4.75 GHz, or 5–7.5 GHz.
+It is recommended to have the robot’s full functionality enabled and measure interference using a
+spectrum analyzer in close proximity to the device that may generate wireless signal interference.
+
+2.1.3
+
+Optical Equipment
+
+S23 Robots can be equipped with a display no larger than 7 inches, with an illuminance of no greater than 300 lux
+measured at a distance of 40 mm. The luminous surface of the display shall be at least 100 mm away from any
+Armor Module.
+S24 Except under special requirements, robots shall not be equipped with obvious visible or invisible light emitting
+equipment.
+Robots’ status indicators and infrared sensors are not considered obvious light emitting equipment.
+S25 For Ground Robots operating under normal conditions, the maximum height of non-scanning laser devices
+above the ground must not exceed 250 mm. The laser launch angle should be either horizontal or downward.
+For Drones, laser devices can only launch vertically downward, with no limit on altitude. Non-scanning laser
+products shall not be installed on any other robots.
+S26 The optical equipment used by robots shall not cause any physical harm to any person.
+S27 Laser launch devices may only be installed at the Radar Sensor end, with just one device permitted.
+S28 The wavelength of the laser launch device must not exceed 730 nm.
+
+
+It is recommended that the emission wavelength range include 600–700 nm.
+
+
+
+Laser launch devices must emit continuous waves (CW).
+
+S29 During the Pre-Match Inspection, the laser launch device must project vertically onto a wall at a horizontal
+distance of 5 m, with the diameter of the circle surrounding the laser spot no greater than 7.5 mm.
+
+15
+
+© 2025 DJI All Rights Reserved.
+
+It is recommended that the laser beam be projected vertically onto a wall at a horizontal distance of
+5 m, with the diameter of the circle surrounding the laser spot at least 5.5 mm.
+S30 The laser safety specifications available for robots and other devices are shown in the table below:
+Laser Safety Specifications
+Applicable Devices/Robots
+
+Laser Launching Device
+
+Others
+
+2.1.4
+
+Class III and
+
+Class I
+
+Class II
+
+Allowed (not
+
+Allowed
+
+Not allowed
+
+Not allowed
+
+Not allowed
+
+above
+
+recommended)
+Allowed
+
+Visual Features
+
+The Referee System Armor Modules have distinct light effects on both sides to facilitate the development of robot
+auto-recognition aiming algorithms. Since the environment in and around the Competition Area is relatively
+complex, the RMOC cannot guarantee that the computer visual features of the Competition Area will not cause
+visual interference. The computer vision algorithm should adapt to the changes in the lighting of the venue and other
+possible interference around the venue.
+The following specifications shall be followed when designing a robot:
+S31 Do not simulate visual features.
+S32 Teams should not use any means to interfere with the detection of their own robot’s visual features by robots
+on other teams.
+
+
+Robots’ visual features include LED indicators on both sides of the Armor Module, armor stickers,
+and light effects of the Laser Detection Module.
+
+
+
+Venue’s visual features include Dart Launching Station, visual markers, light effects of Power Runes,
+light effects of Tech Cores, Dart Guiding Light, etc.
+
+2.1.5
+
+Armor Stickers
+
+During both the Pre-Match Inspections and the matches, RMOC staff will provide armor stickers to robots based
+on their robot numberings. For sticker drawings, please refer to “Appendix II Reference Drawings“. For robot
+© 2025 DJI All Rights Reserved.
+
+16
+
+numberings, please refer to the “Robot Lineup” section in the RoboMaster 2026 University Championship Rules
+Manual.
+The following specifications shall be followed when attaching armor stickers on robots:
+S33 Robots must attach armor stickers with the corresponding numbers in accordance with the rules, ensuring that
+the numbers and symbols are oriented correctly. Stickers should be free of visible bubbles and undamaged. No
+more than one armor sticker may be applied to a single Armor Module.
+S34 The armor stickers provided by the RMOC can only be attached to Armor Modules. Except for the armor
+stickers provided by the RMOC, no other stickers that resemble the armor stickers in their patterns may be
+attached to a robot’s Armor Module or its other external structures.
+
+2.1.6
+
+Aesthetic Design
+
+To ensure that the aesthetic design of robots does not affect the shootout battles in the Competition Area and the
+audience’s experience, the following specifications shall be followed when designing and creating a robot’s exterior:
+Basic Requirements:
+S35 The cables of robots are neat with no exposed metal wire cores. Unavoidable exposure requires cable protection
+using materials such as drag chains and cable managers.
+S36 Do not use materials that will have an obvious impact on the aesthetics of the robot, such as washbasins, plastic
+bottles, corrugated paper, bed sheets, white foam boards, bubble wrap, etc.
+S37 Fishing net cannot be used as an aesthetic material, but can be used for the propeller guard of a Drone.
+S38 Do not design or use sharp structures to avoid causing damage to the Battlefield or injury to personnel.
+Gloss:
+S39 The exterior gloss of any area larger than 10 mm * 20 mm on robots shall not exceed 30 Gs. An exception is
+made for optical equipment that cannot be made non-glossy, such as optical axes and camera lenses. However,
+they shall be kept more than 100 mm away from the edge of the Armor Module side indicators.
+Paint Color:
+
+
+All robots of a team should preferably have a consistent aesthetic style.
+
+
+
+It is advised to have a single robot display two school badges or team badges, each facing a different
+side. The size of a single school badge or team badge shall not be larger than 100 mm * 100 mm.
+The school badges or team badges shall be displayed prominently on a robot, with a distance of at
+least 30 mm from the Armor Module side indicators. If the exterior of a robot does not meet
+
+17
+
+© 2025 DJI All Rights Reserved.
+
+specifications, Pre-Match Inspection staff may require the position or size of a school badge or team
+badge to be altered.
+S40 The Red Team’s robots may use a color from the red spectrum for their protective shell, while the Blue Team
+may use any color from the blue spectrum. A robot’s exterior may feature up to four areas with the opponent
+team’s color, each not exceeding 60 mm * 60 mm in size.
+When designing robots, avoid using red or blue accessories whenever possible.
+S41 The inkjet print or stickers of the school and team badges shall not affect the robot’s visual features, and shall
+not be luminous.
+Mounting of Protective Shells:
+It is recommended that teams use tough materials that are not easily damaged for the protective shell
+and conduct reliability tests to avoid any violation of rules caused by breakage of the protective shell
+from battles in the Competition Area.
+Aesthetic Requirements:
+S42 The advertising spaces must be displayed on the left and right sides of the robot, and their distance with the
+Armor Module side indicators shall not be less than 30 mm.
+S43 The inkjet print or stickers of the advertising spaces shall not affect the robot’s visual features, and shall not
+be luminous.
+S44 The size of a single robot advertising space must not be greater than 100 mm * 100 mm. Each robot can have
+two advertising spaces for the display of sponsor information. If the exterior of a robot does not meet
+specifications, Pre-Match Inspection staff may require the position or size of an advertising space to be altered.
+S45 Custom clients, wireless charging devices, custom controllers, and their accessories shall not provide
+advertising spaces for the display of sponsor information.
+Inverse colors can be applied on a school badge or team badge, or an advertising space, or their original
+colors can be retained.
+
+2.1.7
+
+Launching Mechanism
+A Launching Mechanism is a mechanism capable of launching a projectile from a robot on a fixed
+trajectory and at a certain initial speed.
+© 2025 DJI All Rights Reserved.
+
+18
+
+S46 Robots using compressed gas as the projectile launch power must have an acceleration length no more than
+200 mm (the acceleration shall be completed before the projectile enters the Speed Monitor Module).
+S47 The Launching Mechanisms of robots shall be able to stably launch 10 rounds of 17 mm projectiles or 5 rounds
+of 42 mm projectiles.
+S48 Each Launching Mechanism shall be installed with a Speed Monitor Module in accordance with the
+specifications.
+
+2.1.8
+
+Custom Controller
+
+A Custom Controller is a set of multi-purpose controllers made by the participating team and is used to control and
+monitor robot movements and status.
+
+
+The Custom Controller includes but is not limited to VR goggles and their supporting control
+equipment, the joysticks, self-built wired controllers, and other self-built control modules.
+
+
+
+If the joystick is mapped onto the mouse, then the joystick and Remote Controller combo shall
+be deemed as one set of control equipment and not part of the Custom Controller.
+
+
+
+Size: L * W * H (length * width * height).
+
+S49 The production parameters for Custom Controller must meet the following requirements:
+Table 2-4 Production Parameters for Custom Controller
+Parameter
+Maximum Total Power
+Capacity (Wh)
+Maximum Supply Voltage
+(V)
+Maximum Storage Size
+(mm, L * W * H)
+
+Limit
+
+Remarks
+
+200
+
+-
+
+30
+
+-
+
+600 * 600 * 600
+
+-
+
+
+Maximum Expansion Size
+(mm, L * W * H)
+
+It is recommended to keep the size of
+a Custom Controller within 600 mm *
+600 mm * 600 mm.
+
+No restrictions
+
+
+Any inconvenience in use or inability
+to compete resulting from size issues
+
+19
+
+© 2025 DJI All Rights Reserved.
+
+Parameter
+
+Limit
+
+Remarks
+will be the responsibility of the
+participating team.
+
+Data Transmission
+
+Data is sent and received through the
+serial port.
+
+
+
+The serial port standard is RS232.
+
+
+
+A device is considered a Custom
+Controller when and only when it
+uses a custom controller link.
+
+Protocol
+
+Refer to the Referee System Serial
+
+-
+
+Protocol.
+
+Installation Requirements:
+S50 Do not put any sticky or sharp items such as double-sided tape and screws in direct contact with the desk in
+the Operation Room.
+S51 Custom Controllers shall not have exposed live wiring.
+S52 The interface between the Custom Controller and the Operation Room computer shall strictly comply with the
+requirements specified in “Table 2-4 Production Parameters for Custom Controller“. Unauthorized connection
+is strictly forbidden.
+Rules of Usage:
+An RS232 plug is provided in the Operation Room, for connecting Custom Controller signals. The Operator can
+connect them on their own.
+S53 Before use, the Custom Controller must be connected to the data interface provided in the Operation Room to
+test whether the controller can function properly. For specific placement requirements, please refer to the
+“Operation Room” section in the RoboMaster 2026 University Championship Rules Manual.
+S54 Custom Controllers shall not be equipped with any wireless transmitter or receiver.
+
+2.1.9
+
+Custom Client
+
+A Custom Client is a multi-purpose device developed by participating teams to receive competition-related
+information and robot video feeds sent by the Referee System’s RoboMaster Champion server, and to transmit
+competition-specific interaction commands to the RoboMaster Champion server.
+S55 Custom clients may only be used in RMUC events.
+S56 The production parameters for Custom Client must meet the following requirements:
+© 2025 DJI All Rights Reserved.
+
+20
+
+Table 2-5 Production Parameters for Custom Client
+Parameter
+
+Limit
+
+Maximum Supply Voltage
+
+Remarks
+-
+
+30
+
+(V)
+Maximum Storage Size
+
+400 * 400 * 400
+
+(mm, L * W * H)
+
+Any inconvenience in use or inability
+
+Maximum Expansion Size
+
+No restrictions
+
+(mm, L * W * H)
+
+to compete resulting from size issues
+will be the responsibility of the
+participating team.
+
+Video transmission information: UDP
+Data Transmission
+
+Competition-related data: MQTT +
+
+-
+
+ProtoBuf
+Protocol
+
+Refer to the Referee System Serial
+Protocol.
+
+-
+
+Installation Requirements:
+S57 Do not put any sticky or sharp items such as double-sided tape and screws in direct contact with the desk in
+the Operation Room.
+S58 Custom Clients shall not have exposed metal wire cores.
+S59 The interface between the Custom Client and the Operation Room computer shall strictly comply with the
+requirements specified in “Table 2-5 Production Parameters for Custom Client“. Unauthorized connection is
+strictly forbidden.
+Rules of Usage:
+An RJ45 connector is provided in the Operation Room, for connecting Custom Client signals. The Operator can
+connect them on their own.
+S60 Before use, the Custom Client must be connected to the data interface provided in the Operation Room to test
+whether the controller can function properly. For specific placement requirements, please refer to the
+“Operation Room” section in the RoboMaster 2026 University Championship Rules Manual.
+S61 Custom Clients shall not be equipped with any wireless transmitter or receiver.
+
+21
+
+© 2025 DJI All Rights Reserved.
+
+2.1.10 17 mm Fluorescent Projectile Energy-Charging Device
+Drill in mounting holes on specified positions on the robot according to the size of the 17 mm fluorescent projectile
+energy-charging device.
+
+Figure 2-1 17 mm Fluorescent Projectile Energy-Charging Device
+The figure above is for reference only; updated information about the driver board will be provided later.
+Installation Steps:
+In RMUL events, it is not required to install a fluorescent energy-charging device on the robot.
+1.
+
+The UV light panel should be installed on a specific part of the robot, and should cover the standby projectile
+next to the projectile to be launched, as shown in the figure below.
+
+2.
+
+If the projectile feed pipe is metal, its area in contact with the light panel should be maximized as much as
+possible, and the screw should be tightly fastened for easy conduction. Non-metal projectile feed pipes shall
+be properly mounted with heat sinks.
+
+3.
+
+After the wiring for the UV light panel is completed, the XT30 connector can be connected to a 12 V or 24 V
+power supply.
+
+© 2025 DJI All Rights Reserved.
+
+22
+
+[1]
+
+UV light panel
+
+[2]
+
+Standby projectile
+
+[3]
+
+Projectile to be launched
+
+[4]
+
+Slot
+
+Figure 2-2 UV Light Panel Installation
+Installation Requirements:
+
+
+It is recommended that the UV light panel should be in close contact with the metal parts, or heat
+sinks should be installed to dissipate heat.
+
+
+
+It is recommended that the back of the UV light panel or the surface of the heat sinks should not be
+covered with any material that prevents heat dissipation such as tapes or plastic.
+
+
+
+During use, check for dirt or blockage on the light beads, or for any damaged light beads. If any
+issues are found, replace them promptly to avoid affecting the Pre-Match Inspection result.
+
+S62 UV light panels shall be installed in a way that ensures no obvious light leaks to prevent the emission of harmful
+UV rays.
+S63 The UV light panel shall cover the standby projectile next to the projectile to be launched. The light bead
+alignment should match the projectile launch direction, and there should be no structural blockage preventing
+the light beads from illuminating the projectile, ensuring proper energy charging of the projectile.
+S64 The maximum radio frequency of the 17 mm Launching Mechanism must be no less than 10 Hz, and the initial
+launching speed of the projectile must exceed 20 m/s. During self-testing, use the actual competition radio
+frequency or the maximum radio frequency of the Launching Mechanism for shooting, and ensure the
+23
+
+© 2025 DJI All Rights Reserved.
+
+brightness meets the self-test requirements. These requirements will be provided later.
+S65 During the Pre-Match Inspection of the 17 mm energy-charging device, robots must launch projectiles at the
+actual competition radio frequency or the maximum radio frequency of the Launching Mechanism.
+S66 If the official energy-charging device is used, the corresponding heat sink and its related components must also
+be used.
+S67 Custom-made UV light panels must use UV light beads with a wavelength of 390–410 nm.
+Recommendations for Custom-made UV Light Panels:
+
+
+It is recommended that the light bead emission angle be 120°.
+
+
+
+It is recommended that each light panel have a total luminous power of 3 W (6 W in total for two light panels).
+
+
+
+It is recommended to use an aluminium substrate or copper substrate for the circuit board.
+
+
+
+It is recommended to refer to the fluorescent energy-charging device for requirements such as heat sink
+specifications, light bead spacing, and total light panel length.
+
+2.1.11 Wireless Charging Device
+Wireless charging is a non-beam near-field power transmission technology that utilizes mechanisms such as
+magnetic coupling (magnetic induction, magnetic resonance) and capacitive coupling to transfer power from a
+power source to an electrical load. Participating teams may choose to build wireless charging devices that only
+include the power transmitter (the “Transmitter”) or only the power receiver (the “Receiver”). The following
+regulations apply only to wireless charging devices participating in Chassis Energy Interaction. Wireless charging
+devices must independently comply with the “Provisional Regulations on Radio Management of Wireless Charging
+(Power Transmission) Equipment” and the requirements in all other relevant chapters of this manual, and must not
+be used for purposes other than wireless charging energy interaction.
+
+The wireless charging devices used in RMU events are considered “mobile/portable wireless charging
+devices” under the aforementioned regulations.
+S68 Wireless charging devices may only be used in RMUC events.
+S69 The maximum transmission power between the Transmitter and the Receiver is 120 W.
+S70 Charging is only available when the protocol used by the Transmitter matches that used by the Receiver. If
+protocol matching fails, the Transmitter is prohibited from releasing power to any object.
+
+© 2025 DJI All Rights Reserved.
+
+24
+
+There are no restrictions on the specific protocol format, but the protocol must comply with relevant
+regulations.
+S71 At the Pre-Match Inspection, the wireless charging device must be able to enter charging mode to facilitate
+compliance testing.
+S72 The wireless charging device must not interfere with the normal functioning of Referee System Onboard
+Modules. Any issues arising from such interference are the responsibility of participating teams.
+S73 The maximum energy interaction surface area for each wireless charging device Receiver and Transmitter must
+not exceed 10,000 mm².
+Wireless Charging Device (Transmitter):
+S74 The operating frequency is limited to 100-148.5 kHz.
+S75 Installation is only permitted in the Resupply Zone, and no more than one may be installed.
+S76 When the Transmitter isn’t charging (in an idle state), its total power must be no higher than 1 W.
+S77 The Transmitter must be equipped with at least one light emitting device to indicate its operating status (this
+device does not need to indicate charging status). This light emitting device should light up when the
+Transmitter is powered on and turn off when the Transmitter is powered off. The size of the light emitting
+device must not exceed 5 mm * 5 mm * 5 mm, and the light color can only be white. If multiple light emitting
+devices are installed, please refer to the requirements for “Robots Status Indicator.”
+S78 The maximum detection distance of the Transmitter must be less than or equal to 30 mm. All information
+transmission of the wireless charging device must also occur within this range.
+Teams are advised to equip their Transmitters with power management, voltage and current adjustment,
+over current protection, over voltage protection, over temperature protection, and other safety features.
+S79 The maximum size of the Transmitter installed in the Resupply Zone is 500 mm * 500 mm * 300 mm.
+S80 The Transmitter installed in the Resupply Zone must be connected to the DC switching power supply provided
+by the RMOC, with a supply voltage of 24 V ± 1 V and a maximum output power of 200 W. The Resupply
+Zone provides a power supply interface with an XT60 receptacle. The cable used by the wireless charging
+device (Receiver) to connect to this power port must not exceed 500 mm in length.
+For safety reasons, the RMOC has set up a power protection device for the power supply. If the total
+operating power of the Transmitter exceeds 200 W, the power supply for the round will be cut off.
+
+25
+
+© 2025 DJI All Rights Reserved.
+
+Wireless Charging Device (Receiver):
+The wireless charging device (Receiver) can only be connected to the power control board and must not be
+connected to other circuits, as shown in “Figure 3-50 Wiring of Super-capacitor Management Module“.
+S81 The wireless charging device (Receiver) can only be installed on Hero, Infantry, and Sentry, with a maximum
+of one device (Receiver) per robot.
+
+2.1.12 Miscellaneous
+S82 No materials that are fragile, easy to fall off, and difficult to clean may be used in the production of robots,
+such as feathers and cotton. No glue or adhesive materials may be used to attach robots to the Battlefield or
+Battlefield components.
+S83 Robots must not leave visible marks or cause damage to the Energy Units when acquiring or assembling them.
+Grabbing the Referee System Onboard Modules by a robot may severely affect the functionality of the
+module, and all consequences arising therefrom will be the responsibility of the participating team.
+S84 With the exception of Dart Launchers in the Dart System that fire darts, robots may not disintegrate into subrobots or multiple subsystems connected by flexible cables, and shall not cast or launch their own parts.
+S85 All robots, custom controllers, custom clients, and wireless charging devices must use open-source operating
+systems for their computing platforms, if an operating system is required. For example: Linux and its derivative
+operating systems, and RTOS. Closed-source operating systems such as Windows and macOS are not allowed.
+
+2.2 Rules of Usage for Fully Assembled Robots and OpenSource Robots
+
+
+Only teams that did not qualify for the on-site competitions of the RoboMaster 2025 University Series
+are allowed to deploy a maximum of one non-modified RoboMaster Robot Self-Assembled Version
+Type A or one RoboMaster AI Robot 2020 Infantry Version whose modification meets the new
+design criteria.
+
+
+
+When building their robots, the remaining teams shall not modify the aforementioned robots into a
+newly designed robot or directly use their frame, material or other important components during the
+production process, and are only allowed to use the Motor Shaft Coupling, Launching Mechanism,
+Loading Mechanism, or other such parts of the aforementioned robots.
+© 2025 DJI All Rights Reserved.
+
+26
+
+
+
+When building their robots, participating teams are forbidden from using third-party pre-assembled
+modules, except for the flight system of Drones (including the frame, propulsion system, flight
+control, and perception system).
+
+
+
+Third parties refer to entities other than the RMOC and participating team itself.
+
+
+
+Pre-assembled modules: Specific functional components comprised of several basic functional
+elements, which can be used to build a fully functional system. Examples include: Robotic Arm,
+Chassis, Supercapacitor Control Board and corresponding code, Gimbal, Dart, Wheels with
+suspension, Loading Mechanism, and Launching Mechanism.
+
+For the RoboMaster University Series, the RMOC has defined the ownership of intellectual property over the
+participating robots. Only team members involved in the design and production of the robots and the universities or
+colleges they represent shall own the intellectual property rights related to the robots’ design and form. Only the
+teams representing their colleges or universities having the intellectual property rights over the robots’ design and
+form or teams made up of individuals with such rights are allowed to use the robots’ design and form in the
+competition. Other teams wishing to incorporate such design and form shall perform a redesign to their robot by at
+least satisfying one complete redesign criterion or three partial redesign criteria. Once these criteria are satisfied,
+the design will be deemed new and the team may use the newly designed robots in the competition. Such redesigns
+include but are not limited to the examples mentioned in this document.
+Meanwhile, the RMOC will conduct random checks on robots during the competition. Participating teams are
+obligated to show their robots’ mechanisms, circuit design drawings, and relevant code documents to the RMOC
+and answer relevant technical questions. The RMOC has the right to photograph/record the configurations and
+information of the robots of the participating teams.
+S86 Before a robot is inspected, the team is required to submit its photographs clearly showing the primary
+structures of the robot through the designated channel. Any protective shell shall be removed to capture the
+robot’s main body in the photographs.
+S87 Any team using a redesigned, pre-assembled robots or open-source robots shall submit descriptions of the
+relevant modifications through the designated channel.
+S88 In the event of a situation where robots do not satisfy each other’s redesign conditions and the open-source
+robot is not referenced, it is stipulated that the owner of the intellectual property rights will be the team that
+first uses the robot to participate in the official competition. This means that as long as the affiliated team is
+still participating in the RoboMaster University Series, all subsequent robots from other teams that come on
+stage shall meet the redesign requirements relative to the robots that were once on stage.
+
+27
+
+© 2025 DJI All Rights Reserved.
+
+2.2.1
+
+Complete Redesign
+
+Complete redesign refers to improvements made to the core mechanisms of robots, which often involve extensive
+modifications across related systems.
+1.
+
+Chassis
+
+
+
+Changes to wheels. For example: changes such as Mecanum wheels, steering wheels, omni wheels, Ackermann
+steering wheels, continuous tracks, etc.
+
+
+
+Changes to wheel transmission. For example: changes such as unsprung power, sprung power, etc.
+
+
+
+Changes to suspension. For example: changes to solutions such as double wishbone suspension, torsion beam
+suspension, double-trailing-arm suspension, lift suspension, etc.
+
+
+
+Changes to chassis power. For example: changes in power systems such as AC, DC, brushed, brushless,
+decelerating, direct drive, etc.
+
+
+
+Changes to chassis form. For example: changes in chassis forms such as body-on-frame, layered, and unibody
+designs.
+
+2.
+
+Gimbal
+
+
+
+Changes to gimbal transmission. For example: subset relationships and quantities of the yaw, pitch, and roll
+axes change.
+
+
+
+Changes to projectile feed principle. For example: changes of robot’s projectile feed link from a simple, direct
+connection to feeding to the Launching Mechanism through the yaw-axis joint.
+
+
+
+Changes to positions of magazines. For example: changes in the fixed linkage between magazines and the
+chassis, yaw axis, pitch axis, etc.
+
+
+
+Changes to transmission from the gimbal’s motor. For example: changes to direct drive, pulleys, connecting
+rods, and gears (not including swapping between pulleys, gears, and sprockets).
+
+
+
+Increased quantity of effective Launching Mechanisms.
+
+3.
+
+Actuator
+
+
+
+Changes to the topological structures of mechanisms other than terminal executive mechanisms. For example:
+modifications in the combination order, quantity, or types of revolute pairs, sliding pairs, and similar
+components.
+
+
+
+Improving the power efficiency of the Actuator, for example: reducing the number of power sources with
+unchanged functionality, maintaining the same number of power sources while increasing effective
+functionality, or increasing both the number of power sources and effective functionality.
+© 2025 DJI All Rights Reserved.
+
+28
+
+4.
+
+Dart System
+
+
+
+Dart: Complete redesign based on aerodynamic principles. For example: changes in the wing design,
+aerodynamic shape, power system, stabilization method, and more.
+
+
+
+Dart Launcher: Complete redesign of the core transmission system or Launching Mechanism, including the
+launching method, power transmission structure, and pushing mechanism layout.
+The complete redesign requirements for the Dart and the Dart Launcher are independent of each other and
+must both be met.
+
+2.2.2
+
+Partial Redesign
+
+Partial redesign refers to improvements that have fewer impact on related systems.
+
+
+More than 10% change in the suspension’s hard point parameter.
+
+
+
+Changes to the quantity of effective power wheels.
+
+
+
+More than 10% change in the axle track and wheelbase.
+
+
+
+Changes to the gear ratio of the chassis motor.
+
+
+
+Changes to at least three Referee System Onboard Module placement orientations, resulting in a change to the
+topological structure of the robot system.
+
+
+
+New functional modules related to the original features of the robots. For example: independent rescue device,
+image transmission turntable, Energy Unit diverter, or visual module.
+
+
+
+Changes to the vertical and horizontal positions of the friction wheels.
+
+
+
+Changes to transmission from the gimbal’s motor. For example: swapping between pulleys, gears, and
+sprockets.
+
+
+
+Changes made to the power supply. For example: pneumatic and electrical changes.
+
+
+
+Changes to the types and solutions of terminal executive mechanisms. For example: changing rotational
+grabbing to lateral grabbing.
+
+
+
+Changes to the layout of core electronic devices (main control module, power supply, computing platform, and
+sensor modules). For example: changing their position from the gimbal to the chassis.
+
+
+
+Change of the gimbal’s rotating range from limited to unlimited.
+
+
+
+Adjustments to the size, quantity, or installation angle of local aerodynamic components on the Dart, such as
+changes to the tail fin area, tail fin installation angle, and airfoil curvature.
+
+29
+
+© 2025 DJI All Rights Reserved.
+
+
+
+Replacement of the Dart material, along with adjustments to mass distribution or surface characteristics.
+
+
+
+Adjustments to the layout or structural configuration of the Dart Launcher’s projectile feed mechanism, such
+as changes to the shape of the projectile feed track or optimization in the shape of the projectile pushing
+mechanism.
+
+
+
+Modification of the transmission ratio or transmission path between Dart Launcher components.
+The partial redesign requirements for the Dart and the Dart Launcher are independent of each other and
+must both be met.
+
+2.2.3
+
+Minimal Redesign
+
+Minimal redesign refers to modifications that have a small impact on the core functions.
+Minimal redesign includes but is not limited to the following modifications:
+
+
+Changes to secondary load-bearing and shielding structures. For example: a hollowed space or their shape.
+
+
+
+Changes to the quantities of models for standard parts.
+
+
+
+Switching the pneumatic cylinder and the electric joystick.
+
+
+
+Redesign of the Dart mounting method.
+
+
+
+Change of material of the same characteristics. For example: switching between fiberglass and carbon fiber
+sheets.
+
+
+
+Non-principle changes. For example: changing the hardness of the projectile feed pipe, such as by replacing it
+with a soft pipe.
+
+2.3 Robot Technical Specifications
+
+
+Maximum Storage Size: The robot must have one configuration that complies with the maximum
+size limit, including the Referee System and its mounting bracket.
+
+
+
+Maximum Expansion Size: The robot’s maximum size limit at any moment, based on the
+maximum size the robot could possibly expand to, including the Referee System and its mounting
+bracket. The length, width, and height of the robot are determined according to the robot’s body
+coordinate system. At the Pre-Match Inspection, participating teams must proactively demonstrate
+all possible mechanical transformation scenarios. At no point before, during, or after
+transformation may any configuration of the robot exceed the Maximum Expansion Size limit.
+© 2025 DJI All Rights Reserved.
+
+30
+
+
+
+In this section, the length, width, and height of the robot correspond to the distances along the X,
+Y, and Z axes of the robot’s body coordinate system, respectively. For Drones and Radar, either
+the X-axis or Y-axis direction may be selected, while the Dart System is not subject to these
+specifications.
+
+2.3.1
+
+Hero
+
+S89 A Hero Robot shall have the functions for horizontal movement and launching 42 mm projectiles.
+S90 The production parameters for Hero must meet the following requirements:
+Table 2-6 Production Parameters for Hero
+Parameter
+
+Operating Mode
+
+Limit
+No restrictions. Up to one remote
+
+-
+
+controller and one custom controller.
+
+Maximum Total Power Capacity
+(Wh)
+Maximum Supply Voltage (V)
+
+Launching Mechanism
+
+Remarks
+
+300
+
+-
+
+30
+
+-
+
+One Launching Mechanism (42 mm
+
+-
+
+projectile)
+
+Including the weight of the battery,
+35
+
+Maximum Weight (kg)
+
+but not the weight of the Referee
+System.
+
+The robot must have one
+Maximum Storage Size (mm)
+
+configuration that complies with the
+maximum size limit: 800 * 800 *
+
+-
+
+800.
+The robot’s size at any moment must
+Maximum Expansion Size (mm)
+
+not exceed the size limit: 1200 *
+1200 * 1200.
+
+31
+
+© 2025 DJI All Rights Reserved.
+
+-
+
+Parameter
+
+Limit
+
+Remarks
+
+
+
+Large Armor Module
+
+
+
+Speed Monitor Module (42 mm
+projectile)
+
+
+
+Video Transmitter Module
+(Transmitter)
+
+Referee System
+
+
+
+RFID Interaction Module
+
+
+
+UWB Positioning Module
+
+
+
+Main Control Module
+
+
+
+Power Management Module
+
+
+
+Light Indicator Module
+
+
+
+Supercapacitor Management
+
+Weight: 4.21 kg
+
+Module
+
+2.3.2
+
+Engineer
+
+S91 An Engineer Robot must have the functions for horizontal movement and grabbing Energy Units in the
+Resource Area.
+S92 The production parameters for Engineer must meet the following requirements:
+Table 2-7 Production Parameters for Engineer
+Parameter
+
+Operating Mode
+
+Maximum Total Power
+Capacity (Wh)
+Maximum Supply
+Voltage (V)
+
+Limit
+
+Remarks
+
+No restrictions. Up to one remote controller and one custom
+controller.
+
+-
+
+300
+
+-
+
+30
+
+-
+
+© 2025 DJI All Rights Reserved.
+
+32
+
+Parameter
+
+Limit
+
+Remarks
+
+Launching Mechanism
+
+No Launching Mechanism is allowed to be installed.
+
+Including the weight
+of the battery, but not
+
+35
+
+Maximum Weight (kg)
+
+the weight of the
+Referee System.
+
+Maximum Storage Size
+
+The robot must have one configuration that complies with the
+
+(mm,)
+
+maximum size limit: 600 * 600 * 600.
+
+-
+
+One of the following requirements must be met:
+
+
+The robot’s size at any moment must not exceed the size
+limit: 1200 * 1200 * 1100.
+
+
+
+Set a sphere with a diameter of 1,500 mm. Place the robot
+on a plane parallel to the ground and 480 mm from the
+center of the sphere. Any transformation or movement of
+the robot on this plane must not exceed the boundaries of
+the sphere, as shown in the following figure:
+
+Maximum Expansion
+
+-
+
+Size (mm, L * W * H)
+
+[1]
+
+Referee System
+33
+
+
+
+Maximum expansion
+size range
+
+Small Armor Module
+
+© 2025 DJI All Rights Reserved.
+
+[2]
+
+Engineer
+
+Weight: 3.04 kg
+
+Parameter
+(Applicable to RMUC)
+
+Referee System
+
+Limit
+
+
+Video Transmitter Module (Transmitter)
+
+
+
+RFID Interaction Module
+
+
+
+UWB Positioning Module
+
+
+
+Main Control Module
+
+
+
+Power Management Module
+
+
+
+Light Indicator Module
+
+
+
+Main Control Module
+
+
+
+Power Management Module
+
+
+
+Video Transmitter Module (Transmitter)
+
+Remarks
+
+Weight: 0.36 kg (If
+you have any future
+plans to join RMUC,
+it is recommended to
+reserve space in the
+
+(Applicable to RMUL)
+
+design that conforms
+to the RMUC
+Referee System
+specifications.)
+
+2.3.3
+
+Infantry
+
+S93 Infantry shall have the functions for horizontal movement and launching 17 mm projectiles.
+S94 The production parameters for Infantry must meet the following requirements:
+Table 2-8 Production Parameters for Infantry
+Parameter
+
+Operating Mode
+
+Maximum Total Power
+Capacity (Wh)
+Maximum Supply Voltage (V)
+
+Limit
+No restrictions. Up to one remote
+controller and one custom controller.
+
+Remarks
+
+-
+
+300
+
+-
+
+30
+
+© 2025 DJI All Rights Reserved.
+
+34
+
+Parameter
+
+Limit
+One Launching Mechanism (17
+
+Launching Mechanism
+
+mm projectile)
+
+25
+
+Maximum Weight (kg)
+
+Remarks
+
+-
+
+Including the weight of the battery, but
+not the weight of the Referee System.
+
+The robot must have one
+Maximum Storage Size (mm)
+
+configuration that complies with the
+maximum size limit: 600 * 600 *
+
+-
+
+600.
+
+Maximum Expansion Size
+(mm)
+
+The robot’s size at any moment must
+not exceed the size limit: 800 * 800 *
+
+-
+
+800.
+
+
+Small Armor Module
+
+
+
+Speed Monitor Module (17 mm
+Projectile)
+
+
+
+Video Transmitter Module
+(Transmitter)
+
+
+
+RFID Interaction Module
+
+
+
+UWB Positioning Module
+
+
+
+Main Control Module
+
+
+
+Power Management Module
+
+
+
+Light Indicator Module
+
+
+
+17 mm Fluorescent Projectile
+
+Weight: 3.25 kg
+
+Referee System
+
+Energy-Charging Device
+
+
+Supercapacitor Management
+Module
+
+35
+
+© 2025 DJI All Rights Reserved.
+
+2.3.4
+
+Drone
+
+S95 Drone shall be able to sustain flight for at least 10 seconds and the participating team shall provide a video of
+that robot in flight at the Pre-Match Inspection. The video must meet the following specifications:
+
+
+The video needs to clearly demonstrate that the robot shown is the one under Pre-Match Inspection.
+
+
+
+The video should show the Drone flying for at least 10 seconds and include content that proves the video’s
+timeliness and authenticity, such as the time the video was shot and a photo that contains both the robot
+and the pilot.
+
+
+
+The video should be shot in advance. The competition venue will not provide a dedicated space for video
+shooting.
+
+S96 The production parameters for Drone must meet the following requirements:
+Table 2-9 Production Parameters for Drone
+Parameter
+
+Operating Mode
+
+Maximum Total Power Capacity
+(Wh)
+Maximum Supply Voltage (V)
+
+Launching Mechanism
+
+Maximum Weight (kg)
+
+Limit
+
+Remarks
+
+No restrictions. Up to two remote
+controllers and one custom controller.
+
+-
+
+900
+
+-
+
+52
+
+-
+
+One Launching Mechanism (17 mm
+Projectile)
+
+-
+
+Include battery weight, but not the
+
+13
+
+weight of the Referee System.
+
+The robot must have one configuration
+Maximum Storage Size (mm)
+
+that complies with the maximum size
+limit: 1400 * 1400 * 1100 (excluding
+
+-
+
+the vertical rigid safety rod).
+
+© 2025 DJI All Rights Reserved.
+
+36
+
+Parameter
+
+Limit
+
+Remarks
+
+The robot’s size at any moment must
+Maximum Expansion Size (mm)
+
+not exceed the size limit: 1700 * 1700 *
+
+-
+
+800 (excluding the vertical rigid safety
+rod).
+
+
+Video Transmitter Module
+(Transmitter)
+
+
+
+UWB Positioning Module
+
+
+
+Main Control Module
+
+
+
+Power Management Module
+
+
+
+Speed Monitor Module (17 mm
+
+Excluding the Laser Detection
+Module, the weight is 0.66 kg
+(the weight of the Laser Detection
+
+Referee System
+
+Module is to be determined, with
+an upper limit of 400 g).
+
+Projectile)
+
+
+Laser Detection Module
+
+The following requirements shall be adhered to when building a Drone:
+S97 Drone shall be mounted with a fully enclosed propeller guard, where the propeller blades shall not be exposed.
+Drone should be able to collide with a rigid surface at a horizontal speed of (1.2 ± 0.1) m/s without suffering
+significant damage.
+
+
+Fully enclosed propeller guard: A structure that fully protects each propeller blade.
+
+
+
+DJI Mavic Pro Propeller Guard is displayed below for your reference:
+
+Figure 2-3 Fully Enclosed Propeller Guard
+S98 When any part of the fully enclosed propeller guard is subjected to a force of 20 N, the propeller guard shall
+not deform and contact the propeller blades nor interfere with normal propeller spinning. The 42 mm projectile
+37
+
+© 2025 DJI All Rights Reserved.
+
+shall not penetrate the mesh of the propeller guard from any angle. At the Pre-Match Inspection, the inspector
+will apply a 20 N force to any position on the propeller guard using a 2 mm-diameter object and a 42 mm
+projectile. The propeller guard shall comply with this specification after being subjected to the force.
+
+
+It is recommended that the mesh of the propeller guard should not have a surface area larger
+than 9 cm².
+
+
+
+If the propeller guard needs to leave space for robot maintenance, an opening mechanism that
+complies with this regulation should be designed.
+
+S99 If Drone crashes into a tall cylindrical object of any diameter from any angle and at a certain horizontal speed,
+its propeller guard should protect the propeller blades from making direct contact with the cylindrical object,
+and should not suffer any significant deformation.
+S100
+
+Cables, slip rings and retractable aerial safety ropes are in place above the Battlefield to ensure the flying
+
+safety of Drone. A vertical rigid safety rod shall be mounted on the top of Drone, and the rod top shall have a
+rigid ring to be hooked onto the aerial safety rope. The point of connection on the safety rod must be 350 ± 50
+mm higher than the surface on which the robot propeller blades’ center of gravity is located (for coaxial robot
+models, the surface on which the center of gravity of the upper propeller blades is located shall be the reference
+point). Additionally, a protective rope shall be installed to connect the body of the Drone to the aerial safety
+rope hook. The vertical rigid safety rod, the top and bottom connection points on the rod, and the protective
+rope shall all be able to bear the weight of the robot. At the Pre-Match Inspection, the inspector will attach the
+robot to a pull string, raise it vertically by 50 mm, and release it into free fall once – the robot should not suffer
+any significant deformation and structural damage.
+
+
+It is recommended to use a high-strength nylon rope with a diameter of at least 3 mm as the
+protective rope.
+
+
+
+Teams shall ensure the rigid ring on the safety rod can be joined properly with the aerial
+safety rope hook. The dimensions of the aerial safety rope hook are as follows:
+
+© 2025 DJI All Rights Reserved.
+
+38
+
+Figure 2-4 Aerial Safety Rope Hook Dimensions
+S101
+
+Teams should reasonably evaluate and fully test whether the propulsion system and power supply system
+
+of Drones can meet the requirements of loading and combat, to prevent safety incidents or accidents during the
+competition.
+S102
+
+Teams can mount light indicators on Drone to indicate their current flight status. Light indicators should
+
+not be installed in more than six places. The max illuminance of each light at 100 mm away shall not exceed
+3,500 lux. Light indicators shall not disturb the match on the Battlefield (for example, installing high-power
+LED lights that beam directly into the Battlefield, etc.).
+Reference data: The maximum illuminance of the flight status indicators on a DJI Matrice 100
+Drone is 3,200 lux at a distance of 100 mm.
+S103
+
+Participating teams are required to design and install their own external navigation lights on their Drone
+
+to enhance the visibility of their Drone. External navigation lights must ensure that the top projection plane of
+the Drone can be effectively observed. The specific requirements are as follows:
+a)
+
+External navigation lights must be securely connected on the Drone using an LED indicator, with a total
+LED indicator length of more than 1,500 mm. The LED indicator must not be installed on the propeller
+blade and should maintain a visually appealing, symmetrical appearance.
+
+b)
+
+External navigation lights shall be mounted facing up and never mounted sideways or facing down. The
+external navigation lights of Drone should be able to switch between red and blue, and their RGB values
+should closely match the light effect colors of the referee system LED indicator, ensuring consistency
+with the team’s designated color during the competition.
+
+S104
+
+The external navigation light within a single area on the Drone must have an illuminance of 150-1,500
+
+lux at 40 mm away.
+39
+
+© 2025 DJI All Rights Reserved.
+
+S105
+
+The batteries and battery rack on Drone shall be fixed in position using a mechanical structure. After
+
+being fixed in place, batteries should not wobble.
+S106
+
+Drone should have a corresponding structure to keep the projectiles secure in the magazine. Projectiles
+
+should not be allowed to fall out of the magazine during flight.
+S107
+
+The remote controller used by Drone shall have an “Emergency Cut-Off” function, to ensure the Drone
+
+is able to stop its propellers instantly through the remote controller in an emergency.
+
+2.3.5
+
+Sentry
+
+S108
+
+Sentry shall have the functions for horizontal movement and launching 17 mm projectiles.
+
+S109
+
+The production parameters for Sentry must meet the following requirements:
+
+Table 2-10 Production Parameters for Sentry
+Parameter
+
+Operating Mode
+
+Maximum Total Power
+Capacity (Wh)
+Maximum Supply Voltage
+(V)
+
+Launching Mechanism
+
+Maximum Weight (kg)
+
+Maximum Storage Size
+(mm)
+
+Limit
+No restrictions. Up to one remote
+controller for commissioning
+
+Remarks
+
+-
+
+300
+
+-
+
+30
+
+-
+
+One Launching Mechanism (17 mm
+Projectile)
+
+25
+
+-
+
+Including the weight of the battery, but
+not the weight of the Referee System.
+
+The robot must have one configuration
+that complies with the maximum size
+
+-
+
+limit: 600 * 600 * 600.
+
+Maximum Expansion Size
+
+The robot’s size at any moment must not
+
+(mm)
+
+exceed the size limit: 800 * 800 * 800.
+
+-
+
+© 2025 DJI All Rights Reserved.
+
+40
+
+Parameter
+
+Limit
+
+
+Small Armor Module
+
+
+
+Speed Monitor Module (17 mm
+
+Remarks
+
+Projectile)
+
+Referee System
+
+
+
+RFID Interaction Module
+
+
+
+UWB Positioning Module
+
+
+
+Main Control Module
+
+
+
+Power Management Module
+
+
+
+Light Indicator Module
+
+
+
+17 mm Fluorescent Projectile
+
+Weight: 3.25 kg
+
+Energy-Charging Device
+
+
+Supercapacitor Management
+Module
+
+
+
+Video Transmitter Module
+(Transmitter)
+
+2.3.6
+
+Dart System
+
+The Dart System consists of the Dart and the Dart Launcher. The Dart Launcher serves as the carrier of Darts and
+provides them with initial propulsion.
+S110
+
+A Dart Launcher must have the functions for loading darts and launching them for more than 5 m, and
+
+must be mounted with a dart trigger device. Participating teams are required to provide a video of the dart
+launching system firing darts for more than 5 m at the Pre-Match Inspection.
+S111
+
+A Dart must locate a Dart Detection Module and control its flight direction using a propeller (maximum
+
+one allowed to be used), rudders, air jets and other means, to strike and attack the Dart Detection Module. The
+thrust-to-weight ratio of the Dart shall be lower than one.
+S112
+
+When a Dart is launched, the Dart Trigger must light up. Additionally, when viewed from above, the Dart
+
+System shall have no exposed light sources, except for the Referee System and the Dart Trigger.
+
+41
+
+© 2025 DJI All Rights Reserved.
+
+If the Dart Trigger does not light up when a Dart is launched, the Referee System will not be able to
+properly detect the Dart’s release.
+S113
+
+Dart Trigger has built-in red-blue bicolor LED light beads, which will be set as the corresponding color
+
+according to the team during the match. The colors of all Darts taken into the Competition Area shall be set by
+staff at the Inspection Area.
+
+
+A Dart will land in the Battlefield after it is launched and may collide with or be run over by other
+robots. In addition, a Dart will receive a rather large impact when hitting a target. It is recommended
+that teams incorporate buffer and strength designs to avoid damage to their Darts.
+
+
+
+After either the Dart Trigger is powered on for 3 seconds or configured during Pre-Match
+Inspection, the Dart Trigger will enter normal operating mode. At this point, if the Dart Trigger
+experiences an acceleration greater than 2g, it will light up with the corresponding team’s color.
+Each trigger lasts for 5 seconds, after which the light turns off. If the Dart Trigger experiences
+another acceleration greater than 2g during this 5-second period, the trigger time is reset.
+
+
+
+If the Dart Trigger exhibits alternating red and blue flashing lights, LED damage, or other abnormal
+conditions, it indicates that the Dart Trigger is malfunctioning and may not be able to detect dart
+hits. In this case, please replace it with a backup Dart Trigger, otherwise any resulting losses will
+be the responsibility of the participating team.
+
+S114
+
+The use of compressed air is prohibited in propelling a Dart.
+
+S115
+
+The production parameters for Dart must meet the following requirements:
+
+Table 2-11 Production Parameters for Dart
+Parameter
+
+Limit
+
+Remarks
+
+4
+
+-
+
+Maximum Supply Voltage (V)
+
+8.4
+
+Ripple ≤ 50 mVpp
+
+Maximum Weight (kg)
+
+0.35
+
+Maximum Total Power
+Capacity (Wh)
+
+Maximum Expansion Size
+(mm, L * W * H)
+
+250 * 250 * 150
+
+Not including the Dart Trigger (0.0395 kg
+± 0.002 kg)
+
+
+The flight length of a Dart is not
+greater than 250.
+
+© 2025 DJI All Rights Reserved.
+
+42
+
+Parameter
+
+Limit
+
+Remarks
+
+
+The wingspan of a Dart is not greater
+than 250.
+
+Using the forward direction of the Dart Trigger as the Dart’s flight direction, the y and z directions in
+the figure represent the wingspan and height of the Dart, respectively.
+
+Figure 2-5 Dart Flight Direction
+S116
+
+Dart System can only be in the ready-to-launch state during the Seven-Minute Round.
+Ready-to-launch state: The energy storage component used for providing initial kinetic energy for Darts
+is in a tense, inflated, or rotating state. The energy store component includes but is not limited to rubber
+band, pneumatic cylinder, friction wheel, etc.
+
+S117
+
+The production parameters for Dart Launcher must meet the following requirements:
+
+Table 2-12 Production Parameters for Dart Launcher
+Parameter
+Operating Mode
+
+Rotation Angle (°)
+
+Limit
+
+Remarks
+
+No restrictions. Up to one remote
+
+Use of the Referee System Serial Port is
+
+controller.
+
+recommended.
+
+
+
+Yaw angle: not limited
+
+
+
+Pitch angle: 25–45
+
+Maximum Total Power
+Capacity (Wh)
+
+43
+
+© 2025 DJI All Rights Reserved.
+
+300
+
+-
+
+-
+
+Parameter
+Maximum Supply
+Voltage (V)
+Maximum Operating
+Power (W)
+Maximum Dart Load
+
+Limit
+
+Remarks
+
+30
+
+-
+
+No restrictions
+
+-
+
+4
+
+If the initial launching speed of the Dart
+
+Initial Launching Speed
+
+No restrictions
+
+of Dart
+
+exceeds 25 m/s, the Referee System may not
+be able to detect the Dart.
+
+25
+
+Maximum Weight (kg)
+
+Including the weight of the battery, but not the
+weight of the Referee System.
+
+
+The maximum expansion size should be
+the size of the Dart Launcher after being
+loaded with four Darts.
+
+
+
+In any case, the orthographic projection
+of the Dart System on the ground does
+not exceed a 1000 * 600 square and the
+highest point of the Dart System is not
+more than 1000 from the ground.
+
+
+
+Maximum Expansion
+
+1000 * 600 * 1000
+
+Size (mm, L * W * H)
+
+The orthographic projection of the Dart
+Launcher and the Dart to be launched on
+the ground must not exceed the outer
+edge of the Dart System’s bottom frame
+at any time. The part of the Dart
+System’s bottom frame in contact with
+the ground must form a closed rectangle,
+with dimensions of 950 mm * 550 mm,
+allowing for an assembly tolerance of
+±50 mm, as shown in “Figure 2-6 Dart
+System Size Limits“.
+
+Referee System
+
+
+
+Main Control Module
+
+Weight: 0.22 kg
+
+© 2025 DJI All Rights Reserved.
+
+44
+
+Parameter
+
+Limit
+
+
+Remarks
+
+Power Management Module
+
+[1]
+
+Dart Launcher
+
+[2]
+
+Dart System bottom
+
+[3]
+
+Dart body
+
+[4]
+
+Outermost edges of the bottom frame
+
+Figure 2-6 Dart System Size Limits
+
+2.3.6.1
+S118
+
+Mounting Specifications
+The Dart Trigger designated by the RMOC shall be mounted on the Dart.
+The officially designated Dart Trigger for this season is “Dart Trigger 2.”
+
+The Dart Trigger weighs approximately 39.5 g ± 2 g, and its appearance and dimensions are shown in the following
+figure.
+Drill in mounting holes on the Dart head according to the size of the Dart Trigger.
+
+45
+
+© 2025 DJI All Rights Reserved.
+
+[1]
+
+GND cable
+
+[2]
+
++5 V cable
+
+[3]
+
+Logo
+
+[4]
+
+Dart Trigger
+
+[5]
+
+Lug
+
+[6]
+
+3P 2.54 mm cable
+
+Figure 2-7 Dart Trigger
+
+2.3.6.1.1
+
+Installation Steps
+
+1.
+
+Secure the Dart Trigger on the Dart head using eight M2.5 countersunk screws and four localization pins.
+
+2.
+
+Connect the power port of the Dart Trigger to a 5 V power supply.
+
+2.3.6.1.2
+S119
+
+Installation Requirements
+
+The Dart Trigger will be dimmed when the battery voltage is low, so the participating teams need to
+
+ensure that the battery voltage used for the darts during the competition is at least 4 V. If the actual operating
+voltage of the Dart Trigger is lower than 4 V, the Base and Outpost may not be able to detect dart hits.
+S120
+
+After the Dart Trigger is mounted, ensure its top, bottom, left, and right sides are not blocked by the Dart
+
+structure. Within a hemisphere of a 125 mm radius centered on the central point of the bottom surface of the
+Dart Trigger, there must be no blockage, as shown in the figure below.
+
+© 2025 DJI All Rights Reserved.
+
+46
+
+[1]
+
+Left side
+
+[2]
+
+Areas not
+[5]
+
+allowed to be
+blocked
+
+Top side
+
+[3]
+
+Right side
+
+[4]
+
+Downward side
+
+Unrestricted
+[6]
+
+space inside the
+Dart Trigger
+
+Figure 2-8 Prohibited Blockage Areas for Dart Trigger
+S121
+
+Dart camera or other devices can be mounted in the internal cavity of the Dart Trigger. The mounting area
+
+shall not exceed the shadow area as shown below.
+
+[1]
+
+Shadow area
+
+Figure 2-9 Internal Cavity of Dart Trigger
+47
+
+© 2025 DJI All Rights Reserved.
+
+2.3.6.2
+
+Visual Features
+
+Visual features, which are used to assist the Dart System with sighting, is the green LED integrated light beads
+mounted on the Dart Detection Module. For details on its dimensions, please refer to the relevant descriptions of
+Outpost and Base in the RoboMaster 2026 University Championship Rules Manual.
+
+2.3.6.3
+
+Dart Launching Station
+
+The Dart Launching Station is an official Battlefield component. For details, please refer to the relevant descriptions
+of the Dart Launching Station in the RoboMaster 2026 University Championship Rules Manual.
+
+2.3.7
+S122
+
+Radar
+A Radar consists of a computing platform and a sensor, which must be connected by an electric cable. A
+
+Radar shall have a computing platform and sensor, and be able to display commissioning images.
+S123
+
+The production parameters for Radar Computing Platform must meet the following requirements:
+
+Table 2-13 Production Parameters for Radar Computing Platform
+Parameter
+
+Limit
+
+Remarks
+
+Fully autonomous, with no more
+Operating Mode
+
+than one remote controller for
+
+-
+
+commissioning
+If overpower occurs during the use of the
+Radar in a round, the mains supply to the Radar
+Maximum Power (W)
+
+750
+
+Computing Platform will be cut off, and all
+consequences arising therefrom will be the
+responsibility of the participating team.
+These are based on the electrical power
+standards in Mainland China. Users in other
+
+Power Supply Voltage (V)
+
+220
+
+countries or regions may refer to their local
+electrical power standards. Other universal
+power standards can also be applied.
+
+© 2025 DJI All Rights Reserved.
+
+48
+
+Parameter
+
+Limit
+
+Remarks
+These are based on the electrical power
+
+Power Supply Frequency
+
+standards in Mainland China. Users in other
+
+50
+
+(Hz)
+
+countries or regions may refer to their local
+electrical power standards.
+
+The Radar Computing Platform
+Maximum Expansion Size
+
+must have one configuration that
+
+(mm)
+
+complies with the maximum size
+
+-
+
+limit: 600 * 350 * 600.
+
+
+Main Control Module
+
+
+
+Power Management Module
+
+Weight: 0.22 kg
+
+Referee System
+
+S124
+
+The parameters for a Radar Sensor are as follows:
+
+Table 2-14 Radar Sensor Parameters
+Parameter
+
+Limit
+
+The Radar Sensor must have one
+Maximum Expansion Size
+
+configuration that complies with the
+
+(mm)
+
+maximum size limit: 1200 * 1200 *
+1500.
+
+Maximum Supply Voltage (V)
+
+2.3.7.1
+
+Remarks
+
+
+The recommended minimum height
+for the mounting bracket of the Radar
+Sensor is 1.2 m.
+
+
+
+60
+
+Cables used for connections are not
+included in the measurement.
+-
+
+Mounting Specifications
+
+The Radar Sensor is relatively far away from the installation position of the Radar Computing Platform. Teams are
+advised to prepare connecting cables with an effective length of at least 5 m.
+
+2.3.7.2
+
+Computing Platform
+
+During the Three-Minute Setup Period, teams shall place their Computing Platforms on a designated surface near
+the Radar Foundation. The Referee System of a Radar can only be mounted on the Computing Platform.
+49
+
+© 2025 DJI All Rights Reserved.
+
+S125
+
+No wireless devices shall be installed or used on the computing platform. If the wireless device cannot be
+
+removed, it needs to be set to disabled in the operating system.
+S126
+
+The Main Control Module and Power Management Module shall conform to the module installation
+
+standards and be firmly installed on the Radar Computing Platform. The referee system and the computing
+platform can share the same power supply or use the batteries designated by the RMOC for this season.
+
+
+The alternating current power supply provided by the RMOC is 220 V 50 Hz, with a fivepin socket that complies with Chinese national standards and supports simultaneous
+connection of a single-phase two-pin plug and a single-phase three-pin plug. Teams should
+prepare their own power adapters as needed.
+
+
+
+The RMOC only ensures the normal operation of the official display device on the Radar
+Foundation and the HDMI cable provided by the RMOC. Participating teams shall resolve
+connection issues on their own.
+
+2.3.7.3
+
+Sensor
+
+Teams need to install their own protective guards on their equipment, to prevent damage caused by
+projectile impact during the competition.
+S127
+
+Sensors shall be fixed on the Radar Sensor mounting bracket and placed on the Radar Foundation.
+
+S128
+
+Laser launch devices and wireless receivers must be installed at the Radar Sensor end.
+
+S129
+
+Teams shall design their own Radar Sensor mounting bracket to increase the installation height of the
+
+sensors.
+S130
+
+The Radar Sensor mounting bracket must be sized to fit on the surface of the Radar Foundation. For
+
+specifications of the Radar Foundation, refer to the relevant descriptions in the RoboMaster 2026 University
+Championship Rules Manual. The signal transmission and power supply of the sensor shall be handled by the
+participating teams themselves.
+
+© 2025 DJI All Rights Reserved.
+
+50
+
+3. Referee System Mounting Specifications
+Users are advised to read the manuals for the various Referee System modules to learn about their respective
+functions and how to install them. After successfully installing the Referee System modules, refer to the Referee
+System User Manual to understand its overall functions. The document can be downloaded at:
+https://bbs.robomaster.com/wiki/20204847/804050?source=7
+When mounting and using the Referee System, refer to the following recommendations:
+
+
+When a robot is operating, no module of the Referee System should collide, rub, or interact with the ground,
+walls, or other objects in any way that could cause damage.
+
+
+
+The modules of the Referee System should be connected according to the respective manuals. Appropriate
+protection should be implemented to ensure stable connections.
+
+S131
+
+Except for the installation methods mentioned in this manual, any removal or modification of Referee
+
+System Onboard Modules is prohibited.
+S132
+
+Only Referee System Modules borrowed in the current season may be installed on robots.
+
+S133
+
+When replacing Referee System Onboard Modules during the competition and Pre-Match Inspection, the
+
+following time requirements shall be met (excluding time spent on firmware upgrades and armor sticker
+replacement):
+Table 3-1 Maximum Replacement Time for Referee System Onboard Modules
+
+51
+
+Module
+
+Maximum Replacement Time (minutes)
+
+Main Control Module
+
+5
+
+Power Management Module
+
+10
+
+Light Indicator Module
+
+5
+
+Small Armor Module
+
+2
+
+Large Armor Module
+
+2
+
+Armor Support Frame
+
+7
+
+Video Transmitter Module (Transmitter)
+
+5
+
+© 2025 DJI All Rights Reserved.
+
+Module
+
+Maximum Replacement Time (minutes)
+
+RFID Interaction Module
+
+7
+
+Speed Monitor Module (17 mm Projectile)
+
+7
+
+Speed Monitor Module (42 mm Projectile)
+
+7
+
+UWB Positioning Module
+
+4
+
+Supercapacitor Management Module
+
+3
+
+Laser Detection Module
+
+To be determined
+
+3.1 Referee System Overview
+The robots designed by each team shall have reserved mechanical and electrical ports, and each module of the
+Referee System shall be correctly mounted according to the specifications stated in this chapter.
+
+
+The RMOC provides Referee Systems for loan. Teams can obtain permissions to borrow the
+Referee System by passing Technical Assessments. See the “Season Schedule” section in the
+Participant Manual for details.
+
+
+
+Chassis power: The power of propulsion system that enables a robot to conduct translational and
+rotational motions in the horizontal direction, not including the power used for special tasks (e.g.,
+power consumption for functional movements such as moving the upper mechanical structure,
+legged robot’s joint motor, climbing steps, or overcoming obstacles). Therefore, the power
+generated during the power consumption by the propulsion system actuator of mechanical
+structures related to chassis horizontal movements counts as chassis power. For example, the
+motors, steering gears, electromagnetic switches, and other components for regulating the direction
+of chassis motors or other energy storage mechanical structures (including but not limited to
+springs, pneumatic systems, rubber bands, and tension springs).
+
+
+
+Any equipment used by the participating teams shall not interfere with the normal operation of the
+Referee System. In case of any interference, the participating teams shall cooperate with the RMOC
+to deal with the source of interference until no more interference is generated.
+
+© 2025 DJI All Rights Reserved.
+
+52
+
+A Referee System consists of the following modules:
+Table 3-2 Referee System Modules
+Module
+
+Main Control
+Module
+
+Power
+Management
+Module
+Light
+Indicator
+Module
+
+Introduction
+The Main Control Module is the core control module of a Referee System, which can monitor the
+operation of the entire system, and integrates functions such as human-robot interaction, wireless
+communication and status display.
+
+The Power Management Module has such functions: controlling the chassis, gimbal, and power
+supply for the Launching Mechanism of a robot; transmitting data; detecting chassis power; etc.
+
+The Light Indicator Module indicates statuses such as the red/blue side of robot, robot HP, buff, and
+module going offline through the LED Light Indicator.
+
+Armor
+
+The Armor Module is used to detect situations where the robot is either struck by projectiles or
+
+Module
+
+experiences collisions. There are Small Armor Modules and Large Armor Modules.
+
+Speed
+Monitor
+Module
+RFID
+Interaction
+Module
+
+Video
+Transmitter
+Module
+
+The Speed Monitor Module is used to detect the Projectile Speed and Barrel Heat of robots. There
+are separate Speed Monitor Modules for 17 mm projectiles and 42 mm projectiles.
+
+The RFID Interaction Module can exchange information with RFID Interaction Module Card in the
+Battlefield or on robots, to perform corresponding functions.
+
+The Video Transmitter Module consists of a Transmitter and a Receiver. The Transmitter is mounted
+on the robot while the receiver is mounted on the client in the Operation Room. Its function is to
+capture the view in front of the robot through the camera, and transmit the first-person view image
+back to the display in the Operation Room. In addition, it also supports remote control of robots.
+
+UWB
+Positioning
+
+The UWB Positioning Module can detect a robot’s location on the Battlefield.
+
+Module
+
+53
+
+© 2025 DJI All Rights Reserved.
+
+Module
+
+Introduction
+
+Supercapacit
+or
+Management
+
+The Supercapacitor Management Module is used to monitor the energy input and output of the
+Supercapacitor Module.
+
+Module
+Laser
+Detection
+
+The Laser Detection Module is used to detect laser irradiation from the Radar laser launch device.
+
+Module
+
+© 2025 DJI All Rights Reserved.
+
+54
+
+3.2 Configuration of Referee System Onboard Modules
+The configuration of Referee System Onboard Modules for each type of robot is as follows:
+Table 3-3 Configuration of Referee System Onboard Modules
+Robot Type
+Quantity
+Main Control
+Module
+
+Hero
+
+Engineer
+
+Infantry
+
+Drone
+
+Sentry
+
+Dart
+
+Robot
+
+Robot
+
+Robot
+
+Robot
+
+Robot
+
+System
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+0
+
+1
+
+0
+
+0
+
+4
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+4
+
+4
+
+0
+
+4
+
+0
+
+0
+
+1
+
+1
+
+1
+
+1
+
+1
+
+0
+
+0
+
+1
+
+1
+
+1
+
+0
+
+1
+
+0
+
+0
+
+0
+
+0
+
+1
+
+1
+
+1
+
+0
+
+0
+
+1
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+Radar
+
+Power
+Management
+Module
+Light
+Indicator
+Module
+Large Armor
+Module
+Small Armor
+Module
+Video
+Transmission
+Module
+(Transmitter)
+RFID
+Interaction
+Module
+Speed Monitor
+Module
+(17 mm
+Projectile)
+Speed Monitor
+Module
+55
+
+© 2025 DJI All Rights Reserved.
+
+Robot Type
+Quantity
+
+Hero
+
+Engineer
+
+Infantry
+
+Drone
+
+Sentry
+
+Dart
+
+Robot
+
+Robot
+
+Robot
+
+Robot
+
+Robot
+
+System
+
+1
+
+1
+
+1
+
+1
+
+1
+
+0
+
+0
+
+1
+
+0
+
+1
+
+0
+
+1
+
+0
+
+0
+
+0
+
+0
+
+0
+
+1
+
+0
+
+0
+
+0
+
+Radar
+
+(42 mm
+Projectile)
+UWB
+Positioning
+Module
+Supercapacitor
+Management
+Module
+Laser
+Detection
+Module
+
+In RMUL, robots are not required to have a UWB Positioning Module installed; Engineers require only
+the Main Control Module, Power Management Module and Video Transmitter Module (Transmitter).
+
+3.3 Mounting Specifications for Main Control Module
+Drill in mounting holes on specified positions on the robot according to the size of the Main Control Module.
+
+[1]
+
+[5]
+
+Infrared
+receiver
+Metal bottom
+cover
+
+[2]
+
+[6]
+
+Button
+
+USB port for
+system update
+
+[3]
+
+[7]
+
+Power
+indicator
+Plastic top
+cover
+
+[4]
+
+[8]
+
+Aviation connector with black
+metal ring
+
+Screen
+
+© 2025 DJI All Rights Reserved.
+
+56
+
+Figure 3-1 Main Control Module
+
+3.3.1
+1.
+
+Installation Steps
+
+Use four M2.5 screws to secure the Main Control Module to the designated position on the robot.
+Installation reference: Participating teams may design parts by themselves and install them on the
+back of the upper edge of the Armor Module (the reserved M3 threaded hole on the Armor Support
+Frame can be used), with non-metal guards installed around them to prevent projectile hits.
+
+[1]
+
+Main Control Module
+
+[2]
+
+Armor Module
+
+[3]
+
+Self-designed protective guard
+
+[4]
+
+Self-designed part
+
+Figure 3-2 Main Control Module Installation
+2.
+
+Use the aviation cable inside the package to connect the Main Control Module to the aviation connector with
+the black metal ring on the Power Management Module.
+
+57
+
+© 2025 DJI All Rights Reserved.
+
+When connecting the Main Control Module to the Power Management Module, no other Referee
+System Onboard Modules should be connected in series between them.
+
+[1]
+
+Aviation cable
+
+Figure 3-3 Wiring of Main Control Module
+
+3.3.2
+
+Installation Requirements
+
+The installation of the Main Control Module shall meet the following requirements, otherwise it may not connect
+to the competition server or the connection may be unstable.
+
+
+When the robot is operational, the top surface of the Main Control Module should be level and face upward.
+With the center of each antenna as the apex, there should be at least one cone-shaped area with an apex angle
+of 60° (solid angle of π(2-√3)sr) and an infinitely extended range free of blockage by any conductive material,
+
+or an equivalent space that does not interfere with wireless signal transmission. (The post-adjustment shape
+must be the same cone with its generatrix within the upper hemisphere.) For details, see the following figure.
+
+© 2025 DJI All Rights Reserved.
+
+58
+
+[1]
+
+Areas not allowed to be blocked
+
+Figure 3-4 Prohibited Blockage Areas for Main Control Module
+
+
+The Main Control Module should be installed in a location where heat is easily dissipated; otherwise, it is
+highly likely that heat dissipation issues may cause malfunctions during robot operation.
+
+
+
+The space above the Main Control Module screen, buttons, ports, and infrared receiver shall not be obstructed.
+When designing a protective device, transparent materials should be used and the device shall be easy to
+remove. If it cannot be removed, the screen, buttons, ports, and infrared receiver need to be fully exposed. Any
+blockage may cause the Main Control Module unable to connect to the competition server, prevent
+troubleshooting, and produce other issues.
+
+
+
+Within a hemisphere of 70 mm radius centered 8.5 mm directly below the logo’s center, there shall be no
+conductive materials, electromagnetic absorbing materials, or other components that may interfere with the
+Wi-Fi signal.
+If electromagnetic absorbing materials or devices causing electromagnetic interference on
+mechanisms such as a gimbal or robotic arm pass through this area during movement, they may
+cause interference to the Wi-Fi signal.
+
+59
+
+© 2025 DJI All Rights Reserved.
+
+[1]
+
+Antenna’s center
+
+Figure 3-5 Installation Location of Main Control Module
+S134
+
+During the competition, the Dart System and Radar shall connect to the Power Management Module and
+
+Main Control Module in the manner specified by the RMOC.
+For the Radar:
+The Battlefield provides the Radar with wired connection to the Battlefield network and servers. The Radar
+Computing Platform is provided with a wired access point: a single-ended aviation receptacle cable. Pit Crew
+shall connect the main controller in the Power Management Module on the Radar Computing Platform to the
+wired access point using the official aviation cable.
+To connect the Radar efficiently, please follow the requirements below:
+
+
+During the competition, the Radar does not need to carry the main controller. Please remove the main
+controller for commissioning from the robot before the Pre-Match Inspection.
+
+
+
+The Power Management Module of the Radar shall be exposed and placed where it is easy for the staff to
+operate.
+© 2025 DJI All Rights Reserved.
+
+60
+
+
+
+The Main Control Module port on the Radar Power Management Module must not be connected to any
+device. The aviation cable must be neatly arranged, untangled, and easily extendable for connection to a
+wired access point.
+
+For the Dart System:
+The Battlefield provides the Dart System with wired connection to the Battlefield network and server. The Dart
+Launching Station comes with an 800 mm aviation cable with a socket on one end. The Pit Crew shall connect
+the Dart System to the wired access point using the official aviation cable.
+To connect the Dart System efficiently, please follow the requirements below:
+
+
+During the competition, the Dart System does not need to carry the Main Control Module. Please remove
+the Main Control Module for commissioning from the robot before the Pre-Match Inspection.
+
+
+
+The aviation cable connecting the Power Management Module and the main controller can be easily
+unplugged and plugged in without using any tools.
+
+
+
+The Power Management Module of the Dart System shall be exposed and placed where it is easy for the
+staff to operate.
+
+
+
+Install the Power Management Module of the Dart System as close to the wired connection access point
+on the Dart Launching Station as possible and ensure no device is connected to the port of the module.
+The aviation cable must be neatly arranged, untangled, and easily extendable for connection to a wired
+access point.
+
+[1]
+
+0.8 m Referee System connection cable (socket)
+
+[2]
+
+Surface for placing the Dart System
+
+Figure 3-6 Location of the Referee System Aviation Cable in Dart Launching Station
+
+61
+
+© 2025 DJI All Rights Reserved.
+
+3.4 Mounting Specifications for Power Management Module
+Drill in mounting holes on specified positions according to the size of the Power Management Module.
+
+[1]
+
+[4]
+
+Connection status indicator
+
+Gimbal power output
+indicator
+
+[2]
+
+[5]
+
+System status indicator
+
+Chassis power output
+indicator
+
+[3]
+
+[6]
+
+Launching Mechanism power output
+indicator
+
+Bottom mounting surface
+
+Figure 3-7 Power Management Module
+
+© 2025 DJI All Rights Reserved.
+
+62
+
+3.4.1
+
+Installation Steps
+The aviation connector of the Light Indicator Module, Video Transmitter Module (Transmitter), Speed
+Monitor Module and UWB Positioning Module are all equivalent ports and can be serially connected to
+each other.
+
+Secure the Power Management Module on the robot using four M2.5 screws.
+
+[1]
+
+Power Management Module
+
+Figure 3-8 Mounting of Power Management Module
+
+63
+
+© 2025 DJI All Rights Reserved.
+
+[1]
+
+[3]
+
+[5]
+
+[6]
+
+[8]
+
+Armor Module SM06B-GHS-TB port
+Supercapacitor
+
+Management
+
+Module
+
+SM04B-GHS-TB port
+
+[2]
+
+[4]
+
+RFID Interaction Module SM04B-GHS-TB port
+Main Control Module port (the metal ring of the
+aviation connector is black)
+
+Ports of other Referee System Onboard Modules (Speed Monitor, UWB Positioning, Video Transmitter,
+and Light Indicator; the metal ring of the aviation connector is silvery white in color)
+Referee System Serial Port SM03B-GHSTB port
+Referee System power supply XT60 port
+(input)
+
+[7]
+
+System Level Up SM03B-GHS-TB port
+
+[9]
+
+Mini PC power supply XT30 port (output)
+
+[10]
+
+Referee System power supply XT30 port (output) - connecting to the chassis
+
+[11]
+
+Referee System power supply XT30 port (output) - connecting to the gimbal
+
+[12]
+
+Referee System power supply XT30 port (output) - connecting to the Launching Mechanism
+Figure 3-9 Ports of Power Management Module
+
+© 2025 DJI All Rights Reserved.
+
+64
+
+[1]
+
+Aviation cable
+
+Figure 3-10 Wiring of Power Management Module
+
+3.4.2
+
+Installation Requirements
+
+The installation of a Power Management Module shall meet the following requirements:
+The Power Management Module shall be securely fastened to a heat-resistant material in a location
+where heat is easily dissipated, and all ports shall be protected. The Power Management Module
+generates heat during operation. Using adhesives like double-sided tape to secure it could cause the
+module to detach, creating a safety hazard. Participating teams bear sole responsibility for any
+consequences resulting from poorly fixed Power Management Modules or insufficient cooling.
+S135
+
+For a robot with a chassis power consumption limit, the electric power consumed by the chassis power
+
+mechanism shall be taken into account to ensure it does not bypass the monitoring of the Power Management
+Module.
+S136
+
+Participants shall use the Main Control Module installed by the RMOC on the site for their Dart Systems
+
+and Radars. As such, teams are required to meet the following requirements when designing their robots:
+ When designing the Dart System and Radar, the port on the Power Management Module for connecting
+the Main Control Module must be exposed.
+ When designing the structure of the Dart System, install the Power Management Module close to the portal
+65
+
+© 2025 DJI All Rights Reserved.
+
+of the Dart Launching Station.
+S137
+
+Carefully differentiate between the ports on the Power Management Module to ensure correct wiring. For
+
+power supply to the robot’s mechanisms, refer to “Table 3-4 Ports of the Power Management Module“.
+Except for the chassis power supply for Ground Robots, the other power ports of a robot may be
+connected to a battery to ensure a stable power supply, such as for the gimbal or Launching Mechanism
+(42 mm projectile). The power may be controlled through a relay or other method, but its on-off control
+shall be operated via the corresponding Power Management Module port shown in the table below (the
+relay or other method shall be powered through the corresponding port; make sure the Referee System
+is able to turn on and off all power supply connected to the robot’s Referee System power port (output);
+any failure to do so will be considered as cheating).
+After power supply is disconnected at the Chassis port, all electrical appliances on the chassis
+
+
+
+should be powered off.
+If the Radar or Dart Launcher requires a 24 V power port, it can be powered directly through the
+
+
+
+“Mini PC” port on the Power Management Module or the battery.
+Table 3-4 Ports of the Power Management Module
+Port
+Robot Type
+
+Hero
+
+Engineer
+
+Infantry
+
+Drone
+
+Chassis
+
+Gimbal
+
+Chassis power
+
+Gimbal power
+
+supply
+
+supply
+
+Chassis power
+supply
+
+Gimbal power
+supply
+
+Chassis power
+
+Gimbal power
+
+supply
+
+supply
+
+No power supply
+
+Gimbal power
+supply
+
+Ammo-Booster
+
+Launching Mechanism
+(42 mm projectile)
+power supply
+No power supply
+Launching Mechanism
+(17 mm projectile)
+power supply
+Launching Mechanism
+(17 mm projectile)
+power supply
+
+Mini PC
+
+Mini PC power
+supply
+Mini PC power
+supply
+Mini PC power
+supply
+
+Mini PC power
+supply
+
+© 2025 DJI All Rights Reserved.
+
+66
+
+Port
+Robot Type
+
+Sentry
+
+Dart Launcher
+
+Chassis
+
+Gimbal
+
+Chassis power
+
+Gimbal power
+
+supply
+
+supply
+
+No power supply
+
+No power supply
+
+Platform
+
+S138
+
+supply
+
+Launching Mechanism
+(17 mm projectile)
+
+Mini PC
+
+Mini PC power
+supply
+
+power supply
+No power supply
+
+Mini PC power
+supply
+
+Laser launch
+
+Radar
+Computing
+
+No power
+
+Ammo-Booster
+
+device and its
+actuator power
+
+No power supply
+
+Mini PC power
+supply
+
+supply
+
+For a robot with a Launching Mechanism, when the Ammo-Booster port on the Power Management
+
+Module is disconnected from power, the Launching Mechanism (such as the friction wheel motor, pan
+magazine motor, and electromagnetic valve) shall also be powered off at the same time.
+S139
+
+The circuit board and circuit of a robot with a chassis power limit shall meet the following requirements:
+
+
+
+The circuit board related to the chassis power supply shall be independent of the gimbal and Launching
+Mechanism power supply. A circuit board powered through the “Chassis” port on the Power Management
+Module cannot be connected to other power ports on the Power Management Module.
+
+
+
+All chassis-related circuits of a robot shall be clearly laid out. A referee may conduct random inspections
+on a robot after a match, and, where required, the team shall cooperate in the random inspection and
+disassemble the relevant robot parts to show the relevant circuits. It is recommended that teams consider
+the random inspection requirements of referees when designing the layout of circuits, as any loss of
+preparation time due to disassembling of robots for circuit inspections will be the responsibility of the
+team itself.
+
+
+
+A robot’s circuit connected to the “Chassis” port on the Power Management Module, i.e., a chassis-related
+circuit, and other circuits connected to other ports on the Power Management Module are connected using
+only cables with a diameter specification of 24 AWG or smaller, and can only be used for communication,
+with the total current flow equal to or smaller than 50 mA.
+
+67
+
+© 2025 DJI All Rights Reserved.
+
+
+
+Input voltage requirements for a Power Management Module: 22 V - 26 V. Power output
+ports 10, 11, and 12 in “Figure 3-9 Ports of Power Management Module” can be
+connected and disconnected by the Referee System.
+
+
+
+For the payload threshold of each port on the Power Management Module, please refer to
+the Power Management Module User Guide.
+
+
+
+The voltage on the power output ports No. 9-12 will fluctuate if the system payload
+experiences large fluctuations. Teams are advised to take voltage-regulating measures for
+payloads that are sensitive to voltage (such as Mini PC).
+
+3.5 Mounting Specifications for Light Indicator Module
+
+[1]
+
+Auxiliary light
+indicator
+
+[2]
+
+Main light
+indicator
+
+[3]
+
+Mounting bracket
+
+[4]
+
+Aviation connector
+
+Figure 3-11 Light Indicator Module
+
+3.5.1
+1.
+
+Installation Steps
+
+A Light Indicator Module can be mounted on an Armor Module and secured to the Armor Support Frame using
+M3×10 screws.
+
+© 2025 DJI All Rights Reserved.
+
+68
+
+[1]
+
+Screw mounting positions
+
+Figure 3-12 Mounting of Light Indicator Module
+2.
+
+The Light Indicator Module can be secured using the bottom screw hole of the mounting bracket and installed
+on a suitable position on the robot.
+
+69
+
+© 2025 DJI All Rights Reserved.
+
+Figure 3-13 Bottom of the Light Indicator Module
+3.
+
+Use the aviation cable inside the package to connect the Light Indicator Module to the aviation connector with
+the silvery-white metal ring on the Power Management Module.
+
+[1]
+
+Aviation cable
+
+Figure 3-14 Wiring of Light Indicator Module
+
+3.5.2
+
+Installation Requirements
+
+The mounting of a Light Indicator Module shall meet the following requirements:
+S140
+
+The cables connecting the left and right auxiliary light indicators are parallel to the ground.
+
+S141
+
+When mounting Light Indicator Modules on a Ground Robot, the lower edge of the luminous part must
+
+be at least 200 mm above the ground.
+It is recommended to follow these guidelines when installing Light Indicator Modules: The main and
+auxiliary light indicators shall be fully visible when viewing it up and down 45 degrees from at least one
+horizontal angle. Otherwise, important light-based information during the competition may be
+overlooked, potentially delaying the detection and handling of irregularities.
+© 2025 DJI All Rights Reserved.
+
+70
+
+3.6 Mounting Specifications for Armor Module
+The Armor Module should be mounted on a robot using a designated Armor Support Frame. The designated Armor
+Support Frame for this season is Armor Support Frame Type A.
+S142
+
+The Armor Support Frame can be mounted on a robot chassis using only the rear mounting surface or the
+
+bottom mounting surface.
+S143
+
+Only the Armor Support Frames provided by the RMOC can be used to mount the Armor Modules.
+
+Modifying or damaging the Armor Support Frame is prohibited.
+The designated Armor Support Frame is shown in the figure below:
+
+[1]
+
+Back mounting
+surface
+
+[2]
+
+Bottom mounting
+surface
+
+[4]
+
+Electrical connection
+point
+
+[5]
+
+JST 6-pin port
+
+[3]
+
+Figure 3-15 Designated Armor Support Frame
+
+71
+
+© 2025 DJI All Rights Reserved.
+
+Armor Module
+mounting surface
+
+The Small Armor Module is shown in the figure below:
+
+[1]
+
+Side light
+indicator
+
+[2]
+
+The top fastened with
+M4 screws
+
+Figure 3-16 Small Armor Module
+The Large Armor Module is shown in the figure below:
+
+[1]
+
+Side light
+indicator
+
+[2]
+
+The top fastened with
+M4 screws
+
+Figure 3-17 Large Armor Module
+S144
+
+Do not modify or decorate the Armor Modules.
+© 2025 DJI All Rights Reserved.
+
+72
+
+3.6.1
+
+General Specifications
+Robot chassis: It is a mechanism that carries the robot propulsion system and its accessories; a
+mechanism that supports the body of a robot.
+
+The robot’s coordinate system is the standard X, Y, Z cartesian coordinate system, with the origin at the robot’s
+center of mass. According to the installation requirements for ground robot Armor Modules, the X-axis of the robot
+is defined as the direction that theoretically provides the highest efficiency based on chassis structure, and the Zaxis is pointed towards the center of the Earth. If a special chassis configuration (for example, a steering wheel) has
+multiple directions with maximum efficiency, any one of these directions can be selected as the X-axis. The
+definition of the X-axis for different types of chassis is shown in the figure below:
+
+Figure 3-18 Robot Coordinate System
+
+Figure 3-19 Graph of X-axis Orientation in Different Chassis Configurations of Robots
+73
+
+© 2025 DJI All Rights Reserved.
+
+3.6.1.1
+S145
+
+Armor Module Mounting
+When mounting an Armor Module on the robot, the Armor Module and the Armor Support Frame must
+
+be securely connected. The bottom connecting surface of the Armor Support Frame shall be parallel to the XY
+plane, so that the acute angle between the normal vector of the plane on which the force-bearing surface of the
+Armor Module lies and the straight line in the negative direction of the Z-axis is 75°. The two sides of the
+Armor Module without sidelights should form angles of less than 5° with the XY plane. Define the projection
+of the normal vector of the plane of the impact surface (forming an acute angle with the negative Z-axis) of the
+mounted Armor Module on the XY plane as the mounted Armor Module’s direction vector. The direction
+vectors of the four Armor Modules shall be in a one-to-one correspondence to the positive X-axis, negative Xaxis, positive Y-axis, and negative Y-axis of the robot’s body coordinate system, and the angular error between
+a direction vector and its corresponding coordinate axis cannot exceed 5°.
+S146
+
+The kinematic equations of the robot should also be based on the above reference coordinate system. The
+
+mounting procedures of the Armor Modules must share the same reference coordinate system with the robot’s
+own structural or kinematic properties. The geometric center point line of the Armor Modules mounted on the
+X-axis and the geometric center point line of the Armor Modules mounted on the Y-axis should be
+perpendicular to each other. The offset of the Armor Module from the geometric center of the robot shall not
+exceed 50 mm on the X or Y axis.
+
+3.6.1.2
+S147
+
+Rigid Connection
+A mounted Armor Module and Support Frame shall be rigidly connected to the chassis. During the
+
+competition, the Armor Module and the chassis shall not shift relative to each other. The rigid connection of
+the Armor Module is defined in the figure below. Apply a vertical upward force of 60 N to the midpoint of the
+lower edge of the Armor Module, and the angle change α of the Armor Module’s impact surface must not
+exceed 2.5°.
+
+© 2025 DJI All Rights Reserved.
+
+74
+
+Figure 3-20 Forces on the Armor Module
+
+3.6.1.3
+S148
+
+Robot Transformation
+In principle, after a match begins, no Armor Module should actively move relative to the robot’s overall
+
+center of mass. If the robot is designed with transformable characteristics due to its structural design, its Armor
+Modules shall meet the following requirements: At any time, no Armor Module should undergo continuous,
+reciprocal, and rapid movement relative to the robot’s chassis. Rapid movement is defined as a speed exceeding
+0.5 m/s.
+S149
+
+The height difference between the lower edges of any two Armor Modules of the Ground Robot should
+
+not exceed 100 mm.
+S150
+
+For a Ground Robot, the altitude from the lower edge of its Armor Module from the ground must not
+
+exceed 400 mm before, during, or after transformation, and the lower edge of the Armor Module must not
+directly contact the ground.
+When the plane that supports the robot body is no longer ground, the requirement of the Armor Module
+mounting height should be subject to the robot body support plane.
+
+3.6.1.4
+S151
+
+Armor Module Protection
+Teams should design safety rods for Ground Robots to reduce any damage caused by collision of Armor
+
+Modules.
+
+75
+
+© 2025 DJI All Rights Reserved.
+
+S152
+
+When any side of a robot is closely up against a vertical rigid plane (wall), its Armor Module shall not
+
+have any direct contact with the rigid plane (wall), as shown below:
+
+[1]
+
+Wall
+
+Figure 3-21 Robot Protection
+S153
+
+3.6.2
+
+No structure other than the Armor Support Frame is allowed to make contact with the Armor Module.
+
+Installation Steps
+
+The installation steps for the Armor Modules of all Ground Robots are the same. Below is an illustration of the
+installation steps using the Armor Modules of Infantry as an example. In the steps, only the bottom mounting surface
+of the Armor Support Frame is used for installation.
+1.
+
+According to the dimensions drawn in the diagram below, four sets of built-in holes should be reserved on the
+chassis, with each corresponding to one Armor Module. The sizes and locations of the four holes must remain
+consistent.
+
+© 2025 DJI All Rights Reserved.
+
+76
+
+Figure 3-22 Chassis Reserved Holes
+2.
+
+Each Armor Support Frame shall be secured to the chassis using two M4 screws. The properly installed Armor
+Support Frame is shown in the figure below.
+
+Figure 3-23 Armor Support Frame Mounting
+3.
+
+Mount the Armor Module on the Armor Support Frame, and secure using M4 screws. The installation steps
+are as follows:
+
+77
+
+© 2025 DJI All Rights Reserved.
+
+Figure 3-24 Armor Module Mounting
+
+4.
+
+1)
+
+Insert the lower slot of the Armor Module into the lower buckle of the Armor Support Frame
+
+2)
+
+Insert the upper surface of the Armor Module into the upper buckle of the Armor Support Frame
+
+3)
+
+Secure with screws
+
+Use the 6-pin cables provided in the package to connect the Armor Modules serially to the Armor Module port
+of the Power Management Module. The two 6-pin ports of the Armor Support Frame are equivalent ports.
+
+
+Connect the wiring appropriately according to the robot’s specific situation, and ensure that
+the cables are securely connected to prevent damage and wear.
+
+
+
+The number of Armor Modules in series on the two 6-pin ports of the Power Management
+Module should preferably be equally distributed, to divide the current on the ports evenly.
+
+© 2025 DJI All Rights Reserved.
+
+78
+
+[1]
+
+Power Management Module
+
+Figure 3-25 Wiring of Armor Module
+
+3.6.3
+S154
+
+Installation Requirements
+For Hero, Infantry, and Sentry robots, the Armor Module’s impact surface must not be blocked within
+
+105° at the bottom edge, 120° at the upper edge, and 145° at the left and right edges.
+
+[1]
+
+The top fastened with M4 screws
+
+Figure 3-26 Mounting Specifications for Armor Module
+79
+
+© 2025 DJI All Rights Reserved.
+
+[1]
+
+Infinite extension
+
+Figure 3-27 Prohibited Blockage Areas for Armor Module on Hero, Infantry, and Sentry
+S155
+
+For Engineer, the Armor Module’s impact surface must not be blocked within 105° at the bottom edge.
+
+Among the four Armor Modules, at least three meet the requirements of no blockage within 120° at the upper
+edge and 145° at the left and right edges of the Armor Module’s impact surface. At most one Armor Module
+is allowed to be blocked in the aforementioned areas under certain conditions: On the plane of the impact
+surface of the Armor Module, the area beyond 150 mm from the upper edge or the area beyond 170 mm from
+the left and right edges of the Armor Module can be blocked, i.e., the shadow areas in the following drawings
+cannot be blocked.
+The areas not allowed to be blocked, as mentioned in this chapter, extend infinitely within the robot’s
+maximum expansion size.
+
+© 2025 DJI All Rights Reserved.
+
+80
+
+[1]
+
+Infinite extension
+
+Figure 3-28 Prohibited Blockage Areas for Armor Module on Engineer
+
+81
+
+© 2025 DJI All Rights Reserved.
+
+3.7 Mounting Specifications for Speed Monitor Module
+There are two types of Speed Monitor Modules: Speed Monitor Module (17 mm Projectile) and Speed Monitor
+Module (42 mm Projectile).
+Speed Monitor Module (17 mm Projectile):
+
+[1]
+
+Phototube
+
+[2]
+
+Speed Monitor Module’s clamping screw hole
+
+[3]
+
+M2.5 mounting screw hole
+
+[4]
+
+LED light indicator
+
+[5]
+
+Sight
+Figure 3-29 Speed Monitor Module (17 mm Projectile)
+
+© 2025 DJI All Rights Reserved.
+
+82
+
+Speed Monitor Module (42 mm Projectile):
+
+[1]
+
+Phototube
+
+[2]
+
+Speed Monitor Module’s clamping screw hole
+
+[3]
+
+M2.5 mounting screw hole
+
+[4]
+
+LED light indicator
+
+[5]
+
+Sight
+Figure 3-30 Speed Monitor Module (42 mm Projectile)
+
+S156
+
+The removal of Sights from Speed Monitor Modules is prohibited.
+
+3.7.1
+
+Installation Steps
+
+Three methods are available for securing the Speed Monitor Module (17 mm projectile). All of the three securing
+methods meet the mounting specifications for Speed Monitor Modules (17 mm projectile). Participating teams may
+choose to adopt any one of the securing methods.
+
+83
+
+© 2025 DJI All Rights Reserved.
+
+3.7.1.1
+
+Speed Monitor Module (17mm Projectile) Securing Method 1
+
+17 mm barrel size restrictions:
+
+[1]
+
+Facing the muzzle
+
+[2]
+
+Recommended wall thickness: no less than 1 mm
+
+Figure 3-31 17 mm Barrel
+Building requirements for 17 mm barrel:
+S157
+
+The phototube shall not be blocked.
+
+S158
+
+Transparent and luminous materials and the use of infrared sensors near the barrel are forbidden.
+
+S159
+
+Frost the inner wall of the barrel.
+
+Installation Steps for Securing Method 1:
+1.
+
+Fit the Speed Monitor Module onto the barrel.
+
+2.
+
+Insert M3 screws through the clamping screw holes on the Speed Monitor Module to clamp the barrel.
+
+3.
+
+Use an aviation cable to connect the aviation connector port of the Speed Monitor Module to the aviation
+connector port of the Power Management Module.
+After installation, avoid rotation or misalignment of the barrel that could lead to blockage of the
+phototube.
+
+© 2025 DJI All Rights Reserved.
+
+84
+
+The installed Speed Monitor Module is shown in the figure below:
+
+Figure 3-32 Mounting of Speed Monitor Module
+
+3.7.1.2
+
+Speed Monitor Module (17mm Projectile) Securing Method 2
+
+The team designs and develops its own adapter block, to connect the Speed Monitor Module (17 mm projectile) and
+Launching Mechanism.
+See “Appendix I: Speed Monitor Module (17mm Projectile) Adapter Block Engineering Drawing“ for the
+specifications of an adapter block. Its 3D model can be downloaded from the Speed Monitor Module product page
+on RoboMaster’s official website as a reference.
+An adapter block is shown below:
+
+[1]
+
+Front boss
+
+[2]
+
+Back boss
+
+Figure 3-33 17mm Adapter Block
+85
+
+© 2025 DJI All Rights Reserved.
+
+[1]
+
+M2.5 screw for securing LED
+light indicator
+
+[2]
+
+M3 screw
+
+[3]
+
+Self-produced part 1
+
+[6]
+
+Self-produced part 2
+
+[4]
+
+Side securing hole
+
+[5]
+
+Back boss
+
+[7]
+
+M2.5 screw
+
+[8]
+
+M3 screw
+
+Figure 3-34 17mm Adapter Block Securing Method
+Installation Steps for Securing Method 2:
+1.
+
+Remove the M2.5 screws on both the left and right of the Speed Monitor Module for securing the LED indicator.
+The position of one side is shown in [1] in the figure below. Do not remove any other screws securing the LED
+indicator on the Speed Monitor Module.
+
+2.
+
+Use two M2.5×14 screws to secure the adapter block to the Speed Monitor Module, through the fixing holes
+on both left and right sides (the position of one side is as shown in [4] in the figure below).
+
+3.
+
+Use two M3 screws to secure the robot’s original board part 1 on the top of Speed Monitor Module.
+
+4.
+
+Use two M3 screws and four M2.5 screws to secure the robot’s original board part 2 to the bottom of the Speed
+Monitor Module.
+© 2025 DJI All Rights Reserved.
+
+86
+
+5.
+
+Use an aviation cable to connect the aviation connector port of the Speed Monitor Module to the aviation
+connector port of the Power Management Module.
+Except for the two screws removed in Step 1, the rest of the screws on the Speed Monitor Module shall
+not be removed without permission. Otherwise, it will be deemed as sabotaging the Referee System.
+
+3.7.1.3
+
+Speed Monitor Module (17mm Projectile) Securing Method 3
+
+The team designs and produces its own barrel parts to connect the Speed Monitor Module (17 mm projectile) and
+Launching Mechanism.
+
+[1]
+
+Barrel
+
+[2]
+
+Self-produced part 1
+
+[3]
+
+M2.5 screw
+
+Figure 3-35 17mm Short Barrel Installation
+Installation Steps for Securing Method 3:
+1.
+
+Insert the Speed Monitor Module into the short barrel.
+
+2.
+
+Use four M2.5 screws to secure the robot’s original board part 1 on the bottom of the Speed Monitor Module.
+
+3.
+
+Use an aviation cable to connect the aviation connector port of the Speed Monitor Module to the aviation
+connector port of the Power Management Module.
+
+87
+
+© 2025 DJI All Rights Reserved.
+
+
+
+The length of the barrel installed into the Speed Monitor Module must not exceed 23 mm, to avoid
+obstructing the speed-monitoring phototube.
+
+
+
+The outer diameter of the barrel should preferably be kept within the range of 21 + 0.05 mm.
+Insufficient barrel diameter will create a gap between the outer wall of the barrel and the inner wall
+of the Speed Monitor Module, causing the expansion of the projectile’s dispersion area.
+
+
+
+With this securing method, a lack of mutual positioning between the Speed Monitor Module and
+parts of the Launching Mechanism may result in the misalignment of the Speed Monitor Module’s
+axis with the projectile firing axis, therefore leading to some projectiles hitting the inner wall of the
+Speed Monitor Module. Teams may add washers between the robot’s original board part 1 and the
+Speed Monitor Module as needed, to adjust the mounting angle of the robot’s original board part 1
+on the Speed Monitor Module.
+
+3.7.1.4
+
+Speed Monitor Module (42mm Projectile) Securing Method
+The three securing methods for the Speed Monitor Module (17 mm projectiles) can serve as a reference
+for the securing method for the Speed Monitor Module (42 mm projectile).
+
+42 mm barrel size restrictions:
+
+[1]
+
+Facing the
+muzzle
+
+[2]
+
+Wall thickness shall
+be no less than 1 mm
+
+Figure 3-36 42 mm Barrel
+Building requirements for 42 mm barrel:
+© 2025 DJI All Rights Reserved.
+
+88
+
+S160
+
+The phototube shall not be blocked.
+
+S161
+
+Transparent and luminous materials and the use of infrared sensors near the barrel are forbidden.
+
+S162
+
+Frost the inner wall of the barrel.
+
+Installation Steps for Securing Method:
+1.
+
+Fit the Speed Monitor Module onto the barrel.
+
+2.
+
+Insert M3 screws through the clamping screw holes on the Speed Monitor Module to clamp the barrel.
+
+3.
+
+Use an aviation cable to connect the aviation connector port of the Speed Monitor Module to the aviation
+connector port of the Power Management Module.
+
+3.7.2
+
+Installation Requirements
+
+The mounting of a Speed Monitor Module shall meet the following requirements:
+Each Speed Monitor Module should preferably have at least one light indicator surface to which the
+normal line is in the upper hemisphere above the horizontal plane, and the Pre-Match Inspection
+personnel shall be able to see 80% of the light indicator’s surface area when looking directly at the
+Speed Monitor Module in the direction perpendicular to the light indicator’s surface at a distance of 1
+m away from the module. Otherwise, important light-based information during the competition may
+be overlooked, potentially delaying the detection and handling of irregularities.
+S163
+
+A Speed Monitor Module shall be installed at the end of the Launching Mechanism to make sure the
+
+projectile enters the module after it has fully accelerated.
+S164
+
+When installing a Speed Monitor Module, ensure that the intersection line between the plane
+
+perpendicular to the projectile launch direction and the logo remains level with the ground, as shown in the
+figure below:
+
+89
+
+© 2025 DJI All Rights Reserved.
+
+[1]
+
+Projectile
+direction
+
+[2]
+
+The plane perpendicular
+
+[3]
+
+to the projectile direction
+
+Intersection line between
+the logo and [2]
+
+Figure 3-37 Speed Monitor Module Installation
+S165
+
+When performing horizontal calibration on a Speed Monitor Module, its logo should be facing up.
+
+S166
+The Speed Monitor Module shall be securely fixed and shall not move relative to the standby projectile
+next to the projectile to be launched within the Launching Mechanism.
+S167
+
+It is forbidden to use iron or other easily magnetized materials for the barrel installed in the Speed Monitor
+
+Module.
+S168
+
+For ferromagnetic materials or devices that generate strong magnetism during operation, the angle of the
+
+magnetic force on the Speed Monitor Module when stationary or during operation shall be within 2° (It is not
+required to follow this specification in RMUL events).
+After calibrating the Speed Monitor Module, press OK on the Main Control Module and then
+press PgDn. Follow the instructions below to observe the real-time coordinate changes of the
+Main Control Module robot (please refer to the Referee System Onboard Modules in the Referee
+System User Manual for details):
+
+
+After rotating the gimbal by 90°, 180° and 240° respectively, compare the actual rotation
+angles to see if the error values are less than 15°.
+
+
+
+For ferromagnetic materials, after installing them in accordance with the above
+specifications, observe if the angle of the Speed Monitor Module fluctuates within 2°.
+
+© 2025 DJI All Rights Reserved.
+
+90
+
+
+
+For devices that generate strong magnetism during operation, when the device is powered
+on and in both stationary and running states (for example, when the friction wheel motor is
+powered on and in both stationary and rotating states), observe if the angle of the Speed
+Monitor Module fluctuates within 2°.
+
+S169
+
+As shown in the Mounting Specifications for Speed Monitor Module figure, with the logo position as the
+
+center of the sphere, it is prohibited to use substances that are easily magnetized (products containing iron,
+cobalt and nickel, the cooling fan at the transmitter of the transmitter module, and industrial camera bodies,
+etc.) within a diameter of 50 mm. Within a diameter of 100 mm, magnetic materials such as friction wheel
+motors and gimbal motors (except for Video Transmitter Modules and industrial camera bodies) are not
+allowed in order to avoid interference with the magnetometer inside the Speed Monitor Module.
+
+[1]
+
+Sphere center
+
+Figure 3-38 Mounting Specifications for Speed Monitor Module
+
+91
+
+© 2025 DJI All Rights Reserved.
+
+
+
+Four M2.5 threaded holes are available.
+
+
+
+Do not block the phototube holes. Otherwise, the initialization of the Speed Monitor Module
+may fail.
+
+
+
+The aviation connector cable of the Speed Monitor Module is close to the friction wheel. The
+cable should be protected from wear when used.
+
+3.8 Mounting Specifications for RFID Interaction Module
+Drill in mounting holes on the robot’s chassis according to the size and mounting port of the RFID Interaction
+Module.
+
+[1]
+
+Back
+
+[2]
+
+LED light indicator
+
+[3]
+
+Front
+
+Figure 3-39 RFID Interaction Module
+
+3.8.1
+1.
+
+Installation Steps
+
+Connect the RFID Interaction Module to the RFID port on the Power Management Module using the 4-pin
+cable provided in the package.
+
+© 2025 DJI All Rights Reserved.
+
+92
+
+Figure 3-40 Wiring of RFID Interaction Module
+2.
+
+Use M3 screws to secure the RFID Interaction Module on the chassis. Do not press the cable while mounting
+the module, and make sure to keep the RFID Interaction Module at an appropriate distance from the ground.
+
+Figure 3-41 Mounting of RFID Interaction Module
+
+3.8.2
+
+Installation Requirements
+
+The installation of the RFID Interaction Module shall follow the specifications below, or it may result in a decline
+in detection performance. Any consequences arising from improper installation will be the responsibility of the
+participating teams.
+
+
+Large conductive materials shall not be installed near the RFID Interaction Module. Ensure that there are no
+sources of strong currents or high-frequency signals (such as motor cables, RoboMaster Central Board, CAN
+cables, and supercapacitors).
+
+
+
+The front and rear of the RFID Interaction Module shall not be obstructed by any conductive materials, and
+the rear surface shall be kept at least 30 mm away from conductive materials such as the metal and carbon
+plates.
+
+93
+
+© 2025 DJI All Rights Reserved.
+
+
+
+When the robot transforms, the RFID Interaction Module shall not exceed the Maximum Expansion Size of
+the robot.
+
+
+The effective detection distance of the RFID Interaction Module is 100 mm (±5%). The actual
+detection distance after mounting is subject to the test result. If the effective detection distance is
+reduced or the module does not function properly, please check if it was installed correctly. For
+details about effective detection distance, please refer to the RFID Interaction Module User Guide
+and Power Management Module User Guide.
+
+
+
+Due to the complex electromagnetic environment in a robot, the testing of the effective detection
+distance of an RFID Interaction Module shall be carried out when all the modules of the robot are
+working properly (e.g., when the supercapacitor, power motor and wireless charging coil, etc. are
+in operation). If multiple robot operation modes are involved (e.g., the charging or discharge of the
+capacitor, or the motor at variable or uniform speed), the effective detection distance of the RFID
+Interaction Module will have to be tested under the different operation modes.
+
+3.9 Mounting Specifications for Video Transmitter Module
+(Transmitter)
+
+
+The VTM Link data are output from the UART serial port of the Video Transmitter Module
+(Transmitter).
+
+
+
+The UART serial port of a Video Transmitter Module (Transmitter) supports the 3.3 V TTL logic
+level. The UART serial port supports the RX, TX and GND pins. Please do not connect the positive
+terminal of a power supply to the UART serial port.
+
+Drill in mounting holes on specified positions according to the size and mounting port of the Transmitter structure.
+
+© 2025 DJI All Rights Reserved.
+
+94
+
+[1]
+
+[5]
+
+Intake
+Camera
+
+[2]
+
+Indicator
+
+[3]
+
+[6]
+
+Exhaust
+
+[7]
+
+Sphere center
+Mounting throughhole
+
+[4]
+
+[8]
+
+Antenna
+Threaded
+hole
+
+Figure 3-42 Video Transmitter Module (Transmitter)
+Refer to the above figure for the appearance of the Video Transmitter Module (Transmitter); all
+appearances of the Video Transmitter Module (Transmitter) in other drawings are for reference only.
+
+3.9.1
+
+Installation Steps
+
+1.
+
+Use four M3 screws to secure the Transmitter on the appropriate position on the robot.
+
+95
+
+© 2025 DJI All Rights Reserved.
+
+[1]
+
+Video Transmitter Module (Transmitter)
+
+Figure 3-43 Mounting of Video Transmitter Module (Transmitter)
+2.
+
+Use an aviation cable to connect the aviation connector port of the Video Transmitter Module (Transmitter) to
+the aviation connector port of the Power Management Module.
+
+3.9.2
+
+Installation Requirements
+
+The mounting of a Video Transmitter Module (Transmitter) shall meet the following requirements. Failure to do so
+may result in reduced image quality, unstable VTM Link data transmission, robot entering Irregular Offline Status,
+and other problems.
+
+
+The indicator of the Video Transmitter Module (Transmitter) shall not be blocked.
+
+
+
+With the center of the base of the Video Transmitter Module (Transmitter) as the apex, there should be a
+generatrix parallel to the base and located directly in front of the camera. There must be a cone-shaped area
+with an apex angle of 60° (solid angle of π(2-√3) sr) and its infinitely extended range is free of blockage by
+any conductive material, as shown in the figure below.
+
+S170
+
+The intake and exhaust of the Video Transmitter Module (Transmitter) shall not be blocked.
+It is recommended to keep a clear area of 150 mm around each intake and exhaust, free of any
+blockages.
+
+© 2025 DJI All Rights Reserved.
+
+96
+
+[1]
+
+Areas not allowed to be blocked
+
+[2]
+
+Space’s symmetry axis
+
+Figure 3-44 Prohibited Blockage Areas for Video Transmitter Module (Transmitter)
+
+
+Within an upper hemisphere of 70 mm radius centered on the center of the antenna base of the Video
+Transmitter Module (Transmitter), there shall be no conductive materials, electromagnetic absorbing materials,
+or other components that may interfere with the Wi-Fi signal, as shown in “Figure 3-42 Video Transmitter
+Module (Transmitter)“.
+
+
+
+If the VTM Link is used, the UART serial port of the Video Transmitter Module (Transmitter) must be
+protected with protective devices such as foam and non-metallic shields.
+
+
+
+The ports and indicator of the Video Transmitter Module (Transmitter) shall not be blocked.
+
+97
+
+© 2025 DJI All Rights Reserved.
+
+3.10 Rules of Usage for Video Transmitter Module (Receiver)
+
+[1]
+
+Exhaust
+
+Figure 3-45 Video Transmitter Module (Receiver)
+
+3.10.1 Installation Requirements
+The use of the Video Transmitter Module (Receiver) must meet the following requirements; otherwise, image
+quality may deteriorate, remote data transmission may lag, or the device may malfunction.
+S171
+
+Metal blockage should be avoided near the Video Transmitter Module (Receiver).
+
+S172
+
+The exhaust must not be blocked.
+
+3.11 Mounting Specifications for UWB Positioning Module
+Drill in mounting holes on specified positions on the robot according to the size of the UWB Positioning Module.
+© 2025 DJI All Rights Reserved.
+
+98
+
+[1]
+
+Referee System connection cable
+
+[2]
+
+Top
+
+[3]
+
+Front
+
+Figure 3-46 UWB Positioning Module
+
+3.11.1 Installation Steps
+1.
+
+Use two M3 screws to secure the UWB Positioning Module at a specific position, as shown in the figure below.
+
+Figure 3-47 Mounting of UWB Positioning Module
+2.
+
+Use the aviation cable inside the package to connect the UWB Positioning Module to the aviation connector
+with the silvery-white metal ring on the Power Management Module.
+
+99
+
+© 2025 DJI All Rights Reserved.
+
+Figure 3-48 Wiring of UWB Positioning Module
+
+3.11.2
+
+Installation Requirements
+
+The installation of the UWB Positioning Module should meet the following requirements. Otherwise, the module
+may not function properly.
+S173
+
+The mounting bracket for the UWB Positioning Module needs to be rigidly connected to the robot, i.e.,
+
+when a force of 40 N perpendicular to the bracket is applied at any position on the bracket, the plane of the
+UWB Positioning Module base should not deviate from the horizontal plane by more than 10°.
+S174
+
+UWB Positioning Module should be horizontally installed with the top facing up. The 145° area above
+
+the UWB Positioning Module shall not be blocked by any conductor, as shown below: According to the above
+mounting specifications, only one out of the front, back, left and right horizontal directions of a Drone’s UWB
+Positioning Module is allowed to be blocked by a conductor at a horizontal distance of 100 mm away. If the
+UWB Positioning Module is installed on a structure capable of active transformation or participating in
+mechanical linkage, the requirements related to UWB Positioning Module blockage must be met before, during,
+and after robot transformation.
+
+[1]
+
+Infinite extension
+
+Figure 3-49 Mounting of UWB Positioning Module
+S175
+
+The UWB Positioning Module and the Video Transmitter Module shall be at least 150 mm from each
+© 2025 DJI All Rights Reserved.
+
+100
+
+other. The shortest straight-line distance between the outermost edges of the modules shall be used as the
+reference.
+S176
+
+No magnets, magnetic flux concentrators, or easily magnetized objects or components that may generate
+
+strong magnetic fields are not allowed anywhere that is 100 mm from the UWB Positioning Module to avoid
+interference with its functionality.
+Common components that may cause magnetic interference include motors, magnetized metals, and
+magnets.
+S177
+
+It is forbidden to use magnets, magnetic flux concentrators, or adhesive materials to secure the UWB
+
+Positioning Module.
+
+
+Mounting screws are included in the package of the UWB Positioning Module. It is
+recommended to use these screws for installation. (If the screws are lost, replacements can be
+obtained on site.)
+
+
+
+Other screws selected must comply with relevant specifications.
+
+3.12 Mounting Specifications for Supercapacitor Management
+Module
+The Supercapacitor Management Module is used to test the capacitance of the Supercapacitor Module and the
+energy of the Supercapacitor Module during the competition. The estimated size of a Supercapacitor Management
+Module is 60 * 30 * 7.5 mm (L * W * H), and heat-shrink tubing is used as external protection for the module.
+The hardware interfaces include one XT30 plug, two XT30 receptacles, and one Supercapacitor Management
+Module communication port.
+
+
+The model number for the XT30 receptacle is XT30PW-F.
+
+
+
+The model number for the XT30 plug is XT30PW-M.
+
+3.12.1 Installation Steps
+The power control board regulates the output power of the Chassis port on the Power Management
+Module and the input power and output power of the Supercapacitor Module, to comply with module
+101
+
+© 2025 DJI All Rights Reserved.
+
+power limits in the rules. This module should be built by the teams themselves.
+1.
+
+Install the Supercapacitor Management Module between the output connector of the Supercapacitor Module
+and the input connector of the power control board.
+
+2.
+
+Connect the Supercapacitor Module and Supercapacitor Management Module using an XT30-connector cable.
+
+3.
+
+Connect the power control board and the Supercapacitor Management Module using an XT30-connector cable.
+
+4.
+
+Connect the communication port of the Supercapacitor Management Module and the AN1 port of the Power
+Management Module using a 4-pin cable.
+
+The connection of the Supercapacitor Management Module is shown below:
+
+[1]
+
+Wireless charging device (Receiver)
+
+[2]
+
+Power control board
+
+[3]
+
+Supercapacitor Module
+
+[4]
+
+Supercapacitor Management Module
+
+[5]
+
+[6]
+
+[7]
+
+Supercapacitor Management Module connector (output, XT30 receptacle) – connecting to power
+control board
+Inspection port of Supercapacitor Management Module (output, XT30 receptacle) – for Pre-Match
+Inspection only
+Communication port of Supercapacitor Management Module (CAN, SM04B-GHS-TB connector)
+– connecting to Power Management Module
+
+© 2025 DJI All Rights Reserved.
+
+102
+
+[8]
+
+Supercapacitor Management Module connector (input, XT30 plug) – connecting to Supercapacitor
+Module
+
+[9]
+
+Chassis output port of Power Management Module
+
+[11]
+
+Robot chassis power port
+
+[10]
+
+Power Management Module
+
+Figure 3-50 Wiring of Supercapacitor Management Module
+
+3.12.2 Installation Requirements
+The communication port on a Supercapacitor Management Module shall be connected to the CAN1 port
+of the Power Management Module for proper functioning of the former module.
+S178
+
+The peak current and maximum continuous current for the XT30 port of the Supercapacitor Management
+
+Module must not exceed 15 A.
+S179
+
+From a fully charged state, the capacitor’s voltage needs to drop past 1 V. If the capacitor’s voltage drops
+
+at an unusually rapid pace, it is deemed to have failed the Pre-Match Inspection.
+S180
+
+An XT30 receptacle cable that is at least 100 mm long should be attached to the inspection port of the
+
+Supercapacitor Management Module.
+S181
+
+Infantry, Hero and Sentry shall be mounted with Supercapacitor Management Modules. If a robot does
+
+not have a Supercapacitor Module, a Supercapacitor Management Module can be connected to the Power
+Management Module using a 4-pin cable.
+S182
+
+The Supercapacitor Management Module shall be installed on an easily accessible place on the robot to
+
+facilitate operation during the Pre-Match Inspection.
+S183
+
+The Supercapacitor Module can use only one power port and shall be connected as required in “Figure
+
+3-50 Wiring of Super-capacitor Management Module“. It shall not be connected to other circuits on the robot.
+
+103
+
+© 2025 DJI All Rights Reserved.
+
+3.13 Laser Detection Module
+The overall dimensions of the Laser Detection Module shall not exceed 130 mm * 130 mm * 130 mm, and the
+detection range shall not be less than φ50 mm.
+S184
+
+The Laser Detection Module must be fitted onto a rigid safety rod, with a hollow opening of no less than
+
+φ25 mm. The specific mounting method is yet to be determined. As shown in the figure below (for reference
+only), the upper edge of the module’s installation height may exceed the maximum expansion size limit of the
+Drone, but must not be higher than the highest point of its rigid safety rod.
+
+[1]
+
+Detection area
+
+[2]
+
+Visual feature area
+
+[3]
+
+Hollow area
+
+Figure 3-51 Laser Detection Module
+S185
+
+There must be no blockage within 90° of the top, bottom, left, and right edges of the detection surface of
+
+the Laser Detection Module, and the blockage area extends infinitely.
+
+© 2025 DJI All Rights Reserved.
+
+104
+
+Appendix I: Speed Monitor Module (17mm
+Projectile) Adapter Block Engineering Drawing
+
+105
+
+© 2025 DJI All Rights Reserved.
+
+Appendix II Reference Drawings
+
+Appendix Figure 1 Hero Armor Sticker - No. 1
+
+Appendix Figure 2 Engineer Armor Sticker - No. 2
+© 2025 DJI All Rights Reserved.
+
+106
+
+Appendix Figure 3 Infantry Armor Sticker - No. 3
+
+Appendix Figure 4 Infantry Armor Sticker - No. 4
+
+107
+
+© 2025 DJI All Rights Reserved.
+
+Appendix Figure 5 Sentry Armor Sticker
+
+Appendix Figure 6 Outpost Armor Sticker
+
+© 2025 DJI All Rights Reserved.
+
+108
+
+Appendix Figure 7 Base Small Armor Sticker
+
+Appendix Figure 8 Base Large Armor Sticker
+
+109
+
+© 2025 DJI All Rights Reserved.
+
+© 2025 DJI All Rights Reserved.
+
+110
+
+

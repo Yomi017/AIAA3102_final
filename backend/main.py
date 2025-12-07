@@ -179,7 +179,7 @@ async def initialize_resources():
     
     logger.info("Initializing model and agent...")
     try:
-        llm = Qwen3VL(gpu_ids=[0,1,2,3])
+        llm = Qwen3VL(gpu_ids=[0,1,2,3], gpu_memory_utilization=0.7)
         agent = Agent(llm, rag_db_path="rag/wiki_vector_db" if os.path.exists("rag/wiki_vector_db") else None)
         load_history()
         logger.success("Model and agent initialized successfully")
